@@ -120,3 +120,19 @@ window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
 });
+document.querySelectorAll('.gallery-grid img').forEach(img => {
+  img.addEventListener('click', function() {
+    const overlay = document.createElement('div');
+    overlay.classList.add('lightbox');
+    const clonedImg = document.createElement('img');
+    clonedImg.src = this.src;
+    clonedImg.alt = this.alt;
+    overlay.appendChild(clonedImg);
+    // cerrar al hacer clic fuera
+    overlay.addEventListener('click', () => {
+      document.body.removeChild(overlay);
+    });
+    document.body.appendChild(overlay);
+  });
+});
+
