@@ -1,0 +1,230 @@
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    font-weight: 600;
+    font-size: 1.2rem;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #008080;
+}
+
+.lang-select select {
+    padding: 0.3rem;
+    font-size: 0.9rem;
+}
+
+/* Hero section */
+.home-section .hero {
+    /* Cambiamos la imagen de fondo por una fotografía real del hotel */
+    background-image: url('images/468322890_18048613424483247_939284270881576216_n.jpg');
+    background-size: cover;
+    background-position: center;
+    color: #fff;
+    text-align: center;
+    padding: 6rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.home-section .hero-content {
+    max-width: 800px;
+    background-color: rgba(0,0,0,0.5);
+    padding: 2rem;
+    border-radius: 8px;
+}
+
+.home-section h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.home-section p {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+/* Section headings */
+section h2 {
+    text-align: center;
+    margin: 3rem 0 2rem;
+    font-size: 2rem;
+    color: #008080;
+}
+
+/* Services */
+.services-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+.service-item {
+    flex: 1 1 250px;
+    background-color: #f7f7f7;
+    border-radius: 8px;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.service-item h3 {
+    color: #008080;
+    margin-bottom: 0.5rem;
+}
+
+/* Gallery */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    padding: 0 2rem;
+}
+.gallery-grid img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* Experiences */
+.experience-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+.experience-item {
+    flex: 1 1 300px;
+    background-color: #fdfdfd;
+    padding: 1rem;
+    border-left: 4px solid #008080;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+.experience-item h3 {
+    margin-top: 0;
+    color: #008080;
+}
+
+/* Recommendations */
+.recommendation-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 0 2rem;
+}
+.recommendation-item {
+    flex: 1 1 300px;
+    background-color: #f7f7f7;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+.recommendation-item h3 {
+    color: #008080;
+    margin-bottom: 0.5rem;
+}
+
+/* Reservations */
+#reservation-form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #fafafa;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+.reservation-step {
+    display: none;
+}
+.reservation-step.active {
+    display: block;
+}
+.reservation-step label {
+    display: block;
+    margin-top: 0.5rem;
+    font-weight: 500;
+}
+.reservation-step input[type="text"],
+.reservation-step input[type="email"],
+.reservation-step input[type="date"],
+.reservation-step input[type="number"] {
+    width: 100%;
+    padding: 0.5rem;
+    margin-top: 0.3rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.reservation-step button {
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #008080;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+.reservation-step button:hover {
+    background-color: #006666;
+}
+
+.whatsapp-btn {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.5rem 1rem;
+    background-color: #25D366;
+    color: #fff;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+/* Contact */
+.contact-section {
+    padding: 2rem;
+    background-color: #f7f7f7;
+}
+
+footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #333;
+    color: #fff;
+}
