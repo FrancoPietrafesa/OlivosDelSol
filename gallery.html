@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería - Hotel Olivos del Sol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Preloader overlay -->
+    <div id="preloader"><div class="spinner"></div></div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <span data-i18n="header.logo">Hotel Olivos del Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+                <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+                <!-- Current page: link to this page's section -->
+                <li><a href="#gallery" data-i18n="nav.gallery">Galería</a></li>
+                <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+                <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+            <div class="lang-select">
+                <select id="language-select">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <section id="gallery" class="gallery-section">
+        <h2 data-i18n="gallery.title">Galería</h2>
+        <div class="gallery-grid">
+            <img src="images/468055293_18048612503483247_2721229852365988716_n.jpg" alt="Fachada del hotel y palmeras">
+            <img src="images/468322890_18048613424483247_939284270881576216_n.jpg" alt="Hotel al atardecer">
+            <img src="images/467974956_18048489227483247_727230495596107223_n.jpg" alt="Piscina y área de relax">
+            <img src="images/448164664_18028615775483247_7811932803664603036_n.jpg" alt="Jardines del hotel">
+            <img src="images/444485924_18028044413483247_1520712395456252353_n.jpg" alt="Restaurante con chimenea">
+            <img src="images/Captura.PNG" alt="Habitación cómoda con aire acondicionado">
+            <img src="images/3.PNG" alt="Habitación familiar con literas">
+            <img src="images/6.PNG" alt="Habitación con vistas panorámicas">
+            <img src="images/5.PNG" alt="Parque y senderos en la propiedad">
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>

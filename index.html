@@ -11,14 +11,23 @@
     <script defer src="script.js"></script>
 </head>
 <body>
+    <!-- Preloader overlay that appears while the page is loading -->
+    <div id="preloader"><div class="spinner"></div></div>
+
     <header>
         <nav class="navbar">
-            <div class="logo" data-i18n="header.logo">Hotel Olivos del Sol</div>
+            <!-- Logo image and text -->
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <span data-i18n="header.logo">Hotel Olivos del Sol</span>
+            </div>
             <ul class="nav-links">
                 <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
-                <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
-                <li><a href="#gallery" data-i18n="nav.gallery">Galería</a></li>
-                <li><a href="#experiences" data-i18n="nav.experiences">Experiencias</a></li>
+                <!-- Link out to dedicated pages for services, gallery and experiences -->
+                <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+                <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+                <!-- Sections that remain on this page link to their anchors -->
                 <li><a href="#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
                 <li><a href="#reservations" data-i18n="nav.reservations">Reservas</a></li>
                 <li><a href="#contact" data-i18n="nav.contact">Contacto</a></li>

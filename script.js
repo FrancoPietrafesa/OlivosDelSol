@@ -119,20 +119,30 @@ function resetForm() {
 window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
-});
-document.querySelectorAll('.gallery-grid img').forEach(img => {
-  img.addEventListener('click', function() {
-    const overlay = document.createElement('div');
-    overlay.classList.add('lightbox');
-    const clonedImg = document.createElement('img');
-    clonedImg.src = this.src;
-    clonedImg.alt = this.alt;
-    overlay.appendChild(clonedImg);
-    // cerrar al hacer clic fuera
-    overlay.addEventListener('click', () => {
-      document.body.removeChild(overlay);
+
+    // Configurar la funcionalidad de lightbox para las imágenes de la galería
+    document.querySelectorAll('.gallery-grid img').forEach(img => {
+        img.addEventListener('click', function() {
+            // Crear overlay y mostrar imagen ampliada
+            const overlay = document.createElement('div');
+            overlay.classList.add('lightbox');
+            const clonedImg = document.createElement('img');
+            clonedImg.src = this.src;
+            clonedImg.alt = this.alt;
+            overlay.appendChild(clonedImg);
+            // Al hacer click en el overlay se cierra
+            overlay.addEventListener('click', () => {
+                document.body.removeChild(overlay);
+            });
+            document.body.appendChild(overlay);
+        });
     });
-    document.body.appendChild(overlay);
-  });
 });
 
+// Ocultar el preloader una vez que la página haya cargado completamente
+window.addEventListener('load', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.style.display = 'none';
+    }
+});

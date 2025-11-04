@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Servicios - Hotel Olivos del Sol</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <!-- Preloader overlay -->
+    <div id="preloader"><div class="spinner"></div></div>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <span data-i18n="header.logo">Hotel Olivos del Sol</span>
+            </div>
+            <ul class="nav-links">
+                <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+                <!-- Current page: link to this page's section -->
+                <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+                <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+                <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+            <div class="lang-select">
+                <select id="language-select">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+        </nav>
+    </header>
+
+    <section id="services" class="services-section">
+        <h2 data-i18n="services.title">Servicios</h2>
+        <div class="services-list">
+            <div class="service-item"><h3 data-i18n="services.room">Habitaciones confortables</h3><p data-i18n="services.roomDesc">Amplias y luminosas habitaciones con todas las comodidades.</p></div>
+            <div class="service-item"><h3 data-i18n="services.restaurant">Restaurante</h3><p data-i18n="services.restaurantDesc">Gastronomía regional e internacional de alta calidad.</p></div>
+            <div class="service-item"><h3 data-i18n="services.pool">Piscina</h3><p data-i18n="services.poolDesc">Piscina al aire libre para relajarse y disfrutar del sol.</p></div>
+            <div class="service-item"><h3 data-i18n="services.wifi">Wi‑Fi gratuito</h3><p data-i18n="services.wifiDesc">Acceso a internet de alta velocidad en todo el hotel.</p></div>
+            <div class="service-item"><h3 data-i18n="services.parking">Estacionamiento</h3><p data-i18n="services.parkingDesc">Estacionamiento seguro para su vehículo.</p></div>
+            <div class="service-item"><h3 data-i18n="services.spa">Spa &amp; bienestar</h3><p data-i18n="services.spaDesc">Sesiones de masajes y tratamientos relajantes.</p></div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
+    </footer>
+</body>
+</html>
