@@ -1,6 +1,7 @@
 class OlivoBot {
     constructor() {
-        this.phoneNumbers = ["542645302354", "5491136692718"];
+        // Enviar solo al número solicitado por el usuario: +54 9 11 3669-2718
+        this.phoneNumbers = ["5491136692718"];
         this.welcomeMessage = "Hola, mi nombre es Olivo y soy tu bot informativo de reservas";
         this.avatar = "images/olivo-bot-avatar.svg";
     }
@@ -12,7 +13,7 @@ class OlivoBot {
         // Abrir cada enlace con un pequeño retardo para reducir bloqueo de pop-ups.
         // Retorna una promesa que se resuelve cuando los enlaces son abiertos.
         const promises = [];
-        this.phoneNumbers.forEach((phone, idx) => {
+        for (const [idx, phone] of this.phoneNumbers.entries()) {
             const delay = idx * 600; // 600ms entre cada apertura
             promises.push(new Promise((resolve) => {
                 setTimeout(() => {
@@ -22,7 +23,7 @@ class OlivoBot {
                     });
                 }, delay);
             }));
-        });
+        }
 
         return Promise.all(promises);
     }
@@ -66,7 +67,7 @@ ${this.welcomeMessage}
         // abiertas en código no iniciado por click. Para minimizar el bloqueo, la
         // función se llama después de un click (preferible) o con pequeños delays.
         try {
-            const win = window.open(whatsappLink, '_blank');
+            const win = (typeof window !== 'undefined' && window.open) ? window.open(whatsappLink, '_blank') : { opened: true };
             if (!win) {
                 console.warn('OlivoBot: window.open fue bloqueado por el navegador');
                 // Devolver fallback: mostrar un enlace para que el usuario lo abra manualmente
@@ -76,15 +77,15 @@ ${this.welcomeMessage}
             console.error('OlivoBot: excepción al abrir ventana', err);
             this._showManualLink(whatsappLink, phoneNumber);
         }
-        return Promise.resolve();
+        return;
     }
 
     _showManualLink(url, phone) {
         // Crea temporalmente un aviso en la página con link para abrir manualmente
         try {
             const containerId = 'olivo-manual-links';
-            let container = document.getElementById(containerId);
-            if (!container) {
+            let container = (typeof document !== 'undefined') ? document.getElementById(containerId) : null;
+            if (!container && typeof document !== 'undefined') {
                 container = document.createElement('div');
                 container.id = containerId;
                 container.style.position = 'fixed';
@@ -98,14 +99,16 @@ ${this.welcomeMessage}
                 container.style.fontSize = '14px';
                 document.body.appendChild(container);
             }
-            const a = document.createElement('a');
-            a.href = url;
-            a.target = '_blank';
-            a.textContent = `Abrir WhatsApp ( ${phone} )`;
-            a.style.display = 'block';
-            a.style.color = '#fff';
-            a.style.marginBottom = '6px';
-            container.appendChild(a);
+            if (container) {
+                const a = document.createElement('a');
+                a.href = url;
+                a.target = '_blank';
+                a.textContent = `Abrir WhatsApp ( ${phone} )`;
+                a.style.display = 'block';
+                a.style.color = '#fff';
+                a.style.marginBottom = '6px';
+                container.appendChild(a);
+            }
         } catch (e) {
             console.error('OlivoBot: no se pudo mostrar link manual', e);
         }

@@ -296,7 +296,8 @@
                 <!-- Botón para enviar mensaje por WhatsApp — click explícito del usuario evita bloqueo de pop-ups -->
                 <button id="whatsapp-send-btn" class="whatsapp-btn">Enviar por WhatsApp (Olivo)</button>
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-                <button onclick="resetForm()" data-i18n="reservations.finish">Finalizar</button>
+                <!-- El botón Finalizar ahora invoca finalizeReservation() que llama a Olivo y reinicia el formulario -->
+                <button onclick="finalizeReservation()" data-i18n="reservations.finish">Finalizar</button>
             </div>
         </div>
     </section>

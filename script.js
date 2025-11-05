@@ -465,6 +465,44 @@ _Reserva realizada el ${new Date().toLocaleDateString('es-AR')}_`;
     }
 }
 
+// Función que se ejecuta al finalizar la reserva: llama a Olivo y luego reinicia el formulario
+async function finalizeReservation() {
+    console.log('Finalizar reserva: enviando datos a Olivo...', reservationData);
+
+    // Asegurarnos de que los datos mínimos estén presentes
+    if (!reservationData.checkin || !reservationData.checkout || !reservationData.guestName) {
+        console.warn('finalizeReservation: faltan datos en reservationData, asegurando recopilación final.');
+        // Intentar recomponer desde los inputs si faltan
+        const maybeCheckin = document.getElementById('checkin');
+        const maybeCheckout = document.getElementById('checkout');
+        const maybeName = document.getElementById('guestName');
+        if (maybeCheckin && maybeCheckin.value) reservationData.checkin = maybeCheckin.value;
+        if (maybeCheckout && maybeCheckout.value) reservationData.checkout = maybeCheckout.value;
+        if (maybeName && maybeName.value) reservationData.guestName = maybeName.value;
+    }
+
+    try {
+        // Llamada principal al bot. Como esto se ejecuta por click del usuario,
+        // window.open dentro del bot tiene más probabilidades de no ser bloqueado.
+        await olivoBot.sendReservationDetails(reservationData);
+        console.log('finalizeReservation: Olivo ha intentado enviar el mensaje.');
+
+        // Informar al usuario en la confirmación
+        const confMsg = document.getElementById('confirmation-message');
+        if (confMsg) confMsg.textContent = 'Reserva enviada. Olivo ha iniciado el envío por WhatsApp.';
+
+    } catch (err) {
+        console.error('finalizeReservation: error al enviar por Olivo', err);
+        const confMsg = document.getElementById('confirmation-message');
+        if (confMsg) confMsg.textContent = 'Ocurrió un error intentando enviar el mensaje por WhatsApp.';
+    }
+
+    // Reiniciar formulario después de un breve retraso para que el usuario vea la confirmación
+    setTimeout(() => {
+        resetForm();
+    }, 1200);
+}
+
 // Initialize
 window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
