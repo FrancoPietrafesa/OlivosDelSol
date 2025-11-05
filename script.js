@@ -163,13 +163,28 @@ function showStep(step) {
     });
 }
 
-function validateField(input, regex, errorMessage) {
-    const isValid = regex ? regex.test(input.value) : input.value.trim() !== '';
-    input.classList.toggle('invalid', !isValid);
+function validateField(input, regex) {
+    // Limpiar validación previa
+    input.classList.remove('error', 'valid');
     const errorSpan = input.nextElementSibling;
     if (errorSpan && errorSpan.classList.contains('error-message')) {
-        errorSpan.style.display = isValid ? 'none' : 'block';
+        errorSpan.style.display = 'none';
     }
+
+    // Si el campo está vacío o no cumple con el regex
+    const isEmpty = input.value.trim() === '';
+    const isValid = !isEmpty && (!regex || regex.test(input.value));
+
+    // Solo mostrar error si está vacío al intentar validar
+    if (isEmpty) {
+        input.classList.add('error');
+        if (errorSpan) {
+            errorSpan.style.display = 'block';
+        }
+    } else if (isValid) {
+        input.classList.add('valid');
+    }
+
     return isValid;
 }
 
