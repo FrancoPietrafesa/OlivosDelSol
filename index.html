@@ -5,9 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hotel Olivos del Sol</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo_cropped.png">
+    <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <!-- MercadoPago SDK -->
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script src="config/mercadopago-config.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body class="index-page">
@@ -203,21 +209,68 @@
                 <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
             </div>
 
-            <!-- Step 5: Pago -->
+            <!-- Step 5: Selección de método de pago -->
             <div class="reservation-step" id="step5" style="display:none;">
-                <h3 data-i18n="reservations.paymentTitle">Pago</h3>
-                <p data-i18n="reservations.paymentInstructions">Para completar tu reserva, ingresa los detalles de pago o utiliza la pasarela de pago integrada. Este sitio utiliza Stripe para procesar pagos de forma segura.</p>
-                <p><strong>Información:</strong> El formulario de pago real debe integrarse con un proveedor como Stripe. Consulta el archivo README para instrucciones.</p>
-                <label data-i18n="reservations.cardName">Nombre en la tarjeta:</label>
-                <input type="text"><br>
-                <label data-i18n="reservations.cardNumber">Número de tarjeta:</label>
-                <input type="text"><br>
-                <label data-i18n="reservations.cardExpiry">Fecha de expiración:</label>
-                <input type="text" placeholder="MM/AA"><br>
-                <label data-i18n="reservations.cardCVC">CVC:</label>
-                <input type="text" placeholder="123"><br>
+                <h3 data-i18n="reservations.paymentTitle">Método de Pago</h3>
+                <p>Selecciona tu método de pago preferido:</p>
+                
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="card" checked>
+                        <div class="payment-card">
+                            <strong>💳 Tarjeta de Débito/Crédito</strong>
+                            <span>Pago seguro con tarjeta</span>
+                        </div>
+                    </label>
+                    
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="mercadopago">
+                        <div class="payment-card">
+                            <strong>🛒 MercadoPago</strong>
+                            <span>Pago rápido y seguro</span>
+                        </div>
+                    </label>
+                    
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="local">
+                        <div class="payment-card">
+                            <strong>🏨 Pago en el Local</strong>
+                            <span>Pagarás al llegar al hotel</span>
+                        </div>
+                    </label>
+                </div>
+                
+                <!-- Formulario de tarjeta (se muestra solo si se selecciona tarjeta) -->
+                <div id="card-payment-form" class="payment-form-section">
+                    <h4>Datos de la Tarjeta</h4>
+                    <label data-i18n="reservations.cardName">Nombre en la tarjeta:</label>
+                    <input type="text" id="cardName" placeholder="Juan Pérez"><br>
+                    <label data-i18n="reservations.cardNumber">Número de tarjeta:</label>
+                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"><br>
+                    <div class="card-row">
+                        <div>
+                            <label data-i18n="reservations.cardExpiry">Fecha de expiración:</label>
+                            <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
+                        </div>
+                        <div>
+                            <label data-i18n="reservations.cardCVC">CVC:</label>
+                            <input type="text" id="cardCVC" placeholder="123" maxlength="4">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- MercadoPago (se mostrará cuando se seleccione) -->
+                <div id="mercadopago-payment-form" class="payment-form-section" style="display:none;">
+                    <div id="mercadopago-container"></div>
+                </div>
+                
+                <!-- Pago en local (solo información) -->
+                <div id="local-payment-info" class="payment-form-section" style="display:none;">
+                    <p>✅ Has seleccionado pagar en el local. El pago se realizará al momento de tu llegada al hotel.</p>
+                </div>
+                
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-                <button onclick="nextStep()" data-i18n="reservations.next">Pagar</button>
+                <button onclick="processPayment()" id="payment-button">Continuar</button>
             </div>
 
             <!-- Step 6: Confirmación -->

@@ -90,13 +90,14 @@ function nextStep() {
                                `<p>Tipo de habitación: ${roomLabel}</p>`;
     }
     if (currentStep === 5) {
-        // Payment step - just proceed to confirmation
+        // Payment step - handled by processPayment function
+        // Don't proceed automatically, wait for processPayment()
+        return;
     }
     if (currentStep === 6) {
-        // Confirmation: set WhatsApp link
-        const number = '5492644444000'; // Argentinian phone number with country code
-        const text = encodeURIComponent(`He reservado desde ${reservationData.checkin} hasta ${reservationData.checkout} en Hotel Olivos del Sol.`);
-        document.getElementById('whatsapp-link').href = `https://api.whatsapp.com/send?phone=${number}&text=${text}`;
+        // Confirmation step - send WhatsApp to owner
+        sendWhatsAppToOwner();
+        return; // Don't proceed further
     }
     if (currentStep < 6) {
         showStep(currentStep + 1);
@@ -113,6 +114,174 @@ function resetForm() {
     reservationData = {};
     document.getElementById('reservation-form').reset();
     showStep(1);
+}
+
+// Función para formatear el número de tarjeta
+function formatCardNumber(input) {
+    let value = input.value.replace(/\s/g, '');
+    let formattedValue = value.match(/.{1,4}/g)?.join(' ') || value;
+    input.value = formattedValue;
+}
+
+// Función para formatear la fecha de expiración
+function formatExpiry(input) {
+    let value = input.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+        value = value.substring(0, 2) + '/' + value.substring(2, 4);
+    }
+    input.value = value;
+}
+
+// Función para manejar el cambio de método de pago
+function handlePaymentMethodChange() {
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    const cardForm = document.getElementById('card-payment-form');
+    const mercadopagoForm = document.getElementById('mercadopago-payment-form');
+    const localInfo = document.getElementById('local-payment-info');
+    const paymentButton = document.getElementById('payment-button');
+    
+    // Ocultar todos los formularios
+    cardForm.style.display = 'none';
+    mercadopagoForm.style.display = 'none';
+    localInfo.style.display = 'none';
+    
+    // Mostrar el formulario correspondiente
+    if (paymentMethod === 'card') {
+        cardForm.style.display = 'block';
+        paymentButton.textContent = 'Pagar con Tarjeta';
+    } else if (paymentMethod === 'mercadopago') {
+        mercadopagoForm.style.display = 'block';
+        paymentButton.textContent = 'Pagar con MercadoPago';
+        initMercadoPagoCheckout();
+    } else if (paymentMethod === 'local') {
+        localInfo.style.display = 'block';
+        paymentButton.textContent = 'Confirmar Reserva';
+    }
+}
+
+// Función para inicializar MercadoPago checkout
+function initMercadoPagoCheckout() {
+    const container = document.getElementById('mercadopago-container');
+    container.innerHTML = '<p>Cargando MercadoPago...</p>';
+    
+    // Aquí se inicializaría el checkout de MercadoPago
+    // Esto requiere las credenciales configuradas
+    setTimeout(() => {
+        container.innerHTML = `
+            <div style="padding: 1rem; background: rgba(0, 168, 142, 0.1); border-radius: 8px; margin-top: 1rem;">
+                <p><strong>MercadoPago</strong></p>
+                <p>Serás redirigido a MercadoPago para completar el pago de forma segura.</p>
+                <p style="font-size: 0.9rem; color: #b0b0b0;">Nota: Configura tus credenciales en config/mercadopago-config.js</p>
+            </div>
+        `;
+    }, 500);
+}
+
+// Función para procesar el pago
+async function processPayment() {
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    reservationData.paymentMethod = paymentMethod;
+    
+    // Validar según el método de pago
+    if (paymentMethod === 'card') {
+        reservationData.cardName = document.getElementById('cardName').value;
+        reservationData.cardNumber = document.getElementById('cardNumber').value;
+        reservationData.cardExpiry = document.getElementById('cardExpiry').value;
+        reservationData.cardCVC = document.getElementById('cardCVC').value;
+        
+        // Validaciones básicas
+        if (!reservationData.cardName || !reservationData.cardNumber || !reservationData.cardExpiry || !reservationData.cardCVC) {
+            alert('Por favor completa todos los datos de la tarjeta');
+            return;
+        }
+        
+        // Aquí normalmente procesarías el pago con un backend
+        // Por ahora, solo simulamos el procesamiento
+        console.log('Procesando pago con tarjeta...');
+        await simulatePayment();
+        
+    } else if (paymentMethod === 'mercadopago') {
+        // Redirigir a MercadoPago
+        try {
+            if (typeof createPaymentPreference !== 'undefined') {
+                const checkoutUrl = await createPaymentPreference(reservationData);
+                if (checkoutUrl) {
+                    window.location.href = checkoutUrl;
+                    return;
+                }
+            }
+            alert('Error al procesar el pago con MercadoPago. Por favor, configura tus credenciales en config/mercadopago-config.js o intenta con otro método.');
+            return;
+        } catch (error) {
+            console.error('Error con MercadoPago:', error);
+            alert('Error al procesar el pago con MercadoPago. Por favor, intenta con otro método.');
+            return;
+        }
+        
+    } else if (paymentMethod === 'local') {
+        // Pago en local, no requiere procesamiento
+        console.log('Reserva confirmada para pago en local');
+    }
+    
+    // Si llegamos aquí, el pago fue exitoso (o es pago local)
+    // Proceder al paso de confirmación
+    showStep(6);
+}
+
+// Función para simular procesamiento de pago
+async function simulatePayment() {
+    return new Promise((resolve) => {
+        setTimeout(() => {
+            console.log('Pago procesado exitosamente (simulado)');
+            resolve();
+        }, 1000);
+    });
+}
+
+// Función para enviar WhatsApp al dueño
+function sendWhatsAppToOwner() {
+    const ownerNumber = '5492645302354'; // Número del dueño
+    const lang = translations[currentLanguage];
+    
+    // Obtener el nombre del tipo de habitación
+    let roomLabel = '';
+    if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
+    if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
+    if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
+    
+    // Obtener el método de pago
+    let paymentMethodText = '';
+    if (reservationData.paymentMethod === 'card') paymentMethodText = 'Tarjeta de Débito/Crédito';
+    else if (reservationData.paymentMethod === 'mercadopago') paymentMethodText = 'MercadoPago';
+    else if (reservationData.paymentMethod === 'local') paymentMethodText = 'Pago en el Local';
+    
+    // Crear el mensaje
+    const message = `🏨 *Nueva Reserva - Hotel Olivos del Sol*
+
+👤 *Nombre:* ${reservationData.guestName}
+📧 *Email:* ${reservationData.guestEmail}
+📱 *Teléfono:* ${reservationData.guestPhone}
+
+📅 *Check-in:* ${reservationData.checkin}
+📅 *Check-out:* ${reservationData.checkout}
+👥 *Huéspedes:* ${reservationData.guests}
+🛏️ *Habitaciones:* ${reservationData.rooms}
+🏠 *Tipo de Habitación:* ${roomLabel}
+
+💳 *Método de Pago:* ${paymentMethodText}
+
+_Reserva realizada el ${new Date().toLocaleDateString('es-AR')}_`;
+    
+    const whatsappUrl = `https://api.whatsapp.com/send?phone=${ownerNumber}&text=${encodeURIComponent(message)}`;
+    
+    // Abrir WhatsApp automáticamente
+    window.open(whatsappUrl, '_blank');
+    
+    // También actualizar el link en la página de confirmación
+    const whatsappLink = document.getElementById('whatsapp-link');
+    if (whatsappLink) {
+        whatsappLink.href = whatsappUrl;
+    }
 }
 
 // Initialize
@@ -137,6 +306,29 @@ window.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(overlay);
         });
     });
+    
+    // Configurar listeners para métodos de pago
+    const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentMethods.forEach(method => {
+        method.addEventListener('change', handlePaymentMethodChange);
+    });
+    
+    // Formatear número de tarjeta
+    const cardNumberInput = document.getElementById('cardNumber');
+    if (cardNumberInput) {
+        cardNumberInput.addEventListener('input', () => formatCardNumber(cardNumberInput));
+    }
+    
+    // Formatear fecha de expiración
+    const cardExpiryInput = document.getElementById('cardExpiry');
+    if (cardExpiryInput) {
+        cardExpiryInput.addEventListener('input', () => formatExpiry(cardExpiryInput));
+    }
+    
+    // Inicializar método de pago por defecto
+    if (document.getElementById('step5')) {
+        handlePaymentMethodChange();
+    }
 });
 
 // Ocultar el preloader una vez que la página haya cargado completamente
