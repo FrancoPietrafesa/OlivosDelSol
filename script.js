@@ -3,6 +3,32 @@ let currentStep = 1;
 let reservationData = {};
 let currentLanguage = 'es';
 
+// Función para manejar la transparencia del navbar al hacer scroll
+function handleNavbarTransparency() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) return;
+    
+    const scrollPosition = window.scrollY;
+    
+    if (scrollPosition > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+}
+
+// Agregar evento de scroll con throttling para mejor rendimiento
+let ticking = false;
+window.addEventListener('scroll', () => {
+    if (!ticking) {
+        window.requestAnimationFrame(() => {
+            handleNavbarTransparency();
+            ticking = false;
+        });
+        ticking = true;
+    }
+});
+
 const translations = {
     es: {
         nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto'},
@@ -43,6 +69,89 @@ function setLanguage(lang) {
     });
 }
 
+// Funcionalidad del visor de imágenes
+let currentImageIndex = 0;
+const imageViewer = document.querySelector('.image-viewer');
+const viewerImage = imageViewer?.querySelector('img');
+const closeBtn = imageViewer?.querySelector('.close-btn');
+const prevBtn = imageViewer?.querySelector('.prev-btn');
+const nextBtn = imageViewer?.querySelector('.next-btn');
+const galleryImages = document.querySelectorAll('.gallery-grid img');
+
+if (galleryImages.length > 0) {
+    galleryImages.forEach((img, index) => {
+        img.addEventListener('click', () => {
+            currentImageIndex = index;
+            openImageViewer(img.src, img.alt);
+        });
+    });
+
+    if (imageViewer) {
+        closeBtn?.addEventListener('click', closeImageViewer);
+        prevBtn?.addEventListener('click', showPreviousImage);
+        nextBtn?.addEventListener('click', showNextImage);
+        
+        // Cerrar al hacer clic fuera de la imagen
+        imageViewer.addEventListener('click', (e) => {
+            if (e.target === imageViewer) {
+                closeImageViewer();
+            }
+        });
+
+        // Manejar teclas
+        document.addEventListener('keydown', (e) => {
+            if (!imageViewer.classList.contains('active')) return;
+            
+            switch(e.key) {
+                case 'Escape':
+                    closeImageViewer();
+                    break;
+                case 'ArrowLeft':
+                    showPreviousImage();
+                    break;
+                case 'ArrowRight':
+                    showNextImage();
+                    break;
+            }
+        });
+    }
+}
+
+function openImageViewer(src, alt) {
+    if (!imageViewer || !viewerImage) return;
+    viewerImage.src = src;
+    viewerImage.alt = alt;
+    imageViewer.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeImageViewer() {
+    if (!imageViewer) return;
+    imageViewer.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function showPreviousImage() {
+    if (currentImageIndex > 0) {
+        currentImageIndex--;
+        updateViewerImage();
+    }
+}
+
+function showNextImage() {
+    if (currentImageIndex < galleryImages.length - 1) {
+        currentImageIndex++;
+        updateViewerImage();
+    }
+}
+
+function updateViewerImage() {
+    if (!viewerImage) return;
+    const currentImg = galleryImages[currentImageIndex];
+    viewerImage.src = currentImg.src;
+    viewerImage.alt = currentImg.alt;
+}
+
 document.getElementById('language-select').addEventListener('change', function(e) {
     setLanguage(e.target.value);
 });
@@ -54,7 +163,60 @@ function showStep(step) {
     });
 }
 
+function validateStep(step) {
+    switch(step) {
+        case 1:
+            const checkin = document.getElementById('checkin').value;
+            const checkout = document.getElementById('checkout').value;
+            const guests = document.getElementById('guests').value;
+            const rooms = document.getElementById('rooms').value;
+            
+            if (!checkin || !checkout || !guests || !rooms) {
+                alert('Por favor, complete todos los campos antes de continuar.');
+                return false;
+            }
+            return true;
+        case 2:
+            const roomType = document.querySelector('input[name="roomType"]:checked');
+            if (!roomType) {
+                alert('Por favor, seleccione un tipo de habitación.');
+                return false;
+            }
+            return true;
+        case 4:
+            const guestName = document.getElementById('guestName').value;
+            const guestEmail = document.getElementById('guestEmail').value;
+            const guestPhone = document.getElementById('guestPhone').value;
+            
+            if (!guestName || !guestEmail || !guestPhone) {
+                alert('Por favor, complete todos los datos del huésped.');
+                return false;
+            }
+            
+            // Validación básica de email
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(guestEmail)) {
+                alert('Por favor, ingrese un correo electrónico válido.');
+                return false;
+            }
+            
+            // Validación básica de teléfono
+            const phoneRegex = /^\+?[\d\s-]+$/;
+            if (!phoneRegex.test(guestPhone)) {
+                alert('Por favor, ingrese un número de teléfono válido.');
+                return false;
+            }
+            return true;
+        default:
+            return true;
+    }
+}
+
 function nextStep() {
+    if (!validateStep(currentStep)) {
+        return;
+    }
+
     if (currentStep === 1) {
         // collect search data
         reservationData.checkin = document.getElementById('checkin').value;

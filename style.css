@@ -22,15 +22,21 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(17, 17, 17, 0.95);
+    background: rgba(17, 17, 17, 1);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1rem 2rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    position: sticky;
+    position: fixed;
     top: 0;
+    left: 0;
+    right: 0;
     z-index: 1000;
-    transition: all 0.3s ease;
+    transition: background-color 0.3s ease;
+}
+
+.navbar.scrolled {
+    background: rgba(17, 17, 17, 0.5);
 }
 
 .logo {
@@ -80,12 +86,12 @@ body {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #00a88e, #00d4b8);
+    background: linear-gradient(90deg, #556B2F, #708238);
     transition: width 0.3s ease;
 }
 
 .nav-links a:hover {
-    color: #00d4b8;
+    color: #708238;
 }
 
 .nav-links a:hover::after {
