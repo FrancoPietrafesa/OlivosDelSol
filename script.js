@@ -276,8 +276,8 @@ function nextStep() {
         return;
     }
     if (currentStep === 6) {
-        // Confirmation step - send WhatsApp to owners via Olivo Bot
-        olivoBot.sendReservationDetails(reservationData);
+        // Confirmation step - do NOT auto-send WhatsApp (puede ser bloqueado por pop-ups).
+        // El usuario puede enviar manualmente con el botón "Enviar por WhatsApp (Olivo)".
         return; // Don't proceed further
     }
     if (currentStep < 6) {
@@ -509,6 +509,18 @@ window.addEventListener('DOMContentLoaded', () => {
     // Inicializar método de pago por defecto
     if (document.getElementById('step5')) {
         handlePaymentMethodChange();
+    }
+
+    // Botón de envío por WhatsApp (click explícito del usuario evita bloqueo de pop-ups)
+    const whatsappBtn = document.getElementById('whatsapp-send-btn');
+    if (whatsappBtn) {
+        whatsappBtn.addEventListener('click', () => {
+            console.log('Usuario hizo click en Enviar por WhatsApp');
+            // reservationData debe contener los datos recopilados en los pasos anteriores
+            olivoBot.sendReservationDetails(reservationData).then(() => {
+                console.log('OlivoBot: intentó enviar mensajes por WhatsApp');
+            });
+        });
     }
 });
 

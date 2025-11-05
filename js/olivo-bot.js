@@ -2,14 +2,29 @@ class OlivoBot {
     constructor() {
         this.phoneNumbers = ["542645302354", "5491136692718"];
         this.welcomeMessage = "Hola, mi nombre es Olivo y soy tu bot informativo de reservas";
-        this.avatar = "images/olivo-bot-avatar.png";
+        this.avatar = "images/olivo-bot-avatar.svg";
     }
 
     async sendReservationDetails(reservationData) {
+        console.log('OlivoBot: sendReservationDetails called', reservationData);
         const message = this.formatReservationMessage(reservationData);
-        for (const phoneNumber of this.phoneNumbers) {
-            await this.sendWhatsAppMessage(message, phoneNumber);
-        }
+
+        // Abrir cada enlace con un pequeño retardo para reducir bloqueo de pop-ups.
+        // Retorna una promesa que se resuelve cuando los enlaces son abiertos.
+        const promises = [];
+        this.phoneNumbers.forEach((phone, idx) => {
+            const delay = idx * 600; // 600ms entre cada apertura
+            promises.push(new Promise((resolve) => {
+                setTimeout(() => {
+                    this.sendWhatsAppMessage(message, phone).then(resolve).catch((err) => {
+                        console.error('OlivoBot: error sending to', phone, err);
+                        resolve();
+                    });
+                }, delay);
+            }));
+        });
+
+        return Promise.all(promises);
     }
 
     formatReservationMessage(data) {
@@ -45,6 +60,54 @@ ${this.welcomeMessage}
 
     async sendWhatsAppMessage(message, phoneNumber) {
         const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        window.open(whatsappLink, '_blank');
+        console.log(`OlivoBot: opening WhatsApp link for ${phoneNumber}:`, whatsappLink);
+
+        // Intentamos abrir en nueva pestaña. Algunos navegadores bloquean ventanas
+        // abiertas en código no iniciado por click. Para minimizar el bloqueo, la
+        // función se llama después de un click (preferible) o con pequeños delays.
+        try {
+            const win = window.open(whatsappLink, '_blank');
+            if (!win) {
+                console.warn('OlivoBot: window.open fue bloqueado por el navegador');
+                // Devolver fallback: mostrar un enlace para que el usuario lo abra manualmente
+                this._showManualLink(whatsappLink, phoneNumber);
+            }
+        } catch (err) {
+            console.error('OlivoBot: excepción al abrir ventana', err);
+            this._showManualLink(whatsappLink, phoneNumber);
+        }
+        return Promise.resolve();
+    }
+
+    _showManualLink(url, phone) {
+        // Crea temporalmente un aviso en la página con link para abrir manualmente
+        try {
+            const containerId = 'olivo-manual-links';
+            let container = document.getElementById(containerId);
+            if (!container) {
+                container = document.createElement('div');
+                container.id = containerId;
+                container.style.position = 'fixed';
+                container.style.right = '20px';
+                container.style.bottom = '20px';
+                container.style.zIndex = '11000';
+                container.style.background = 'rgba(0,0,0,0.7)';
+                container.style.color = '#fff';
+                container.style.padding = '10px 12px';
+                container.style.borderRadius = '10px';
+                container.style.fontSize = '14px';
+                document.body.appendChild(container);
+            }
+            const a = document.createElement('a');
+            a.href = url;
+            a.target = '_blank';
+            a.textContent = `Abrir WhatsApp ( ${phone} )`;
+            a.style.display = 'block';
+            a.style.color = '#fff';
+            a.style.marginBottom = '6px';
+            container.appendChild(a);
+        } catch (e) {
+            console.error('OlivoBot: no se pudo mostrar link manual', e);
+        }
     }
 }

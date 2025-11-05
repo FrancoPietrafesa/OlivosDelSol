@@ -293,7 +293,8 @@
                 <h3 data-i18n="reservations.confirmationTitle">Confirmación</h3>
                 <div id="confirmation-message" data-i18n="reservations.confirmationMessage">¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.</div>
                 <p data-i18n="reservations.whatsappMessage">Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:</p>
-                <a id="whatsapp-link" href="#" target="_blank" class="whatsapp-btn">Enviar mensaje</a>
+                <!-- Botón para enviar mensaje por WhatsApp — click explícito del usuario evita bloqueo de pop-ups -->
+                <button id="whatsapp-send-btn" class="whatsapp-btn">Enviar por WhatsApp (Olivo)</button>
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
                 <button onclick="resetForm()" data-i18n="reservations.finish">Finalizar</button>
             </div>
