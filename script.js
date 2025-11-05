@@ -163,62 +163,54 @@ function showStep(step) {
     });
 }
 
+function validateField(input, regex, errorMessage) {
+    const isValid = regex ? regex.test(input.value) : input.value.trim() !== '';
+    input.classList.toggle('invalid', !isValid);
+    const errorSpan = input.nextElementSibling;
+    if (errorSpan && errorSpan.classList.contains('error-message')) {
+        errorSpan.style.display = isValid ? 'none' : 'block';
+    }
+    return isValid;
+}
+
 function validateStep(step) {
     let isValid = true;
-
     switch(step) {
-        case 1:
-            const checkin = document.getElementById('checkin');
-            const checkout = document.getElementById('checkout');
-            const guests = document.getElementById('guests');
-            const rooms = document.getElementById('rooms');
-            
-            [checkin, checkout, guests, rooms].forEach(input => {
-                if (!input.value) {
-                    input.reportValidity();
+        case 1: {
+            const fields = ['checkin', 'checkout', 'guests', 'rooms'];
+            fields.forEach(fieldId => {
+                const field = document.getElementById(fieldId);
+                if (field && !validateField(field)) {
                     isValid = false;
                 }
             });
-            break;
-
-        case 2:
+            return isValid;
+        }
+        case 2: {
             const roomType = document.querySelector('input[name="roomType"]:checked');
-            if (!roomType) {
-                document.querySelector('.room-selection').classList.add('highlight-required');
+            const errorSpan = document.querySelector('.room-type-error');
+            if (!roomType && errorSpan) {
+                errorSpan.style.display = 'block';
                 isValid = false;
             }
-            break;
-
-        case 4:
+            return isValid;
+        }
+        case 4: {
             const guestName = document.getElementById('guestName');
             const guestEmail = document.getElementById('guestEmail');
             const guestPhone = document.getElementById('guestPhone');
             
-            if (!guestName.value || !guestEmail.value || !guestPhone.value) {
-                [guestName, guestEmail, guestPhone].forEach(input => {
-                    if (!input.value) {
-                        input.reportValidity();
-                        isValid = false;
-                    }
-                });
-            }
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const phoneRegex = /^\+?[\d\s-]+$/;
             
-            // Validación de email
-            if (guestEmail.value && !guestEmail.validity.valid) {
-                guestEmail.reportValidity();
-                isValid = false;
-            }
-            
-            // Validación de teléfono
-            if (guestPhone.value && !guestPhone.validity.valid) {
-                guestPhone.reportValidity();
-                isValid = false;
-            }
-            break;
+            isValid = validateField(guestName) &&
+                     validateField(guestEmail, emailRegex) &&
+                     validateField(guestPhone, phoneRegex);
+            return isValid;
+        }
+        default:
+            return true;
     }
-
-    return isValid;
-}
 }
 
 function nextStep() {

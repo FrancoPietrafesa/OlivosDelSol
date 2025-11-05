@@ -168,13 +168,21 @@
             <div class="reservation-step" id="step1">
                 <h3 data-i18n="reservations.searchTitle">Búsqueda inicial</h3>
                 <label data-i18n="reservations.checkin">Fecha de entrada:</label>
-                <input type="date" id="checkin">
+                <input type="date" id="checkin" required>
+                <span class="error-message">Seleccione una fecha de entrada</span>
+
                 <label data-i18n="reservations.checkout">Fecha de salida:</label>
-                <input type="date" id="checkout">
+                <input type="date" id="checkout" required>
+                <span class="error-message">Seleccione una fecha de salida</span>
+
                 <label data-i18n="reservations.guests">Huéspedes:</label>
-                <input type="number" id="guests" min="1" value="2">
+                <input type="number" id="guests" min="1" max="10" required>
+                <span class="error-message">Ingrese el número de huéspedes (1-10)</span>
+
                 <label data-i18n="reservations.rooms">Habitaciones:</label>
-                <input type="number" id="rooms" min="1" value="1">
+                <input type="number" id="rooms" min="1" max="5" required>
+                <span class="error-message">Ingrese el número de habitaciones (1-5)</span>
+
                 <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
             </div>
 
@@ -199,12 +207,18 @@
             <!-- Step 4: Datos del huésped -->
             <div class="reservation-step" id="step4" style="display:none;">
                 <h3 data-i18n="reservations.guestTitle">Datos del huésped</h3>
-                <label data-i18n="reservations.name">Nombre completo:</label>
-                <input type="text" id="guestName"><br>
-                <label data-i18n="reservations.email">Correo electrónico:</label>
-                <input type="email" id="guestEmail"><br>
-                <label data-i18n="reservations.phone">Teléfono:</label>
-                <input type="text" id="guestPhone"><br>
+                <label for="guestName" data-i18n="reservations.name">Nombre completo:</label>
+                <input type="text" id="guestName" required placeholder="Ingrese su nombre completo">
+                <span class="error-message">Por favor ingrese su nombre completo</span>
+
+                <label for="guestEmail" data-i18n="reservations.email">Correo electrónico:</label>
+                <input type="email" id="guestEmail" required placeholder="ejemplo@correo.com">
+                <span class="error-message">Ingrese un correo electrónico válido</span>
+
+                <label for="guestPhone" data-i18n="reservations.phone">Teléfono:</label>
+                <input type="tel" id="guestPhone" required placeholder="+54 123 456 7890">
+                <span class="error-message">Ingrese un número de teléfono válido</span>
+
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
                 <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
             </div>
