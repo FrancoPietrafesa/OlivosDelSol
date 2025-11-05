@@ -228,6 +228,9 @@ function validateStep(step) {
     }
 }
 
+// Inicializar el bot
+const olivoBot = new OlivoBot();
+
 function nextStep() {
     if (!validateStep(currentStep)) {
         return;
@@ -273,8 +276,8 @@ function nextStep() {
         return;
     }
     if (currentStep === 6) {
-        // Confirmation step - send WhatsApp to owner
-        sendWhatsAppToOwner();
+        // Confirmation step - send WhatsApp to owners via Olivo Bot
+        olivoBot.sendReservationDetails(reservationData);
         return; // Don't proceed further
     }
     if (currentStep < 6) {
