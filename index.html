@@ -14,7 +14,6 @@
     <!-- MercadoPago SDK -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="config/mercadopago-config.js"></script>
-    <script src="js/olivo-bot.js"></script>
     <script defer src="script.js"></script>
 </head>
 <body class="index-page">
@@ -292,11 +291,10 @@
             <div class="reservation-step" id="step6" style="display:none;">
                 <h3 data-i18n="reservations.confirmationTitle">Confirmación</h3>
                 <div id="confirmation-message" data-i18n="reservations.confirmationMessage">¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.</div>
-                <p data-i18n="reservations.whatsappMessage">Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:</p>
-                <!-- Botón para enviar mensaje por WhatsApp — click explícito del usuario evita bloqueo de pop-ups -->
-                <button id="whatsapp-send-btn" class="whatsapp-btn">Enviar por WhatsApp (Olivo)</button>
+                <p>Al finalizar la reserva se enviará automáticamente un correo con los detalles al propietario.</p>
+                <!-- Mensaje enviado automáticamente al finalizar la reserva (server-side) -->
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-                <!-- El botón Finalizar ahora invoca finalizeReservation() que llama a Olivo y reinicia el formulario -->
+                <!-- El botón Finalizar ahora invoca finalizeReservation() que envía los datos al servidor y reinicia el formulario -->
                 <button onclick="finalizeReservation()" data-i18n="reservations.finish">Finalizar</button>
             </div>
         </div>

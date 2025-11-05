@@ -42,63 +42,8 @@ ${this.welcomeMessage}
 ▸ Check-out: ${data.checkout}
 ▸ Noches totales: ${nights}
 
-👤 *Datos del huésped:*
-▸ Nombre: ${data.guestName}
-▸ Email: ${data.guestEmail}
-▸ Teléfono: ${data.guestPhone}
-
-🛎️ *Detalles de la reserva:*
-▸ Cantidad de huéspedes: ${data.guests}
-▸ Habitaciones: ${data.rooms}
-▸ Tipo de habitación: ${data.roomType}
-
-💳 *Método de pago:*
-▸ ${data.paymentMethod}
-
-¡Gracias por elegir Olivos del Sol! 🌟
-        `.trim();
-    }
-
-    async sendWhatsAppMessage(message, phoneNumber) {
-        const whatsappLink = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
-        console.log(`OlivoBot: opening WhatsApp link for ${phoneNumber}:`, whatsappLink);
-
-        // Intentamos abrir en nueva pestaña. Algunos navegadores bloquean ventanas
-        // abiertas en código no iniciado por click. Para minimizar el bloqueo, la
-        // función se llama después de un click (preferible) o con pequeños delays.
-        try {
-            const win = (typeof window !== 'undefined' && window.open) ? window.open(whatsappLink, '_blank') : { opened: true };
-            if (!win) {
-                console.warn('OlivoBot: window.open fue bloqueado por el navegador');
-                // Devolver fallback: mostrar un enlace para que el usuario lo abra manualmente
-                this._showManualLink(whatsappLink, phoneNumber);
-            }
-        } catch (err) {
-            console.error('OlivoBot: excepción al abrir ventana', err);
-            this._showManualLink(whatsappLink, phoneNumber);
-        }
-        return;
-    }
-
-    _showManualLink(url, phone) {
-        // Crea temporalmente un aviso en la página con link para abrir manualmente
-        try {
-            const containerId = 'olivo-manual-links';
-            let container = (typeof document !== 'undefined') ? document.getElementById(containerId) : null;
-            if (!container && typeof document !== 'undefined') {
-                container = document.createElement('div');
-                container.id = containerId;
-                container.style.position = 'fixed';
-                container.style.right = '20px';
-                container.style.bottom = '20px';
-                container.style.zIndex = '11000';
-                container.style.background = 'rgba(0,0,0,0.7)';
-                container.style.color = '#fff';
-                container.style.padding = '10px 12px';
-                container.style.borderRadius = '10px';
-                container.style.fontSize = '14px';
-                document.body.appendChild(container);
-            }
+// REMOVED: Olivo WhatsApp client has been retired. File archived for history.
+// See server/ for the email-based notification implementation.
             if (container) {
                 const a = document.createElement('a');
                 a.href = url;

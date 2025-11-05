@@ -681,24 +681,7 @@ section h2::after {
     transform: translateY(0);
 }
 
-.whatsapp-btn {
-    display: inline-block;
-    margin-top: 1rem;
-    padding: 0.875rem 2rem;
-    background: #25D366;
-    color: #fff;
-    border-radius: 10px;
-    text-decoration: none;
-    font-weight: 600;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
-}
-
-.whatsapp-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
-    background: #1ea356;
-}
+/* Removed WhatsApp-specific button styles (flow moved server-side). */
 
 /* =========================
    CONTACTO

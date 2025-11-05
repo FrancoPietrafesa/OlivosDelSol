@@ -228,8 +228,7 @@ function validateStep(step) {
     }
 }
 
-// Inicializar el bot
-const olivoBot = new OlivoBot();
+// No se usa bot cliente; las notificaciones se envían por email server-side
 
 function nextStep() {
     if (!validateStep(currentStep)) {
@@ -419,60 +418,15 @@ async function simulatePayment() {
     });
 }
 
-// Función para enviar WhatsApp al dueño
-function sendWhatsAppToOwner() {
-    const ownerNumber = '5492645302354'; // Número del dueño
-    const lang = translations[currentLanguage];
-    
-    // Obtener el nombre del tipo de habitación
-    let roomLabel = '';
-    if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
-    if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
-    if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
-    
-    // Obtener el método de pago
-    let paymentMethodText = '';
-    if (reservationData.paymentMethod === 'card') paymentMethodText = 'Tarjeta de Débito/Crédito';
-    else if (reservationData.paymentMethod === 'mercadopago') paymentMethodText = 'MercadoPago';
-    else if (reservationData.paymentMethod === 'local') paymentMethodText = 'Pago en el Local';
-    
-    // Crear el mensaje
-    const message = `🏨 *Nueva Reserva - Hotel Olivos del Sol*
+// No se utiliza el envío por WhatsApp. El servidor enviará un correo automáticamente.
 
-👤 *Nombre:* ${reservationData.guestName}
-📧 *Email:* ${reservationData.guestEmail}
-📱 *Teléfono:* ${reservationData.guestPhone}
-
-📅 *Check-in:* ${reservationData.checkin}
-📅 *Check-out:* ${reservationData.checkout}
-👥 *Huéspedes:* ${reservationData.guests}
-🛏️ *Habitaciones:* ${reservationData.rooms}
-🏠 *Tipo de Habitación:* ${roomLabel}
-
-💳 *Método de Pago:* ${paymentMethodText}
-
-_Reserva realizada el ${new Date().toLocaleDateString('es-AR')}_`;
-    
-    const whatsappUrl = `https://api.whatsapp.com/send?phone=${ownerNumber}&text=${encodeURIComponent(message)}`;
-    
-    // Abrir WhatsApp automáticamente
-    window.open(whatsappUrl, '_blank');
-    
-    // También actualizar el link en la página de confirmación
-    const whatsappLink = document.getElementById('whatsapp-link');
-    if (whatsappLink) {
-        whatsappLink.href = whatsappUrl;
-    }
-}
-
-// Función que se ejecuta al finalizar la reserva: llama a Olivo y luego reinicia el formulario
+// Función que se ejecuta al finalizar la reserva: envía los datos al servidor y reinicia el formulario
 async function finalizeReservation() {
-    console.log('Finalizar reserva: enviando datos a Olivo...', reservationData);
+    console.log('Finalizar reserva: enviando datos al servidor...', reservationData);
 
     // Asegurarnos de que los datos mínimos estén presentes
     if (!reservationData.checkin || !reservationData.checkout || !reservationData.guestName) {
         console.warn('finalizeReservation: faltan datos en reservationData, asegurando recopilación final.');
-        // Intentar recomponer desde los inputs si faltan
         const maybeCheckin = document.getElementById('checkin');
         const maybeCheckout = document.getElementById('checkout');
         const maybeName = document.getElementById('guestName');
@@ -482,25 +436,46 @@ async function finalizeReservation() {
     }
 
     try {
-        // Llamada principal al bot. Como esto se ejecuta por click del usuario,
-        // window.open dentro del bot tiene más probabilidades de no ser bloqueado.
-        await olivoBot.sendReservationDetails(reservationData);
-        console.log('finalizeReservation: Olivo ha intentado enviar el mensaje.');
-
-        // Informar al usuario en la confirmación
+        const serverResult = await sendReservationToServer(reservationData);
         const confMsg = document.getElementById('confirmation-message');
-        if (confMsg) confMsg.textContent = 'Reserva enviada. Olivo ha iniciado el envío por WhatsApp.';
-
+        if (serverResult.ok) {
+            console.log('finalizeReservation: servidor respondió OK', serverResult.data);
+            if (confMsg) confMsg.textContent = 'Reserva enviada automáticamente al propietario.';
+        } else {
+            console.warn('finalizeReservation: no se pudo enviar al servidor', serverResult.error);
+            if (confMsg) confMsg.textContent = 'No se pudo enviar la reserva automáticamente. Por favor inténtalo de nuevo.';
+        }
     } catch (err) {
-        console.error('finalizeReservation: error al enviar por Olivo', err);
+        console.error('finalizeReservation: error enviando al servidor', err);
         const confMsg = document.getElementById('confirmation-message');
-        if (confMsg) confMsg.textContent = 'Ocurrió un error intentando enviar el mensaje por WhatsApp.';
+        if (confMsg) confMsg.textContent = 'Ocurrió un error intentando enviar la reserva.';
     }
 
     // Reiniciar formulario después de un breve retraso para que el usuario vea la confirmación
     setTimeout(() => {
         resetForm();
     }, 1200);
+}
+
+// Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
+async function sendReservationToServer(reservation) {
+    const defaultUrl = 'http://localhost:3000/api/reservations';
+    const url = (typeof window !== 'undefined' && window.OLIVO_SERVER_URL) ? window.OLIVO_SERVER_URL : defaultUrl;
+    try {
+        const resp = await fetch(url, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(reservation)
+        });
+        if (!resp.ok) {
+            const text = await resp.text();
+            return { ok: false, error: `HTTP ${resp.status}: ${text}` };
+        }
+        const data = await resp.json();
+        return { ok: true, data };
+    } catch (err) {
+        return { ok: false, error: err.message || err };
+    }
 }
 
 // Initialize
@@ -549,17 +524,7 @@ window.addEventListener('DOMContentLoaded', () => {
         handlePaymentMethodChange();
     }
 
-    // Botón de envío por WhatsApp (click explícito del usuario evita bloqueo de pop-ups)
-    const whatsappBtn = document.getElementById('whatsapp-send-btn');
-    if (whatsappBtn) {
-        whatsappBtn.addEventListener('click', () => {
-            console.log('Usuario hizo click en Enviar por WhatsApp');
-            // reservationData debe contener los datos recopilados en los pasos anteriores
-            olivoBot.sendReservationDetails(reservationData).then(() => {
-                console.log('OlivoBot: intentó enviar mensajes por WhatsApp');
-            });
-        });
-    }
+    // Notificación server-side: el envío se realiza automáticamente por el servidor al pulsar Finalizar
 });
 
 // Ocultar el preloader una vez que la página haya cargado completamente
