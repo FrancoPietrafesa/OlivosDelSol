@@ -92,9 +92,10 @@ El flujo de reservas incluye un paso de pago con campos de tarjeta. Para procesa
 
 Estas instrucciones permiten añadir pagos reales de forma segura. Si no deseas procesar pagos en línea, puedes mantener el formulario actual como un registro interno y cobrar físicamente en el hotel.
 
-## WhatsApp de confirmación
+## Confirmación por correo
 
-El flujo de reservas genera automáticamente un enlace de WhatsApp en la página de confirmación con la fecha de entrada y salida. Este enlace utiliza el número `+54 9 264 444 4000` (reemplaza el número según tus necesidades) y permite que el huésped envíe un mensaje de confirmación.
+Al finalizar la reserva, el sitio envía automáticamente un correo electrónico con los detalles al propietario configurado (por defecto `francopietra01@gmail.com`).
+Si prefieres usar WhatsApp en el futuro, podemos añadir una integración server-side con las APIs oficiales o un enlace manual en la confirmación.
 
 ## Traducción ES/EN
 

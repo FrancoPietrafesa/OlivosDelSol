@@ -1,7 +1,7 @@
 {
   "name": "olivos-olivo-server",
   "version": "1.0.0",
-  "description": "Servidor de prueba para enviar mensajes de reserva via WhatsApp Cloud API",
+  "description": "Servidor de ejemplo para enviar notificaciones de reserva por email (SMTP) usando nodemailer",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",

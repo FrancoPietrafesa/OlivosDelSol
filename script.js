@@ -275,8 +275,7 @@ function nextStep() {
         return;
     }
     if (currentStep === 6) {
-        // Confirmation step - do NOT auto-send WhatsApp (puede ser bloqueado por pop-ups).
-        // El usuario puede enviar manualmente con el botón "Enviar por WhatsApp (Olivo)".
+        // Confirmation step - the server will send a confirmation email to the owner.
         return; // Don't proceed further
     }
     if (currentStep < 6) {
