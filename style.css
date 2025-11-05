@@ -238,7 +238,7 @@ section h2 {
     margin: 0 0 3rem 0;
     font-size: clamp(1.75rem, 4vw, 2.5rem);
     font-weight: 700;
-    background: linear-gradient(135deg, #00a88e, #00d4b8);
+    background: linear-gradient(135deg, #556B2F, #708238);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -254,7 +254,7 @@ section h2::after {
     transform: translateX(-50%);
     width: 80px;
     height: 4px;
-    background: linear-gradient(90deg, #00a88e, #00d4b8);
+    background: linear-gradient(90deg, #556B2F, #708238);
     border-radius: 2px;
 }
 
@@ -294,7 +294,7 @@ section h2::after {
     left: 0;
     width: 100%;
     height: 4px;
-    background: linear-gradient(90deg, #00a88e, #00d4b8);
+    background: linear-gradient(90deg, #556B2F, #708238);
     transform: scaleX(0);
     transition: transform 0.3s ease;
 }
@@ -535,19 +535,52 @@ section h2::after {
     font-size: 0.95rem;
 }
 
-.reservation-step input[type="text"],
-.reservation-step input[type="email"],
-.reservation-step input[type="date"],
-.reservation-step input[type="number"] {
+.reservation-form input[type="text"],
+.reservation-form input[type="email"],
+.reservation-form input[type="tel"],
+.reservation-form input[type="date"],
+.reservation-form input[type="number"] {
     width: 100%;
-    padding: 0.875rem 1rem;
-    margin-top: 0.5rem;
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: 10px;
-    background-color: #1a1a1a;
-    color: #e0e0e0;
-    font-size: 1rem;
-    transition: all 0.3s ease;
+    padding: 12px;
+    margin: 8px 0;
+    border: 2px solid #333;
+    border-radius: 4px;
+    background-color: #222;
+    color: #fff;
+    transition: border-color 0.3s ease;
+}
+
+.reservation-form input:required {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23ff4444' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1h-7z'/%3E%3C/svg%3E");
+    background-position: right 10px center;
+    background-repeat: no-repeat;
+    padding-right: 32px;
+}
+
+.reservation-form input:required:valid {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23556B2F' viewBox='0 0 16 16'%3E%3Cpath d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zm3.97 4.97a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.071-1.05z'/%3E%3C/svg%3E");
+    border-color: #556B2F;
+}
+
+.reservation-form input:required:invalid:not(:placeholder-shown) {
+    border-color: #ff4444;
+}
+
+.reservation-form input:focus {
+    outline: none;
+    border-color: #708238;
+}
+
+.reservation-form .error-message {
+    color: #ff4444;
+    font-size: 0.85em;
+    margin-top: -6px;
+    margin-bottom: 10px;
+    display: none;
+}
+
+.reservation-form input:invalid:not(:placeholder-shown) + .error-message {
+    display: block;
 }
 
 .reservation-step input:focus {
