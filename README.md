@@ -99,3 +99,9 @@ El flujo de reservas genera automáticamente un enlace de WhatsApp en la página
 ## Traducción ES/EN
 
 El selector de idiomas en la esquina superior derecha permite alternar entre español e inglés. Si deseas añadir más idiomas, edita el objeto `translations` en `script.js` agregando las traducciones correspondientes y actualiza las opciones en el selector.
+
+
+## Móvil y menú estilo iOS
+- Se añadió un menú móvil tipo *action sheet* (estilo iOS). El botón hamburguesa abre un panel con enlaces y selector de idioma.  
+- Accesible con teclado (Escape para cerrar, foco atrapado).
+- Estilos en `style.css` y lógica en `script.js`.

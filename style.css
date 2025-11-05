@@ -335,3 +335,156 @@ footer {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
 }
+
+
+/* =========================
+   Responsive navbar
+   ========================= */
+.nav-toggle {
+    display: none;
+    background: transparent;
+    border: 0;
+    cursor: pointer;
+    padding: 0.25rem;
+    margin-left: 0.25rem;
+}
+.nav-toggle .bar {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: #eee;
+    margin: 5px 0;
+    transition: transform 0.2s, opacity 0.2s;
+}
+
+/* Compact tweaks */
+@media (max-width: 1024px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+}
+@media (max-width: 860px) {
+    .nav-links {
+        display: none;
+    }
+    .nav-toggle {
+        display: inline-block;
+    }
+    .lang-select {
+        display: none;
+    }
+}
+
+/* =========================
+   iOS-style mobile menu (action sheet)
+   ========================= */
+ /* Backdrop */
+.ios-menu-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    backdrop-filter: blur(2px);
+    -webkit-backdrop-filter: blur(2px);
+    z-index: 10000;
+}
+
+/* Container */
+.ios-menu {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    place-items: end center;
+    z-index: 10001;
+}
+
+/* Sheet */
+.ios-menu-sheet {
+    width: min(600px, 92vw);
+    margin: 0 0 24px;
+    padding: 12px;
+    border-radius: 20px;
+    background: rgba(22,22,22,0.8);
+    backdrop-filter: saturate(180%) blur(20px);
+    -webkit-backdrop-filter: saturate(180%) blur(20px);
+    border: 1px solid rgba(255,255,255,0.08);
+    transform: translateY(16px);
+    opacity: 0;
+    transition: transform 200ms ease, opacity 200ms ease;
+}
+
+/* Show states */
+.ios-menu[data-open="true"] .ios-menu-sheet {
+    transform: translateY(0);
+    opacity: 1;
+}
+.ios-menu[data-open="true"] ~ .ios-menu-backdrop {
+    display: block;
+}
+
+/* Menu items inside */
+.ios-menu .nav-links {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 0;
+    margin: 0 0 8px 0;
+}
+.ios-menu .nav-links li {
+    list-style: none;
+}
+.ios-menu .nav-links a {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+    font-size: 1.05rem;
+    padding: 14px 16px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 14px;
+}
+.ios-menu .nav-links a::after {
+    content: "›";
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+/* Language select inside sheet */
+.ios-menu .lang-select {
+    display: block;
+    margin-top: 6px;
+}
+.ios-menu .lang-select select {
+    width: 100%;
+    padding: 12px 14px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+}
+
+/* Close button */
+.ios-menu-close {
+    width: 100%;
+    margin-top: 10px;
+    padding: 14px 16px;
+    border-radius: 14px;
+    background: rgba(255,255,255,0.1);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* Backdrop default hidden via [hidden] attr */
+.ios-menu-backdrop[hidden],
+.ios-menu[hidden] {
+    display: none !important;
+}
+
+/* =========================
+   General responsiveness
+   ========================= */
+.home-section h1 { font-size: clamp(1.8rem, 3.2vw + 1rem, 3rem); }
+.home-section p { font-size: clamp(1rem, 1.2vw + 0.6rem, 1.2rem); }
+.service-item, .experience-item, .recommendation-item { padding: clamp(0.8rem, 1vw + 0.2rem, 1.25rem); }
+.gallery-grid img { height: clamp(160px, 26vw, 220px); }
+#reservation-form { width: min(640px, 92vw); }

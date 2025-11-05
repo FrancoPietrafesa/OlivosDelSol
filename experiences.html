@@ -17,6 +17,11 @@
                 <img src="images/logo.png" alt="Logo Olivos del Sol">
                 <span data-i18n="header.logo">Hotel Olivos del Sol</span>
             </div>
+<button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
             <ul class="nav-links">
                 <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
                 <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
@@ -33,7 +38,30 @@
                     <option value="en">EN</option>
                 </select>
             </div>
-        </nav>
+        
+<div class="ios-menu-backdrop" hidden></div>
+<div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
+  <div class="ios-menu-sheet" role="menu">
+    <ul class="nav-links">
+                <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+                <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+                <!-- Current page: link to this page's section -->
+                <li><a href="#experiences" data-i18n="nav.experiences">Experiencias</a></li>
+                <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+    <div class="lang-select">
+                <select id="language-select">
+                    <option value="es">ES</option>
+                    <option value="en">EN</option>
+                </select>
+            </div>
+    <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
+  </div>
+</div>
+</nav>
     </header>
 
     <section id="experiences" class="experiences-section">

@@ -146,3 +146,61 @@ window.addEventListener('load', () => {
         preloader.style.display = 'none';
     }
 });
+
+
+// =========================
+// Mobile menu logic
+// =========================
+(function () {
+    const navToggle = document.querySelector('.nav-toggle');
+    const sheet = document.getElementById('mobileMenu');
+    const backdrop = document.querySelector('.ios-menu-backdrop');
+    const closeBtn = sheet ? sheet.querySelector('.ios-menu-close') : null;
+
+    if (!navToggle || !sheet || !backdrop) return;
+
+    const focusableSelector = 'a[href], button, select';
+    let lastFocused = null;
+
+    function openMenu() {
+        lastFocused = document.activeElement;
+        sheet.hidden = false;
+        backdrop.hidden = false;
+        sheet.setAttribute('data-open','true');
+        navToggle.setAttribute('aria-expanded','true');
+        // focus first item
+        const first = sheet.querySelector(focusableSelector);
+        if (first) first.focus();
+        document.body.style.overflow = 'hidden';
+    }
+    function closeMenu() {
+        sheet.removeAttribute('data-open');
+        navToggle.setAttribute('aria-expanded','false');
+        // small delay for transition then hide
+        setTimeout(() => {
+            sheet.hidden = true;
+            backdrop.hidden = true;
+            document.body.style.overflow = '';
+            if (lastFocused) lastFocused.focus();
+        }, 160);
+    }
+
+    navToggle.addEventListener('click', () => {
+        const isOpen = sheet.getAttribute('data-open') === 'true';
+        if (isOpen) { closeMenu(); } else { openMenu(); }
+    });
+    if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+    backdrop.addEventListener('click', closeMenu);
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && sheet.getAttribute('data-open') === 'true') closeMenu();
+        if (e.key === 'Tab' && sheet.getAttribute('data-open') === 'true') {
+            // trap focus
+            const focusables = Array.from(sheet.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
+            if (focusables.length === 0) return;
+            const first = focusables[0];
+            const last = focusables[focusables.length - 1];
+            if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+            else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+        }
+    });
+})();
