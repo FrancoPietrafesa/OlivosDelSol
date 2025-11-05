@@ -9,8 +9,8 @@ body {
     font-family: 'Montserrat', sans-serif;
     margin: 0;
     padding: 0;
-    color: #2c2c2c;
-    background-color: #fafafa;
+    color: #e0e0e0;
+    background-color: #1a1a1a;
     line-height: 1.6;
     overflow-x: hidden;
 }
@@ -109,13 +109,9 @@ body {
 }
 
 /* =========================
-   HERO SECTION - Index
+   HERO SECTION - Index con fondo dinámico
    ========================= */
 .home-section .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('images/468322890_18048613424483247_939284270881576216_n.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
     color: #fff;
     text-align: center;
     padding: 8rem 2rem;
@@ -124,6 +120,55 @@ body {
     justify-content: center;
     min-height: 90vh;
     position: relative;
+    overflow: hidden;
+}
+
+.home-section .hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
+    z-index: 1;
+}
+
+.home-section .hero-background {
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 2s ease-in-out;
+    z-index: 0;
+    animation: slowPan 60s ease-in-out infinite;
+}
+
+.home-section .hero-background.active {
+    opacity: 1;
+    animation: slowPan 60s ease-in-out infinite;
+}
+
+@keyframes slowPan {
+    0% {
+        transform: scale(1) translate(0, 0);
+    }
+    25% {
+        transform: scale(1.08) translate(-1.5%, -1.5%);
+    }
+    50% {
+        transform: scale(1.12) translate(-3%, -3%);
+    }
+    75% {
+        transform: scale(1.08) translate(-1.5%, -1.5%);
+    }
+    100% {
+        transform: scale(1) translate(0, 0);
+    }
 }
 
 .home-section .hero-content {
@@ -134,6 +179,8 @@ body {
     border-radius: 20px;
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: fadeInUp 0.8s ease;
+    position: relative;
+    z-index: 2;
 }
 
 @keyframes fadeInUp {
@@ -169,15 +216,15 @@ section {
     position: relative;
 }
 
-/* Secciones alternadas: blanco y negro */
+/* Secciones alternadas: gris oscuro y negro */
 section:nth-child(even) {
-    background-color: #ffffff;
-    color: #2c2c2c;
+    background-color: #2a2a2a;
+    color: #e0e0e0;
 }
 
 section:nth-child(odd) {
-    background-color: #0a0a0a;
-    color: #f5f5f5;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
 }
 
 section h2 {
@@ -209,7 +256,7 @@ section h2::after {
    SERVICIOS - Estilo único
    ========================= */
 .services-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 .services-list {
@@ -222,15 +269,16 @@ section h2::after {
 }
 
 .service-item {
-    background: #ffffff;
+    background: #2a2a2a;
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    border: 1px solid rgba(0, 168, 142, 0.1);
+    border: 1px solid rgba(0, 168, 142, 0.2);
     position: relative;
     overflow: hidden;
+    color: #e0e0e0;
 }
 
 .service-item::before {
@@ -262,7 +310,7 @@ section h2::after {
 }
 
 .service-item p {
-    color: #666;
+    color: #b0b0b0;
     line-height: 1.8;
     margin: 0;
 }
@@ -344,7 +392,7 @@ section h2::after {
    EXPERIENCIAS - Estilo único
    ========================= */
 .experiences-section {
-    background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 .experience-list {
@@ -357,13 +405,14 @@ section h2::after {
 }
 
 .experience-item {
-    background: #ffffff;
+    background: #2a2a2a;
     padding: 2.5rem;
     border-left: 5px solid #00a88e;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
+    color: #e0e0e0;
 }
 
 .experience-item::before {
@@ -391,7 +440,7 @@ section h2::after {
 }
 
 .experience-item p {
-    color: #555;
+    color: #b0b0b0;
     line-height: 1.8;
     font-style: italic;
     position: relative;
@@ -442,17 +491,18 @@ section h2::after {
    RESERVAS
    ========================= */
 .reservations-section {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 #reservation-form {
     max-width: 700px;
     margin: 0 auto;
-    background: #ffffff;
+    background: #2a2a2a;
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.1);
-    border: 1px solid rgba(0, 168, 142, 0.1);
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(0, 168, 142, 0.2);
+    color: #e0e0e0;
 }
 
 .reservation-step {
@@ -475,7 +525,7 @@ section h2::after {
     display: block;
     margin-top: 1.5rem;
     font-weight: 600;
-    color: #333;
+    color: #e0e0e0;
     font-size: 0.95rem;
 }
 
@@ -486,10 +536,10 @@ section h2::after {
     width: 100%;
     padding: 0.875rem 1rem;
     margin-top: 0.5rem;
-    border: 2px solid #e0e0e0;
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 10px;
-    background-color: #fafafa;
-    color: #333;
+    background-color: #1a1a1a;
+    color: #e0e0e0;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
@@ -497,8 +547,8 @@ section h2::after {
 .reservation-step input:focus {
     outline: none;
     border-color: #00a88e;
-    background-color: #fff;
-    box-shadow: 0 0 0 3px rgba(0, 168, 142, 0.1);
+    background-color: #2a2a2a;
+    box-shadow: 0 0 0 3px rgba(0, 168, 142, 0.2);
 }
 
 .reservation-step input[type="radio"] {
@@ -874,27 +924,27 @@ footer {
 
 /* Página de Servicios - Estilo único */
 body.services-page {
-    background: #ffffff;
+    background: #1a1a1a;
 }
 
 body.services-page .services-section {
-    background: linear-gradient(135deg, #f0f7ff 0%, #ffffff 50%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
     padding: 6rem 0;
 }
 
 body.services-page .service-item {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
-    border: 2px solid rgba(0, 168, 142, 0.1);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    border: 2px solid rgba(0, 168, 142, 0.2);
 }
 
 body.services-page .service-item:hover {
-    border-color: rgba(0, 168, 142, 0.3);
+    border-color: rgba(0, 168, 142, 0.4);
 }
 
 body.services-page footer {
-    background: #f8f9fa;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #666;
+    background: #1a1a1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #aaa;
 }
 
 /* Página de Galería - Estilo único */
@@ -928,57 +978,57 @@ body.gallery-page footer {
 
 /* Página de Experiencias - Estilo único */
 body.experiences-page {
-    background: #ffffff;
+    background: #1a1a1a;
 }
 
 body.experiences-page .experiences-section {
-    background: linear-gradient(135deg, #ffffff 0%, #f5f5f5 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
     padding: 6rem 0;
 }
 
 body.experiences-page .experience-item {
-    background: linear-gradient(135deg, #ffffff 0%, #fafafa 100%);
-    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    box-shadow: 0 6px 25px rgba(0, 0, 0, 0.3);
 }
 
 body.experiences-page .experience-item:hover {
-    background: #ffffff;
-    box-shadow: 0 10px 35px rgba(0, 168, 142, 0.15);
+    background: #2a2a2a;
+    box-shadow: 0 10px 35px rgba(0, 168, 142, 0.3);
 }
 
 body.experiences-page footer {
-    background: #f8f9fa;
-    border-top: 1px solid rgba(0, 0, 0, 0.1);
-    color: #666;
+    background: #1a1a1a;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #aaa;
 }
 
 /* Página Index - Estilo único */
 body.index-page section:nth-child(2) {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 body.index-page section:nth-child(3) {
-    background: #0a0a0a;
+    background: #1a1a1a;
 }
 
 body.index-page section:nth-child(4) {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 body.index-page section:nth-child(5) {
-    background: #0a0a0a;
+    background: #1a1a1a;
 }
 
 body.index-page section:nth-child(6) {
-    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 body.index-page section:nth-child(7) {
-    background: #0a0a0a;
+    background: #1a1a1a;
 }
 
 body.index-page section:nth-child(8) {
-    background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
 
 /* Smooth scrolling */

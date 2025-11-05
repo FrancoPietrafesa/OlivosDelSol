@@ -147,6 +147,31 @@ window.addEventListener('load', () => {
     }
 });
 
+// =========================
+// Carrusel de imágenes dinámico en el hero
+// =========================
+(function() {
+    const heroBackgrounds = document.querySelectorAll('.hero-background');
+    if (heroBackgrounds.length === 0) return;
+    
+    let currentIndex = 0;
+    const changeInterval = 30000; // 30 segundos
+    
+    function changeBackground() {
+        // Remover la clase active de todas
+        heroBackgrounds.forEach(bg => bg.classList.remove('active'));
+        
+        // Avanzar al siguiente índice
+        currentIndex = (currentIndex + 1) % heroBackgrounds.length;
+        
+        // Agregar la clase active a la siguiente imagen
+        heroBackgrounds[currentIndex].classList.add('active');
+    }
+    
+    // Cambiar la imagen cada 30 segundos
+    setInterval(changeBackground, changeInterval);
+})();
+
 
 // =========================
 // Mobile menu logic
