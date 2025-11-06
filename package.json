@@ -1,0 +1,9 @@
+{
+  "name": "olivos-del-sol",
+  "version": "1.0.0",
+  "description": "Hotel Olivos del Sol website",
+  "dependencies": {
+    "nodemailer": "^6.9.3"
+  }
+}
+
