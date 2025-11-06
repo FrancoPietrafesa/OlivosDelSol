@@ -51,35 +51,64 @@ function buildEmailText(reservation) {
 const transporter = nodemailer.createTransport({
   host: SMTP_HOST,
   port: Number(SMTP_PORT) || 587,
-  secure: Number(SMTP_PORT) === 465, // true for 465, false for other ports
+  secure: false, // true for 465, false for other ports
   auth: {
     user: SMTP_USER,
     pass: SMTP_PASS
-  }
+  },
+  tls: {
+    rejectUnauthorized: false
+  },
+  debug: true,
+  logger: true
 });
 
 app.post('/api/reservations', async (req, res) => {
+  console.log('Recibida nueva reserva:', req.body);
   const reservation = req.body || {};
 
   if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
+    console.error('Error de configuración:', { SMTP_HOST, SMTP_PORT, SMTP_USER: !!SMTP_USER, SMTP_PASS: !!SMTP_PASS });
     return res.status(500).json({ error: 'Servidor no configurado. Faltan variables SMTP en .env.' });
   }
 
   const text = buildEmailText(reservation);
+  console.log('Contenido del email:', text);
 
   const mailOptions = {
-    from: FROM_EMAIL,
+    from: `"Reservas Olivos del Sol" <${FROM_EMAIL}>`,
     to: OWNER_EMAIL,
     subject: 'Nueva Reserva - Olivos del Sol',
-    text
+    text,
+    html: text.replace(/\n/g, '<br>')
   };
 
+  console.log('Enviando email con opciones:', { ...mailOptions, pass: '******' });
+
   try {
+    // Verificar conexión SMTP
+    console.log('Verificando conexión SMTP...');
+    await transporter.verify();
+    console.log('Conexión SMTP verificada correctamente');
+
+    // Enviar email
+    console.log('Enviando email...');
     const info = await transporter.sendMail(mailOptions);
+    console.log('Email enviado exitosamente:', info);
     return res.json({ ok: true, info });
   } catch (err) {
-    console.error('Error enviando email:', err);
-    return res.status(502).json({ ok: false, error: err.message || err });
+    console.error('Error detallado al enviar email:', err);
+    if (err.code === 'EAUTH') {
+      return res.status(502).json({ 
+        ok: false, 
+        error: 'Error de autenticación con Gmail. Verifica tu contraseña de aplicación.' 
+      });
+    }
+    return res.status(502).json({ 
+      ok: false, 
+      error: err.message || 'Error al enviar el email',
+      details: err.response || err
+    });
   }
 });
 
