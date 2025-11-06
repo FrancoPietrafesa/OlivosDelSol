@@ -10,13 +10,5 @@
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1" },
     { "src": "/(.*)", "dest": "/$1" }
-  ],
-  "env": {
-    "SMTP_HOST": "smtp.gmail.com",
-    "SMTP_PORT": "587",
-    "SMTP_USER": "@smtp-user",
-    "SMTP_PASS": "@smtp-pass",
-    "FROM_EMAIL": "@from-email",
-    "OWNER_EMAIL": "francopietra01@gmail.com"
-  }
+  ]
 }
