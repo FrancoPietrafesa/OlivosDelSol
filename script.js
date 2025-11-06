@@ -435,10 +435,12 @@ async function sendReservationToServer(reservation) {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
-                'Accept': 'application/json'
+                'Accept': 'application/json',
+                'Access-Control-Allow-Origin': '*'
             },
             body: JSON.stringify(reservation),
-            mode: 'cors'
+            mode: 'cors',
+            credentials: 'include'
         });
         
         console.log('Respuesta del servidor:', resp.status);
