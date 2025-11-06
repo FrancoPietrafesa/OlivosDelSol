@@ -37,7 +37,7 @@ const translations = {
         gallery: {title: 'Galería'},
         experiences: {title: 'Experiencias', jose: '“Una estadía maravillosa. El personal nos hizo sentir como en casa y la piscina es espectacular.”', ana: '“Las habitaciones son amplias y cómodas. La comida en el restaurante fue deliciosa.”', luis: '“El hotel está cerca de muchas bodegas interesantes. ¡Sin duda volveré!”'},
         recommendations: {title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMas: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.'},
-        reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Pago', paymentInstructions: 'Para completar tu reserva, ingresa los detalles de pago o utiliza la pasarela de pago integrada. Este sitio utiliza Stripe para procesar pagos de forma segura.', cardName: 'Nombre en la tarjeta:', cardNumber: 'Número de tarjeta:', cardExpiry: 'Fecha de expiración:', cardCVC: 'CVC:', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Finalizar'},
+        reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Finalizar'},
         contact: {title: 'Contacto', addressLabel: 'Dirección:', phoneLabel: 'Teléfono:'}
     },
     en: {
@@ -48,7 +48,7 @@ const translations = {
         gallery: {title: 'Gallery'},
         experiences: {title: 'Experiences', jose: '“A wonderful stay. The staff made us feel at home and the pool is spectacular.”', ana: '“The rooms are spacious and comfortable. The food in the restaurant was delicious.”', luis: '“The hotel is close to many interesting wineries. I will definitely return!”'},
         recommendations: {title: 'Tourist Recommendations', lasMarianas: 'Located on Calle Nueva between Av. Aberastain and Vidart, La Rinconada, Pocito. This family winery features an old underground cellar and award-winning wines.', segisa: 'Located at Aberastain and Calle 15, Pocito. This boutique winery lets visitors discover the history and winemaking process and offers lunches with local dishes in a cozy atmosphere.', fabril: 'On National Route 40 between streets 13 and 14, Pocito. This pioneer organic winery offers guided tours, tastings and sales of its certified wines and sparkling wines.', miguelMas: 'Located on RP 215, Villa Aberastain. This modern family sparkling wine house offers organic sparkling wine tastings and a participatory lunch with pizza baked in a wood oven.'},
-        reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment', paymentInstructions: 'To complete your booking, enter the payment details or use the integrated payment gateway. This site uses Stripe to process payments securely.', cardName: 'Name on card:', cardNumber: 'Card number:', cardExpiry: 'Expiry date:', cardCVC: 'CVC:', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Finish'},
+        reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Finish'},
         contact: {title: 'Contact', addressLabel: 'Address:', phoneLabel: 'Phone:'}
     }
 };
@@ -160,6 +160,17 @@ function showStep(step) {
     document.querySelectorAll('.reservation-step').forEach((div, index) => {
         div.style.display = (index + 1 === step) ? 'block' : 'none';
     });
+    
+    // Inicializar resaltado de opciones de pago cuando se muestra el paso 5
+    if (step === 5) {
+        const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
+        document.querySelectorAll('.payment-option').forEach(option => {
+            option.classList.remove('selected');
+        });
+        if (selectedPayment && selectedPayment.closest('.payment-option')) {
+            selectedPayment.closest('.payment-option').classList.add('selected');
+        }
+    }
 }
 
 function validateField(input, regex) {
@@ -269,13 +280,15 @@ function nextStep() {
                                `<p>Tipo de habitación: ${roomLabel}</p>`;
     }
     if (currentStep === 5) {
-        // Payment step - handled by processPayment function
-        // Don't proceed automatically, wait for processPayment()
-        return;
+        // Get selected payment method
+        const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+        if (paymentMethod) {
+            reservationData.paymentMethod = paymentMethod.value;
+        }
     }
     if (currentStep === 6) {
-        // Confirmation step - the server will send a confirmation email to the owner.
-        return; // Don't proceed further
+        // Confirmation step - don't proceed further
+        return;
     }
     if (currentStep < 6) {
         showStep(currentStep + 1);
@@ -302,20 +315,48 @@ function resetForm() {
             // Solo resetear si es un input, textarea o select
             if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
                 el.value = '';
-            }
-            // Si es un radio button, desmarcarlo
-            if (el.type === 'radio') {
-                el.checked = false;
+                // Limpiar clases de validación
+                el.classList.remove('error', 'valid');
             }
         }
     });
+    
     // Reiniciar los radio buttons de tipo de habitación
     const roomTypeRadios = document.querySelectorAll('input[name="roomType"]');
     if (roomTypeRadios.length > 0) {
         roomTypeRadios[0].checked = true; // Marcar el primero por defecto
     }
+    
+    // Reiniciar el método de pago a tarjeta
+    const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    if (paymentMethodRadios.length > 0) {
+        const cardRadio = Array.from(paymentMethodRadios).find(r => r.value === 'card');
+        if (cardRadio) {
+            cardRadio.checked = true;
+        } else {
+            paymentMethodRadios[0].checked = true;
+        }
+    }
+    
+    // Limpiar mensajes de error
+    document.querySelectorAll('.error-message').forEach(msg => {
+        msg.style.display = 'none';
+    });
+    
+    // Limpiar mensaje de confirmación
+    const confMsg = document.getElementById('confirmation-message');
+    if (confMsg) {
+        confMsg.textContent = '';
+        confMsg.style.color = '';
+    }
+    
     // Reiniciar el paso
     showStep(1);
+    
+    // Rehabilitar botones que puedan estar deshabilitados
+    document.querySelectorAll('button[disabled]').forEach(btn => {
+        btn.disabled = false;
+    });
 }
 
 // Función para formatear el número de tarjeta
@@ -416,7 +457,7 @@ async function finalizeReservation() {
             // Reiniciar formulario después de un breve retraso solo si fue exitoso
             setTimeout(() => {
                 resetForm();
-            }, 5000);
+            }, 3000);
         } else {
             confMsg.textContent = `Hubo un problema al enviar la reserva: ${serverResult.error || 'Error desconocido'}. Por favor, inténtalo de nuevo o contáctanos directamente por teléfono.`;
             confMsg.style.color = '#f44336';
@@ -551,6 +592,25 @@ window.addEventListener('DOMContentLoaded', () => {
     if (document.getElementById('step5')) {
         handlePaymentMethodChange();
     }
+    
+    // Manejar resaltado de opciones de pago
+    const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
+    paymentRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            // Remover clase selected de todas las opciones
+            document.querySelectorAll('.payment-option').forEach(option => {
+                option.classList.remove('selected');
+            });
+            // Agregar clase selected a la opción seleccionada
+            if (this.checked && this.closest('.payment-option')) {
+                this.closest('.payment-option').classList.add('selected');
+            }
+        });
+        // Marcar la opción seleccionada inicialmente
+        if (radio.checked) {
+            radio.closest('.payment-option')?.classList.add('selected');
+        }
+    });
 
     // Notificación server-side: el envío se realiza automáticamente por el servidor al pulsar Finalizar
 });

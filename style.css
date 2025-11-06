@@ -597,37 +597,62 @@ section h2::after {
 }
 
 .payment-option {
-    display: block;
+    display: flex;
+    align-items: center;
     cursor: pointer;
-}
-
-.payment-option input[type="radio"] {
-    display: none;
-}
-
-.payment-card {
     background: #1a1a1a;
     border: 2px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
     padding: 1.5rem;
     transition: all 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
 }
 
-.payment-option input[type="radio"]:checked + .payment-card {
+.payment-option:hover {
+    border-color: rgba(85, 107, 47, 0.5);
+    background: rgba(85, 107, 47, 0.05);
+}
+
+.payment-option input[type="radio"] {
+    margin-right: 1rem;
+    width: 20px;
+    height: 20px;
+    accent-color: #556B2F;
+    cursor: pointer;
+}
+
+.payment-option input[type="radio"]:checked ~ .payment-option-content {
+    color: #fff;
+}
+
+.payment-option input[type="radio"]:checked {
+    accent-color: #556B2F;
+}
+
+.payment-option input[type="radio"]:checked ~ .payment-option-content strong {
+    color: #556B2F;
+}
+
+/* Resaltar la opción seleccionada usando JavaScript (clase agregada dinámicamente) */
+.payment-option.selected {
     border-color: #556B2F;
     background: rgba(85, 107, 47, 0.1);
     box-shadow: 0 0 0 3px rgba(85, 107, 47, 0.2);
 }
 
-.payment-card strong {
-    color: #fff;
-    font-size: 1.1rem;
+.payment-option-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
 }
 
-.payment-card span {
+.payment-option-content strong {
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.payment-option-content span {
     color: #b0b0b0;
     font-size: 0.9rem;
 }

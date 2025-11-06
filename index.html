@@ -223,8 +223,43 @@
                 <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
             </div>
 
-            <!-- Step 5: Confirmación -->
+            <!-- Step 5: Formas de pago -->
             <div class="reservation-step" id="step5" style="display:none;">
+                <h3 data-i18n="reservations.paymentTitle">Forma de pago</h3>
+                <p data-i18n="reservations.paymentInstructions">Selecciona tu método de pago preferido:</p>
+                
+                <div class="payment-methods">
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="card" checked>
+                        <div class="payment-option-content">
+                            <strong data-i18n="reservations.paymentCard">Tarjeta de Débito/Crédito</strong>
+                            <span data-i18n="reservations.paymentCardDesc">Pago seguro con tarjeta</span>
+                        </div>
+                    </label>
+                    
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="mercadopago">
+                        <div class="payment-option-content">
+                            <strong data-i18n="reservations.paymentMercadopago">MercadoPago</strong>
+                            <span data-i18n="reservations.paymentMercadopagoDesc">Pago rápido y seguro con MercadoPago</span>
+                        </div>
+                    </label>
+                    
+                    <label class="payment-option">
+                        <input type="radio" name="paymentMethod" value="cash">
+                        <div class="payment-option-content">
+                            <strong data-i18n="reservations.paymentCash">Efectivo en el local</strong>
+                            <span data-i18n="reservations.paymentCashDesc">Pagarás al llegar al hotel</span>
+                        </div>
+                    </label>
+                </div>
+                
+                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
+                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
+            </div>
+
+            <!-- Step 6: Confirmación -->
+            <div class="reservation-step" id="step6" style="display:none;">
                 <h3 data-i18n="reservations.confirmationTitle">Confirmación</h3>
                 <div id="confirmation-message" data-i18n="reservations.confirmationMessage">¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.</div>
                 <p>Enviaremos un email de confirmación al propietario y nos pondremos en contacto contigo pronto.</p>
