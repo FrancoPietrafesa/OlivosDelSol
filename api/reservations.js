@@ -76,7 +76,7 @@ module.exports = async (req, res) => {
     to: OWNER_EMAIL,
     subject: 'Nueva Reserva - Olivos del Sol',
     text,
-    html: text.replaceAll('\n', '<br>')
+    html: text.replace(/\n/g, '<br>')
   };
 
   try {

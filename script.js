@@ -298,8 +298,22 @@ function resetForm() {
     ];
     fields.forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.value = '';
+        if (el) {
+            // Solo resetear si es un input, textarea o select
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'SELECT') {
+                el.value = '';
+            }
+            // Si es un radio button, desmarcarlo
+            if (el.type === 'radio') {
+                el.checked = false;
+            }
+        }
     });
+    // Reiniciar los radio buttons de tipo de habitación
+    const roomTypeRadios = document.querySelectorAll('input[name="roomType"]');
+    if (roomTypeRadios.length > 0) {
+        roomTypeRadios[0].checked = true; // Marcar el primero por defecto
+    }
     // Reiniciar el paso
     showStep(1);
 }
@@ -385,35 +399,62 @@ async function simulatePayment() {
 
 // Función que se ejecuta al finalizar la reserva: envía los datos al servidor y reinicia el formulario
 async function finalizeReservation() {
+    const confMsg = document.getElementById('confirmation-message');
+    const finishButton = document.querySelector('button[onclick="finalizeReservation()"]');
+    
+    // Deshabilitar el botón mientras se procesa
+    if (finishButton) {
+        finishButton.disabled = true;
+        finishButton.textContent = 'Enviando...';
+    }
+    
     try {
         const serverResult = await sendReservationToServer(reservationData);
-        const confMsg = document.getElementById('confirmation-message');
         if (serverResult.ok) {
             confMsg.textContent = '¡Gracias! Tu reserva ha sido enviada con éxito. Pronto nos pondremos en contacto contigo.';
+            confMsg.style.color = '#4CAF50';
+            // Reiniciar formulario después de un breve retraso solo si fue exitoso
+            setTimeout(() => {
+                resetForm();
+            }, 5000);
         } else {
-            confMsg.textContent = 'Hubo un problema al enviar la reserva. Por favor, inténtalo de nuevo o contáctanos directamente por teléfono.';
+            confMsg.textContent = `Hubo un problema al enviar la reserva: ${serverResult.error || 'Error desconocido'}. Por favor, inténtalo de nuevo o contáctanos directamente por teléfono.`;
+            confMsg.style.color = '#f44336';
+            // Rehabilitar el botón para que puedan intentar de nuevo
+            if (finishButton) {
+                finishButton.disabled = false;
+                finishButton.textContent = document.querySelector('[data-i18n="reservations.finish"]')?.textContent || 'Finalizar Reserva';
+            }
         }
     } catch (err) {
-        const confMsg = document.getElementById('confirmation-message');
-        confMsg.textContent = 'Ocurrió un error al enviar la reserva. Por favor, contáctanos directamente por teléfono.';
+        console.error('Error inesperado en finalizeReservation:', err);
+        confMsg.textContent = 'Ocurrió un error inesperado al enviar la reserva. Por favor, contáctanos directamente por teléfono.';
+        confMsg.style.color = '#f44336';
+        // Rehabilitar el botón
+        if (finishButton) {
+            finishButton.disabled = false;
+            finishButton.textContent = document.querySelector('[data-i18n="reservations.finish"]')?.textContent || 'Finalizar Reserva';
+        }
     }
-
-    // Reiniciar formulario después de un breve retraso
-    setTimeout(() => {
-        resetForm();
-    }, 3000);
 }
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    // Determinar baseUrl: en desarrollo usamos localhost:3000, en producción asumimos que la API está en el mismo dominio
-    const isLocal = /(^localhost$|^127\.0\.0\.1$)/.test(globalThis.location.hostname);
+    // Determinar baseUrl: en desarrollo usamos localhost:3000, en producción (Vercel) usamos ruta relativa
+    const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname);
+    // En producción, usar ruta relativa para que funcione con Vercel serverless functions
     const baseUrl = isLocal ? 'http://localhost:3000' : '';
     const apiUrl = `${baseUrl}/api/reservations`;
 
     console.log('Enviando reserva al servidor:', reservation, '->', apiUrl);
 
+    // Crear un AbortController para timeout (compatible con navegadores más antiguos)
+    const controller = new AbortController();
+    let timeoutId;
+    
     try {
+        timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos de timeout
+        
         // Intentamos enviar la reserva directamente. Si el servidor no está escuchando, el catch capturará la excepción (ECONNREFUSED).
         const resp = await fetch(apiUrl, {
             method: 'POST',
@@ -422,8 +463,10 @@ async function sendReservationToServer(reservation) {
                 'Accept': 'application/json'
             },
             body: JSON.stringify(reservation),
-            // mode y credentials no son necesarios en la mayoría de setups; omitirlos para evitar problemas
+            signal: controller.signal
         });
+        
+        clearTimeout(timeoutId);
 
         console.log('Respuesta del servidor:', resp.status);
 
@@ -432,27 +475,34 @@ async function sendReservationToServer(reservation) {
             console.error('Error del servidor:', text);
             // Mostrar mensaje más informativo según código
             if (resp.status === 403) {
-                alert('Acceso denegado al servidor de reservas (403). Revisa CORS o autorización en el servidor.');
+                return { ok: false, error: 'Acceso denegado al servidor de reservas (403). Revisa CORS o autorización en el servidor.' };
             } else if (resp.status >= 500) {
-                alert('El servidor tuvo un error al procesar la reserva. Por favor, intenta más tarde.');
+                return { ok: false, error: 'El servidor tuvo un error al procesar la reserva. Por favor, intenta más tarde.' };
             } else {
-                alert('Error al procesar la reserva. Por favor, intenta de nuevo.');
+                return { ok: false, error: `Error al procesar la reserva: ${text}` };
             }
-            return { ok: false, error: `Error del servidor: ${text}` };
         }
 
         const data = await resp.json();
         console.log('Datos recibidos:', data);
         return { ok: true, data };
     } catch (err) {
-        console.error('Error enviando reserva:', err);
-        // Manejo específico para conexión rehusada
-        if (err?.message && (err.message.includes('Failed to fetch') || err.message.includes('ECONNREFUSED'))) {
-            alert('No se pudo conectar con el servidor de reservas en localhost:3000. Asegúrate de iniciar el servidor con `npm start` en la carpeta `server`.');
-            return { ok: false, error: 'Servidor no disponible (ECONNREFUSED). Inicia el servidor.' };
+        // Asegurarse de limpiar el timeout en caso de error
+        if (timeoutId) {
+            clearTimeout(timeoutId);
         }
-        alert('Error al enviar la reserva. Por favor, intenta de nuevo o contáctanos directamente.');
-        return { ok: false, error: 'Error de conexión. Por favor, intenta de nuevo.' };
+        console.error('Error enviando reserva:', err);
+        // Manejo específico para conexión rehusada o timeout
+        if (err?.name === 'AbortError' || err?.name === 'TimeoutError' || err?.message?.includes('aborted')) {
+            return { ok: false, error: 'El servidor no respondió a tiempo. Por favor, verifica que el servidor esté corriendo e intenta de nuevo.' };
+        }
+        if (err?.message && (err.message.includes('Failed to fetch') || err.message.includes('ECONNREFUSED') || err.message.includes('NetworkError') || err.message.includes('Network request failed'))) {
+            const errorMsg = isLocal 
+                ? 'No se pudo conectar con el servidor de reservas. Asegúrate de iniciar el servidor con `npm start` en la carpeta `server`.'
+                : 'No se pudo conectar con el servidor de reservas. Por favor, verifica tu conexión a internet e intenta de nuevo. Si el problema persiste, contáctanos directamente.';
+            return { ok: false, error: errorMsg };
+        }
+        return { ok: false, error: `Error de conexión: ${err.message || 'Error desconocido'}` };
     }
 }
 
