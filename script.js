@@ -1,4 +1,3 @@
-
 let currentStep = 1;
 let reservationData = {};
 let currentLanguage = 'es';
@@ -291,7 +290,17 @@ function prevStep() {
 
 function resetForm() {
     reservationData = {};
-    document.getElementById('reservation-form').reset();
+    // Limpiar todos los campos manualmente
+    const fields = [
+        'checkin', 'checkout', 'guests', 'rooms',
+        'guestName', 'guestEmail', 'guestPhone',
+        'cardName', 'cardNumber', 'cardExpiry', 'cardCVC'
+    ];
+    fields.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.value = '';
+    });
+    // Reiniciar el paso
     showStep(1);
 }
 
@@ -398,7 +407,7 @@ async function finalizeReservation() {
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
     // En desarrollo usa localhost, en producción usa la URL de Vercel
-    const url = window.location.hostname === 'localhost' 
+    const url = globalThis.location.hostname === 'localhost'
         ? 'http://localhost:3000/api/reservations'
         : '/api/reservations';
     console.log('Enviando reserva al servidor:', reservation);
