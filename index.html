@@ -223,79 +223,13 @@
                 <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
             </div>
 
-            <!-- Step 5: Selección de método de pago -->
+            <!-- Step 5: Confirmación -->
             <div class="reservation-step" id="step5" style="display:none;">
-                <h3 data-i18n="reservations.paymentTitle">Método de Pago</h3>
-                <p>Selecciona tu método de pago preferido:</p>
-                
-                <div class="payment-methods">
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="card" checked>
-                        <div class="payment-card">
-                            <strong>💳 Tarjeta de Débito/Crédito</strong>
-                            <span>Pago seguro con tarjeta</span>
-                        </div>
-                    </label>
-                    
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="mercadopago">
-                        <div class="payment-card">
-                            <strong>🛒 MercadoPago</strong>
-                            <span>Pago rápido y seguro</span>
-                        </div>
-                    </label>
-                    
-                    <label class="payment-option">
-                        <input type="radio" name="paymentMethod" value="local">
-                        <div class="payment-card">
-                            <strong>🏨 Pago en el Local</strong>
-                            <span>Pagarás al llegar al hotel</span>
-                        </div>
-                    </label>
-                </div>
-                
-                <!-- Formulario de tarjeta (se muestra solo si se selecciona tarjeta) -->
-                <div id="card-payment-form" class="payment-form-section">
-                    <h4>Datos de la Tarjeta</h4>
-                    <label data-i18n="reservations.cardName">Nombre en la tarjeta:</label>
-                    <input type="text" id="cardName" placeholder="Juan Pérez"><br>
-                    <label data-i18n="reservations.cardNumber">Número de tarjeta:</label>
-                    <input type="text" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19"><br>
-                    <div class="card-row">
-                        <div>
-                            <label data-i18n="reservations.cardExpiry">Fecha de expiración:</label>
-                            <input type="text" id="cardExpiry" placeholder="MM/AA" maxlength="5">
-                        </div>
-                        <div>
-                            <label data-i18n="reservations.cardCVC">CVC:</label>
-                            <input type="text" id="cardCVC" placeholder="123" maxlength="4">
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- MercadoPago (se mostrará cuando se seleccione) -->
-                <div id="mercadopago-payment-form" class="payment-form-section" style="display:none;">
-                    <div id="mercadopago-container"></div>
-                </div>
-                
-                <!-- Pago en local (solo información) -->
-                <div id="local-payment-info" class="payment-form-section" style="display:none;">
-                    <p>✅ Has seleccionado pagar en el local. El pago se realizará al momento de tu llegada al hotel.</p>
-                </div>
-                
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-                <button onclick="processPayment()" id="payment-button">Continuar</button>
-            </div>
-
-            <!-- Step 6: Confirmación -->
-            <div class="reservation-step" id="step6" style="display:none;">
                 <h3 data-i18n="reservations.confirmationTitle">Confirmación</h3>
                 <div id="confirmation-message" data-i18n="reservations.confirmationMessage">¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.</div>
-                <p>Al finalizar la reserva se enviará automáticamente un correo con los detalles al propietario.</p>
-                <!-- Mensaje enviado automáticamente al finalizar la reserva (server-side) -->
+                <p>Enviaremos un email de confirmación al propietario y nos pondremos en contacto contigo pronto.</p>
                 <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-                <!-- El botón Finalizar ahora invoca finalizeReservation() que envía los datos al servidor y reinicia el formulario -->
-                <button onclick="finalizeReservation()" data-i18n="reservations.finish">Finalizar</button>
+                <button onclick="finalizeReservation()" data-i18n="reservations.finish">Finalizar Reserva</button>
             </div>
         </div>
     </section>

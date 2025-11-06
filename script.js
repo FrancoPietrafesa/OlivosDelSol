@@ -358,52 +358,7 @@ function initMercadoPagoCheckout() {
 
 // Función para procesar el pago
 async function processPayment() {
-    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-    reservationData.paymentMethod = paymentMethod;
-    
-    // Validar según el método de pago
-    if (paymentMethod === 'card') {
-        reservationData.cardName = document.getElementById('cardName').value;
-        reservationData.cardNumber = document.getElementById('cardNumber').value;
-        reservationData.cardExpiry = document.getElementById('cardExpiry').value;
-        reservationData.cardCVC = document.getElementById('cardCVC').value;
-        
-        // Validaciones básicas
-        if (!reservationData.cardName || !reservationData.cardNumber || !reservationData.cardExpiry || !reservationData.cardCVC) {
-            alert('Por favor completa todos los datos de la tarjeta');
-            return;
-        }
-        
-        // Aquí normalmente procesarías el pago con un backend
-        // Por ahora, solo simulamos el procesamiento
-        console.log('Procesando pago con tarjeta...');
-        await simulatePayment();
-        
-    } else if (paymentMethod === 'mercadopago') {
-        // Redirigir a MercadoPago
-        try {
-            if (typeof createPaymentPreference !== 'undefined') {
-                const checkoutUrl = await createPaymentPreference(reservationData);
-                if (checkoutUrl) {
-                    window.location.href = checkoutUrl;
-                    return;
-                }
-            }
-            alert('Error al procesar el pago con MercadoPago. Por favor, configura tus credenciales en config/mercadopago-config.js o intenta con otro método.');
-            return;
-        } catch (error) {
-            console.error('Error con MercadoPago:', error);
-            alert('Error al procesar el pago con MercadoPago. Por favor, intenta con otro método.');
-            return;
-        }
-        
-    } else if (paymentMethod === 'local') {
-        // Pago en local, no requiere procesamiento
-        console.log('Reserva confirmada para pago en local');
-    }
-    
-    // Si llegamos aquí, el pago fue exitoso (o es pago local)
-    // Proceder al paso de confirmación
+    // Ya no necesitamos procesar pagos, solo enviamos la reserva
     showStep(6);
 }
 
@@ -421,39 +376,23 @@ async function simulatePayment() {
 
 // Función que se ejecuta al finalizar la reserva: envía los datos al servidor y reinicia el formulario
 async function finalizeReservation() {
-    console.log('Finalizar reserva: enviando datos al servidor...', reservationData);
-
-    // Asegurarnos de que los datos mínimos estén presentes
-    if (!reservationData.checkin || !reservationData.checkout || !reservationData.guestName) {
-        console.warn('finalizeReservation: faltan datos en reservationData, asegurando recopilación final.');
-        const maybeCheckin = document.getElementById('checkin');
-        const maybeCheckout = document.getElementById('checkout');
-        const maybeName = document.getElementById('guestName');
-        if (maybeCheckin && maybeCheckin.value) reservationData.checkin = maybeCheckin.value;
-        if (maybeCheckout && maybeCheckout.value) reservationData.checkout = maybeCheckout.value;
-        if (maybeName && maybeName.value) reservationData.guestName = maybeName.value;
-    }
-
     try {
         const serverResult = await sendReservationToServer(reservationData);
         const confMsg = document.getElementById('confirmation-message');
         if (serverResult.ok) {
-            console.log('finalizeReservation: servidor respondió OK', serverResult.data);
-            if (confMsg) confMsg.textContent = 'Reserva enviada automáticamente al propietario.';
+            confMsg.textContent = '¡Gracias! Tu reserva ha sido enviada con éxito. Pronto nos pondremos en contacto contigo.';
         } else {
-            console.warn('finalizeReservation: no se pudo enviar al servidor', serverResult.error);
-            if (confMsg) confMsg.textContent = 'No se pudo enviar la reserva automáticamente. Por favor inténtalo de nuevo.';
+            confMsg.textContent = 'Hubo un problema al enviar la reserva. Por favor, inténtalo de nuevo o contáctanos directamente por teléfono.';
         }
     } catch (err) {
-        console.error('finalizeReservation: error enviando al servidor', err);
         const confMsg = document.getElementById('confirmation-message');
-        if (confMsg) confMsg.textContent = 'Ocurrió un error intentando enviar la reserva.';
+        confMsg.textContent = 'Ocurrió un error al enviar la reserva. Por favor, contáctanos directamente por teléfono.';
     }
 
-    // Reiniciar formulario después de un breve retraso para que el usuario vea la confirmación
+    // Reiniciar formulario después de un breve retraso
     setTimeout(() => {
         resetForm();
-    }, 1200);
+    }, 3000);
 }
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
