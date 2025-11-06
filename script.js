@@ -397,8 +397,28 @@ async function finalizeReservation() {
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    const url = 'http://localhost:3000/api/reservations';
+    // En desarrollo usa localhost, en producción usa la URL de Vercel
+    const url = window.location.hostname === 'localhost' 
+        ? 'http://localhost:3000/api/reservations'
+        : '/api/reservations';
     console.log('Enviando reserva al servidor:', reservation);
+    
+    // Primero verificamos si el servidor está disponible
+    try {
+        const checkServer = await fetch('http://localhost:3000/', {
+            method: 'GET',
+            mode: 'cors'
+        });
+        if (!checkServer.ok) {
+            throw new Error('Servidor no disponible');
+        }
+    } catch (err) {
+        console.error('Error de conexión:', err);
+        alert('El servidor de reservas no está disponible. Asegúrate de que el servidor esté corriendo (npm start en la carpeta server).');
+        return { ok: false, error: 'Servidor no disponible. Por favor, contacta al administrador.' };
+    }
+
+    // Si llegamos aquí, el servidor está disponible, intentamos enviar la reserva
     try {
         const resp = await fetch(url, {
             method: 'POST',
@@ -415,6 +435,7 @@ async function sendReservationToServer(reservation) {
         if (!resp.ok) {
             const text = await resp.text();
             console.error('Error del servidor:', text);
+            alert('Error al procesar la reserva. Por favor, intenta de nuevo.');
             return { ok: false, error: `Error del servidor: ${text}` };
         }
         
@@ -423,7 +444,8 @@ async function sendReservationToServer(reservation) {
         return { ok: true, data };
     } catch (err) {
         console.error('Error enviando reserva:', err);
-        return { ok: false, error: 'No se pudo conectar con el servidor. Por favor, intenta de nuevo.' };
+        alert('Error al enviar la reserva. Por favor, intenta de nuevo o contáctanos directamente.');
+        return { ok: false, error: 'Error de conexión. Por favor, intenta de nuevo.' };
     }
 }
 
