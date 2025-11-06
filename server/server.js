@@ -112,6 +112,11 @@ app.post('/api/reservations', async (req, res) => {
   }
 });
 
+// Health check endpoint (useful para comprobaciones desde el cliente o despliegues)
+app.get('/api/health', (req, res) => {
+  return res.json({ ok: true, time: Date.now() });
+});
+
 app.get('/', (req, res) => {
   res.send('Olivo email server listo. Usa POST /api/reservations con el JSON de la reserva.');
 });

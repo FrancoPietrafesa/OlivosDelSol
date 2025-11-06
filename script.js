@@ -406,57 +406,51 @@ async function finalizeReservation() {
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    // Construimos la URL base para la API
-    const baseUrl = globalThis.location.hostname === 'localhost'
-        ? 'http://localhost:3000'
-        : 'https://olivosdelsol-api.vercel.app';
-    
+    // Determinar baseUrl: en desarrollo usamos localhost:3000, en producción asumimos que la API está en el mismo dominio
+    const isLocal = /(^localhost$|^127\.0\.0\.1$)/.test(globalThis.location.hostname);
+    const baseUrl = isLocal ? 'http://localhost:3000' : '';
     const apiUrl = `${baseUrl}/api/reservations`;
-    console.log('Enviando reserva al servidor:', reservation);
-    
-    // Primero verificamos si el servidor está disponible
-    try {
-        const checkServer = await fetch(baseUrl + '/api/health', {
-            method: 'GET',
-            mode: 'cors'
-        });
-        if (!checkServer.ok) {
-            throw new Error('Servidor no disponible');
-        }
-    } catch (err) {
-        console.error('Error de conexión:', err);
-        alert('El servidor de reservas no está disponible. Asegúrate de que el servidor esté corriendo (npm start en la carpeta server).');
-        return { ok: false, error: 'Servidor no disponible. Por favor, contacta al administrador.' };
-    }
 
-    // Si llegamos aquí, el servidor está disponible, intentamos enviar la reserva
+    console.log('Enviando reserva al servidor:', reservation, '->', apiUrl);
+
     try {
-        const resp = await fetch(`${baseUrl}/api/reservations`, {
+        // Intentamos enviar la reserva directamente. Si el servidor no está escuchando, el catch capturará la excepción (ECONNREFUSED).
+        const resp = await fetch(apiUrl, {
             method: 'POST',
-            headers: { 
+            headers: {
                 'Content-Type': 'application/json',
-                'Accept': 'application/json',
-                'Access-Control-Allow-Origin': '*'
+                'Accept': 'application/json'
             },
             body: JSON.stringify(reservation),
-            mode: 'cors',
-            credentials: 'include'
+            // mode y credentials no son necesarios en la mayoría de setups; omitirlos para evitar problemas
         });
-        
+
         console.log('Respuesta del servidor:', resp.status);
-        
+
         if (!resp.ok) {
             const text = await resp.text();
             console.error('Error del servidor:', text);
-            alert('Error al procesar la reserva. Por favor, intenta de nuevo.');
+            // Mostrar mensaje más informativo según código
+            if (resp.status === 403) {
+                alert('Acceso denegado al servidor de reservas (403). Revisa CORS o autorización en el servidor.');
+            } else if (resp.status >= 500) {
+                alert('El servidor tuvo un error al procesar la reserva. Por favor, intenta más tarde.');
+            } else {
+                alert('Error al procesar la reserva. Por favor, intenta de nuevo.');
+            }
             return { ok: false, error: `Error del servidor: ${text}` };
         }
-        
+
         const data = await resp.json();
         console.log('Datos recibidos:', data);
         return { ok: true, data };
     } catch (err) {
         console.error('Error enviando reserva:', err);
+        // Manejo específico para conexión rehusada
+        if (err?.message && (err.message.includes('Failed to fetch') || err.message.includes('ECONNREFUSED'))) {
+            alert('No se pudo conectar con el servidor de reservas en localhost:3000. Asegúrate de iniciar el servidor con `npm start` en la carpeta `server`.');
+            return { ok: false, error: 'Servidor no disponible (ECONNREFUSED). Inicia el servidor.' };
+        }
         alert('Error al enviar la reserva. Por favor, intenta de nuevo o contáctanos directamente.');
         return { ok: false, error: 'Error de conexión. Por favor, intenta de nuevo.' };
     }
