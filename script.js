@@ -406,15 +406,17 @@ async function finalizeReservation() {
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    // En desarrollo usa localhost, en producción usa la URL de Vercel
-    const url = globalThis.location.hostname === 'localhost'
-        ? 'http://localhost:3000/api/reservations'
-        : '/api/reservations';
+    // Construimos la URL base para la API
+    const baseUrl = globalThis.location.hostname === 'localhost'
+        ? 'http://localhost:3000'
+        : 'https://olivosdelsol-api.vercel.app';
+    
+    const apiUrl = `${baseUrl}/api/reservations`;
     console.log('Enviando reserva al servidor:', reservation);
     
     // Primero verificamos si el servidor está disponible
     try {
-        const checkServer = await fetch('http://localhost:3000/', {
+        const checkServer = await fetch(baseUrl + '/api/health', {
             method: 'GET',
             mode: 'cors'
         });
@@ -429,7 +431,7 @@ async function sendReservationToServer(reservation) {
 
     // Si llegamos aquí, el servidor está disponible, intentamos enviar la reserva
     try {
-        const resp = await fetch(url, {
+        const resp = await fetch(`${baseUrl}/api/reservations`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
