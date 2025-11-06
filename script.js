@@ -443,7 +443,7 @@ async function sendReservationToServer(reservation) {
     // Determinar baseUrl: en desarrollo usamos localhost:3000, en producción (Vercel) usamos ruta relativa
     const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname);
     // En producción, usar ruta relativa para que funcione con Vercel serverless functions
-    const baseUrl = isLocal ? 'http://localhos:3000' : '';
+    const baseUrl = isLocal ? 'https://olivos-del-sol.vercel.app/' : '';
     const apiUrl = `${baseUrl}/api/reservations`;
 
     console.log('Enviando reserva al servidor:', reservation, '->', apiUrl);
