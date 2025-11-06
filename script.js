@@ -397,22 +397,33 @@ async function finalizeReservation() {
 
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    const defaultUrl = 'http://localhost:3000/api/reservations';
-    const url = (typeof window !== 'undefined' && window.OLIVO_SERVER_URL) ? window.OLIVO_SERVER_URL : defaultUrl;
+    const url = 'http://localhost:3000/api/reservations';
+    console.log('Enviando reserva al servidor:', reservation);
     try {
         const resp = await fetch(url, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(reservation)
+            headers: { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            },
+            body: JSON.stringify(reservation),
+            mode: 'cors'
         });
+        
+        console.log('Respuesta del servidor:', resp.status);
+        
         if (!resp.ok) {
             const text = await resp.text();
-            return { ok: false, error: `HTTP ${resp.status}: ${text}` };
+            console.error('Error del servidor:', text);
+            return { ok: false, error: `Error del servidor: ${text}` };
         }
+        
         const data = await resp.json();
+        console.log('Datos recibidos:', data);
         return { ok: true, data };
     } catch (err) {
-        return { ok: false, error: err.message || err };
+        console.error('Error enviando reserva:', err);
+        return { ok: false, error: 'No se pudo conectar con el servidor. Por favor, intenta de nuevo.' };
     }
 }
 

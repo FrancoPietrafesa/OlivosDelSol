@@ -4,7 +4,11 @@ const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 const app = express();
-app.use(cors());
+app.use(cors({
+    origin: '*', // En producción, cambia esto por tu dominio real
+    methods: ['POST', 'GET'],
+    allowedHeaders: ['Content-Type']
+}));
 app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
