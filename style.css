@@ -272,6 +272,14 @@ section h2::after {
     padding: 0 2rem;
     max-width: 1400px;
     margin: 0 auto;
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%), url('images/6.PNG');
+    background-size: 120% 120%;
+    background-position: center;
+    background-attachment: fixed;
+    animation: slowZoom 20s ease-in-out infinite;
+    position: relative;
+    padding: 2rem;
+    border-radius: 20px;
 }
 
 .service-item {
