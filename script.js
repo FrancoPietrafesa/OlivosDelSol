@@ -452,7 +452,7 @@ async function finalizeReservation() {
     try {
         const serverResult = await sendReservationToServer(reservationData);
         if (serverResult.ok) {
-            confMsg.textContent = '¡Gracias! Tu reserva ha sido enviada con éxito. Pronto nos pondremos en contacto contigo.';
+            confMsg.textContent = '¡Gracias! Tu reserva fue enviada. Te contactaremos para confirmar disponibilidad.';
             confMsg.style.color = '#4CAF50';
             // Reiniciar formulario después de un breve retraso solo si fue exitoso
             setTimeout(() => {
