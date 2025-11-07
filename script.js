@@ -37,10 +37,11 @@ const translations = {
         gallery: {title: 'Galería'},
         experiences: {title: 'Experiencias', jose: '“Una estadía maravillosa. El personal nos hizo sentir como en casa y la piscina es espectacular.”', ana: '“Las habitaciones son amplias y cómodas. La comida en el restaurante fue deliciosa.”', luis: '“El hotel está cerca de muchas bodegas interesantes. ¡Sin duda volveré!”'},
         recommendations: {title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMas: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.'},
-        reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Finalizar'},
+        reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Enviar', sending: 'Enviando...', sent: 'Enviado'},
         contact: {title: 'Contacto', addressLabel: 'Dirección:', phoneLabel: 'Teléfono:'}
     },
     en: {
+        reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Send', sending: 'Sending...', sent: 'Sent'},
         nav: {home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', contact: 'Contact'},
         header: {logo: 'Hotel Olivos del Sol'},
         home: {title: 'Welcome to Hotel Olivos del Sol', subtitle: 'An oasis of tranquility and comfort in Pocito, San Juan.', description: 'Our hotel offers modern rooms, first-class services and exceptional attention to make your stay unforgettable.'},
@@ -356,6 +357,8 @@ function resetForm() {
     // Rehabilitar botones que puedan estar deshabilitados
     document.querySelectorAll('button[disabled]').forEach(btn => {
         btn.disabled = false;
+        btn.style.opacity = '';
+        btn.style.filter = '';
     });
 }
 
@@ -442,11 +445,11 @@ async function simulatePayment() {
 async function finalizeReservation() {
     const confMsg = document.getElementById('confirmation-message');
     const finishButton = document.querySelector('button[onclick="finalizeReservation()"]');
-    
-    // Deshabilitar el botón mientras se procesa
+
+    // Cambiar el texto del botón a "Enviando..." antes de deshabilitarlo
     if (finishButton) {
+        finishButton.textContent = translations[currentLanguage].reservations.sending;
         finishButton.disabled = true;
-        finishButton.textContent = 'Enviando...';
     }
     
     try {
@@ -454,6 +457,12 @@ async function finalizeReservation() {
         if (serverResult.ok) {
             confMsg.textContent = '¡Gracias! Tu reserva fue enviada. Te contactaremos para confirmar disponibilidad.';
             confMsg.style.color = '#4CAF50';
+            // Cambiar el botón a "Enviado" y reducir contraste/brillo
+            if (finishButton) {
+                finishButton.textContent = translations[currentLanguage].reservations.sent;
+                finishButton.style.opacity = '0.6';
+                finishButton.style.filter = 'brightness(0.8)';
+            }
             // Reiniciar formulario después de un breve retraso solo si fue exitoso
             setTimeout(() => {
                 resetForm();
@@ -464,7 +473,9 @@ async function finalizeReservation() {
             // Rehabilitar el botón para que puedan intentar de nuevo
             if (finishButton) {
                 finishButton.disabled = false;
-                finishButton.textContent = document.querySelector('[data-i18n="reservations.finish"]')?.textContent || 'Finalizar Reserva';
+                finishButton.textContent = translations[currentLanguage].reservations.finish;
+                finishButton.style.opacity = '';
+                finishButton.style.filter = '';
             }
         }
     } catch (err) {
@@ -474,7 +485,9 @@ async function finalizeReservation() {
         // Rehabilitar el botón
         if (finishButton) {
             finishButton.disabled = false;
-            finishButton.textContent = document.querySelector('[data-i18n="reservations.finish"]')?.textContent || 'Finalizar Reserva';
+            finishButton.textContent = translations[currentLanguage].reservations.finish;
+            finishButton.style.opacity = '';
+            finishButton.style.filter = '';
         }
     }
 }
