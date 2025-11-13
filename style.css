@@ -549,15 +549,25 @@ section h2::after {
 .reservation-step input[type="tel"],
 .reservation-step input[type="date"],
 .reservation-step input[type="number"] {
+    display: block;
     width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
     padding: 0.8rem;
     margin-bottom: 1rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 4px;
-    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
     color: #fff;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* iOS date input indicator styling - keep picker but avoid overflow visual */
+.reservation-step input[type="date"]::-webkit-calendar-picker-indicator {
+    opacity: 0.95;
 }
 
 /* Estilo para campos requeridos */

@@ -28,61 +28,6 @@ window.addEventListener('scroll', () => {
     }
 });
 
-/* =========================
-   MENÚ MÓVIL: control de toggle + backdrop
-   Se muestra como un 'sheet' moderno y accesible.
-   ========================= */
-const navToggle = document.querySelector('.nav-toggle');
-const mobileMenu = document.getElementById('mobileMenu');
-const iosBackdrop = document.querySelector('.ios-menu-backdrop');
-const iosClose = document.querySelector('.ios-menu-close');
-
-function openMobileMenu() {
-    try {
-        if (mobileMenu) {
-            mobileMenu.hidden = false;
-            mobileMenu.classList.add('show');
-        }
-        if (iosBackdrop) {
-            iosBackdrop.hidden = false;
-            iosBackdrop.classList.add('show');
-        }
-        if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
-        document.body.style.overflow = 'hidden';
-    } catch (e) { console.warn('openMobileMenu error', e); }
-}
-
-function closeMobileMenu() {
-    try {
-        if (mobileMenu) mobileMenu.classList.remove('show');
-        if (iosBackdrop) iosBackdrop.classList.remove('show');
-        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-        document.body.style.overflow = '';
-        // esperar la animación antes de esconder (mejora accesibilidad)
-        setTimeout(() => {
-            if (mobileMenu) mobileMenu.hidden = true;
-            if (iosBackdrop) iosBackdrop.hidden = true;
-        }, 320);
-    } catch (e) { console.warn('closeMobileMenu error', e); }
-}
-
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        if (!mobileMenu || mobileMenu.hidden) openMobileMenu();
-        else closeMobileMenu();
-    });
-}
-
-if (iosBackdrop) iosBackdrop.addEventListener('click', closeMobileMenu);
-if (iosClose) iosClose.addEventListener('click', closeMobileMenu);
-
-// Cerrar menú móvil con Escape
-document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && mobileMenu && !mobileMenu.hidden) {
-        closeMobileMenu();
-    }
-});
-
 const translations = {
     es: {
         nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto'},
@@ -757,6 +702,13 @@ window.addEventListener('load', () => {
     navToggle.addEventListener('click', () => {
         const isOpen = sheet.getAttribute('data-open') === 'true';
         if (isOpen) { closeMenu(); } else { openMenu(); }
+    });
+    // Cerrar el menú si se clickea un enlace dentro del sheet (mejora UX en mobile)
+    sheet.addEventListener('click', (e) => {
+        const a = e.target.closest && e.target.closest('a');
+        if (a && a.getAttribute('href')) {
+            setTimeout(() => closeMenu(), 60);
+        }
     });
     if (closeBtn) closeBtn.addEventListener('click', closeMenu);
     backdrop.addEventListener('click', closeMenu);
