@@ -28,6 +28,121 @@ window.addEventListener('scroll', () => {
     }
 });
 
+/* =========================
+   MENÚ MÓVIL: control de toggle + backdrop
+   Se muestra como un 'sheet' moderno y accesible.
+   ========================= */
+const navToggle = document.querySelector('.nav-toggle');
+const mobileMenu = document.getElementById('mobileMenu');
+const iosBackdrop = document.querySelector('.ios-menu-backdrop');
+const iosClose = document.querySelector('.ios-menu-close');
+let _focusTrapListener = null;
+let _focusableElements = [];
+let _firstFocusable = null;
+let _lastFocusable = null;
+let _previousActiveElement = null;
+
+function openMobileMenu() {
+    try {
+        if (mobileMenu) {
+            mobileMenu.hidden = false;
+            mobileMenu.classList.add('show');
+        }
+        if (iosBackdrop) {
+            iosBackdrop.hidden = false;
+            iosBackdrop.classList.add('show');
+        }
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'true');
+        document.body.style.overflow = 'hidden';
+            // focus trap: guardar elemento activo y mover foco al primer control
+            if (mobileMenu) {
+                _previousActiveElement = document.activeElement;
+                activateFocusTrap(mobileMenu);
+            }
+    } catch (e) { console.warn('openMobileMenu error', e); }
+}
+
+function closeMobileMenu() {
+    try {
+        if (mobileMenu) mobileMenu.classList.remove('show');
+        if (iosBackdrop) iosBackdrop.classList.remove('show');
+        if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+        document.body.style.overflow = '';
+        // esperar la animación antes de esconder (mejora accesibilidad)
+        setTimeout(() => {
+            if (mobileMenu) mobileMenu.hidden = true;
+            if (iosBackdrop) iosBackdrop.hidden = true;
+            // release focus trap and restore focus
+            releaseFocusTrap();
+            if (_previousActiveElement && _previousActiveElement.focus) _previousActiveElement.focus();
+        }, 320);
+    } catch (e) { console.warn('closeMobileMenu error', e); }
+}
+
+if (navToggle) {
+    navToggle.addEventListener('click', () => {
+        if (!mobileMenu || mobileMenu.hidden) openMobileMenu();
+        else closeMobileMenu();
+    });
+}
+
+if (iosBackdrop) iosBackdrop.addEventListener('click', closeMobileMenu);
+if (iosClose) iosClose.addEventListener('click', closeMobileMenu);
+
+// Cerrar menú móvil con Escape
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && mobileMenu && !mobileMenu.hidden) {
+        closeMobileMenu();
+    }
+});
+
+/* Focus trap implementation (simple, small, robust)
+   Activates when the mobile menu is opened and removes when closed.
+*/
+function activateFocusTrap(container) {
+    if (!container) return;
+    const selectors = 'a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), [tabindex]:not([tabindex="-1"])';
+    _focusableElements = Array.from(container.querySelectorAll(selectors)).filter(el => el.offsetParent !== null);
+    _firstFocusable = _focusableElements[0] || null;
+    _lastFocusable = _focusableElements[_focusableElements.length - 1] || null;
+
+    // focus first
+    if (_firstFocusable) _firstFocusable.focus();
+
+    _focusTrapListener = function(e) {
+        if (e.key !== 'Tab') return;
+        if (_focusableElements.length === 0) {
+            e.preventDefault();
+            return;
+        }
+        if (e.shiftKey) {
+            // shift + tab
+            if (document.activeElement === _firstFocusable) {
+                e.preventDefault();
+                _lastFocusable.focus();
+            }
+        } else {
+            if (document.activeElement === _lastFocusable) {
+                e.preventDefault();
+                _firstFocusable.focus();
+            }
+        }
+    };
+
+    document.addEventListener('keydown', _focusTrapListener);
+}
+
+function releaseFocusTrap() {
+    if (_focusTrapListener) {
+        document.removeEventListener('keydown', _focusTrapListener);
+        _focusTrapListener = null;
+    }
+    _focusableElements = [];
+    _firstFocusable = null;
+    _lastFocusable = null;
+    _previousActiveElement = null;
+}
+
 const translations = {
     es: {
         nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto'},
