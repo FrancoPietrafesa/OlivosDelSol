@@ -6,7 +6,7 @@ const cors = require('cors');
 
 const app = express();
 app.use(cors({
-  origin: '*', // En producción, cambia esto por tu dominio real
+  origin: 'https://olivos-del-sol.vercel.app/reservations.html#reservations', // En producción, cambia esto por tu dominio real
   methods: ['POST', 'GET'],
   allowedHeaders: ['Content-Type']
 }));
