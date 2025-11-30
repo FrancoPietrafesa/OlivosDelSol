@@ -1,13 +1,14 @@
-require('dotenv').config();
+const path = require('path');
+require('dotenv').config({ path: path.join(__dirname, '.env') });
 const express = require('express');
 const nodemailer = require('nodemailer');
 const cors = require('cors');
 
 const app = express();
 app.use(cors({
-    origin: '*', // En producción, cambia esto por tu dominio real
-    methods: ['POST', 'GET'],
-    allowedHeaders: ['Content-Type']
+  origin: '*', // En producción, cambia esto por tu dominio real
+  methods: ['POST', 'GET'],
+  allowedHeaders: ['Content-Type']
 }));
 app.use(express.json());
 
@@ -19,7 +20,7 @@ const SMTP_PORT = process.env.SMTP_PORT;
 const SMTP_USER = process.env.SMTP_USER;
 const SMTP_PASS = process.env.SMTP_PASS;
 const FROM_EMAIL = process.env.FROM_EMAIL || SMTP_USER;
-const OWNER_EMAIL = process.env.OWNER_EMAIL || 'francopietra01@gmail.com';
+const OWNER_EMAIL = process.env.OWNER_EMAIL;
 
 if (!SMTP_HOST || !SMTP_PORT || !SMTP_USER || !SMTP_PASS) {
   console.warn('Advertencia: faltan variables SMTP en .env (SMTP_HOST/SMTP_PORT/SMTP_USER/SMTP_PASS). Ver server/.env.example');
@@ -99,13 +100,13 @@ app.post('/api/reservations', async (req, res) => {
   } catch (err) {
     console.error('Error detallado al enviar email:', err);
     if (err.code === 'EAUTH') {
-      return res.status(502).json({ 
-        ok: false, 
-        error: 'Error de autenticación con Gmail. Verifica tu contraseña de aplicación.' 
+      return res.status(502).json({
+        ok: false,
+        error: 'Error de autenticación con Gmail. Verifica tu contraseña de aplicación.'
       });
     }
-    return res.status(502).json({ 
-      ok: false, 
+    return res.status(502).json({
+      ok: false,
       error: err.message || 'Error al enviar el email',
       details: err.response || err
     });
