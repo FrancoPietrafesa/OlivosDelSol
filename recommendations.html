@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Galería - Hotel Olivos del Sol</title>
+    <title>Recomendaciones - Hotel Olivos del Sol</title>
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
@@ -13,7 +13,7 @@
     <script defer src="script.js"></script>
 </head>
 
-<body class="gallery-page">
+<body class="recommendations-page">
     <!-- Preloader overlay -->
     <div id="preloader">
         <div class="spinner"></div>
@@ -32,10 +32,10 @@
             <ul class="nav-links">
                 <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
                 <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
-                <!-- Current page: link to this page's section -->
-                <li><a href="#gallery" data-i18n="nav.gallery">Galería</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
                 <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
-                <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <!-- Current page: link to this page's section -->
+                <li><a href="#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
                 <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
                 <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
             </ul>
@@ -52,13 +52,12 @@
                     <ul class="nav-links">
                         <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
                         <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
-                        <!-- Current page: link to this page's section -->
-                        <li><a href="#gallery" data-i18n="nav.gallery">Galería</a></li>
+                        <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
                         <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
-                        <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a>
-                        </li>
-                        <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
-                        <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+                        <!-- Current page: link to this page's section -->
+                        <li><a href="#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                        <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                        <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                     <div class="lang-select">
                         <select id="language-select">
@@ -72,28 +71,35 @@
         </nav>
     </header>
 
-    <section id="gallery" class="gallery-section">
-        <h2 data-i18n="gallery.title">Galería</h2>
-        <div class="gallery-grid">
-            <img src="images/468055293_18048612503483247_2721229852365988716_n.jpg" alt="Fachada del hotel y palmeras">
-            <img src="images/468322890_18048613424483247_939284270881576216_n.jpg" alt="Hotel al atardecer">
-            <img src="images/467974956_18048489227483247_727230495596107223_n.jpg" alt="Piscina y área de relax">
-            <img src="images/448164664_18028615775483247_7811932803664603036_n.jpg" alt="Jardines del hotel">
-            <img src="images/444485924_18028044413483247_1520712395456252353_n.jpg" alt="Restaurante con chimenea">
-            <img src="images/Captura.PNG" alt="Habitación cómoda con aire acondicionado">
-            <img src="images/3.PNG" alt="Habitación familiar con literas">
-            <img src="images/6.PNG" alt="Habitación con vistas panorámicas">
-            <img src="images/5.PNG" alt="Parque y senderos en la propiedad">
+    <section id="recommendations" class="recommendations-section">
+        <h2 data-i18n="recommendations.title">Recomendaciones Turísticas</h2>
+        <div class="recommendation-list">
+            <div class="recommendation-item">
+                <h3>Bodega Las Marianas</h3>
+                <p data-i18n="recommendations.lasMarianas">Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La
+                    Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava
+                    subterránea y degustar vinos premiados【541807160660009†L38-L56】.</p>
+            </div>
+            <div class="recommendation-item">
+                <h3>Bodega Boutique Viñas de Segisa</h3>
+                <p data-i18n="recommendations.segisa">Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas
+                    subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de
+                    platos típicos en un ambiente acogedor【541807160660009†L66-L80】.</p>
+            </div>
+            <div class="recommendation-item">
+                <h3>Bodegas y Viñedos Fabril Alto Verde</h3>
+                <p data-i18n="recommendations.fabril">En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega
+                    pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes
+                    certificados【541807160660009†L92-L107】.</p>
+            </div>
+            <div class="recommendation-item">
+                <h3>Champañera Miguel Más</h3>
+                <p data-i18n="recommendations.miguelMas">Ubicada en la RP 215, Villa Aberastain. Es una moderna
+                    champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo
+                    participativo con pizzas al horno【541807160660009†L118-L129】.</p>
+            </div>
         </div>
     </section>
-
-    <!-- Visor de imágenes -->
-    <div class="image-viewer">
-        <button class="close-btn" aria-label="Cerrar visor de imágenes"></button>
-        <button class="nav-btn prev-btn" aria-label="Imagen anterior">❮</button>
-        <img src="" alt="">
-        <button class="nav-btn next-btn" aria-label="Siguiente imagen">❯</button>
-    </div>
 
     <footer>
         <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
