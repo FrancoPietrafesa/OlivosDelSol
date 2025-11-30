@@ -6,9 +6,9 @@ let currentLanguage = 'es';
 function handleNavbarTransparency() {
     const navbar = document.querySelector('.navbar');
     if (!navbar) return;
-    
+
     const scrollPosition = window.scrollY;
-    
+
     if (scrollPosition > 50) {
         navbar.classList.add('scrolled');
     } else {
@@ -30,27 +30,27 @@ window.addEventListener('scroll', () => {
 
 const translations = {
     es: {
-        nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto'},
-        header: {logo: 'Hotel Olivos del Sol'},
-        home: {title: 'Bienvenidos a Hotel Olivos del Sol', subtitle: 'Un oasis de tranquilidad y confort en Pocito, San Juan.', description: 'Nuestro hotel ofrece habitaciones modernas, servicios de primera y una atención excepcional para que su estadía sea inolvidable.'},
-        services: {title: 'Servicios', room: 'Habitaciones confortables', roomDesc: 'Amplias y luminosas habitaciones con todas las comodidades.', restaurant: 'Restaurante', restaurantDesc: 'Gastronomía regional e internacional de alta calidad.', pool: 'Piscina', poolDesc: 'Piscina al aire libre para relajarse y disfrutar del sol.', wifi: 'Wi‑Fi gratuito', wifiDesc: 'Acceso a internet de alta velocidad en todo el hotel.', parking: 'Estacionamiento', parkingDesc: 'Estacionamiento seguro para su vehículo.', spa: 'Spa & bienestar', spaDesc: 'Sesiones de masajes y tratamientos relajantes.'},
-        gallery: {title: 'Galería'},
-        experiences: {title: 'Experiencias', jose: '“Una estadía maravillosa. El personal nos hizo sentir como en casa y la piscina es espectacular.”', ana: '“Las habitaciones son amplias y cómodas. La comida en el restaurante fue deliciosa.”', luis: '“El hotel está cerca de muchas bodegas interesantes. ¡Sin duda volveré!”'},
-        recommendations: {title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMas: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.'},
-        reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Enviar', sending: 'Enviando...', sent: 'Enviado'},
-        contact: {title: 'Contacto', addressLabel: 'Dirección:', phoneLabel: 'Teléfono:'}
+        nav: { home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto' },
+        header: { logo: 'Hotel Olivos del Sol' },
+        home: { title: 'Bienvenidos a Hotel Olivos del Sol', subtitle: 'Un oasis de tranquilidad y confort en Pocito, San Juan.', description: 'Nuestro hotel ofrece habitaciones modernas, servicios de primera y una atención excepcional para que su estadía sea inolvidable.' },
+        services: { title: 'Servicios', room: 'Habitaciones confortables', roomDesc: 'Amplias y luminosas habitaciones con todas las comodidades.', restaurant: 'Restaurante', restaurantDesc: 'Gastronomía regional e internacional de alta calidad.', pool: 'Piscina', poolDesc: 'Piscina al aire libre para relajarse y disfrutar del sol.', wifi: 'Wi‑Fi gratuito', wifiDesc: 'Acceso a internet de alta velocidad en todo el hotel.', parking: 'Estacionamiento', parkingDesc: 'Estacionamiento seguro para su vehículo.', spa: 'Spa & bienestar', spaDesc: 'Sesiones de masajes y tratamientos relajantes.' },
+        gallery: { title: 'Galería' },
+        experiences: { title: 'Experiencias', jose: '“Una estadía maravillosa. El personal nos hizo sentir como en casa y la piscina es espectacular.”', ana: '“Las habitaciones son amplias y cómodas. La comida en el restaurante fue deliciosa.”', luis: '“El hotel está cerca de muchas bodegas interesantes. ¡Sin duda volveré!”' },
+        recommendations: { title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMas: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.' },
+        reservations: { title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Enviar', sending: 'Enviando...', sent: 'Enviado' },
+        contact: { title: 'Contacto', addressLabel: 'Dirección:', phoneLabel: 'Teléfono:' }
     },
     en: {
-        reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Send', sending: 'Sending...', sent: 'Sent'},
-        nav: {home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', contact: 'Contact'},
-        header: {logo: 'Hotel Olivos del Sol'},
-        home: {title: 'Welcome to Hotel Olivos del Sol', subtitle: 'An oasis of tranquility and comfort in Pocito, San Juan.', description: 'Our hotel offers modern rooms, first-class services and exceptional attention to make your stay unforgettable.'},
-        services: {title: 'Services', room: 'Comfortable Rooms', roomDesc: 'Spacious and bright rooms with every comfort.', restaurant: 'Restaurant', restaurantDesc: 'High-quality regional and international gastronomy.', pool: 'Pool', poolDesc: 'Outdoor pool to relax and enjoy the sun.', wifi: 'Free Wi‑Fi', wifiDesc: 'High-speed internet access throughout the hotel.', parking: 'Parking', parkingDesc: 'Secure parking for your vehicle.', spa: 'Spa & Wellness', spaDesc: 'Massage sessions and relaxing treatments.'},
-        gallery: {title: 'Gallery'},
-        experiences: {title: 'Experiences', jose: '“A wonderful stay. The staff made us feel at home and the pool is spectacular.”', ana: '“The rooms are spacious and comfortable. The food in the restaurant was delicious.”', luis: '“The hotel is close to many interesting wineries. I will definitely return!”'},
-        recommendations: {title: 'Tourist Recommendations', lasMarianas: 'Located on Calle Nueva between Av. Aberastain and Vidart, La Rinconada, Pocito. This family winery features an old underground cellar and award-winning wines.', segisa: 'Located at Aberastain and Calle 15, Pocito. This boutique winery lets visitors discover the history and winemaking process and offers lunches with local dishes in a cozy atmosphere.', fabril: 'On National Route 40 between streets 13 and 14, Pocito. This pioneer organic winery offers guided tours, tastings and sales of its certified wines and sparkling wines.', miguelMas: 'Located on RP 215, Villa Aberastain. This modern family sparkling wine house offers organic sparkling wine tastings and a participatory lunch with pizza baked in a wood oven.'},
-        reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Finish'},
-        contact: {title: 'Contact', addressLabel: 'Address:', phoneLabel: 'Phone:'}
+        reservations: { title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Send', sending: 'Sending...', sent: 'Sent' },
+        nav: { home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', contact: 'Contact' },
+        header: { logo: 'Hotel Olivos del Sol' },
+        home: { title: 'Welcome to Hotel Olivos del Sol', subtitle: 'An oasis of tranquility and comfort in Pocito, San Juan.', description: 'Our hotel offers modern rooms, first-class services and exceptional attention to make your stay unforgettable.' },
+        services: { title: 'Services', room: 'Comfortable Rooms', roomDesc: 'Spacious and bright rooms with every comfort.', restaurant: 'Restaurant', restaurantDesc: 'High-quality regional and international gastronomy.', pool: 'Pool', poolDesc: 'Outdoor pool to relax and enjoy the sun.', wifi: 'Free Wi‑Fi', wifiDesc: 'High-speed internet access throughout the hotel.', parking: 'Parking', parkingDesc: 'Secure parking for your vehicle.', spa: 'Spa & Wellness', spaDesc: 'Massage sessions and relaxing treatments.' },
+        gallery: { title: 'Gallery' },
+        experiences: { title: 'Experiences', jose: '“A wonderful stay. The staff made us feel at home and the pool is spectacular.”', ana: '“The rooms are spacious and comfortable. The food in the restaurant was delicious.”', luis: '“The hotel is close to many interesting wineries. I will definitely return!”' },
+        recommendations: { title: 'Tourist Recommendations', lasMarianas: 'Located on Calle Nueva between Av. Aberastain and Vidart, La Rinconada, Pocito. This family winery features an old underground cellar and award-winning wines.', segisa: 'Located at Aberastain and Calle 15, Pocito. This boutique winery lets visitors discover the history and winemaking process and offers lunches with local dishes in a cozy atmosphere.', fabril: 'On National Route 40 between streets 13 and 14, Pocito. This pioneer organic winery offers guided tours, tastings and sales of its certified wines and sparkling wines.', miguelMas: 'Located on RP 215, Villa Aberastain. This modern family sparkling wine house offers organic sparkling wine tastings and a participatory lunch with pizza baked in a wood oven.' },
+        reservations: { title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Finish' },
+        contact: { title: 'Contact', addressLabel: 'Address:', phoneLabel: 'Phone:' }
     }
 };
 
@@ -90,7 +90,7 @@ if (galleryImages.length > 0) {
         closeBtn?.addEventListener('click', closeImageViewer);
         prevBtn?.addEventListener('click', showPreviousImage);
         nextBtn?.addEventListener('click', showNextImage);
-        
+
         // Cerrar al hacer clic fuera de la imagen
         imageViewer.addEventListener('click', (e) => {
             if (e.target === imageViewer) {
@@ -101,8 +101,8 @@ if (galleryImages.length > 0) {
         // Manejar teclas
         document.addEventListener('keydown', (e) => {
             if (!imageViewer.classList.contains('active')) return;
-            
-            switch(e.key) {
+
+            switch (e.key) {
                 case 'Escape':
                     closeImageViewer();
                     break;
@@ -152,16 +152,21 @@ function updateViewerImage() {
     viewerImage.alt = currentImg.alt;
 }
 
-document.getElementById('language-select').addEventListener('change', function(e) {
-    setLanguage(e.target.value);
-});
+
+const languageSelect = document.getElementById('language-select');
+if (languageSelect) {
+    languageSelect.addEventListener('change', function (e) {
+        setLanguage(e.target.value);
+    });
+}
+
 
 function showStep(step) {
     currentStep = step;
     document.querySelectorAll('.reservation-step').forEach((div, index) => {
         div.style.display = (index + 1 === step) ? 'block' : 'none';
     });
-    
+
     // Inicializar resaltado de opciones de pago cuando se muestra el paso 5
     if (step === 5) {
         const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
@@ -201,7 +206,7 @@ function validateField(input, regex) {
 
 function validateStep(step) {
     let isValid = true;
-    switch(step) {
+    switch (step) {
         case 1: {
             const fields = ['checkin', 'checkout', 'guests', 'rooms'];
             fields.forEach(fieldId => {
@@ -225,13 +230,13 @@ function validateStep(step) {
             const guestName = document.getElementById('guestName');
             const guestEmail = document.getElementById('guestEmail');
             const guestPhone = document.getElementById('guestPhone');
-            
+
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
             const phoneRegex = /^\+?[\d\s-]+$/;
-            
+
             isValid = validateField(guestName) &&
-                     validateField(guestEmail, emailRegex) &&
-                     validateField(guestPhone, phoneRegex);
+                validateField(guestEmail, emailRegex) &&
+                validateField(guestPhone, phoneRegex);
             return isValid;
         }
         default:
@@ -275,10 +280,10 @@ function nextStep() {
         if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
         if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
         summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
-                               `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
-                               `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
-                               `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
-                               `<p>Tipo de habitación: ${roomLabel}</p>`;
+            `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
+            `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
+            `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
+            `<p>Tipo de habitación: ${roomLabel}</p>`;
     }
     if (currentStep === 5) {
         // Get selected payment method
@@ -321,13 +326,13 @@ function resetForm() {
             }
         }
     });
-    
+
     // Reiniciar los radio buttons de tipo de habitación
     const roomTypeRadios = document.querySelectorAll('input[name="roomType"]');
     if (roomTypeRadios.length > 0) {
         roomTypeRadios[0].checked = true; // Marcar el primero por defecto
     }
-    
+
     // Reiniciar el método de pago a tarjeta
     const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
     if (paymentMethodRadios.length > 0) {
@@ -338,22 +343,22 @@ function resetForm() {
             paymentMethodRadios[0].checked = true;
         }
     }
-    
+
     // Limpiar mensajes de error
     document.querySelectorAll('.error-message').forEach(msg => {
         msg.style.display = 'none';
     });
-    
+
     // Limpiar mensaje de confirmación
     const confMsg = document.getElementById('confirmation-message');
     if (confMsg) {
         confMsg.textContent = '';
         confMsg.style.color = '';
     }
-    
+
     // Reiniciar el paso
     showStep(1);
-    
+
     // Rehabilitar botones que puedan estar deshabilitados
     document.querySelectorAll('button[disabled]').forEach(btn => {
         btn.disabled = false;
@@ -385,12 +390,12 @@ function handlePaymentMethodChange() {
     const mercadopagoForm = document.getElementById('mercadopago-payment-form');
     const localInfo = document.getElementById('local-payment-info');
     const paymentButton = document.getElementById('payment-button');
-    
+
     // Ocultar todos los formularios
     cardForm.style.display = 'none';
     mercadopagoForm.style.display = 'none';
     localInfo.style.display = 'none';
-    
+
     // Mostrar el formulario correspondiente
     if (paymentMethod === 'card') {
         cardForm.style.display = 'block';
@@ -409,7 +414,7 @@ function handlePaymentMethodChange() {
 function initMercadoPagoCheckout() {
     const container = document.getElementById('mercadopago-container');
     container.innerHTML = '<p>Cargando MercadoPago...</p>';
-    
+
     // Aquí se inicializaría el checkout de MercadoPago
     // Esto requiere las credenciales configuradas
     setTimeout(() => {
@@ -451,7 +456,7 @@ async function finalizeReservation() {
         finishButton.textContent = translations[currentLanguage].reservations.sending;
         finishButton.disabled = true;
     }
-    
+
     try {
         const serverResult = await sendReservationToServer(reservationData);
         if (serverResult.ok) {
@@ -505,10 +510,10 @@ async function sendReservationToServer(reservation) {
     // Crear un AbortController para timeout (compatible con navegadores más antiguos)
     const controller = new AbortController();
     let timeoutId;
-    
+
     try {
         timeoutId = setTimeout(() => controller.abort(), 10000); // 10 segundos de timeout
-        
+
         // Intentamos enviar la reserva directamente. Si el servidor no está escuchando, el catch capturará la excepción (ECONNREFUSED).
         const resp = await fetch(apiUrl, {
             method: 'POST',
@@ -519,7 +524,7 @@ async function sendReservationToServer(reservation) {
             body: JSON.stringify(reservation),
             signal: controller.signal
         });
-        
+
         clearTimeout(timeoutId);
 
         console.log('Respuesta del servidor:', resp.status);
@@ -551,7 +556,7 @@ async function sendReservationToServer(reservation) {
             return { ok: false, error: 'El servidor no respondió a tiempo. Por favor, verifica que el servidor esté corriendo e intenta de nuevo.' };
         }
         if (err?.message && (err.message.includes('Failed to fetch') || err.message.includes('ECONNREFUSED') || err.message.includes('NetworkError') || err.message.includes('Network request failed'))) {
-            const errorMsg = isLocal 
+            const errorMsg = isLocal
                 ? 'No se pudo conectar con el servidor de reservas. Asegúrate de iniciar el servidor con `npm start` en la carpeta `server`.'
                 : 'No se pudo conectar con el servidor de reservas. Por favor, verifica tu conexión a internet e intenta de nuevo. Si el problema persiste, contáctanos directamente.';
             return { ok: false, error: errorMsg };
@@ -567,7 +572,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
-        img.addEventListener('click', function() {
+        img.addEventListener('click', function () {
             // Crear overlay y mostrar imagen ampliada
             const overlay = document.createElement('div');
             overlay.classList.add('lightbox');
@@ -582,34 +587,34 @@ window.addEventListener('DOMContentLoaded', () => {
             document.body.appendChild(overlay);
         });
     });
-    
+
     // Configurar listeners para métodos de pago
     const paymentMethods = document.querySelectorAll('input[name="paymentMethod"]');
     paymentMethods.forEach(method => {
         method.addEventListener('change', handlePaymentMethodChange);
     });
-    
+
     // Formatear número de tarjeta
     const cardNumberInput = document.getElementById('cardNumber');
     if (cardNumberInput) {
         cardNumberInput.addEventListener('input', () => formatCardNumber(cardNumberInput));
     }
-    
+
     // Formatear fecha de expiración
     const cardExpiryInput = document.getElementById('cardExpiry');
     if (cardExpiryInput) {
         cardExpiryInput.addEventListener('input', () => formatExpiry(cardExpiryInput));
     }
-    
+
     // Inicializar método de pago por defecto
     if (document.getElementById('step5')) {
         handlePaymentMethodChange();
     }
-    
+
     // Manejar resaltado de opciones de pago
     const paymentRadios = document.querySelectorAll('input[name="paymentMethod"]');
     paymentRadios.forEach(radio => {
-        radio.addEventListener('change', function() {
+        radio.addEventListener('change', function () {
             // Remover clase selected de todas las opciones
             document.querySelectorAll('.payment-option').forEach(option => {
                 option.classList.remove('selected');
@@ -639,24 +644,24 @@ window.addEventListener('load', () => {
 // =========================
 // Carrusel de imágenes dinámico en el hero
 // =========================
-(function() {
+(function () {
     const heroBackgrounds = document.querySelectorAll('.hero-background');
     if (heroBackgrounds.length === 0) return;
-    
+
     let currentIndex = 0;
     const changeInterval = 30000; // 30 segundos
-    
+
     function changeBackground() {
         // Remover la clase active de todas
         heroBackgrounds.forEach(bg => bg.classList.remove('active'));
-        
+
         // Avanzar al siguiente índice
         currentIndex = (currentIndex + 1) % heroBackgrounds.length;
-        
+
         // Agregar la clase active a la siguiente imagen
         heroBackgrounds[currentIndex].classList.add('active');
     }
-    
+
     // Cambiar la imagen cada 30 segundos
     setInterval(changeBackground, changeInterval);
 })();
@@ -680,8 +685,8 @@ window.addEventListener('load', () => {
         lastFocused = document.activeElement;
         sheet.hidden = false;
         backdrop.hidden = false;
-        sheet.setAttribute('data-open','true');
-        navToggle.setAttribute('aria-expanded','true');
+        sheet.setAttribute('data-open', 'true');
+        navToggle.setAttribute('aria-expanded', 'true');
         // focus first item
         const first = sheet.querySelector(focusableSelector);
         if (first) first.focus();
@@ -689,7 +694,7 @@ window.addEventListener('load', () => {
     }
     function closeMenu() {
         sheet.removeAttribute('data-open');
-        navToggle.setAttribute('aria-expanded','false');
+        navToggle.setAttribute('aria-expanded', 'false');
         // small delay for transition then hide
         setTimeout(() => {
             sheet.hidden = true;
