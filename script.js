@@ -500,8 +500,8 @@ async function finalizeReservation() {
 // Envia la reserva al servidor (si está disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
     // Determinar baseUrl: en desarrollo usamos localhost:3000, en producción (Vercel) usamos ruta relativa
-    const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname);
-    // En producción, usar ruta relativa para que funcione con Vercel serverless functions
+    const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname) || globalThis.location.hostname === '';
+    // En producción, usar ruta relativa. En local (o archivo directo), usar localhost:3000
     const baseUrl = isLocal ? 'http://localhost:3000' : '';
     const apiUrl = `${baseUrl}/api/reservations`;
 
