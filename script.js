@@ -152,9 +152,22 @@ function updateViewerImage() {
     viewerImage.alt = currentImg.alt;
 }
 
+// Manejar ambos selectores de idioma (desktop y móvil)
 document.getElementById('language-select').addEventListener('change', function(e) {
     setLanguage(e.target.value);
+    // Sincronizar con el selector móvil
+    const mobileSelect = document.getElementById('mobile-language-select');
+    if (mobileSelect) mobileSelect.value = e.target.value;
 });
+
+const mobileLanguageSelect = document.getElementById('mobile-language-select');
+if (mobileLanguageSelect) {
+    mobileLanguageSelect.addEventListener('change', function(e) {
+        setLanguage(e.target.value);
+        // Sincronizar con el selector desktop
+        document.getElementById('language-select').value = e.target.value;
+    });
+}
 
 function showStep(step) {
     currentStep = step;
