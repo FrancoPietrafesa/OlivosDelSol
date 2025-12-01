@@ -737,16 +737,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 // =========================
-// Mobile menu logic - MEJORADO
+// Modern Mobile Menu Logic - iOS Style
 // =========================
 (function () {
     const navToggle = document.querySelector('.nav-toggle');
     const sheet = document.getElementById('mobileMenu');
     const backdrop = document.querySelector('.ios-menu-backdrop');
     const closeBtn = sheet ? sheet.querySelector('.ios-menu-close') : null;
-
-    // Log para debug
-    console.log('Mobile menu elements:', { navToggle: !!navToggle, sheet: !!sheet, backdrop: !!backdrop });
 
     if (!navToggle || !sheet || !backdrop) {
         console.warn('Mobile menu elements missing:', { navToggle, sheet, backdrop });
@@ -755,64 +752,94 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const focusableSelector = 'a[href], button, select';
     let lastFocused = null;
+    let isAnimating = false;
 
     function openMenu() {
-        console.log('Opening mobile menu');
+        if (isAnimating) return;
+        isAnimating = true;
+        
         lastFocused = document.activeElement;
+        
+        // Actualizar estado del toggle
+        navToggle.setAttribute('data-open', 'true');
+        navToggle.setAttribute('aria-expanded', 'true');
         
         // Mostrar elementos
         sheet.hidden = false;
         backdrop.hidden = false;
         sheet.setAttribute('data-open', 'true');
-        navToggle.setAttribute('aria-expanded', 'true');
         
         // Prevenir scroll del body
         document.body.style.overflow = 'hidden';
         
-        // Focus en primer elemento
+        // Añadir clase para animaciones
+        document.body.classList.add('menu-open');
+        
+        // Focus en primer elemento después de la animación
         setTimeout(() => {
             const first = sheet.querySelector(focusableSelector);
             if (first) {
                 first.focus();
             }
-        }, 100);
+            isAnimating = false;
+        }, 300);
     }
 
     function closeMenu() {
-        console.log('Closing mobile menu');
-        sheet.removeAttribute('data-open');
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        // Actualizar estado del toggle
+        navToggle.removeAttribute('data-open');
         navToggle.setAttribute('aria-expanded', 'false');
+        
+        // Ocultar elementos
+        sheet.removeAttribute('data-open');
+        
+        // Remover clase de animaciones
+        document.body.classList.remove('menu-open');
         
         // Delay para transición
         setTimeout(() => {
             sheet.hidden = true;
             backdrop.hidden = true;
             document.body.style.overflow = '';
-            if (lastFocused) {
+            
+            if (lastFocused && document.contains(lastFocused)) {
                 lastFocused.focus();
             }
-        }, 160);
+            
+            isAnimating = false;
+        }, 400);
     }
 
-    // Event listeners
+    function toggleMenu() {
+        const isOpen = navToggle.getAttribute('data-open') === 'true';
+        if (isOpen) {
+            closeMenu();
+        } else {
+            openMenu();
+        }
+    }
+
+    // Event listeners mejorados
     navToggle.addEventListener('click', (e) => {
         e.preventDefault();
         e.stopPropagation();
-        console.log('Nav toggle clicked');
-        const isOpen = sheet.getAttribute('data-open') === 'true';
-        if (isOpen) { 
-            closeMenu(); 
-        } else { 
-            openMenu(); 
-        }
+        toggleMenu();
     });
 
     // Cerrar menú al hacer clic en enlaces
     sheet.addEventListener('click', (e) => {
-        const a = e.target.closest && e.target.closest('a');
-        if (a && a.getAttribute('href')) {
-            console.log('Link clicked in mobile menu');
-            setTimeout(() => closeMenu(), 60);
+        const link = e.target.closest('a');
+        if (link && link.getAttribute('href')) {
+            // Añadir efecto visual al hacer clic
+            link.style.transform = 'scale(0.98)';
+            setTimeout(() => {
+                link.style.transform = '';
+            }, 150);
+            
+            setTimeout(() => closeMenu(), 200);
         }
     });
 
@@ -831,40 +858,103 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Manejo de teclas
+    // Prevenir cierre al hacer clic dentro del sheet
+    sheet.addEventListener('click', (e) => {
+        e.stopPropagation();
+    });
+
+    // Manejo mejorado de teclas
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && sheet.getAttribute('data-open') === 'true') {
-            e.preventDefault();
-            closeMenu();
-        }
+        const isOpen = navToggle.getAttribute('data-open') === 'true';
         
-        if (e.key === 'Tab' && sheet.getAttribute('data-open') === 'true') {
-            // Trap focus
-            const focusables = Array.from(sheet.querySelectorAll(focusableSelector))
-                .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null);
-            
-            if (focusables.length === 0) return;
-            
-            const first = focusables[0];
-            const last = focusables[focusables.length - 1];
-            
-            if (e.shiftKey && document.activeElement === first) {
+        if (!isOpen) return;
+        
+        switch (e.key) {
+            case 'Escape':
                 e.preventDefault();
-                last.focus();
-            } else if (!e.shiftKey && document.activeElement === last) {
+                closeMenu();
+                break;
+                
+            case 'Tab':
+                // Focus trap mejorado
+                const focusables = Array.from(sheet.querySelectorAll(focusableSelector))
+                    .filter(el => !el.hasAttribute('disabled') && el.offsetParent !== null && !el.hidden);
+                
+                if (focusables.length === 0) return;
+                
+                const first = focusables[0];
+                const last = focusables[focusables.length - 1];
+                
+                if (e.shiftKey && document.activeElement === first) {
+                    e.preventDefault();
+                    last.focus();
+                } else if (!e.shiftKey && document.activeElement === last) {
+                    e.preventDefault();
+                    first.focus();
+                }
+                break;
+                
+            case 'ArrowDown':
+            case 'ArrowUp':
+                // Navegación con flechas
                 e.preventDefault();
-                first.focus();
-            }
+                const current = document.activeElement;
+                const currentIndex = focusables.indexOf(current);
+                
+                if (e.key === 'ArrowDown') {
+                    const next = focusables[(currentIndex + 1) % focusables.length];
+                    next?.focus();
+                } else {
+                    const prev = focusables[(currentIndex - 1 + focusables.length) % focusables.length];
+                    prev?.focus();
+                }
+                break;
         }
     });
 
-    // Debug: asegurar que los elementos están presentes
-    setTimeout(() => {
-        console.log('Mobile menu state check:', {
-            navToggleVisible: getComputedStyle(navToggle).display !== 'none',
-            sheetHidden: sheet.hidden,
-            backdropHidden: backdrop.hidden,
-            dataOpen: sheet.getAttribute('data-open')
-        });
-    }, 1000);
+    // Prevenir scroll del body cuando el menú está abierto
+    const preventScroll = (e) => {
+        if (navToggle.getAttribute('data-open') === 'true') {
+            e.preventDefault();
+        }
+    };
+
+    // Manejar resize para asegurar que el menú se cierre en desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 860 && navToggle.getAttribute('data-open') === 'true') {
+            closeMenu();
+        }
+    });
+
+    // Mejorar la experiencia táctil en móviles
+    let touchStartY = 0;
+    let touchEndY = 0;
+
+    backdrop.addEventListener('touchstart', (e) => {
+        touchStartY = e.changedTouches[0].screenY;
+    }, { passive: true });
+
+    backdrop.addEventListener('touchend', (e) => {
+        touchEndY = e.changedTouches[0].screenY;
+        handleSwipe();
+    }, { passive: true });
+
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const swipeDistance = touchStartY - touchEndY;
+        
+        if (swipeDistance > swipeThreshold) {
+            // Swipe hacia arriba - cerrar menú
+            closeMenu();
+        }
+    }
+
+    // Cleanup en caso de navegación
+    window.addEventListener('beforeunload', () => {
+        if (navToggle.getAttribute('data-open') === 'true') {
+            closeMenu();
+        }
+    });
+
+    console.log('Modern iOS-style mobile menu initialized');
 })();

@@ -39,6 +39,13 @@ body {
     overflow: hidden;
 }
 
+/* Controles del lado derecho del navbar */
+.nav-controls {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
 .navbar::before {
     content: '';
     position: absolute;
@@ -1228,30 +1235,61 @@ footer::before {
 }
 
 /* =========================
-   RESPONSIVE NAVBAR
+   MODERN MOBILE TOGGLE BUTTON
    ========================= */
 .nav-toggle {
     display: none;
     background: transparent;
-    border: 0;
+    border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 12px;
     margin-left: 0.5rem;
     flex-direction: column;
-    gap: 5px;
+    gap: 6px;
+    z-index: 10002;
+    position: relative;
+    border-radius: 12px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-tap-highlight-color: transparent;
+    touch-action: manipulation;
+}
+
+.nav-toggle:hover {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+}
+
+.nav-toggle:active {
+    background: rgba(255, 255, 255, 0.12);
+    transform: scale(0.95);
 }
 
 .nav-toggle .bar {
     display: block;
-    width: 28px;
-    height: 3px;
+    width: 24px;
+    height: 2px;
     background: #fff;
     border-radius: 2px;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-origin: center;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
-.nav-toggle:hover .bar {
-    background: #fff;
+.nav-toggle[data-open="true"] .bar:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+    background: linear-gradient(135deg, #556B2F, #708238);
+    box-shadow: 0 2px 8px rgba(85, 107, 47, 0.4);
+}
+
+.nav-toggle[data-open="true"] .bar:nth-child(2) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.nav-toggle[data-open="true"] .bar:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
+    background: linear-gradient(135deg, #556B2F, #708238);
+    box-shadow: 0 2px 8px rgba(85, 107, 47, 0.4);
 }
 
 @media (max-width: 1024px) {
@@ -1269,36 +1307,19 @@ footer::before {
         display: none !important;
     }
 
-    .nav-toggle {
-        display: flex !important;
-        background: transparent;
-        border: none;
-        cursor: pointer;
-        padding: 8px;
-        margin-left: 1rem;
-        flex-direction: column;
-        gap: 4px;
-        z-index: 10002;
-        position: relative;
-    }
-
-    .nav-toggle .bar {
-        display: block;
-        width: 28px;
-        height: 3px;
-        background: #fff;
-        border-radius: 2px;
-        transition: all 0.3s ease;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-    }
-
-    .nav-toggle:hover .bar {
-        background: #fff;
-        box-shadow: 0 2px 6px rgba(255, 255, 255, 0.3);
+    .nav-controls {
+        gap: 0.5rem;
     }
 
     .lang-select:not(.ios-menu .lang-select) {
         display: none !important;
+    }
+
+    .nav-toggle {
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-left: 0;
     }
 
     .logo span {
@@ -1306,43 +1327,88 @@ footer::before {
     }
 }
 
-/* Asegurar que el botón sea visible en todos los dispositivos móviles */
 @media (max-width: 768px) {
+    .navbar {
+        padding: 1rem 1.5rem;
+    }
+    
+    .nav-controls {
+        gap: 0.75rem;
+    }
+
     .nav-toggle {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+        padding: 12px;
+        margin-left: 0;
+    }
+    
+    .nav-toggle .bar {
+        width: 24px;
+        height: 2px;
+    }
+    
+    .nav-toggle[data-open="true"] .bar:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+    }
+
+    .nav-toggle[data-open="true"] .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
     }
 }
 
 @media (max-width: 480px) {
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+    
+    .nav-controls {
+        gap: 0.5rem;
+    }
+
+    .logo span {
+        font-size: 0.9rem;
+    }
+
     .nav-toggle {
-        display: flex !important;
-        visibility: visible !important;
-        opacity: 1 !important;
-        padding: 6px;
+        padding: 10px;
+        margin-left: 0;
     }
     
     .nav-toggle .bar {
-        width: 25px;
+        width: 22px;
         height: 2px;
+    }
+    
+    .nav-toggle[data-open="true"] .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .nav-toggle[data-open="true"] .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
     }
 }
 
 /* =========================
-   iOS-STYLE MOBILE MENU - MEJORADO
+   MODERN iOS-STYLE MOBILE MENU
    ========================= */
 .ios-menu-backdrop {
     position: fixed;
     inset: 0;
-    background: rgba(0, 0, 0, 0.8);
-    backdrop-filter: blur(6px);
-    -webkit-backdrop-filter: blur(6px);
-    z-index: 10000;
-    animation: fadeIn 0.2s ease;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     display: flex;
     align-items: center;
     justify-content: center;
+    padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
+}
+
+.ios-menu-backdrop[data-open="true"] {
+    opacity: 1;
+    visibility: visible;
 }
 
 .ios-menu {
@@ -1350,9 +1416,9 @@ footer::before {
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 10001;
+    z-index: 10000;
     pointer-events: none;
-    padding: 20px;
+    padding: env(safe-area-inset-top, 20px) env(safe-area-inset-right, 20px) env(safe-area-inset-bottom, 20px) env(safe-area-inset-left, 20px);
 }
 
 .ios-menu[data-open="true"] {
@@ -1360,37 +1426,83 @@ footer::before {
 }
 
 .ios-menu-sheet {
-    width: min(500px, 95vw);
-    max-height: 90vh;
+    width: min(420px, 92vw);
+    max-height: min(80vh, 600px);
     overflow-y: auto;
-    padding: 20px;
-    border-radius: 20px;
-    background: rgba(40, 50, 20, 0.98);
-    backdrop-filter: saturate(200%) blur(20px);
-    -webkit-backdrop-filter: saturate(200%) blur(20px);
-    border: 2px solid rgba(85, 107, 47, 0.4);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    transform: translateY(30px) scale(0.95);
+    overflow-x: hidden;
+    padding: 24px;
+    border-radius: 24px;
+    background: rgba(26, 26, 26, 0.95);
+    backdrop-filter: blur(30px) saturate(180%);
+    -webkit-backdrop-filter: blur(30px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 
+        0 25px 80px rgba(0, 0, 0, 0.4),
+        0 8px 32px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transform: translateY(40px) scale(0.92);
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     pointer-events: all;
+    position: relative;
+}
+
+.ios-menu-sheet::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    opacity: 0.5;
 }
 
 .ios-menu[data-open="true"] .ios-menu-sheet {
     transform: translateY(0) scale(1);
     opacity: 1;
+    animation: menuSlideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+@keyframes menuSlideIn {
+    0% {
+        transform: translateY(40px) scale(0.92);
+        opacity: 0;
+    }
+    100% {
+        transform: translateY(0) scale(1);
+        opacity: 1;
+    }
 }
 
 .ios-menu .nav-links {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 12px;
+    gap: 8px;
     padding: 0;
-    margin: 0 0 16px 0;
+    margin: 0 0 20px 0;
 }
 
 .ios-menu .nav-links li {
     list-style: none;
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: linkSlideIn 0.4s ease forwards;
+}
+
+.ios-menu .nav-links li:nth-child(1) { animation-delay: 0.1s; }
+.ios-menu .nav-links li:nth-child(2) { animation-delay: 0.15s; }
+.ios-menu .nav-links li:nth-child(3) { animation-delay: 0.2s; }
+.ios-menu .nav-links li:nth-child(4) { animation-delay: 0.25s; }
+.ios-menu .nav-links li:nth-child(5) { animation-delay: 0.3s; }
+.ios-menu .nav-links li:nth-child(6) { animation-delay: 0.35s; }
+.ios-menu .nav-links li:nth-child(7) { animation-delay: 0.4s; }
+
+@keyframes linkSlideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
 }
 
 .ios-menu .nav-links a {
@@ -1398,84 +1510,145 @@ footer::before {
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    font-size: 1.1rem;
+    font-size: 16px;
     font-weight: 500;
     padding: 16px 20px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 14px;
-    color: #fff;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+}
+
+.ios-menu .nav-links a::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.ios-menu .nav-links a:hover::before {
+    left: 100%;
 }
 
 .ios-menu .nav-links a:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(85, 107, 47, 0.6);
-    transform: translateX(-3px);
-    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.2);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(85, 107, 47, 0.3);
+    transform: translateX(4px);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.15),
+        0 4px 12px rgba(85, 107, 47, 0.15);
 }
 
 .ios-menu .nav-links a::after {
-    content: "›";
-    font-size: 1.2rem;
-    opacity: 0.8;
-    color: #fff;
-    transition: transform 0.3s ease;
+    content: "→";
+    font-size: 18px;
+    opacity: 0.6;
+    color: #ffffff;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    font-weight: 300;
 }
 
 .ios-menu .nav-links a:hover::after {
-    transform: translateX(3px);
     opacity: 1;
+    transform: translateX(2px);
+    color: #a4c66e;
 }
 
 .ios-menu .lang-select {
     display: block;
-    margin: 16px 0 8px 0;
+    margin: 20px 0 12px 0;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s ease 0.5s forwards;
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .ios-menu .lang-select select {
     width: 100%;
-    padding: 14px 16px;
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    color: #fff;
+    padding: 16px 20px;
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #ffffff;
     font-family: 'Cormorant Garamond', serif;
     font-weight: 500;
-    font-size: 1rem;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
+    font-size: 16px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 20 20'%3e%3cpath stroke='%23ffffff' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' d='M6 8l4 4 4-4'/%3e%3c/svg%3e");
+    background-position: right 16px center;
+    background-repeat: no-repeat;
+    background-size: 16px;
+    padding-right: 50px;
 }
 
 .ios-menu .lang-select select:hover {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(85, 107, 47, 0.6);
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(85, 107, 47, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .ios-menu-close {
     width: 100%;
-    margin-top: 16px;
-    padding: 16px 20px;
-    border-radius: 14px;
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    color: #fff;
+    margin-top: 20px;
+    padding: 18px 24px;
+    border-radius: 16px;
+    background: linear-gradient(135deg, rgba(85, 107, 47, 0.2), rgba(112, 130, 56, 0.2));
+    border: 1px solid rgba(85, 107, 47, 0.3);
+    color: #ffffff;
     cursor: pointer;
     font-weight: 600;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    font-size: 16px;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.4s ease 0.6s forwards;
+}
+
+.ios-menu-close::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.6s ease;
+}
+
+.ios-menu-close:hover::before {
+    left: 100%;
 }
 
 .ios-menu-close:hover {
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(85, 107, 47, 0.6);
-    transform: translateY(-1px);
-    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.2);
+    background: linear-gradient(135deg, rgba(85, 107, 47, 0.3), rgba(112, 130, 56, 0.3));
+    border-color: rgba(85, 107, 47, 0.5);
+    transform: translateY(-2px);
+    box-shadow: 
+        0 8px 25px rgba(85, 107, 47, 0.25),
+        0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .ios-menu-backdrop[hidden],
@@ -1483,22 +1656,58 @@ footer::before {
     display: none !important;
 }
 
+/* iPhone X and newer safe areas */
+@supports (padding: max(0px)) {
+    .ios-menu-backdrop {
+        padding: max(env(safe-area-inset-top, 20px), 20px) 
+                 max(env(safe-area-inset-right, 20px), 20px) 
+                 max(env(safe-area-inset-bottom, 20px), 20px) 
+                 max(env(safe-area-inset-left, 20px), 20px);
+    }
+    
+    .ios-menu {
+        padding: max(env(safe-area-inset-top, 20px), 20px) 
+                 max(env(safe-area-inset-right, 20px), 20px) 
+                 max(env(safe-area-inset-bottom, 20px), 20px) 
+                 max(env(safe-area-inset-left, 20px), 20px);
+    }
+}
+
 /* Responsive específico para el menú móvil */
 @media (max-width: 480px) {
     .ios-menu-sheet {
-        width: 98vw;
+        width: 94vw;
         margin: 0;
-        padding: 16px;
-        border-radius: 16px;
+        padding: 20px;
+        border-radius: 20px;
+        max-height: 75vh;
     }
     
     .ios-menu .nav-links a {
-        padding: 14px 16px;
-        font-size: 1rem;
+        padding: 14px 18px;
+        font-size: 15px;
+    }
+    
+    .ios-menu .lang-select select {
+        padding: 14px 18px;
+        font-size: 15px;
     }
     
     .ios-menu-close {
-        padding: 14px 16px;
+        padding: 16px 20px;
+        font-size: 15px;
+    }
+}
+
+@media (max-width: 360px) {
+    .ios-menu-sheet {
+        width: 96vw;
+        padding: 16px;
+    }
+    
+    .ios-menu .nav-links a {
+        padding: 12px 16px;
+        font-size: 14px;
     }
 }
 
