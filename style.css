@@ -290,18 +290,16 @@ section h2::after {
 }
 
 .service-item {
-    background: rgba(255, 255, 255, 0.1); /* Igual a .hero-content */
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 3rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    box-shadow: 0 4px 20px rgba(0,0,0,0.18);
-    color: #fff;
+    background: #2a2a2a;
+    border-radius: 16px;
+    padding: 2rem;
     text-align: center;
-    transition: all 0.3s cubic-bezier(0.4,0,0.2,1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    border: 1px solid rgba(85, 107, 47, 0.2);
     position: relative;
     overflow: hidden;
+    color: #e0e0e0;
 }
 
 .service-item::before {
@@ -777,18 +775,10 @@ section h2::after {
    ========================= */
 footer {
     text-align: center;
-    padding: 3rem;
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    color: #fff;
-    border-radius: 20px 20px 0 0;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    margin: 3rem 2vw 0 2vw;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    box-sizing: border-box;
+    padding: 2rem;
+    background: #000;
+    color: #aaa;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* =========================
