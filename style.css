@@ -163,15 +163,19 @@ body {
     0% {
         transform: scale(1) translate(0, 0);
     }
+
     25% {
         transform: scale(1.08) translate(-1.5%, -1.5%);
     }
+
     50% {
         transform: scale(1.12) translate(-3%, -3%);
     }
+
     75% {
         transform: scale(1.08) translate(-1.5%, -1.5%);
     }
+
     100% {
         transform: scale(1) translate(0, 0);
     }
@@ -194,6 +198,7 @@ body {
         opacity: 0;
         transform: translateY(30px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -261,8 +266,8 @@ section h2::after {
 /* =========================
     SERVICIOS - Estilo único
     ========================= */
-.services-section {
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center fixed;
+#services {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/san-juan-argentina (1).jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
 }
@@ -381,8 +386,13 @@ section h2::after {
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
 }
 
 .lightbox img {
@@ -398,6 +408,7 @@ section h2::after {
         transform: scale(0.8);
         opacity: 0;
     }
+
     to {
         transform: scale(1);
         opacity: 1;
@@ -640,7 +651,7 @@ section h2::after {
     cursor: pointer;
 }
 
-.payment-option input[type="radio"]:checked ~ .payment-option-content {
+.payment-option input[type="radio"]:checked~.payment-option-content {
     color: #fff;
 }
 
@@ -648,7 +659,7 @@ section h2::after {
     accent-color: #556B2F;
 }
 
-.payment-option input[type="radio"]:checked ~ .payment-option-content strong {
+.payment-option input[type="radio"]:checked~.payment-option-content strong {
     color: #556B2F;
 }
 
@@ -797,8 +808,13 @@ footer {
 }
 
 @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 
 /* =========================
@@ -832,7 +848,7 @@ footer {
     .navbar {
         padding: 1rem 1.5rem;
     }
-    
+
     .nav-links {
         gap: 1rem;
     }
@@ -842,15 +858,15 @@ footer {
     .nav-links:not(.ios-menu .nav-links) {
         display: none;
     }
-    
+
     .nav-toggle {
         display: flex;
     }
-    
+
     .lang-select:not(.ios-menu .lang-select) {
         display: none;
     }
-    
+
     .logo span {
         font-size: 1rem;
     }
@@ -984,17 +1000,17 @@ footer {
     section {
         padding: 3rem 0;
     }
-    
+
     .home-section .hero {
         padding: 4rem 1.5rem;
         min-height: 70vh;
         background-attachment: scroll;
     }
-    
+
     .home-section .hero-content {
         padding: 2rem;
     }
-    
+
     .services-list,
     .gallery-grid,
     .experience-list,
@@ -1003,16 +1019,16 @@ footer {
         padding: 0 1rem;
         gap: 1.5rem;
     }
-    
+
     .gallery-grid img {
         height: 240px;
     }
-    
+
     #reservation-form {
         padding: 2rem 1.5rem;
         margin: 0 1rem;
     }
-    
+
     .service-item,
     .experience-item,
     .recommendation-item {
@@ -1024,24 +1040,24 @@ footer {
     .navbar {
         padding: 0.75rem 1rem;
     }
-    
+
     .logo img {
         height: 35px;
     }
-    
+
     .logo span {
         font-size: 0.9rem;
     }
-    
+
     section h2 {
         font-size: 1.75rem;
         margin-bottom: 2rem;
     }
-    
+
     .home-section .hero-content {
         padding: 1.5rem;
     }
-    
+
     #reservation-form {
         padding: 1.5rem 1rem;
     }
@@ -1144,9 +1160,11 @@ body.index-page section:nth-child(2) {
     0% {
         background-size: 120% 120%;
     }
+
     50% {
         background-size: 140% 140%;
     }
+
     100% {
         background-size: 120% 120%;
     }
@@ -1183,6 +1201,7 @@ html {
 
 /* Mejoras de accesibilidad */
 @media (prefers-reduced-motion: reduce) {
+
     *,
     *::before,
     *::after {
