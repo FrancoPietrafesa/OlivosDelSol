@@ -262,8 +262,9 @@ section h2::after {
     SERVICIOS - Estilo único
     ========================= */
 .services-section {
-  /*  background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);*/
-  background: url('images/san-juan-argentina\ \(1\).jpg');
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center fixed;
+    background-size: cover;
+    min-height: 100vh;
 }
 
 .services-list {
