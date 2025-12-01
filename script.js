@@ -668,6 +668,75 @@ window.addEventListener('load', () => {
 
 
 // =========================
+// TRANSICIONES SIMPLIFICADAS Y ESTABLES
+// =========================
+
+class ModernPageTransitions {
+    constructor() {
+        this.isTransitioning = false;
+        this.init();
+    }
+
+    init() {
+        // Solo agregar efectos de sombreado, no interceptar navegación
+        this.applyShadowEffects();
+    }
+
+    applyShadowEffects() {
+        // Aplicar sombras modernas sin interferir con navegación
+        const elements = document.querySelectorAll('.service-item, .experience-item, .recommendation-item, .contact-card');
+        
+        elements.forEach((element, index) => {
+            element.classList.add('modern-shadow-hover');
+            
+            // Aplicar efectos escalonados
+            setTimeout(() => {
+                element.style.opacity = '1';
+                element.style.transform = 'translateY(0)';
+            }, index * 100);
+        });
+    }
+
+    // Método público para aplicar efectos de entrada
+    applyPageEnter() {
+        const content = document.querySelector('main') || document.body;
+        content.classList.add('page-enter');
+        
+        setTimeout(() => {
+            content.classList.remove('page-enter');
+        }, 800);
+    }
+}
+
+// Función para aplicar sombreados modernos a elementos
+function applyModernShadows() {
+    const elements = document.querySelectorAll('.service-item, .experience-item, .recommendation-item, .contact-card');
+    
+    elements.forEach((element, index) => {
+        // Aplicar diferentes niveles de sombra según el tipo
+        if (element.classList.contains('service-item')) {
+            element.classList.add('modern-shadow-hover');
+        } else if (element.classList.contains('contact-card')) {
+            element.classList.add('modern-shadow-medium');
+        } else {
+            element.classList.add('modern-shadow-small');
+        }
+        
+        // Agregar clase para efectos básicos
+        element.classList.add('dynamic-shadow');
+    });
+}
+
+// Inicializar transiciones modernas cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    // Inicializar sistema de transiciones simplificado
+    new ModernPageTransitions();
+    
+    // Aplicar sombras modernas
+    applyModernShadows();
+});
+
+// =========================
 // Mobile menu logic
 // =========================
 (function () {

@@ -6,13 +6,15 @@
 }
 
 body {
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Cormorant Garamond', 'Times New Roman', Times, serif;
     margin: 0;
     padding: 0;
     color: #e0e0e0;
-    background-color: #1a1a1a;
+    background: linear-gradient(to bottom, #1a1a1a, #2a2a2a);
     line-height: 1.6;
     overflow-x: hidden;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 /*
@@ -22,7 +24,7 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(17, 17, 17, 1);
+    background: rgba(85, 107, 47, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 1rem 2rem;
@@ -31,12 +33,28 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9999;
     transition: background-color 0.3s ease;
+    border-bottom: 1px solid rgba(85, 107, 47, 0.3);
+    overflow: hidden;
+}
+
+.navbar::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.1;
+    z-index: -1;
 }
 
 .navbar.scrolled {
-    background: rgba(17, 17, 17, 0.5);
+    background: rgba(85, 107, 47, 0.25);
 }
 
 .logo {
@@ -52,13 +70,15 @@ body {
 
 .logo:hover img {
     transform: scale(1.05);
+    filter: brightness(1.1) saturate(1.2);
 }
 
 .logo span {
     font-weight: 600;
-    font-size: 1.25rem;
+    font-size: 1.35rem;
     color: #fff;
-    letter-spacing: -0.5px;
+    letter-spacing: 0.02em;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .nav-links {
@@ -73,10 +93,12 @@ body {
     text-decoration: none;
     color: #fff;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    letter-spacing: 0.02em;
 }
 
 .nav-links a::after {
@@ -88,30 +110,65 @@ body {
     height: 2px;
     background: linear-gradient(90deg, #556B2F, #708238);
     transition: width 0.3s ease;
+    will-change: width;
 }
 
 .nav-links a:hover {
-    color: #708238;
+    color: #fff;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
 .nav-links a:hover::after {
     width: 100%;
+    background: linear-gradient(90deg, #a4c66e, #c8d87c);
 }
 
 .lang-select select {
     padding: 0.5rem 1rem;
     font-size: 0.9rem;
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.15);
     color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+}
+
+/* Banderas mini en el selector */
+.lang-select select option {
+    font-size: 0.9rem;
+    font-family: 'Cormorant Garamond', serif;
+}
+
+.lang-select select option .flag-mini {
+    font-size: 0.7rem;
+    vertical-align: middle;
+    margin-right: 0.3rem;
 }
 
 .lang-select select:hover {
-    background-color: rgba(255, 255, 255, 0.15);
-    border-color: rgba(255, 255, 255, 0.3);
+    background-color: rgba(255, 255, 255, 0.25);
+    border-color: rgba(85, 107, 47, 0.6);
+    box-shadow: 0 4px 15px rgba(85, 107, 47, 0.3), 0 0 0 1px rgba(85, 107, 47, 0.2);
+    transform: translateY(-1px);
+}
+
+.lang-select select:focus {
+    outline: none;
+    border-color: rgba(85, 107, 47, 0.6);
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 4px 15px rgba(85, 107, 47, 0.3), 0 0 0 2px rgba(85, 107, 47, 0.2);
+    transform: translateY(-1px);
+}
+
+.lang-select select:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(85, 107, 47, 0.3);
 }
 
 /* =========================
@@ -136,8 +193,10 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));
-    z-index: 1;
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-size: cover;
+    background-attachment: fixed;
+    z-index: 0;
 }
 
 .home-section .hero-background {
@@ -150,7 +209,7 @@ body {
     background-position: center;
     opacity: 0;
     transition: opacity 2s ease-in-out;
-    z-index: 0;
+    z-index: -1;
     animation: slowPan 60s ease-in-out infinite;
 }
 
@@ -190,7 +249,7 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.2);
     animation: fadeInUp 0.8s ease;
     position: relative;
-    z-index: 2;
+    z-index: 3;
 }
 
 @keyframes fadeInUp {
@@ -206,11 +265,11 @@ body {
 }
 
 .home-section h1 {
-    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-size: clamp(2.2rem, 5vw, 4.2rem);
     margin-bottom: 1.5rem;
     font-weight: 700;
-    letter-spacing: -1px;
-    line-height: 1.2;
+    letter-spacing: 0.02em;
+    line-height: 1.1;
 }
 
 .home-section p {
@@ -225,24 +284,26 @@ body {
 section {
     padding: 5rem 0;
     position: relative;
+    border: none;
+    margin: 0;
 }
 
-/* Secciones alternadas: gris oscuro y negro */
-section:nth-child(even) {
-    background-color: #2a2a2a;
+/* Secciones con transiciones suaves */
+section {
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 1), rgba(42, 42, 42, 1));
     color: #e0e0e0;
 }
 
 section:nth-child(odd) {
-    background-color: #1a1a1a;
-    color: #e0e0e0;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 1), rgba(32, 32, 32, 1));
 }
 
 section h2 {
     text-align: center;
     margin: 0 0 3rem 0;
-    font-size: clamp(1.75rem, 4vw, 2.5rem);
-    font-weight: 700;
+    font-size: clamp(1.8rem, 4vw, 3rem);
+    font-weight: 600;
+    letter-spacing: 0.03em;
     background: linear-gradient(135deg, #556B2F, #708238);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
@@ -290,13 +351,15 @@ section h2::after {
 }
 
 .service-item {
-    background: #2a2a2a;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     transition: all 0.3s ease;
-    border: 1px solid rgba(85, 107, 47, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.2);
     position: relative;
     overflow: hidden;
     color: #e0e0e0;
@@ -324,10 +387,11 @@ section h2::after {
 }
 
 .service-item h3 {
-    color: #556B2F;
+    color: #fff;
     margin-bottom: 1rem;
     font-size: 1.3rem;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: -0.01em;
 }
 
 .service-item p {
@@ -460,9 +524,10 @@ section h2::after {
 
 .experience-item h3 {
     margin-top: 0;
-    color: #556B2F;
+    color: #fff;
     font-size: 1.4rem;
-    font-weight: 600;
+    font-weight: 500;
+    letter-spacing: -0.01em;
     margin-bottom: 1rem;
 }
 
@@ -542,7 +607,7 @@ section h2::after {
 }
 
 .reservation-step h3 {
-    color: #556B2F;
+    color: #fff;
     margin-bottom: 2rem;
     font-size: 1.8rem;
     text-align: center;
@@ -551,9 +616,10 @@ section h2::after {
 .reservation-step label {
     display: block;
     margin-top: 1.5rem;
-    font-weight: 600;
+    font-weight: 500;
     color: #e0e0e0;
     font-size: 0.95rem;
+    letter-spacing: -0.005em;
 }
 
 .reservation-step input[type="text"],
@@ -660,7 +726,7 @@ section h2::after {
 }
 
 .payment-option input[type="radio"]:checked~.payment-option-content strong {
-    color: #556B2F;
+    color: #fff;
 }
 
 /* Resaltar la opción seleccionada usando JavaScript (clase agregada dinámicamente) */
@@ -696,7 +762,7 @@ section h2::after {
 }
 
 .payment-form-section h4 {
-    color: #556B2F;
+    color: #fff;
     margin-bottom: 1rem;
 }
 
@@ -722,8 +788,9 @@ section h2::after {
     border: none;
     border-radius: 10px;
     cursor: pointer;
-    font-weight: 600;
+    font-weight: 500;
     font-size: 1rem;
+    letter-spacing: -0.005em;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(0, 168, 142, 0.3);
 }
@@ -740,34 +807,281 @@ section h2::after {
 /* Removed WhatsApp-specific button styles (flow moved server-side). */
 
 /* =========================
-   CONTACTO
+   CONTACTO MODERNO
    ========================= */
 .contact-section {
-    padding: 4rem 2rem;
-    background: #0a0a0a;
+    padding: 6rem 2rem;
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    position: relative;
+    overflow: hidden;
+}
+
+.contact-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.05;
+    z-index: -1;
+}
+
+.contact-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 4rem;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+.contact-header {
     text-align: center;
+    margin-bottom: 4rem;
 }
 
-.contact-section h2 {
-    margin-bottom: 2rem;
+.contact-header h2 {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 500;
+    letter-spacing: -0.02em;
+    background: linear-gradient(135deg, #556B2F, #708238);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
 }
 
-.contact-section p {
-    font-size: 1.1rem;
-    margin: 1rem 0;
-    color: #ddd;
+.contact-header p {
+    font-size: 1.2rem;
+    color: #b0b0b0;
+    max-width: 600px;
+    margin: 0 auto;
+    font-weight: 300;
+    line-height: 1.7;
 }
 
-.contact-section a {
-    color: #708238;
-    text-decoration: none;
+.contact-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 3rem;
+    margin-bottom: 4rem;
+}
+
+.contact-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    padding: 2.5rem;
+    text-align: center;
     transition: all 0.3s ease;
-    border-bottom: 2px solid transparent;
 }
 
-.contact-section a:hover {
-    color: #556B2F;
-    border-bottom-color: #556B2F;
+.contact-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 15px 40px rgba(85, 107, 47, 0.15);
+}
+
+.contact-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #556B2F, #708238);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1.5rem;
+}
+
+.contact-icon svg {
+    width: 30px;
+    height: 30px;
+    fill: white;
+}
+
+.contact-card h3 {
+    color: #e0e0e0;
+    font-size: 1.3rem;
+    font-weight: 500;
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.contact-card p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.contact-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.contact-link:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+}
+
+.social-section {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.social-section h3 {
+    color: #e0e0e0;
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    letter-spacing: -0.01em;
+}
+
+.social-grid {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.social-platform {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem 2rem;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 12px;
+    text-decoration: none;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+    min-width: 200px;
+}
+
+.social-platform:hover {
+    background: rgba(85, 107, 47, 0.15);
+    border-color: rgba(85, 107, 47, 0.3);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(85, 107, 47, 0.2);
+}
+
+.platform-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.platform-icon.tripadvisor {
+    background: linear-gradient(135deg, #00AF87, #00CE7D);
+}
+
+.platform-icon.airbnb {
+    background: linear-gradient(135deg, #FF5A5F, #FC642D);
+}
+
+.platform-icon.instagram {
+    background: linear-gradient(135deg, #E4405F, #C13584);
+}
+
+.platform-icon svg {
+    width: 24px;
+    height: 24px;
+    fill: white;
+}
+
+.platform-info h4 {
+    color: #e0e0e0;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+    letter-spacing: -0.005em;
+}
+
+.platform-info p {
+    color: #b0b0b0;
+    font-size: 0.9rem;
+    margin: 0.25rem 0 0 0;
+}
+
+@media (max-width: 768px) {
+    .contact-container {
+        padding: 2rem;
+        margin: 0 1rem;
+    }
+    
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+    
+    .social-grid {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .social-platform {
+        width: 100%;
+        max-width: 280px;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+    
+    .footer-info,
+    .footer-contact,
+    .footer-social {
+        text-align: center;
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    footer {
+        padding: 2rem 1rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .social-links {
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+    
+    .social-link {
+        width: 45px;
+        height: 45px;
+    }
+    
+    .hotel-phone {
+        font-size: 1.3rem;
+    }
 }
 
 /* =========================
@@ -775,10 +1089,106 @@ section h2::after {
    ========================= */
 footer {
     text-align: center;
-    padding: 2rem;
-    background: #000;
-    color: #aaa;
+    padding: 1rem 1rem;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: #e0e0e0;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    position: relative;
+}
+
+footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    opacity: 0.1;
+    z-index: -1;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 3rem;
+    align-items: center;
+}
+
+.footer-info {
+    text-align: left;
+}
+
+.footer-contact {
+    text-align: center;
+}
+
+.footer-social {
+    text-align: right;
+}
+
+.hotel-phone {
+    font-size: 1.5rem;
+    font-weight: 500;
+    color: #fcfbfa;
+    margin-bottom: 0.5rem;
+    letter-spacing: -0.01em;
+}
+
+.hotel-address {
+    color: #b0b0b0;
+    margin-bottom: 2rem;
+    line-height: 2.0;
+}
+
+.social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.social-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 12px;
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.social-link:hover {
+    background: rgba(85, 107, 47, 0.2);
+    border-color: rgba(85, 107, 47, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.2);
+}
+
+.social-link svg {
+    width: 24px;
+    height: 24px;
+    fill: currentColor;
+}
+
+.footer-bottom {
+    margin-top: 3rem;
+    padding-top: 2rem;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+    color: #999;
+    font-size: 0.9rem;
 }
 
 /* =========================
@@ -841,7 +1251,7 @@ footer {
 }
 
 .nav-toggle:hover .bar {
-    background: #00d4b8;
+    background: #fff;
 }
 
 @media (max-width: 1024px) {
@@ -903,10 +1313,10 @@ footer {
     margin: 0 0 24px;
     padding: 16px;
     border-radius: 24px;
-    background: rgba(20, 20, 20, 0.95);
+    background: rgba(40, 50, 20, 0.95);
     backdrop-filter: saturate(180%) blur(30px);
     -webkit-backdrop-filter: saturate(180%) blur(30px);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(85, 107, 47, 0.3);
     transform: translateY(20px);
     opacity: 0;
     transition: transform 250ms ease, opacity 250ms ease;
@@ -953,7 +1363,7 @@ footer {
     content: "›";
     font-size: 1.4rem;
     opacity: 0.6;
-    color: #00d4b8;
+    color: #fff;
 }
 
 .ios-menu .lang-select {
@@ -968,6 +1378,9 @@ footer {
     background: rgba(255, 255, 255, 0.08);
     border: 1px solid rgba(255, 255, 255, 0.1);
     color: #fff;
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 1rem;
 }
 
 .ios-menu-close {
@@ -1078,17 +1491,22 @@ body.services-page .services-section {
 }
 
 body.services-page .service-item {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
-    border: 2px solid rgba(0, 168, 142, 0.2);
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 body.services-page .service-item:hover {
-    border-color: rgba(0, 168, 142, 0.4);
+    border-color: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.15);
 }
 
 body.services-page footer {
-    background: #1a1a1a;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     color: #aaa;
 }
 
@@ -1118,7 +1536,10 @@ body.gallery-page h2 {
 }
 
 body.gallery-page footer {
-    background: #000;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 /* Página de Experiencias - Estilo único */
@@ -1142,8 +1563,10 @@ body.experiences-page .experience-item:hover {
 }
 
 body.experiences-page footer {
-    background: #1a1a1a;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
     color: #aaa;
 }
 
@@ -1171,27 +1594,27 @@ body.index-page section:nth-child(2) {
 }
 
 body.index-page section:nth-child(3) {
-    background: #1a1a1a;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 1), rgba(32, 32, 32, 1));
 }
 
 body.index-page section:nth-child(4) {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(to bottom, rgba(32, 32, 32, 1), rgba(26, 26, 26, 1));
 }
 
 body.index-page section:nth-child(5) {
-    background: #1a1a1a;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 1), rgba(32, 32, 32, 1));
 }
 
 body.index-page section:nth-child(6) {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(to bottom, rgba(32, 32, 32, 1), rgba(26, 26, 26, 1));
 }
 
 body.index-page section:nth-child(7) {
-    background: #1a1a1a;
+    background: linear-gradient(to bottom, rgba(26, 26, 26, 1), rgba(32, 32, 32, 1));
 }
 
 body.index-page section:nth-child(8) {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: linear-gradient(to bottom, rgba(32, 32, 32, 1), rgba(26, 26, 26, 1));
 }
 
 /* Smooth scrolling */
@@ -1199,14 +1622,576 @@ html {
     scroll-behavior: smooth;
 }
 
-/* Mejoras de accesibilidad */
-@media (prefers-reduced-motion: reduce) {
+/* =========================
+   EXPERIENCIAS HORIZONTALES NUEVAS
+   ========================= */
+.horizontal-experiences {
+    padding: 4rem 0;
+    background: #1a1a1a;
+    overflow: hidden;
+    position: relative;
+}
 
+.horizontal-experiences h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    color: #e0e0e0;
+}
+
+.experiences-scroll {
+    display: flex;
+    gap: 2rem;
+    animation: scrollLeft 30s linear infinite;
+    padding: 0 2rem;
+}
+
+.experience-card {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 16px;
+    padding: 2rem;
+    min-width: 350px;
+    flex-shrink: 0;
+    color: #e0e0e0;
+    transition: all 0.3s ease;
+}
+
+.experience-card:hover {
+    transform: translateY(-5px);
+    background: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 10px 30px rgba(85, 107, 47, 0.2);
+}
+
+.experience-card h3 {
+    color: #fff;
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+}
+
+.experience-card p {
+    color: #b0b0b0;
+    line-height: 1.6;
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+@keyframes scrollLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(-50%);
+    }
+}
+
+@media (max-width: 768px) {
+    .experiences-scroll {
+        animation-duration: 20s;
+    }
+    
+    .experience-card {
+        min-width: 280px;
+        padding: 1.5rem;
+    }
+}
+
+/* =========================
+   IMAGE VIEWER - GALERÍA
+   ========================= */
+.image-viewer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.image-viewer.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.image-viewer img {
+    max-width: 90%;
+    max-height: 90%;
+    object-fit: contain;
+    border-radius: 12px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+    animation: zoomInViewer 0.3s ease;
+}
+
+@keyframes zoomInViewer {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.close-btn,
+.nav-btn {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    font-size: 1.5rem;
+    padding: 1rem;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.close-btn {
+    top: 2rem;
+    right: 2rem;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.nav-btn {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+}
+
+.prev-btn {
+    left: 2rem;
+}
+
+.next-btn {
+    right: 2rem;
+}
+
+.close-btn:hover,
+.nav-btn:hover {
+    background: rgba(85, 107, 47, 0.3);
+    border-color: rgba(85, 107, 47, 0.5);
+    transform: scale(1.1);
+}
+
+.close-btn:active,
+.nav-btn:active {
+    transform: scale(0.95);
+}
+
+/* =========================
+   PÁGINAS ESPECÍFICAS ADICIONALES
+   ========================= */
+
+/* Página de Contacto - Estilo único */
+body.contact-page {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+body.contact-page .contact-section {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6rem 2rem;
+}
+
+body.contact-page .contact-container {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border-radius: 24px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+body.contact-page footer {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Página de Recomendaciones - Estilo único */
+body.recommendations-page {
+    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+}
+
+body.recommendations-page .recommendations-section {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6rem 2rem;
+}
+
+body.recommendations-page .recommendation-item {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+}
+
+body.recommendations-page .recommendation-item:hover {
+    background: rgba(255, 255, 255, 0.12);
+    border-color: rgba(85, 107, 47, 0.3);
+    box-shadow: 0 12px 40px rgba(85, 107, 47, 0.2);
+}
+
+body.recommendations-page footer {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Página de Reservas - Estilo único */
+body.reservations-page {
+    background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
+}
+
+body.reservations-page .reservations-section {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    padding: 6rem 2rem;
+}
+
+body.reservations-page #reservation-form {
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+}
+
+body.reservations-page footer {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* =========================
+   ESTILOS DE BOTONES UNIFICADOS
+   ========================= */
+.btn-primary,
+.btn-secondary,
+button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button),
+input[type="submit"],
+input[type="button"] {
+    padding: 0.875rem 2rem;
+    background: linear-gradient(135deg, #556B2F, #708238);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 1rem;
+    letter-spacing: -0.005em;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(85, 107, 47, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary:hover,
+button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button):hover,
+input[type="submit"]:hover,
+input[type="button"]:hover {
+    background: linear-gradient(135deg, #6b813f, #7d9248);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(85, 107, 47, 0.4);
+}
+
+.btn-primary:active,
+button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button):active,
+input[type="submit"]:active,
+input[type="button"]:active {
+    transform: translateY(0);
+    box-shadow: 0 4px 15px rgba(85, 107, 47, 0.3);
+}
+
+.btn-secondary {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(85, 107, 47, 0.5);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* =========================
+   TRANSICIONES ESTABLES Y SOMBRAS MODERNAS
+   ========================= */
+
+/* Sombras modernas simplificadas para elementos */
+.modern-shadow-small {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.modern-shadow-medium {
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.modern-shadow-large {
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.modern-shadow-hover {
+    transition: all 0.3s ease;
+}
+
+.modern-shadow-hover:hover {
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Transiciones suaves entre páginas */
+section {
+    transition: background 0.5s ease;
+}
+
+.service-item,
+.experience-item,
+.recommendation-item,
+.contact-card {
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Transiciones suaves entre páginas */
+body {
+    transition: background 0.5s ease;
+}
+
+/* Efectos glassmorphism mejorados */
+.glassmorphism-modern {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 
+        0 8px 32px rgba(31, 38, 135, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.3);
+}
+
+/* Efectos mejorados para enlaces sin interferir con navbar */
+.nav-links a {
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    transform: translateY(-1px);
+}
+
+/* Efectos de sombra simplificados */
+.dynamic-shadow {
+    position: relative;
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUpDelayed {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in-up {
+    animation: fadeInUpDelayed 0.6s ease forwards;
+}
+
+/* =========================
+   OPTIMIZACIONES PARA MÓVIL
+   ========================= */
+
+/* Ajustes para transiciones en móvil */
+@media (max-width: 768px) {
+    .modern-shadow-hover:hover {
+        transform: translateY(-1px);
+    }
+    
+    .modern-shadow-large {
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+}
+
+/* Ajustes específicos para pantallas muy pequeñas */
+@media (max-width: 480px) {
+    .modern-shadow-small,
+    .modern-shadow-medium,
+    .modern-shadow-large {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* =========================
+   MEJORAS RESPONSIVE GENERALES
+   ========================= */
+@media (max-width: 1024px) {
+    .home-section .hero {
+        padding: 6rem 1.5rem;
+    }
+    
+    .contact-container,
+    #reservation-form {
+        margin: 0 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Navegación móvil mejorada */
+    .nav-links {
+        display: none;
+    }
+    
+    /* Secciones con mejor espaciado */
+    section {
+        padding: 4rem 0;
+    }
+    
+    /* Grid responsive unificado */
+    .services-list,
+    .gallery-grid,
+    .experience-list,
+    .recommendation-list {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+        gap: 1.5rem;
+    }
+    
+    /* Image viewer en móvil */
+    .close-btn,
+    .nav-btn {
+        width: 45px;
+        height: 45px;
+        font-size: 1.2rem;
+    }
+    
+    .close-btn {
+        top: 1rem;
+        right: 1rem;
+    }
+    
+    .nav-btn {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .prev-btn {
+        left: 1rem;
+    }
+    
+    .next-btn {
+        right: 1rem;
+    }
+    
+    /* Contenedores responsive */
+    .contact-container,
+    #reservation-form {
+        margin: 0 1rem;
+        padding: 2rem;
+    }
+    
+    /* Botones más grandes en móvil */
+    .btn-primary,
+    .btn-secondary,
+    button:not(.nav-toggle):not(.ios-menu-close) {
+        padding: 1rem 1.5rem;
+        font-size: 1.1rem;
+    }
+    
+    /* Optimizar elementos con transición en móvil */
+    .service-item,
+    .experience-item,
+    .recommendation-item,
+    .contact-card {
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+}
+
+@media (max-width: 480px) {
+    /* Espaciado más compacto */
+    section {
+        padding: 3rem 0;
+    }
+    
+    .contact-container,
+    #reservation-form {
+        padding: 1.5rem;
+        margin: 0 0.5rem;
+    }
+    
+    /* Image viewer en pantallas muy pequeñas */
+    .image-viewer img {
+        max-width: 95%;
+        max-height: 85%;
+    }
+    
+    /* Elementos más compactos */
+    .service-item,
+    .experience-item,
+    .recommendation-item,
+    .contact-card {
+        padding: 1.5rem;
+    }
+    
+    /* Footer responsive */
+    footer {
+        padding: 2rem 1rem;
+    }
+    
+    .footer-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+    }
+}
+
+/* =========================
+   MEJORAS DE ACCESIBILIDAD Y PERFORMANCE
+   ========================= */
+@media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
         animation-duration: 0.01ms !important;
         animation-iteration-count: 1 !important;
         transition-duration: 0.01ms !important;
+    }
+    
+    .image-viewer,
+    .lightbox {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
 }
