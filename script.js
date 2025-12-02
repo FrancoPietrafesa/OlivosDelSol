@@ -272,26 +272,25 @@ function nextStep() {
         reservationData.roomType = roomType;
     }
     if (currentStep === 3) {
-        // summary step collects nothing
+        // On summary step show details
+        const summaryDiv = document.getElementById('summary-details');
+        if (summaryDiv) {
+            const lang = translations[currentLanguage];
+            let roomLabel = '';
+            if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
+            if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
+            if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
+            summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
+                                   `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
+                                   `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
+                                   `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
+                                   `<p>Tipo de habitación: ${roomLabel}</p>`;
+        }
     }
     if (currentStep === 4) {
         reservationData.guestName = document.getElementById('guestName').value;
         reservationData.guestEmail = document.getElementById('guestEmail').value;
         reservationData.guestPhone = document.getElementById('guestPhone').value;
-    }
-    if (currentStep === 3) {
-        // On summary step show details
-        const summaryDiv = document.getElementById('summary-details');
-        const lang = translations[currentLanguage];
-        let roomLabel = '';
-        if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
-        if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
-        if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
-        summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
-                               `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
-                               `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
-                               `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
-                               `<p>Tipo de habitación: ${roomLabel}</p>`;
     }
     if (currentStep === 5) {
         // Get selected payment method
