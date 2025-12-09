@@ -444,7 +444,7 @@ section h2::after {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: 8000;
     backdrop-filter: blur(10px);
     animation: fadeIn 0.3s ease;
 }
@@ -1278,7 +1278,7 @@ footer::before {
         margin-left: 1rem;
         flex-direction: column;
         gap: 4px;
-        z-index: 10002;
+        z-index: 1000;
         position: relative;
     }
 
@@ -1338,7 +1338,7 @@ footer::before {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    z-index: 10000;
+    z-index: 8000;
     animation: fadeIn 0.2s ease;
     display: flex;
     align-items: center;
@@ -1350,7 +1350,7 @@ footer::before {
     inset: 0;
     display: grid;
     place-items: center;
-    z-index: 10001;
+    z-index: 8000;
     pointer-events: none;
     padding: 20px;
 }
@@ -1808,7 +1808,7 @@ html {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10000;
+    z-index: 8000;
     opacity: 0;
     visibility: hidden;
     transition: all 0.3s ease;
