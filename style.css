@@ -17,6 +17,15 @@ body {
     letter-spacing: 0.01em;
 }
 
+/* Variables globales para ajustes rápidos de espacios y separación del toggle */
+:root {
+    --nav-toggle-gap: 0.5rem; /* valor por defecto (puede ajustarse) */
+    --nav-toggle-gap-small: 0.25rem;
+    --nav-toggle-gap-medium: 0.5rem;
+    --nav-toggle-gap-large: 1rem;
+    --ios-menu-max-width: 520px;
+}
+
 /*
  * Navbar moderno con efecto glassmorphism
  */
@@ -27,13 +36,17 @@ body {
     background: rgba(85, 107, 47, 0.15);
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
-    padding: 1rem 2rem;
+    /* base padding + safe-area insets for notch devices */
+    padding-left: calc(1rem + env(safe-area-inset-left));
+    padding-right: calc(1rem + env(safe-area-inset-right));
+    padding-top: calc(1rem + env(safe-area-inset-top));
+    padding-bottom: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 100;
     transition: background-color 0.3s ease;
     border-bottom: 1px solid rgba(85, 107, 47, 0.3);
     /* Allow children (menu sheet) to overflow the navbar area */
@@ -47,10 +60,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-    opacity: 0.1;
+    /* eliminar imagen duplicada: dejar sólo un overlay sutil en la navbar */
+    background: linear-gradient(rgba(0,0,0,0.12), rgba(0,0,0,0.12));
     z-index: -1;
 }
 
@@ -62,6 +73,15 @@ body {
     display: flex;
     align-items: center;
     gap: 0.75rem;
+    flex: 0 0 auto;
+}
+
+/* Group left side (logo + toggle) to keep them together */
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex: 0 0 auto;
 }
 
 .logo img {
@@ -88,7 +108,15 @@ body {
     gap: 1.5rem;
     margin: 0;
     padding: 0;
+    /* push links to the right so logo + toggle stay together on the left */
+    margin-left: auto;
 }
+
+/* Use explicit ordering so layout is robust across breakpoints */
+.nav-left { order: 0; }
+.nav-links { order: 1; }
+.lang-select { order: 2; }
+.nav-toggle { order: 3; }
 
 .nav-links a {
     text-decoration: none;
@@ -1240,12 +1268,15 @@ footer::before {
     background: transparent;
     border: 0;
     cursor: pointer;
-    padding: 0.5rem;
+    /* make touch area larger */
+    padding: 0.75rem 0.6rem;
     margin-left: 0.5rem;
+    /* respect safe area on the right and use adjustable gap variable */
+    margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right));
     flex-direction: column;
     gap: 5px;
     position: relative;
-    z-index: 1001;
+    z-index: 101;
 }
 
 .nav-toggle .bar {
@@ -1320,11 +1351,12 @@ footer::before {
         background: transparent;
         border: none;
         cursor: pointer;
-        padding: 8px;
-        margin-left: 1rem;
+        padding: 8px 6px;
+        margin-left: 0; /* ensure it's next to the logo */
+        margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right));
         flex-direction: column;
         gap: 4px;
-        z-index: 1001;
+        z-index: 101;
         position: relative;
     }
 
@@ -1360,6 +1392,8 @@ footer::before {
         display: flex !important;
         visibility: visible !important;
         opacity: 1 !important;
+        margin-left: 0;
+        margin-right: 0.75rem;
     }
 }
 
@@ -1369,6 +1403,8 @@ footer::before {
         visibility: visible !important;
         opacity: 1 !important;
         padding: 6px;
+        margin-left: 0;
+        margin-right: 0.6rem;
     }
     
     .nav-toggle .bar {
@@ -1386,8 +1422,8 @@ footer::before {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    /* elevado para estar por encima de otros overlays (lightbox 8000) */
-    z-index: 10020;
+    /* elevado para estar por encima de otros overlays (lightbox 800) */
+    z-index: 900;
     animation: fadeIn 0.2s ease;
     display: flex;
     align-items: center;
@@ -1400,7 +1436,7 @@ footer::before {
     display: grid;
     place-items: center;
     /* mantener aún por encima de backdrop */
-    z-index: 10021;
+    z-index: 901;
     pointer-events: none;
     padding: 20px;
 }
@@ -1410,20 +1446,66 @@ footer::before {
 }
 
 .ios-menu-sheet {
-    width: min(500px, 95vw);
+    width: min(var(--ios-menu-max-width), 95vw);
     max-height: 90vh;
     overflow-y: auto;
+@media (max-width: 430px) {
+    .ios-menu-sheet {
+        width: min(var(--ios-menu-max-width), 92vw);
+        transform: translateY(12px) scale(0.99);
+        border-radius: 18px;
+        padding: 18px;
+        max-height: 92vh;
+    }
+}
+
+@media (max-width: 412px) {
+    .ios-menu-sheet {
+        width: 94vw;
+        transform: translateY(10px) scale(0.99);
+        padding: 16px;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 390px) {
+    .ios-menu-sheet {
+        width: 96vw;
+        transform: translateY(8px) scale(0.995);
+        padding: 14px;
+        border-radius: 14px;
+    }
+}
+
+@media (max-width: 375px) {
+    .ios-menu-sheet {
+        width: 98vw;
+        transform: translateY(6px) scale(1);
+        padding: 12px;
+        border-radius: 12px;
+        max-height: 94vh;
+    }
+}
+    /* estructura vertical y centrada */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
     padding: 20px;
+    /* respetar safe area inferior (home indicator) */
+    padding-bottom: calc(20px + env(safe-area-inset-bottom));
     border-radius: 20px;
     background: rgba(40, 50, 20, 0.98);
     backdrop-filter: saturate(200%) blur(20px);
     -webkit-backdrop-filter: saturate(200%) blur(20px);
     border: 2px solid rgba(85, 107, 47, 0.4);
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-    transform: translateY(30px) scale(0.95);
+    transform: translateY(18px) scale(0.985);
     opacity: 0;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: transform 0.32s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.28s ease;
     pointer-events: all;
+    /* centrado más consistente en iOS: ligeramente elevado visualmente */
+    align-items: stretch;
+    justify-content: center;
 }
 
 .ios-menu[data-open="true"] .ios-menu-sheet {
@@ -1442,6 +1524,27 @@ footer::before {
 .ios-menu .nav-links li {
     list-style: none;
 }
+
+/* Animación staggered para items del menú */
+.ios-menu .nav-links li {
+    opacity: 0;
+    transform: translateY(6px);
+    transition: opacity 0.32s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.32s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.ios-menu[data-open="true"] .nav-links li {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* delays por item para efecto stagger */
+.ios-menu[data-open="true"] .nav-links li:nth-child(1) { transition-delay: 0s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(2) { transition-delay: 0.04s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(3) { transition-delay: 0.08s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(4) { transition-delay: 0.12s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(5) { transition-delay: 0.16s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(6) { transition-delay: 0.20s; }
+.ios-menu[data-open="true"] .nav-links li:nth-child(7) { transition-delay: 0.24s; }
 
 .ios-menu .nav-links a {
     display: flex;
@@ -1718,10 +1821,8 @@ body.experiences-page footer {
 
 /* Página Index - Estilo único */
 body.index-page section:nth-child(2) {
-    background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%), url('images/san-juan-argentina(1).jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    /* eliminar referencia duplicada a imagen; conservar gradiente */
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%);
     position: relative;
 }
 
@@ -2327,6 +2428,49 @@ body {
 /* =========================
    MEJORAS DE ACCESIBILIDAD Y PERFORMANCE
    ========================= */
+@media (max-width: 430px) {
+    /* iPhone 14/13 Pro Max widths adjustments */
+    .nav-toggle { margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right)); padding: 8px 6px; }
+}
+
+@media (max-width: 412px) {
+    /* iPhone 12/13/14 widths */
+    .nav-toggle { margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right)); padding: 8px 6px; }
+}
+
+@media (max-width: 390px) {
+    /* Small iPhones like 12 mini / older small widths */
+    .nav-toggle { margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right)); padding: 7px 6px; }
+}
+
+@media (max-width: 375px) {
+    /* iPhone SE / narrow devices */
+    .nav-toggle { margin-right: calc(var(--nav-toggle-gap) + env(safe-area-inset-right)); padding: 6px 5px; }
+}
+
+/* Ajuste dinámico de la separación del toggle por breakpoint
+   Valores propuestos:
+   - <=430px : large (1rem)
+   - <=412px : medium (0.5rem)
+   - <=390px : medium (0.5rem)
+   - <=375px : small  (0.25rem)
+   Puedes pedir otros valores y los actualizo fácilmente. */
+@media (max-width: 430px) {
+    :root { --nav-toggle-gap: var(--nav-toggle-gap-large); }
+}
+
+@media (max-width: 412px) {
+    :root { --nav-toggle-gap: var(--nav-toggle-gap-medium); }
+}
+
+@media (max-width: 390px) {
+    :root { --nav-toggle-gap: var(--nav-toggle-gap-medium); }
+}
+
+@media (max-width: 375px) {
+    :root { --nav-toggle-gap: var(--nav-toggle-gap-small); }
+}
+
 @media (prefers-reduced-motion: reduce) {
     *,
     *::before,

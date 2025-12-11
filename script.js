@@ -577,6 +577,21 @@ window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
 
+    // Load mobile menu partial dynamically (acts as a template include)
+    const placeholder = document.getElementById('mobile-menu-placeholder');
+    if (placeholder) {
+        fetch('partials/mobile-menu.html')
+            .then(r => r.text())
+            .then(html => {
+                placeholder.outerHTML = html;
+                // Re-bind menu variables after injecting markup
+                initMobileMenu();
+            })
+            .catch(err => console.warn('No se pudo cargar partial mobile menu:', err));
+    } else {
+        initMobileMenu();
+    }
+
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
         img.addEventListener('click', function() {
@@ -673,11 +688,8 @@ window.addEventListener('load', () => {
     setInterval(changeBackground, changeInterval);
 })();
 
-
-// =========================
-// Mobile menu logic
-// =========================
-(function () {
+// Extracted mobile menu init to callable function so we can re-run after injecting partial
+function initMobileMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const sheet = document.getElementById('mobileMenu');
     const backdrop = document.querySelector('.ios-menu-backdrop');
@@ -694,7 +706,6 @@ window.addEventListener('load', () => {
         backdrop.hidden = false;
         sheet.setAttribute('data-open','true');
         navToggle.setAttribute('aria-expanded','true');
-        // focus first item
         const first = sheet.querySelector(focusableSelector);
         if (first) first.focus();
         document.body.style.overflow = 'hidden';
@@ -702,7 +713,6 @@ window.addEventListener('load', () => {
     function closeMenu() {
         sheet.removeAttribute('data-open');
         navToggle.setAttribute('aria-expanded','false');
-        // small delay for transition then hide
         setTimeout(() => {
             sheet.hidden = true;
             backdrop.hidden = true;
@@ -715,7 +725,7 @@ window.addEventListener('load', () => {
         const isOpen = sheet.getAttribute('data-open') === 'true';
         if (isOpen) { closeMenu(); } else { openMenu(); }
     });
-    // Cerrar el menú si se clickea un enlace dentro del sheet (mejora UX en mobile)
+
     sheet.addEventListener('click', (e) => {
         const a = e.target.closest && e.target.closest('a');
         if (a && a.getAttribute('href')) {
@@ -727,7 +737,6 @@ window.addEventListener('load', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && sheet.getAttribute('data-open') === 'true') closeMenu();
         if (e.key === 'Tab' && sheet.getAttribute('data-open') === 'true') {
-            // trap focus
             const focusables = Array.from(sheet.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
             if (focusables.length === 0) return;
             const first = focusables[0];
@@ -736,4 +745,7 @@ window.addEventListener('load', () => {
             else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
     });
-})();
+}
+
+
+// Mobile menu logic consolidated in `initMobileMenu()` above.
