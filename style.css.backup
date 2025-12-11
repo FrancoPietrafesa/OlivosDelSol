@@ -33,11 +33,10 @@ body {
     top: 0;
     left: 0;
     right: 0;
-    z-index: 1000;
+    z-index: 9999;
     transition: background-color 0.3s ease;
     border-bottom: 1px solid rgba(85, 107, 47, 0.3);
-    /* Allow children (menu sheet) to overflow the navbar area */
-    overflow: visible;
+    overflow: hidden;
 }
 
 .navbar::before {
@@ -175,11 +174,6 @@ body {
 /* =========================
    HERO SECTION - Index con fondo dinámico
    ========================= */
-.home-section {
-    position: relative;
-    z-index: 1;
-}
-
 .home-section .hero {
     color: #fff;
     text-align: center;
@@ -189,6 +183,7 @@ body {
     justify-content: center;
     min-height: 90vh;
     position: relative;
+    overflow: hidden;
 }
 
 .home-section .hero::before {
@@ -1209,7 +1204,7 @@ footer::before {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 100;
+    z-index: 9999;
     transition: opacity 0.5s ease;
 }
 
@@ -1233,7 +1228,7 @@ footer::before {
 }
 
 /* =========================
-   RESPONSIVE NAVBAR - HAMBURGER ANIMADO A X
+   RESPONSIVE NAVBAR
    ========================= */
 .nav-toggle {
     display: none;
@@ -1244,8 +1239,6 @@ footer::before {
     margin-left: 0.5rem;
     flex-direction: column;
     gap: 5px;
-    position: relative;
-    z-index: 1001;
 }
 
 .nav-toggle .bar {
@@ -1254,50 +1247,11 @@ footer::before {
     height: 3px;
     background: #fff;
     border-radius: 2px;
-    transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-    transform-origin: center;
-    will-change: transform, opacity;
-}
-
-/* Primera barra (top) */
-.nav-toggle .bar:nth-child(1) {
-    margin-bottom: 4px;
-}
-
-/* Segunda barra (middle) */
-.nav-toggle .bar:nth-child(2) {
-    opacity: 1;
-    width: 28px;
-}
-
-/* Tercera barra (bottom) */
-.nav-toggle .bar:nth-child(3) {
-    margin-top: 4px;
-}
-
-/* Cuando el menú está abierto - Animación a X */
-.nav-toggle[aria-expanded="true"] .bar:nth-child(1) {
-    transform: rotate(45deg) translateY(12px);
-    margin-bottom: 0;
-}
-
-.nav-toggle[aria-expanded="true"] .bar:nth-child(2) {
-    opacity: 0;
-    width: 0;
-}
-
-.nav-toggle[aria-expanded="true"] .bar:nth-child(3) {
-    transform: rotate(-45deg) translateY(-12px);
-    margin-top: 0;
+    transition: all 0.3s ease;
 }
 
 .nav-toggle:hover .bar {
     background: #fff;
-    box-shadow: 0 2px 6px rgba(255, 255, 255, 0.3);
-}
-
-.nav-toggle:active {
-    transform: scale(0.95);
 }
 
 @media (max-width: 1024px) {
@@ -1324,7 +1278,7 @@ footer::before {
         margin-left: 1rem;
         flex-direction: column;
         gap: 4px;
-        z-index: 1001;
+        z-index: 1000;
         position: relative;
     }
 
@@ -1334,10 +1288,8 @@ footer::before {
         height: 3px;
         background: #fff;
         border-radius: 2px;
-        transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: all 0.3s ease;
         box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
-        transform-origin: center;
-        will-change: transform, opacity;
     }
 
     .nav-toggle:hover .bar {
@@ -1386,8 +1338,7 @@ footer::before {
     background: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(6px);
-    /* elevado para estar por encima de otros overlays (lightbox 8000) */
-    z-index: 10020;
+    z-index: 8000;
     animation: fadeIn 0.2s ease;
     display: flex;
     align-items: center;
@@ -1399,8 +1350,7 @@ footer::before {
     inset: 0;
     display: grid;
     place-items: center;
-    /* mantener aún por encima de backdrop */
-    z-index: 10021;
+    z-index: 8000;
     pointer-events: none;
     padding: 20px;
 }
@@ -1909,7 +1859,7 @@ html {
 .close-btn {
     top: 2rem;
     right: 2rem;
-    width: 500px;
+    width: 50px;
     height: 50px;
     display: flex;
     align-items: center;
@@ -2255,12 +2205,11 @@ body {
     
     .prev-btn {
         left: 1rem;
-        
     }
     
     .next-btn {
         right: 1rem;
-        ]
+    }
     
     /* Contenedores responsive */
     .contact-container,

@@ -83,29 +83,7 @@
                 </select>
             </div>
 
-            <div class="ios-menu-backdrop" hidden></div>
-            <div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
-                <div class="ios-menu-sheet" role="menu">
-                    <ul class="nav-links">
-                        <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
-                        <!-- Link out to dedicated pages for services, gallery and experiences -->
-                        <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
-                        <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-                        <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
-                        <!-- Sections that remain on this page link to their anchors -->
-                        <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
-                        <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
-                        <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
-                    </ul>
-                    <div class="lang-select">
-                        <select id="language-select">
-                            <option value="es"><span class="flag-mini">🇦🇷</span>ES</option>
-                            <option value="en"><span class="flag-mini">🇬🇧</span>EN</option>
-                        </select>
-                    </div>
-                    <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
-                </div>
-            </div>
+            <!-- mobile menu markup moved to end of body for proper stacking context -->
         </nav>
     </header>
 
@@ -172,6 +150,29 @@
             <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- iOS-style mobile menu moved outside the nav to avoid stacking/context issues -->
+    <div class="ios-menu-backdrop" hidden></div>
+    <div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
+        <div class="ios-menu-sheet" role="menu">
+            <ul class="nav-links">
+                <li><a href="#home" data-i18n="nav.home">Inicio</a></li>
+                <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+                <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+                <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+            <div class="lang-select">
+                <select id="mobile-language-select">
+                    <option value="es">🇦🇷 ES</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
+            </div>
+            <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
+        </div>
+    </div>
 </body>
 
 </html>
