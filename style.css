@@ -108,8 +108,7 @@ body {
     gap: 1.5rem;
     margin: 0;
     padding: 0;
-    /* push links to the right so logo + toggle stay together on the left */
-    margin-left: auto;
+    /* centered on large screens; on small screens links are hidden and menu used */
 }
 
 /* Use explicit ordering so layout is robust across breakpoints */
@@ -1383,6 +1382,29 @@ footer::before {
 
     .logo span {
         font-size: 1rem;
+    }
+}
+
+/* Centrar nav-links en pantallas grandes (restaura comportamiento previo) */
+@media (min-width: 861px) {
+    .nav-links {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        gap: 1.5rem;
+        margin: 0;
+    }
+
+    /* Asegurar que logo quede a la izquierda y controles a la derecha */
+    .nav-left {
+        position: relative;
+        z-index: 102;
+    }
+    .lang-select {
+        position: relative;
+        z-index: 102;
     }
 }
 
