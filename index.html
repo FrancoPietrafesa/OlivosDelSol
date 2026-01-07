@@ -45,6 +45,20 @@
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="config/mercadopago-config.js"></script>
     <script defer src="script.js"></script>
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registrado exitosamente:', registration.scope);
+                    })
+                    .catch((registrationError) => {
+                        console.log('Error al registrar SW:', registrationError);
+                    });
+            });
+        }
+    </script>
 </head>
 
 <body class="index-page">
@@ -58,7 +72,7 @@
             <!-- Left group: logo + toggle (wrapped for layout control) -->
             <div class="nav-left">
                 <div class="logo">
-                    <img src="images/logo.png" alt="Logo Olivos del Sol">
+                    <img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
                     <span data-i18n="header.logo">Hotel Olivos del Sol</span>
                 </div>
             </div>
@@ -155,6 +169,15 @@
 
     <!-- Mobile menu partial will be loaded dynamically -->
     <div id="mobile-menu-placeholder"></div>
+
+    <!-- Botón WhatsApp fijo para reservas directas -->
+    <a href="https://wa.me/542644444000?text=Hola%20Hotel%20Olivos%20del%20Sol%2C%20quiero%20consultar%20y%20hacer%20una%20reserva" 
+       class="whatsapp-fijo" target="_blank" rel="noopener" aria-label="Reservar por WhatsApp">
+        <svg viewBox="0 0 32 32" width="32" height="32" fill="currentColor" aria-hidden="true">
+            <circle cx="16" cy="16" r="16" fill="#25D366"/>
+            <path d="M24.6 19.5l-2.06-.59a1.07 1.07 0 0 0-1.03.27l-1.04 1.07a8.09 8.09 0 0 1-3.78-3.77l1.07-1.05a1.07 1.07 0 0 0 .26-1.03l-.59-2.07c-.18-.64-.81-1.06-1.47-.91l-1.28.28a1.09 1.09 0 0 0-.85 1.05 10.28 10.28 0 0 0 10.29 10.3c.58 0 1.05-.56 1.04-1.14a13.7 13.7 0 0 0-.3-1.43c-.16-.55-.57-.97-1.12-1.08z" fill="#fff"/>
+        </svg>
+    </a>
 </body>
 
 </html>

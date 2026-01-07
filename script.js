@@ -175,6 +175,9 @@ function showStep(step) {
         div.style.display = (index + 1 === step) ? 'block' : 'none';
     });
     
+    // Actualizar progress indicator
+    updateStepIndicator(step);
+    
     // Inicializar resaltado de opciones de pago cuando se muestra el paso 5
     if (step === 5) {
         const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
@@ -185,6 +188,19 @@ function showStep(step) {
             selectedPayment.closest('.payment-option').classList.add('selected');
         }
     }
+}
+
+function updateStepIndicator(currentStep) {
+    document.querySelectorAll('.step').forEach((stepElement, index) => {
+        const stepNumber = index + 1;
+        stepElement.classList.remove('active', 'completed');
+        
+        if (stepNumber === currentStep) {
+            stepElement.classList.add('active');
+        } else if (stepNumber < currentStep) {
+            stepElement.classList.add('completed');
+        }
+    });
 }
 
 function validateField(input, regex) {

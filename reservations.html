@@ -24,7 +24,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
                 <span data-i18n="header.logo">Hotel Olivos del Sol</span>
             </div>
             <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
@@ -76,6 +76,34 @@
 
     <section id="reservations" class="reservations-section">
         <h2 data-i18n="reservations.title">Reservas</h2>
+        
+        <!-- Step Progress Indicator -->
+        <div class="step-indicator">
+            <div class="step" data-step="1">
+                <span class="step-number">1</span>
+                <span class="step-label">Fechas</span>
+            </div>
+            <div class="step" data-step="2">
+                <span class="step-number">2</span>
+                <span class="step-label">Habitación</span>
+            </div>
+            <div class="step" data-step="3">
+                <span class="step-number">3</span>
+                <span class="step-label">Resumen</span>
+            </div>
+            <div class="step" data-step="4">
+                <span class="step-number">4</span>
+                <span class="step-label">Datos</span>
+            </div>
+            <div class="step" data-step="5">
+                <span class="step-number">5</span>
+                <span class="step-label">Pago</span>
+            </div>
+            <div class="step" data-step="6">
+                <span class="step-number">6</span>
+                <span class="step-label">Confirmación</span>
+            </div>
+        </div>
         <div id="reservation-form">
             <!-- Step 1: Búsqueda inicial -->
             <div class="reservation-step" id="step1">
