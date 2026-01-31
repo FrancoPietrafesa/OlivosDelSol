@@ -1,0 +1,389 @@
+<!doctype html>
+<html lang="es">
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Excursiones en San Juan — Experiencias guiadas</title>
+	<meta name="description" content="Excursiones en San Juan: trekking, 4x4 y bautismo aéreo. Turismo aventura y experiencias guiadas con almuerzo incluido.">
+	<meta name="keywords" content="excursiones en San Juan, turismo aventura, experiencias guiadas, trekking San Juan, 4x4 San Juan, bautismo aéreo">
+	<link rel="stylesheet" href="style.css">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
+	<script defer src="script.js"></script>
+	<style>
+		/* Video de fondo con efecto fume */
+		.tours-section {
+			position: relative;
+			overflow: hidden;
+		}
+		
+		.video-background {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 0;
+			pointer-events: none;
+		}
+		
+		.video-background iframe {
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			width: 100vw;
+			height: 56.25vw;
+			min-height: 100%;
+			min-width: 177.77vh;
+			transform: translate(-50%, -50%);
+			object-fit: cover;
+		}
+		
+		.video-overlay {
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: linear-gradient(
+				to bottom,
+				rgba(26, 26, 26, 0.85) 0%,
+				rgba(26, 26, 26, 0.7) 30%,
+				rgba(26, 26, 26, 0.6) 50%,
+				rgba(26, 26, 26, 0.7) 70%,
+				rgba(26, 26, 26, 0.9) 100%
+			);
+			z-index: 1;
+		}
+		
+		.tours-section .container {
+			position: relative;
+			z-index: 2;
+		}
+		
+		/* Títulos de cards más visibles */
+		.tour-content h3 {
+			color: #F0A34B !important;
+			font-size: 1.25rem;
+			font-weight: 700;
+			text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+		}
+		
+		/* Descripciones en color blanco para mejor legibilidad */
+		.tour-desc {
+			color: #ffffff !important;
+		}
+		
+		/* Texto lead en blanco */
+		.tours-section .lead {
+			color: #ffffff !important;
+		}
+		
+		/* Precio también en blanco */
+		.tour-price {
+			color: #ffffff !important;
+		}
+		
+		/* Botón de cerrar popup más visible con cruz */
+		.modal-close {
+			background: rgba(255,255,255,0.15);
+			border: 2px solid rgba(255,255,255,0.3);
+			border-radius: 50%;
+			width: 48px;
+			height: 48px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			cursor: pointer;
+			transition: all 0.3s ease;
+		}
+		
+		.modal-close:hover {
+			background: rgba(255,255,255,0.25);
+			border-color: rgba(255,255,255,0.5);
+			transform: scale(1.1);
+		}
+		
+		.modal-close svg {
+			stroke: #ffffff !important;
+			stroke-width: 2.5;
+		}
+		
+		/* Mejoras en las imágenes de las cards */
+		.tour-card .img-container {
+			width: 100%;
+			height: 200px;
+			overflow: hidden;
+			position: relative;
+			border-radius: 24px 24px 0 0;
+		}
+		
+		.tour-card .img-container img {
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+			object-position: center;
+			transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+		}
+		
+		/* Responsive */
+		@media (max-width: 768px) {
+			.video-background iframe {
+				width: 150vw;
+				height: 84.375vw;
+			}
+			
+			.tour-card .img-container {
+				height: 180px;
+			}
+		}
+	</style>
+</head>
+<body class="guides-page">
+	<!-- Preloader overlay -->
+	<div id="preloader">
+		<div class="spinner"></div>
+	</div>
+	<header>
+		<nav class="navbar">
+			<div class="logo">
+				<img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
+				<span data-i18n="header.logo">Hotel Olivos del Sol</span>
+			</div>
+			<button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+				<span class="bar"></span>
+				<span class="bar"></span>
+				<span class="bar"></span>
+			</button>
+			<ul class="nav-links">
+				<li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+				<li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+				<li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+				<li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+				<li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+				<li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+				<li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+				<li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
+			</ul>
+			<div class="lang-select">
+				<select id="language-select">
+					<option value="es"><span class="flag-mini">🇦🇷</span>ES</option>
+					<option value="en"><span class="flag-mini">🇬🇧</span>EN</option>
+				</select>
+			</div>
+
+			<div class="ios-menu-backdrop" hidden></div>
+			<div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
+				<div class="ios-menu-sheet" role="menu">
+					<ul class="nav-links">
+						<li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+						<li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+						<li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+						<li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+						<li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+						<li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
+						<li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+						<li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+					</ul>
+					<div class="lang-select">
+						<select id="language-select">
+							<option value="es">🇦🇷 ES</option>
+							<option value="en">🇬🇧 EN</option>
+						</select>
+					</div>
+					<button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
+				</div>
+			</div>
+		</nav>
+	</header>
+
+	<main>
+		<section id="excursiones" class="tours-section">
+			<!-- Video de fondo con efecto fume -->
+			<div class="video-background">
+				<iframe 
+					src="https://www.youtube.com/embed/UhXwtmuuiQs?autoplay=1&mute=1&loop=1&playlist=UhXwtmuuiQs&controls=0&showinfo=0&rel=0&modestbranding=1&playsinline=1"
+					title="Video de fondo - Excursiones"
+					frameborder="0"
+					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+					allowfullscreen>
+				</iframe>
+				<div class="video-overlay"></div>
+			</div>
+			<div class="container">
+				<h2>Excursiones guiadas en San Juan</h2>
+				<p class="lead">Explora nuestras actividades: opciones visuales, claras y pensadas para vivir San Juan.</p>
+
+				<div class="tour-cards" role="list">
+					<article class="tour-card" role="listitem">
+						<div class="img-container">
+							<img src="images/actividades/la-escondida.jpeg" alt="Trekking a la Escondida" onerror="this.src='https://via.placeholder.com/800x500?text=Trekking+Escondida'">
+						</div>
+						<div class="tour-content">
+							<h3>Trekking a la Escondida</h3>
+							<p class="tour-desc">Caminata guiada por senderos naturales con vistas panorámicas. Nivel: moderado. Duración aprox. 6 h.</p>
+							<p class="tour-price">USD 45 por persona</p>
+							<button class="btn btn-ghost btn-more" data-title="Trekking a la Escondida" data-img="images/actividades/la-escondida.jpeg" data-desc="Caminata guiada por senderos naturales hasta la Playa Escondida, con almuerzo tradicional incluido. Nivel: moderado. Duración aprox. 6 h." data-price="AR$ 18.000 por persona">Ver más</button>
+						</div>
+					</article>
+
+					<article class="tour-card" role="listitem">
+						<div class="img-container">
+							<img src="images/actividades/4x4 offroad.jpeg" alt="Travesía 4x4" onerror="this.src='https://via.placeholder.com/800x500?text=Travesia+4x4'">
+						</div>
+						<div class="tour-content">
+							<h3>Travesía 4x4</h3>
+							<p class="tour-desc">Ruta off-road con paradas en miradores y almuerzo campestre. Ideal para amantes de la aventura.</p>
+							<p class="tour-price">USD 60 por persona</p>
+							<button class="btn btn-ghost btn-more" data-title="Travesía 4x4" data-img="images/actividades/4x4 offroad.jpeg" data-desc="Aventura en vehículos 4x4 por rutas off-road, con paradas en miradores y almuerzo campestre. Duración aprox. 5 h." data-price="AR$ 20.000 por persona">Ver más</button>
+						</div>
+					</article>
+
+					<article class="tour-card" role="listitem">
+						<div class="img-container">
+							<img src="images/actividades/san juan desde el aire.PNG" alt="Bautismo Aéreo San Juan" onerror="this.src='https://via.placeholder.com/800x500?text=Bautismo+Aereo'">
+						</div>
+						<div class="tour-content">
+							<h3>Bautismo Aéreo</h3>
+							<p class="tour-desc">Vuelo panorámico sobre los paisajes más emblemáticos de San Juan. Duración aproximada: 1 h.</p>
+							<p class="tour-price">USD 70 aprox por persona</p>
+							<button class="btn btn-ghost btn-more" data-title="Bautismo Aéreo" data-img="images/actividades/san juan desde el aire.PNG" data-desc="Vuelo panorámico sobre los mejores paisajes de San Juan. Experiencia guiada y segura. Duración aprox. 1 h." data-price="AR$ 28.000 por persona">Ver más</button>
+						</div>
+					</article>
+				</div>
+
+				<div class="cta-wrap">
+					<a id="whatsapp-cta" class="btn btn-primary large" href="#" target="_blank" rel="noopener">Registrate ahora!</a>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	<!-- Modal reutilizable para cada excursión -->
+	<div id="tour-modal" class="modal" aria-hidden="true" role="dialog" aria-labelledby="modal-title" aria-describedby="modal-desc">
+		<div class="modal-backdrop" data-close></div>
+		<div class="modal-panel" role="document">
+			<button class="modal-close" aria-label="Cerrar popup" data-close>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<line x1="18" y1="6" x2="6" y2="18"></line>
+					<line x1="6" y1="6" x2="18" y2="18"></line>
+				</svg>
+			</button>
+			<div class="modal-body">
+				<img id="modal-img" src="" alt="">
+				<div class="modal-info">
+					<h3 id="modal-title"></h3>
+					<p id="modal-desc"></p>
+					<p class="modal-price" id="modal-price"></p>
+					<div class="modal-actions">
+						<a id="modal-whatsapp" class="btn btn-primary" href="#" target="_blank" rel="noopener">
+							<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="vertical-align: middle; margin-right: 8px;">
+								<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
+							</svg>
+							Preguntar por esta excursión
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer>
+		<div class="footer-content">
+			<div class="footer-info">
+				<div class="hotel-address">
+					Ruta 40 Calle 8<br>
+					Pocito - Villa Aberastain<br>
+					San Juan, Argentina
+				</div>
+			</div>
+			<div class="footer-contact">
+				<h4>Contacto Directo</h4>
+				<div class="hotel-phone">+54 264 444-4000</div>
+				<p>Reservas y consultas</p>
+			</div>
+			<div class="footer-social">
+				<div class="social-links">
+					<h4>Síguenos</h4>
+					<a href="https://www.tripadvisor.es/Hotel_Review-g312785-d5006150-Reviews-Apart_Cabanas_Olivos_del_Sol-San_Juan_Province_of_San_Juan_Cuyo.html" 
+					   target="_blank" rel="noopener noreferrer" class="social-link" title="TripAdvisor">
+						<svg viewBox="0 0 24 24">
+							<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+						</svg>
+					</a>
+					<a href="https://www.airbnb.com.ar/rooms/1157214581954301757?viralityEntryPoint=1&unique_share_id=7A6C4082-50EC-4EB7-9459-7F331E4487D2&slcid=329b20582b124625b5b6ebf7917886bf&s=76&feature=share&set_everest_cookie_on_new_domain=1764616711.EAZTllZmIyNWRjMGU0NG.hgG4VC4fsc7dJCT62lTJmysYzTFf9ekBRHmJ426RO7w&adults=1&channel=native&slug=wWfrHKmk&source_impression_id=p3_1764616712_P36QrYA7PQIqskS9" target="_blank" rel="noopener noreferrer" class="social-link" title="Airbnb">
+						<svg viewBox="0 0 24 24">
+							<path d="M15.5 1h-7A2.5 2.5 0 0 0 6 3.5v7A2.5 2.5 0 0 0 8.5 13h7a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 15.5 1zM14 20H10v-1h4v1zm2.25-3H7.75V5h8.5v12z"/>
+						</svg>
+					</a>
+					<a href="https://www.instagram.com/hotel_olivosdelsol?igsh=MWFldjByZjhxMnV4Yg%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+						<svg viewBox="0 0 24 24">
+							<path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+						</svg>
+					</a>
+				</div>
+			</div>
+		</div>
+		<p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
+	</footer>
+
+	<script>
+		// Modal por tarjeta
+		(function(){
+			const phone = '542644444000';
+			const mainCta = document.getElementById('whatsapp-cta');
+			if(mainCta){
+				const text = 'Hola, quiero registrarme en las excursiones. Por favor envíenme información y disponibilidad.';
+				mainCta.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent(text);
+			}
+
+			const modal = document.getElementById('tour-modal');
+			const modalImg = document.getElementById('modal-img');
+			const modalTitle = document.getElementById('modal-title');
+			const modalDesc = document.getElementById('modal-desc');
+			const modalPrice = document.getElementById('modal-price');
+			const modalWhatsapp = document.getElementById('modal-whatsapp');
+
+			function openModal(btn){
+				const title = btn.getAttribute('data-title') || '';
+				const img = btn.getAttribute('data-img') || '';
+				const desc = btn.getAttribute('data-desc') || '';
+				const price = btn.getAttribute('data-price') || '';
+				modalImg.src = img;
+				modalImg.alt = 'Imagen de ' + title;
+				modalImg.onerror = function(){ this.src = 'https://via.placeholder.com/800x500?text=Excursi%C3%B3n'; };
+				modalTitle.textContent = title;
+				modalDesc.textContent = desc;
+				modalPrice.textContent = price;
+				modalWhatsapp.href = 'https://wa.me/' + phone + '?text=' + encodeURIComponent('Hola, quisiera más información sobre: ' + title + '. Gracias.');
+				modal.setAttribute('aria-hidden','false');
+				document.body.style.overflow = 'hidden';
+				modal.classList.add('open');
+			}
+
+			function closeModal(){
+				modal.setAttribute('aria-hidden','true');
+				document.body.style.overflow = '';
+				modal.classList.remove('open');
+			}
+
+			// btn-more opens modal and stops propagation so the card click doesn't fire twice
+			document.querySelectorAll('.btn-more').forEach(b => b.addEventListener('click', (e) => { e.stopPropagation(); openModal(b); }));
+
+			// abrir modal al clickear cualquier parte de la card
+			document.querySelectorAll('.tour-card').forEach(card => {
+				card.addEventListener('click', (e) => {
+					const btn = card.querySelector('.btn-more');
+					if(btn) openModal(btn);
+				});
+			});
+			document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', closeModal));
+			document.addEventListener('keydown', (e)=>{ if(e.key === 'Escape') closeModal(); });
+			modal.addEventListener('click', (e)=>{ if(e.target === modal) closeModal(); });
+		})();
+	</script>
+</body>
+</html>
+

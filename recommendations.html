@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 
@@ -9,7 +10,7 @@
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260128">
     <script defer src="script.js"></script>
 </head>
 
@@ -20,13 +21,15 @@
     </div>
     <header>
         <nav class="navbar">
-            <!-- Logo image and text -->
             <div class="logo">
-                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
                 <span data-i18n="header.logo">Hotel Olivos del Sol</span>
             </div>
-            
-            <!-- Desktop Navigation -->
+            <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
                 <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
@@ -35,25 +38,16 @@
                 <!-- Current page: link to this page's section -->
                 <li><a href="#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
                 <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
                 <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
             </ul>
-            
-            <!-- Right side controls -->
-            <div class="nav-controls">
-                <div class="lang-select">
-                    <select id="language-select">
-                        <option value="es">🇦🇷 ES</option>
-                        <option value="en">🇬🇧 EN</option>
-                    </select>
-                </div>
-                <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                    <span class="bar"></span>
-                </button>
+            <div class="lang-select">
+                <select id="language-select">
+                    <option value="es">🇦🇷 ES</option>
+                    <option value="en">🇬🇧 EN</option>
+                </select>
             </div>
 
-            <!-- Mobile Menu Overlay -->
             <div class="ios-menu-backdrop" hidden></div>
             <div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
                 <div class="ios-menu-sheet" role="menu">
@@ -65,6 +59,7 @@
                         <!-- Current page: link to this page's section -->
                         <li><a href="#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
                         <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                        <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
                         <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                     <div class="lang-select">

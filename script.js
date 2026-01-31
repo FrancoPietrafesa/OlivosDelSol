@@ -30,7 +30,7 @@ window.addEventListener('scroll', () => {
 
 const translations = {
     es: {
-        nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', contact: 'Contacto'},
+        nav: {home: 'Inicio', services: 'Servicios', gallery: 'Galería', experiences: 'Experiencias', recommendations: 'Recomendaciones', reservations: 'Reservas', guides: 'Excursiones', contact: 'Contacto'},
         header: {logo: 'Hotel Olivos del Sol'},
         home: {title: 'Bienvenidos a Hotel Olivos del Sol', subtitle: 'Un oasis de tranquilidad y confort en Pocito, San Juan.', description: 'Nuestro hotel ofrece habitaciones modernas, servicios de primera y una atención excepcional para que su estadía sea inolvidable.'},
         services: {title: 'Servicios', room: 'Habitaciones confortables', roomDesc: 'Amplias y luminosas habitaciones con todas las comodidades.', restaurant: 'Restaurante', restaurantDesc: 'Gastronomía regional e internacional de alta calidad.', pool: 'Piscina', poolDesc: 'Piscina al aire libre para relajarse y disfrutar del sol.', wifi: 'Wi‑Fi gratuito', wifiDesc: 'Acceso a internet de alta velocidad en todo el hotel.', parking: 'Estacionamiento', parkingDesc: 'Estacionamiento seguro para su vehículo.', spa: 'Spa & bienestar', spaDesc: 'Sesiones de masajes y tratamientos relajantes.'},
@@ -42,7 +42,7 @@ const translations = {
     },
     en: {
         reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Send', sending: 'Sending...', sent: 'Sent'},
-        nav: {home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', contact: 'Contact'},
+        nav: {home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', guides: 'Tours', contact: 'Contact'},
         header: {logo: 'Hotel Olivos del Sol'},
         home: {title: 'Welcome to Hotel Olivos del Sol', subtitle: 'An oasis of tranquility and comfort in Pocito, San Juan.', description: 'Our hotel offers modern rooms, first-class services and exceptional attention to make your stay unforgettable.'},
         services: {title: 'Services', room: 'Comfortable Rooms', roomDesc: 'Spacious and bright rooms with every comfort.', restaurant: 'Restaurant', restaurantDesc: 'High-quality regional and international gastronomy.', pool: 'Pool', poolDesc: 'Outdoor pool to relax and enjoy the sun.', wifi: 'Free Wi‑Fi', wifiDesc: 'High-speed internet access throughout the hotel.', parking: 'Parking', parkingDesc: 'Secure parking for your vehicle.', spa: 'Spa & Wellness', spaDesc: 'Massage sessions and relaxing treatments.'},
@@ -175,6 +175,9 @@ function showStep(step) {
         div.style.display = (index + 1 === step) ? 'block' : 'none';
     });
     
+    // Actualizar progress indicator
+    updateStepIndicator(step);
+    
     // Inicializar resaltado de opciones de pago cuando se muestra el paso 5
     if (step === 5) {
         const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
@@ -185,6 +188,19 @@ function showStep(step) {
             selectedPayment.closest('.payment-option').classList.add('selected');
         }
     }
+}
+
+function updateStepIndicator(currentStep) {
+    document.querySelectorAll('.step').forEach((stepElement, index) => {
+        const stepNumber = index + 1;
+        stepElement.classList.remove('active', 'completed');
+        
+        if (stepNumber === currentStep) {
+            stepElement.classList.add('active');
+        } else if (stepNumber < currentStep) {
+            stepElement.classList.add('completed');
+        }
+    });
 }
 
 function validateField(input, regex) {
@@ -272,26 +288,25 @@ function nextStep() {
         reservationData.roomType = roomType;
     }
     if (currentStep === 3) {
-        // summary step collects nothing
+        // On summary step show details
+        const summaryDiv = document.getElementById('summary-details');
+        if (summaryDiv) {
+            const lang = translations[currentLanguage];
+            let roomLabel = '';
+            if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
+            if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
+            if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
+            summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
+                                   `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
+                                   `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
+                                   `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
+                                   `<p>Tipo de habitación: ${roomLabel}</p>`;
+        }
     }
     if (currentStep === 4) {
         reservationData.guestName = document.getElementById('guestName').value;
         reservationData.guestEmail = document.getElementById('guestEmail').value;
         reservationData.guestPhone = document.getElementById('guestPhone').value;
-    }
-    if (currentStep === 3) {
-        // On summary step show details
-        const summaryDiv = document.getElementById('summary-details');
-        const lang = translations[currentLanguage];
-        let roomLabel = '';
-        if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
-        if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
-        if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
-        summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
-                               `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
-                               `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
-                               `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
-                               `<p>Tipo de habitación: ${roomLabel}</p>`;
     }
     if (currentStep === 5) {
         // Get selected payment method
@@ -578,6 +593,21 @@ window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
 
+    // Load mobile menu partial dynamically (acts as a template include)
+    const placeholder = document.getElementById('mobile-menu-placeholder');
+    if (placeholder) {
+        fetch('partials/mobile-menu.html')
+            .then(r => r.text())
+            .then(html => {
+                placeholder.outerHTML = html;
+                // Re-bind menu variables after injecting markup
+                initMobileMenu();
+            })
+            .catch(err => console.warn('No se pudo cargar partial mobile menu:', err));
+    } else {
+        initMobileMenu();
+    }
+
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
         img.addEventListener('click', function() {
@@ -649,6 +679,23 @@ window.addEventListener('load', () => {
     }
 });
 
+// Evitar que el preloader se quede visible indefinidamente en caso de recursos lentos
+// o errores en cargas parciales: ocultamos el preloader poco después de DOMContentLoaded
+document.addEventListener('DOMContentLoaded', () => {
+    const preloader = document.getElementById('preloader');
+    if (preloader && preloader.style.display !== 'none') {
+        // Ocultación segura corta para que no se quede la pantalla bloqueada
+        setTimeout(() => {
+            try {
+                preloader.style.display = 'none';
+                document.body.style.overflow = '';
+            } catch (e) {
+                // no hacer nada si el DOM cambió
+            }
+        }, 350);
+    }
+});
+
 // =========================
 // Carrusel de imágenes dinámico en el hero
 // =========================
@@ -674,11 +721,8 @@ window.addEventListener('load', () => {
     setInterval(changeBackground, changeInterval);
 })();
 
-
-// =========================
-// Mobile menu logic
-// =========================
-(function () {
+// Extracted mobile menu init to callable function so we can re-run after injecting partial
+function initMobileMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const sheet = document.getElementById('mobileMenu');
     const backdrop = document.querySelector('.ios-menu-backdrop');
@@ -695,7 +739,6 @@ window.addEventListener('load', () => {
         backdrop.hidden = false;
         sheet.setAttribute('data-open','true');
         navToggle.setAttribute('aria-expanded','true');
-        // focus first item
         const first = sheet.querySelector(focusableSelector);
         if (first) first.focus();
         document.body.style.overflow = 'hidden';
@@ -703,7 +746,6 @@ window.addEventListener('load', () => {
     function closeMenu() {
         sheet.removeAttribute('data-open');
         navToggle.setAttribute('aria-expanded','false');
-        // small delay for transition then hide
         setTimeout(() => {
             sheet.hidden = true;
             backdrop.hidden = true;
@@ -716,7 +758,7 @@ window.addEventListener('load', () => {
         const isOpen = sheet.getAttribute('data-open') === 'true';
         if (isOpen) { closeMenu(); } else { openMenu(); }
     });
-    // Cerrar el menú si se clickea un enlace dentro del sheet (mejora UX en mobile)
+
     sheet.addEventListener('click', (e) => {
         const a = e.target.closest && e.target.closest('a');
         if (a && a.getAttribute('href')) {
@@ -728,7 +770,6 @@ window.addEventListener('load', () => {
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && sheet.getAttribute('data-open') === 'true') closeMenu();
         if (e.key === 'Tab' && sheet.getAttribute('data-open') === 'true') {
-            // trap focus
             const focusables = Array.from(sheet.querySelectorAll(focusableSelector)).filter(el => !el.hasAttribute('disabled'));
             if (focusables.length === 0) return;
             const first = focusables[0];
@@ -737,4 +778,58 @@ window.addEventListener('load', () => {
             else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
         }
     });
-})();
+}
+
+
+// Mobile menu logic consolidated in `initMobileMenu()` above.
+
+
+// ============================================================
+// PRELOADER DE NAVEGACIÓN - Transición suave entre páginas
+// ============================================================
+
+// Función para mostrar el preloader al navegar
+function showNavigationPreloader() {
+    const preloader = document.getElementById('preloader');
+    if (preloader) {
+        preloader.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+// Configurar eventos de navegación para mostrar preloader
+function initNavigationPreloader() {
+    // Seleccionar todos los enlaces internos del sitio
+    const internalLinks = document.querySelectorAll('a[href^="index.html"], a[href^="services.html"], a[href^="gallery.html"], a[href^="experiences.html"], a[href^="recommendations.html"], a[href^="reservations.html"], a[href^="guides.html"], a[href^="contact.html"]');
+    
+    internalLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            // Ignorar enlaces que son solo anclas (#)
+            if (href && !href.includes('#')) {
+                showNavigationPreloader();
+            }
+        });
+    });
+}
+
+// Inicializar cuando el DOM esté listo
+document.addEventListener('DOMContentLoaded', () => {
+    initNavigationPreloader();
+});
+
+
+// Ocultar preloader después de 1 segundo cuando la página carga
+window.addEventListener('load', () => {
+    setTimeout(() => {
+        const preloader = document.getElementById('preloader');
+        if (preloader) {
+            preloader.style.opacity = '0';
+            preloader.style.transition = 'opacity 0.3s ease';
+            setTimeout(() => {
+                preloader.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+    }, 3000); // 3 segundos de preloader
+});

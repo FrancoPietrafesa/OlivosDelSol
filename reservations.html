@@ -9,7 +9,7 @@
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css?v=20260128">
     <!-- MercadoPago SDK -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="config/mercadopago-config.js"></script>
@@ -24,7 +24,7 @@
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
                 <span data-i18n="header.logo">Hotel Olivos del Sol</span>
             </div>
             <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
@@ -40,6 +40,7 @@
                 <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
                 <!-- Current page: link to this page's section -->
                 <li><a href="#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
                 <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
             </ul>
             <div class="lang-select">
@@ -60,6 +61,7 @@
                         <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
                         <!-- Current page: link to this page's section -->
                         <li><a href="#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                        <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
                         <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
                     </ul>
                     <div class="lang-select">
@@ -76,6 +78,10 @@
 
     <section id="reservations" class="reservations-section">
         <h2 data-i18n="reservations.title">Reservas</h2>
+        
+        <div class="reservation-intro">
+            <p data-i18n="reservations.intro">Bienvenido al sistema de reservas del Hotel Olivos del Sol. Sigue los pasos para completar tu reserva de manera fácil y segura.</p>
+        </div>
         <div id="reservation-form">
             <!-- Step 1: Búsqueda inicial -->
             <div class="reservation-step" id="step1">

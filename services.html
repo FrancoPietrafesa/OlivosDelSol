@@ -1,5 +1,7 @@
+
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,80 +9,143 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css?v=20260128">
     <script defer src="script.js"></script>
 </head>
+
 <body class="services-page">
     <!-- Preloader overlay -->
-    <div id="preloader"><div class="spinner"></div></div>
+    <div id="preloader">
+        <div class="spinner"></div>
+    </div>
     <header>
         <nav class="navbar">
             <div class="logo">
-                <img src="images/logo.png" alt="Logo Olivos del Sol">
+                <img src="images/logo.png" alt="Logo Olivos del Sol" width="45" height="45" loading="lazy">
                 <span data-i18n="header.logo">Hotel Olivos del Sol</span>
             </div>
-<button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
-  <span class="bar"></span>
-  <span class="bar"></span>
-  <span class="bar"></span>
-</button>
+            <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <ul class="nav-links">
                 <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
                 <!-- Current page: link to this page's section -->
                 <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
                 <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
                 <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
-                <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
-                <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+                <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+                <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
             </ul>
             <div class="lang-select">
                 <select id="language-select">
-                    <option value="es">ES</option>
-                    <option value="en">EN</option>
+                    <option value="es">🇦🇷 ES</option>
+                    <option value="en">🇬🇧 EN</option>
                 </select>
             </div>
-        
-<div class="ios-menu-backdrop" hidden></div>
-<div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
-  <div class="ios-menu-sheet" role="menu">
-    <ul class="nav-links">
-                <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
-                <!-- Current page: link to this page's section -->
-                <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
-                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-                <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
-                <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a></li>
-                <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
-                <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
-            </ul>
-    <div class="lang-select">
-                <select id="language-select">
-                    <option value="es">ES</option>
-                    <option value="en">EN</option>
-                </select>
+
+            <div class="ios-menu-backdrop" hidden></div>
+            <div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
+                <div class="ios-menu-sheet" role="menu">
+                    <ul class="nav-links">
+                        <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
+                        <!-- Current page: link to this page's section -->
+                        <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
+                        <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+                        <li><a href="experiences.html" data-i18n="nav.experiences">Experiencias</a></li>
+                        <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a>
+                        </li>
+                        <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
+                        <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+                        <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
+                    </ul>
+                    <div class="lang-select">
+                        <select id="language-select">
+                            <option value="es">🇦🇷 ES</option>
+                            <option value="en">🇬🇧 EN</option>
+                        </select>
+                    </div>
+                    <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
+                </div>
             </div>
-    <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
-  </div>
-</div>
-</nav>
+        </nav>
     </header>
 
     <section id="services" class="services-section">
         <h2 data-i18n="services.title">Servicios</h2>
         <div class="services-list">
-            <div class="service-item"><h3 data-i18n="services.room">Habitaciones confortables</h3><p data-i18n="services.roomDesc">Amplias y luminosas habitaciones con todas las comodidades.</p></div>
-            <div class="service-item"><h3 data-i18n="services.restaurant">Restaurante</h3><p data-i18n="services.restaurantDesc">Gastronomía regional e internacional de alta calidad.</p></div>
-            <div class="service-item"><h3 data-i18n="services.pool">Piscina</h3><p data-i18n="services.poolDesc">Piscina al aire libre para relajarse y disfrutar del sol.</p></div>
-            <div class="service-item"><h3 data-i18n="services.wifi">Wi‑Fi gratuito</h3><p data-i18n="services.wifiDesc">Acceso a internet de alta velocidad en todo el hotel.</p></div>
-            <div class="service-item"><h3 data-i18n="services.parking">Estacionamiento</h3><p data-i18n="services.parkingDesc">Estacionamiento seguro para su vehículo.</p></div>
-            <div class="service-item"><h3 data-i18n="services.spa">Spa &amp; bienestar</h3><p data-i18n="services.spaDesc">Sesiones de masajes y tratamientos relajantes.</p></div>
+            <div class="service-item">
+                <h3 data-i18n="services.room">Habitaciones confortables</h3>
+                <p data-i18n="services.roomDesc">Amplias y luminosas habitaciones con todas las comodidades.</p>
+            </div>
+            <div class="service-item">
+                <h3 data-i18n="services.restaurant">Restaurante</h3>
+                <p data-i18n="services.restaurantDesc">Gastronomía regional e internacional de alta calidad.</p>
+            </div>
+            <div class="service-item">
+                <h3 data-i18n="services.pool">Piscina</h3>
+                <p data-i18n="services.poolDesc">Piscina al aire libre para relajarse y disfrutar del sol.</p>
+            </div>
+            <div class="service-item">
+                <h3 data-i18n="services.wifi">Wi‑Fi gratuito</h3>
+                <p data-i18n="services.wifiDesc">Acceso a internet de alta velocidad en todo el hotel.</p>
+            </div>
+            <div class="service-item">
+                <h3 data-i18n="services.parking">Estacionamiento</h3>
+                <p data-i18n="services.parkingDesc">Estacionamiento seguro para su vehículo.</p>
+            </div>
+            <div class="service-item">
+                <h3 data-i18n="services.spa">Spa &amp; bienestar</h3>
+                <p data-i18n="services.spaDesc">Sesiones de masajes y tratamientos relajantes.</p>
+            </div>
         </div>
     </section>
 
-    <footer>
-        <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
+     <footer>
+        <div class="footer-content">
+            <div class="footer-info">
+                <div class="hotel-address">
+                    Ruta 40 Calle 8<br>
+                    Pocito - Villa Aberastain<br>
+                    San Juan, Argentina
+                </div>
+            </div>
+            <div class="footer-contact">
+                                 <h4>Contacto Directo</h4> <div class="hotel-phone">+54 264 444-4000</div>
+                <p>Reservas y consultas</p>
+            </div>
+            <div class="footer-social">
+                <div class="social-links">
+                                    <h4>Síguenos</h4>
+    <a href="https://www.tripadvisor.es/Hotel_Review-g312785-d5006150-Reviews-Apart_Cabanas_Olivos_del_Sol-San_Juan_Province_of_San_Juan_Cuyo.html" 
+                       target="_blank" rel="noopener noreferrer" class="social-link" title="TripAdvisor">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.airbnb.com.ar/rooms/1157214581954301757?viralityEntryPoint=1&unique_share_id=7A6C4082-50EC-4EB7-9459-7F331E4487D2&slcid=329b20582b124625b5b6ebf7917886bf&s=76&feature=share&set_everest_cookie_on_new_domain=1764616711.EAZTllZmIyNWRjMGU0NG.hgG4VC4fsc7dJCT62lTJmysYzTFf9ekBRHmJ426RO7w&adults=1&channel=native&slug=wWfrHKmk&source_impression_id=p3_1764616712_P36QrYA7PQIqskS9" 
+                       target="_blank" rel="noopener noreferrer" class="social-link" title="Airbnb">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M15.5 1h-7A2.5 2.5 0 0 0 6 3.5v7A2.5 2.5 0 0 0 8.5 13h7a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 15.5 1zM14 20H10v-1h4v1zm2.25-3H7.75V5h8.5v12z"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/hotel_olivosdelsol?igsh=MWFldjByZjhxMnV4Yg%3D%3D" 
+                       target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+            <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
+        </div>
     </footer>
 </body>
+
 </html>
