@@ -593,20 +593,7 @@ window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
 
-    // Load mobile menu partial dynamically (acts as a template include)
-    const placeholder = document.getElementById('mobile-menu-placeholder');
-    if (placeholder) {
-        fetch('partials/mobile-menu.html')
-            .then(r => r.text())
-            .then(html => {
-                placeholder.outerHTML = html;
-                // Re-bind menu variables after injecting markup
-                initMobileMenu();
-            })
-            .catch(err => console.warn('No se pudo cargar partial mobile menu:', err));
-    } else {
-        initMobileMenu();
-    }
+    // Mobile menu is now directly in HTML, no partial loading needed
 
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
