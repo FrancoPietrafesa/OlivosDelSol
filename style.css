@@ -1,10 +1,6 @@
-/*
- * Estilos globales modernos con tema oscuro y espacios en blanco
- */
-* {
-    box-sizing: border-box;
-}
+/* ... [todo el CSS previo] ... */
 
+<<<<<<< HEAD
 body {
     font-family: 'Google Sans', 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
     margin: 0;
@@ -1585,10 +1581,39 @@ footer::before {
     gap: 5px;
     position: relative;
     z-index: 101;
+=======
+/* BOTÓN WHATSAPP FIJO */
+.whatsapp-fijo {
+    position: fixed;
+    right: 24px;
+    bottom: 24px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: #25D366;
+    box-shadow: 0 6px 24px rgba(37,211,102, 0.2), 0 1.5px 4px rgba(26, 40, 25, 0.23);
+    color: #fff;
+    transition: box-shadow 0.3s, transform 0.15s;
+    cursor: pointer;
+    text-decoration: none;
+    font-size: 2rem;
+    animation: fadeInUp 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    border: none;
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
 }
-
-.nav-toggle .bar {
+.whatsapp-fijo:hover,
+.whatsapp-fijo:focus {
+    box-shadow: 0 12px 32px rgba(37,211,102, 0.3), 0 2px 8px rgba(26, 40, 25, 0.29);
+    transform: translateY(-4px) scale(1.07);
+    outline: 0;
+}
+.whatsapp-fijo svg {
     display: block;
+<<<<<<< HEAD
     width: 28px;
     height: 3px;
     background: #fff;
@@ -1768,9 +1793,14 @@ footer::before {
     place-items: center;
     /* mantener aún por encima de backdrop */
     z-index: 901;
+=======
+    width: 36px;
+    height: 36px;
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
     pointer-events: none;
     padding: 20px;
 }
+<<<<<<< HEAD
 
 .ios-menu[data-open="true"] {
     pointer-events: all;
@@ -1990,10 +2020,17 @@ footer::before {
 /* =========================
    RESPONSIVE GENERAL
    ========================= */
+=======
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
 @media (max-width: 768px) {
-    section {
-        padding: 3rem 0;
+    .whatsapp-fijo {
+        right: 16px;
+        bottom: 16px;
+        width: 52px;
+        height: 52px;
+        font-size: 1.4rem;
     }
+<<<<<<< HEAD
 
     .home-section .hero {
         padding: 4rem 1.5rem;
@@ -2027,13 +2064,21 @@ footer::before {
     .experience-item,
     .recommendation-item {
         padding: 1.5rem;
+=======
+    .whatsapp-fijo svg {
+        width: 28px;
+        height: 28px;
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
     }
 }
-
 @media (max-width: 480px) {
-    .navbar {
-        padding: 0.75rem 1rem;
+    .whatsapp-fijo {
+        right: 8px;
+        bottom: 8px;
+        width: 44px;
+        height: 44px;
     }
+<<<<<<< HEAD
 
     .logo img {
         height: 35px;
@@ -2837,3 +2882,10 @@ body {
     }
 }
 .btn-more { margin-top: 0.8rem; }
+=======
+    .whatsapp-fijo svg {
+        width: 22px;
+        height: 22px;
+    }
+}
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e

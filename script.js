@@ -782,6 +782,7 @@ function initMobileMenu() {
 
 
 // Mobile menu logic consolidated in `initMobileMenu()` above.
+<<<<<<< HEAD
 
 
 // ============================================================
@@ -833,3 +834,5 @@ window.addEventListener('load', () => {
         }
     }, 3000); // 3 segundos de preloader
 });
+=======
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e

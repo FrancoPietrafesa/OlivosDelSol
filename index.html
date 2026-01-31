@@ -39,14 +39,20 @@
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
     <!-- Google Fonts -->
+<<<<<<< HEAD
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css?v=20260128">
+=======
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
     <!-- MercadoPago SDK -->
     <script src="https://sdk.mercadopago.com/js/v2"></script>
     <script src="config/mercadopago-config.js"></script>
     <script defer src="script.js"></script>
+<<<<<<< HEAD
     <!-- Service Worker Registration (disabled on localhost for development) -->
     <script>
         if ('serviceWorker' in navigator) {
@@ -73,6 +79,20 @@
                         });
                 });
             }
+=======
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registrado exitosamente:', registration.scope);
+                    })
+                    .catch((registrationError) => {
+                        console.log('Error al registrar SW:', registrationError);
+                    });
+            });
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
         }
     </script>
 </head>
@@ -101,7 +121,10 @@
                 <!-- Sections that remain on this page link to their anchors -->
                 <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
                 <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+<<<<<<< HEAD
                 <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+=======
+>>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
                 <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
             </ul>
             <div class="lang-select">
