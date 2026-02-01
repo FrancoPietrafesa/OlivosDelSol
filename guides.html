@@ -7,138 +7,11 @@
 	<meta name="description" content="Excursiones en San Juan: trekking, 4x4 y bautismo aéreo. Turismo aventura y experiencias guiadas con almuerzo incluido.">
 	<meta name="keywords" content="excursiones en San Juan, turismo aventura, experiencias guiadas, trekking San Juan, 4x4 San Juan, bautismo aéreo">
 	<link rel="stylesheet" href="style.css">
+	<link rel="stylesheet" href="guides.css">
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 	<link href="https://fonts.googleapis.com/css2?family=Google+Sans:ital,opsz,wght@0,17..18,400..700;1,17..18,400..700&display=swap" rel="stylesheet">
 	<script defer src="script.js"></script>
-	<style>
-		/* Video de fondo con efecto fume */
-		.tours-section {
-			position: relative;
-			overflow: hidden;
-		}
-		
-		.video-background {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			z-index: 0;
-			pointer-events: none;
-		}
-		
-		.video-background iframe {
-			position: absolute;
-			top: 50%;
-			left: 50%;
-			width: 100vw;
-			height: 56.25vw;
-			min-height: 100%;
-			min-width: 177.77vh;
-			transform: translate(-50%, -50%);
-			object-fit: cover;
-		}
-		
-		.video-overlay {
-			position: absolute;
-			top: 0;
-			left: 0;
-			width: 100%;
-			height: 100%;
-			background: linear-gradient(
-				to bottom,
-				rgba(26, 26, 26, 0.85) 0%,
-				rgba(26, 26, 26, 0.7) 30%,
-				rgba(26, 26, 26, 0.6) 50%,
-				rgba(26, 26, 26, 0.7) 70%,
-				rgba(26, 26, 26, 0.9) 100%
-			);
-			z-index: 1;
-		}
-		
-		.tours-section .container {
-			position: relative;
-			z-index: 2;
-		}
-		
-		/* Títulos de cards más visibles */
-		.tour-content h3 {
-			color: #F0A34B !important;
-			font-size: 1.25rem;
-			font-weight: 700;
-			text-shadow: 0 2px 4px rgba(0,0,0,0.3);
-		}
-		
-		/* Descripciones en color blanco para mejor legibilidad */
-		.tour-desc {
-			color: #ffffff !important;
-		}
-		
-		/* Texto lead en blanco */
-		.tours-section .lead {
-			color: #ffffff !important;
-		}
-		
-		/* Precio también en blanco */
-		.tour-price {
-			color: #ffffff !important;
-		}
-		
-		/* Botón de cerrar popup más visible con cruz */
-		.modal-close {
-			background: rgba(255,255,255,0.15);
-			border: 2px solid rgba(255,255,255,0.3);
-			border-radius: 50%;
-			width: 48px;
-			height: 48px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			cursor: pointer;
-			transition: all 0.3s ease;
-		}
-		
-		.modal-close:hover {
-			background: rgba(255,255,255,0.25);
-			border-color: rgba(255,255,255,0.5);
-			transform: scale(1.1);
-		}
-		
-		.modal-close svg {
-			stroke: #ffffff !important;
-			stroke-width: 2.5;
-		}
-		
-		/* Mejoras en las imágenes de las cards */
-		.tour-card .img-container {
-			width: 100%;
-			height: 200px;
-			overflow: hidden;
-			position: relative;
-			border-radius: 24px 24px 0 0;
-		}
-		
-		.tour-card .img-container img {
-			width: 100%;
-			height: 100%;
-			object-fit: cover;
-			object-position: center;
-			transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-		}
-		
-		/* Responsive */
-		@media (max-width: 768px) {
-			.video-background iframe {
-				width: 150vw;
-				height: 84.375vw;
-			}
-			
-			.tour-card .img-container {
-				height: 180px;
-			}
-		}
-	</style>
 </head>
 <body class="guides-page">
 	<!-- Preloader overlay -->
@@ -185,14 +58,14 @@
 						<li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
 						<li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
 						<li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
-					</ul>
-					<div class="lang-select">
-						<select id="language-select">
-							<option value="es">🇦🇷 ES</option>
-							<option value="en">🇬🇧 EN</option>
-						</select>
-					</div>
-					<button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
+				</ul>
+				<div class="lang-select">
+					<select id="language-select-mobile">
+						<option value="es">🇦🇷 ES</option>
+						<option value="en">🇬🇧 EN</option>
+					</select>
+				</div>
+				<button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
 				</div>
 			</div>
 		</nav>

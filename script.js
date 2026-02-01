@@ -152,22 +152,7 @@ function updateViewerImage() {
     viewerImage.alt = currentImg.alt;
 }
 
-// Manejar ambos selectores de idioma (desktop y móvil)
-document.getElementById('language-select').addEventListener('change', function(e) {
-    setLanguage(e.target.value);
-    // Sincronizar con el selector móvil
-    const mobileSelect = document.getElementById('mobile-language-select');
-    if (mobileSelect) mobileSelect.value = e.target.value;
-});
-
-const mobileLanguageSelect = document.getElementById('mobile-language-select');
-if (mobileLanguageSelect) {
-    mobileLanguageSelect.addEventListener('change', function(e) {
-        setLanguage(e.target.value);
-        // Sincronizar con el selector desktop
-        document.getElementById('language-select').value = e.target.value;
-    });
-}
+// Delegación: cambio de idioma (desktop y móvil) — se configura en DOMContentLoaded
 
 function showStep(step) {
     currentStep = step;
@@ -588,12 +573,21 @@ async function sendReservationToServer(reservation) {
     }
 }
 
-// Initialize
+// Initialize: i18n, pasos de reserva, galería, pagos y menú móvil
 window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
+    initMobileMenu();
 
-    // Mobile menu is now directly in HTML, no partial loading needed
+    // Delegación: un solo listener para cambio de idioma (desktop y móvil)
+    document.body.addEventListener('change', function(e) {
+        if (e.target.id === 'language-select' || e.target.id === 'mobile-language-select') {
+            setLanguage(e.target.value);
+            var otherId = e.target.id === 'language-select' ? 'mobile-language-select' : 'language-select';
+            var other = document.getElementById(otherId);
+            if (other) other.value = e.target.value;
+        }
+    });
 
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
@@ -768,58 +762,4 @@ function initMobileMenu() {
 }
 
 
-// Mobile menu logic consolidated in `initMobileMenu()` above.
-<<<<<<< HEAD
-
-
-// ============================================================
-// PRELOADER DE NAVEGACIÓN - Transición suave entre páginas
-// ============================================================
-
-// Función para mostrar el preloader al navegar
-function showNavigationPreloader() {
-    const preloader = document.getElementById('preloader');
-    if (preloader) {
-        preloader.style.display = 'flex';
-        document.body.style.overflow = 'hidden';
-    }
-}
-
-// Configurar eventos de navegación para mostrar preloader
-function initNavigationPreloader() {
-    // Seleccionar todos los enlaces internos del sitio
-    const internalLinks = document.querySelectorAll('a[href^="index.html"], a[href^="services.html"], a[href^="gallery.html"], a[href^="experiences.html"], a[href^="recommendations.html"], a[href^="reservations.html"], a[href^="guides.html"], a[href^="contact.html"]');
-    
-    internalLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            // Ignorar enlaces que son solo anclas (#)
-            if (href && !href.includes('#')) {
-                showNavigationPreloader();
-            }
-        });
-    });
-}
-
-// Inicializar cuando el DOM esté listo
-document.addEventListener('DOMContentLoaded', () => {
-    initNavigationPreloader();
-});
-
-
-// Ocultar preloader después de 1 segundo cuando la página carga
-window.addEventListener('load', () => {
-    setTimeout(() => {
-        const preloader = document.getElementById('preloader');
-        if (preloader) {
-            preloader.style.opacity = '0';
-            preloader.style.transition = 'opacity 0.3s ease';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-                document.body.style.overflow = '';
-            }, 300);
-        }
-    }, 3000); // 3 segundos de preloader
-});
-=======
->>>>>>> fac3cfbf65a788e5749930ea0e07f75c45e28c0e
+// Menú móvil: se inicializa en DOMContentLoaded vía initMobileMenu().
