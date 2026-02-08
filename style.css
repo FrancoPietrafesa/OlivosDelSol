@@ -347,6 +347,126 @@ body.index-page .lang-select select {
     opacity: 0.95;
 }
 
+/* Scroll down arrow */
+.scroll-down {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    color: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease;
+    z-index: 5;
+}
+
+.scroll-down__icon {
+    font-size: 1.3rem;
+    line-height: 1;
+}
+
+.scroll-down:hover {
+    transform: translateX(-50%) translateY(2px);
+    background: rgba(255, 255, 255, 0.25);
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+/* Why Us section (index) */
+.why-us-section {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 6rem 0;
+}
+
+.why-us-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.why-us-text .eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5b5b5b;
+    margin-bottom: 0.75rem;
+}
+
+.why-us-text h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 0 0 1rem 0;
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.why-us-text p {
+    font-size: 1.05rem;
+    color: #2c2c2c;
+    margin: 0 0 1.5rem 0;
+}
+
+.why-us-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.pill-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: var(--cream-strong);
+    border: 1px solid var(--cream-border);
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.text-link {
+    color: var(--ink);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.text-link:hover {
+    text-decoration: underline;
+}
+
+.why-us-feature h3 {
+    margin: 0 0 0.4rem 0;
+    color: var(--ink);
+}
+
+.why-us-feature p {
+    margin: 0;
+    color: #2c2c2c;
+}
+
+.why-us-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    display: block;
+}
+
 /* =========================
    SECCIONES GENERALES
    ========================= */
@@ -2402,6 +2522,21 @@ body {
 
     footer {
         padding: 2.5rem 1.5rem;
+    }
+
+    .why-us-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 900px) {
+    .why-us-container {
+        grid-template-columns: 1fr;
+    }
+
+    .why-us-media {
+        order: -1;
     }
 }
 
