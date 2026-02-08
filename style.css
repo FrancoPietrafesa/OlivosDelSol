@@ -1230,14 +1230,14 @@ section h2::after {
 }
 
 .recommendation-item h3 {
-    color: #ffffff;
+    color: var(--ink);
     margin-bottom: 1rem;
     font-size: 1.4rem;
     font-weight: 600;
 }
 
 .recommendation-item p {
-    color: #ddd;
+    color: #2c2c2c;
     line-height: 1.8;
 }
 
@@ -2651,22 +2651,27 @@ body.recommendations-page {
 }
 
 body.recommendations-page .recommendations-section {
-    background: #0a0a0a;
+    background: var(--cream);
     padding: 6rem 2rem;
 }
 
+.recommendations-section {
+    background: var(--cream);
+    color: var(--ink);
+}
+
 body.recommendations-page .recommendation-item {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    background: var(--cream-strong);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--cream-border);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
 }
 
 body.recommendations-page .recommendation-item:hover {
-    background: rgba(255, 255, 255, 0.12);
-    border-color: rgba(85, 107, 47, 0.3);
-    box-shadow: 0 12px 40px rgba(85, 107, 47, 0.2);
+    background: var(--cream);
+    border-color: var(--cream-border);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.16);
 }
 
 body.recommendations-page footer {
