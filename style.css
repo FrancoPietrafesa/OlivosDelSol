@@ -494,13 +494,15 @@ body.index-page .lang-select select {
 
 /* Around Us section (index) */
 .around-section {
-    background: var(--section-cream);
-    color: var(--ink);
+    background: linear-gradient(rgba(18, 18, 18, 0.55), rgba(18, 18, 18, 0.55)), url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
     padding: 6rem 0;
 }
 
 .around-section p {
-    color: #2c2c2c;
+    color: #f2f2f2;
 }
 
 .around-container {
@@ -525,13 +527,13 @@ body.index-page .lang-select select {
 .around-text h2 {
     font-size: clamp(2rem, 4vw, 3.2rem);
     margin: 0 0 1rem 0;
-    color: var(--ink);
+    color: #fff;
     text-shadow: none;
 }
 
 .around-text p {
     font-size: 1.05rem;
-    color: #2c2c2c;
+    color: #f2f2f2;
     margin: 0 0 1.5rem 0;
 }
 
@@ -544,12 +546,12 @@ body.index-page .lang-select select {
 
 .around-item h3 {
     margin: 0 0 0.4rem 0;
-    color: var(--ink);
+    color: #fff;
 }
 
 .around-item p {
     margin: 0;
-    color: #2c2c2c;
+    color: #f2f2f2;
 }
 
 .around-cta {
