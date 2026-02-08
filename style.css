@@ -205,6 +205,8 @@ body.index-page .nav-cta:hover {
     font-size: 1rem;
     letter-spacing: 0.02em;
     position: relative;
+    box-shadow: none !important;
+    border-radius: 0 !important;
 }
 
 .nav-more-toggle::after {
