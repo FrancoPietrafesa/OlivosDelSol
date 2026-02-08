@@ -505,16 +505,18 @@ body.index-page .nav-more-toggle:hover {
     position: static;
     margin: 1.25rem auto 0 auto;
     transform: none;
-    background: var(--cream-strong);
-    border-color: var(--cream-border);
-    color: var(--ink);
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    border-color: rgba(255, 255, 255, 0.6);
+    color: #ffffff;
     display: flex;
 }
 
 .scroll-down--cream:hover {
     transform: translateY(2px);
-    background: var(--cream);
-    border-color: var(--cream-border);
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background-size: cover;
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 /* Why Us section (index) */
@@ -842,31 +844,6 @@ body.index-page .nav-more-toggle:hover {
     background: var(--section-cream);
     color: var(--ink);
     padding: 6rem 0;
-}
-
-/* Hero continuation for sections that follow scroll arrows */
-#around-us,
-#testimonios,
-#faq {
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35));
-    background-size: cover;
-    background-attachment: fixed;
-    color: #fff;
-}
-
-#around-us h2,
-#around-us h3,
-#around-us p,
-#testimonios h2,
-#testimonios p,
-#testimonios .testimonial-quote,
-#testimonios .testimonial-name,
-#testimonios .testimonial-role,
-#faq h2,
-#faq h3,
-#faq p {
-    color: #fff !important;
-    -webkit-text-fill-color: #fff;
 }
 
 .faq-container {
