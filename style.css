@@ -554,6 +554,71 @@ body.index-page .lang-select select {
     display: block;
 }
 
+/* Testimonials section (index) */
+.testimonials-section {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 6rem 0;
+}
+
+.testimonials-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.testimonials-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.testimonials-header h2 {
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+}
+
+.testimonials-header p {
+    color: #2c2c2c;
+    margin: 0;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 2rem;
+}
+
+.testimonial-card {
+    background: var(--cream-strong);
+    border: 1px solid var(--cream-border);
+    border-radius: 18px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+}
+
+.testimonial-quote {
+    font-size: 1.05rem;
+    color: var(--ink);
+    margin: 0 0 1.5rem 0;
+}
+
+.testimonial-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.testimonial-name {
+    font-weight: 700;
+    color: var(--ink);
+}
+
+.testimonial-role {
+    color: #2c2c2c;
+    font-size: 0.95rem;
+}
+
 /* =========================
    SECCIONES GENERALES
    ========================= */
@@ -2620,6 +2685,10 @@ body {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
+
+    .testimonials-grid {
+        grid-template-columns: 1fr 1fr;
+    }
 }
 
 @media (max-width: 900px) {
@@ -2640,6 +2709,10 @@ body {
     }
 
     .around-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonials-grid {
         grid-template-columns: 1fr;
     }
 }
