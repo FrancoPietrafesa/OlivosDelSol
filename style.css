@@ -623,6 +623,62 @@ body.index-page .lang-select select {
     font-size: 0.95rem;
 }
 
+/* Visit section (index) */
+.visit-section {
+    background: var(--section-cream);
+    color: var(--ink);
+    padding: 6rem 0;
+}
+
+.visit-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+    align-items: center;
+}
+
+.visit-header {
+    text-align: center;
+}
+
+.visit-header h2 {
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+}
+
+.visit-header p {
+    color: #2c2c2c;
+    margin: 0 0 1.2rem 0;
+}
+
+.visit-cta {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.pill-button--accent {
+    background: #c98a2e;
+    border-color: #b97e2a;
+    color: #fff;
+}
+
+.pill-button--accent:hover {
+    background: #b27824;
+}
+
+.visit-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    display: block;
+}
+
 /* =========================
    SECCIONES GENERALES
    ========================= */
@@ -2693,6 +2749,10 @@ body {
     .testimonials-grid {
         grid-template-columns: 1fr 1fr;
     }
+
+    .visit-container {
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 900px) {
@@ -2718,6 +2778,10 @@ body {
 
     .testimonials-grid {
         grid-template-columns: 1fr;
+    }
+
+    .visit-container {
+        gap: 2rem;
     }
 }
 
