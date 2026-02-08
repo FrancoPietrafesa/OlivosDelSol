@@ -5,8 +5,17 @@
     box-sizing: border-box;
 }
 
+:root {
+    --font-heading: 'Gloock', 'Times New Roman', serif;
+    --font-body: 'Merriweather Sans', 'Segoe UI', Arial, sans-serif;
+    --cream: #f2e9d8;
+    --cream-strong: #eadfc8;
+    --cream-border: #dccfb6;
+    --ink: #111111;
+}
+
 body {
-    font-family: 'Cormorant Garamond', 'Times New Roman', Times, serif;
+    font-family: var(--font-body);
     margin: 0;
     padding: 0;
     color: #e0e0e0;
@@ -67,6 +76,42 @@ body {
     background: rgba(85, 107, 47, 0.25);
 }
 
+/* Index navbar (cream theme) */
+body.index-page .navbar {
+    background: var(--cream);
+    border-bottom: 1px solid var(--cream-border);
+}
+
+body.index-page .navbar::before {
+    background: transparent;
+}
+
+body.index-page .logo span,
+body.index-page .nav-links a {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+body.index-page .nav-links a::after {
+    background: linear-gradient(90deg, #6b6b6b, #2f2f2f);
+}
+
+body.index-page .nav-links a:hover {
+    color: var(--ink);
+    text-shadow: none;
+}
+
+body.index-page .nav-toggle .bar {
+    background: var(--ink);
+}
+
+body.index-page .lang-select select {
+    background-color: var(--cream-strong);
+    color: var(--ink);
+    border-color: var(--cream-border);
+    box-shadow: none;
+}
+
 .logo {
     display: flex;
     align-items: center;
@@ -92,7 +137,8 @@ body {
 }
 
 .logo span {
-    font-weight: 600;
+    font-family: var(--font-heading);
+    font-weight: 500;
     font-size: 1.35rem;
     color: #fff;
     letter-spacing: 0.02em;
@@ -158,14 +204,14 @@ body {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
     font-weight: 500;
 }
 
 /* Banderas mini en el selector */
 .lang-select select option {
     font-size: 0.9rem;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
 }
 
 .lang-select select option .flag-mini {
@@ -290,7 +336,7 @@ body {
 .home-section h1 {
     font-size: clamp(2.2rem, 5vw, 4.2rem);
     margin-bottom: 1.5rem;
-    font-weight: 700;
+    font-weight: 500;
     letter-spacing: 0.02em;
     line-height: 1.1;
 }
@@ -325,7 +371,7 @@ section h2 {
     text-align: center;
     margin: 0 0 3rem 0;
     font-size: clamp(1.8rem, 4vw, 3rem);
-    font-weight: 600;
+    font-weight: 500;
     letter-spacing: 0.03em;
     background: linear-gradient(135deg, #556B2F, #708238);
     -webkit-background-clip: text;
@@ -333,6 +379,15 @@ section h2 {
     background-clip: text;
     position: relative;
     padding-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--font-heading);
 }
 
 section h2::after {
@@ -450,7 +505,19 @@ section h2::after {
    GALERÍA - Estilo único
    ========================= */
 .gallery-section {
-    background: #0a0a0a;
+    background: var(--cream);
+    color: var(--ink);
+}
+
+.gallery-section h2,
+.experiences-section h2,
+.reservations-section h2 {
+    color: var(--ink);
+    background: none;
+    -webkit-background-clip: unset;
+    -webkit-text-fill-color: unset;
+    background-clip: unset;
+    text-shadow: none;
 }
 
 .gallery-grid {
@@ -529,7 +596,8 @@ section h2::after {
    EXPERIENCIAS - Estilo único
    ========================= */
 .experiences-section {
-    background: linear-gradient(180deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: var(--cream);
+    color: var(--ink);
 }
 
 .experience-list {
@@ -639,7 +707,8 @@ section h2::after {
    RESERVAS
    ========================= */
 .reservations-section {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: var(--cream);
+    color: var(--ink);
 }
 
 .reservations-section h2,
@@ -953,19 +1022,20 @@ section h2::after {
 }
 
 .contact-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: var(--cream);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--cream-border);
     border-radius: 16px;
     padding: 2.5rem;
     text-align: center;
     transition: all 0.3s ease;
+    color: var(--ink);
 }
 
 .contact-card:hover {
     transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.15);
+    background: var(--cream-strong);
     box-shadow: 0 15px 40px rgba(85, 107, 47, 0.15);
 }
 
@@ -987,7 +1057,7 @@ section h2::after {
 }
 
 .contact-card h3 {
-    color: #e0e0e0;
+    color: var(--ink);
     font-size: 1.3rem;
     font-weight: 500;
     margin-bottom: 1rem;
@@ -995,7 +1065,7 @@ section h2::after {
 }
 
 .contact-card p {
-    color: #b0b0b0;
+    color: #2b2b2b;
     line-height: 1.6;
     margin-bottom: 1.5rem;
 }
@@ -1004,7 +1074,7 @@ section h2::after {
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
-    color: #fff;
+    color: var(--ink);
     text-decoration: none;
     font-weight: 500;
     transition: all 0.3s ease;
@@ -1015,9 +1085,9 @@ section h2::after {
 }
 
 .contact-link:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: var(--cream-strong);
     transform: translateY(-2px);
-    box-shadow: 0 8px 25px rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 25px rgba(85, 107, 47, 0.15);
 }
 
 .social-section {
@@ -1530,7 +1600,7 @@ footer::before {
     background: rgba(255, 255, 255, 0.1);
     border: 1px solid rgba(255, 255, 255, 0.2);
     color: #fff;
-    font-family: 'Cormorant Garamond', serif;
+    font-family: var(--font-body);
     font-weight: 500;
     font-size: 0.95rem;
     backdrop-filter: blur(10px);
@@ -1715,7 +1785,7 @@ body.gallery-page {
 }
 
 body.gallery-page .gallery-section {
-    background: linear-gradient(180deg, #0a0a0a 0%, #1a1a1a 100%);
+    background: var(--cream);
     padding: 6rem 0;
 }
 
@@ -1730,7 +1800,7 @@ body.gallery-page .gallery-grid img {
 }
 
 body.gallery-page h2 {
-    color: #fff;
+    color: var(--ink);
     margin-bottom: 4rem;
 }
 
@@ -1747,7 +1817,7 @@ body.experiences-page {
 }
 
 body.experiences-page .experiences-section {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: var(--cream);
     padding: 6rem 0;
 }
 
@@ -2071,9 +2141,7 @@ body.reservations-page {
 }
 
 body.reservations-page .reservations-section {
-    background: rgba(255, 255, 255, 0.02);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: var(--cream);
     padding: 6rem 2rem;
 }
 
