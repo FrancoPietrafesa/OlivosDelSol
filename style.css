@@ -440,9 +440,10 @@ body.index-page .lang-select select {
 }
 
 .text-link {
-    color: var(--ink);
+    color: var(--cream);
     text-decoration: none;
     font-weight: 600;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
 }
 
 .text-link:hover {
@@ -833,23 +834,23 @@ section h2::after {
 
 .reservations-section h2,
 #reservations h2 {
-    color: #ffffff;
+    color: var(--ink);
     background: none;
     -webkit-background-clip: unset;
     -webkit-text-fill-color: unset;
     background-clip: unset;
-    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    text-shadow: none;
 }
 
 #reservation-form {
     max-width: 700px;
     margin: 0 auto;
-    background: #2a2a2a;
+    background: var(--cream-strong);
     padding: 3rem;
     border-radius: 20px;
-    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(0, 168, 142, 0.2);
-    color: #e0e0e0;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
+    border: 1px solid var(--cream-border);
+    color: var(--ink);
 }
 
 .reservation-step {
@@ -862,7 +863,7 @@ section h2::after {
 }
 
 .reservation-step h3 {
-    color: #fff;
+    color: var(--ink);
     margin-bottom: 2rem;
     font-size: 1.8rem;
     text-align: center;
@@ -872,7 +873,7 @@ section h2::after {
     display: block;
     margin-top: 1.5rem;
     font-weight: 500;
-    color: #e0e0e0;
+    color: var(--ink);
     font-size: 0.95rem;
     letter-spacing: -0.005em;
 }
@@ -888,10 +889,10 @@ section h2::after {
     box-sizing: border-box;
     padding: 0.8rem;
     margin-bottom: 1rem;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid var(--cream-border);
     border-radius: 8px;
-    background: rgba(255, 255, 255, 0.04);
-    color: #fff;
+    background: #fff6e8;
+    color: var(--ink);
     font-size: 1rem;
     transition: border-color 0.3s ease;
     -webkit-appearance: none;
@@ -930,9 +931,9 @@ section h2::after {
 
 .reservation-step input:focus {
     outline: none;
-    border-color: #556B2F;
-    background-color: #2a2a2a;
-    box-shadow: 0 0 0 3px rgba(85, 107, 47, 0.2);
+    border-color: #8d7a5b;
+    background-color: #fffaf2;
+    box-shadow: 0 0 0 3px rgba(141, 122, 91, 0.2);
 }
 
 .reservation-step input[type="radio"] {
@@ -2266,11 +2267,11 @@ body.reservations-page .reservations-section {
 }
 
 body.reservations-page #reservation-form {
-    background: rgba(255, 255, 255, 0.08);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    background: var(--cream-strong);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--cream-border);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.18);
 }
 
 body.reservations-page footer {
