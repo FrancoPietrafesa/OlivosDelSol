@@ -192,9 +192,9 @@ body.index-page .nav-cta:hover {
 }
 
 .nav-more-toggle {
-    background: transparent;
-    border: 0;
-    color: #000000;
+    background: none !important;
+    border: 0 !important;
+    color: inherit;
     font: inherit;
     cursor: pointer;
     padding: 0.5rem 0;
@@ -207,6 +207,9 @@ body.index-page .nav-cta:hover {
     position: relative;
     box-shadow: none !important;
     border-radius: 0 !important;
+    appearance: none;
+    -webkit-appearance: none;
+    outline: none;
 }
 
 .nav-more-toggle::after {
@@ -221,7 +224,8 @@ body.index-page .nav-cta:hover {
 }
 
 .nav-more-toggle:hover {
-    color: #000000;
+    color: inherit;
+    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
 }
 
 .nav-more-toggle:hover::after {
