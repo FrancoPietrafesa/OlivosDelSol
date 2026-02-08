@@ -1648,8 +1648,8 @@ section h2::after {
     align-items: center;
     gap: 1rem;
     padding: 1.5rem 2rem;
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: linear-gradient(135deg, rgba(230, 216, 192, 0.98), rgba(221, 205, 178, 0.98));
+    border: 1px solid var(--cream-border);
     border-radius: 12px;
     text-decoration: none;
     color: #e0e0e0;
@@ -1658,10 +1658,10 @@ section h2::after {
 }
 
 .social-platform:hover {
-    background: rgba(85, 107, 47, 0.15);
-    border-color: rgba(85, 107, 47, 0.3);
+    background: linear-gradient(135deg, rgba(238, 226, 205, 0.98), rgba(228, 214, 190, 0.98));
+    border-color: var(--cream-border);
     transform: translateY(-3px);
-    box-shadow: 0 10px 30px rgba(85, 107, 47, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
 }
 
 .platform-icon {
