@@ -1555,7 +1555,7 @@ section h2::after {
 }
 
 .contact-card {
-    background: var(--cream-strong);
+    background: linear-gradient(135deg, rgba(230, 216, 192, 0.98), rgba(221, 205, 178, 0.98));
     backdrop-filter: none;
     -webkit-backdrop-filter: none;
     border: 1px solid var(--cream-border);
@@ -1568,7 +1568,7 @@ section h2::after {
 
 .contact-card:hover {
     transform: translateY(-5px);
-    background: var(--cream);
+    background: linear-gradient(135deg, rgba(238, 226, 205, 0.98), rgba(228, 214, 190, 0.98));
     box-shadow: 0 15px 40px rgba(85, 107, 47, 0.15);
 }
 
