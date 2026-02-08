@@ -577,7 +577,23 @@ async function sendReservationToServer(reservation) {
 window.addEventListener('DOMContentLoaded', () => {
     setLanguage(currentLanguage);
     showStep(1);
-    initMobileMenu();
+
+    // Inject mobile menu partial on pages that use the placeholder (e.g. index).
+    const menuPlaceholder = document.getElementById('mobile-menu-placeholder');
+    if (menuPlaceholder && !document.getElementById('mobileMenu')) {
+        fetch('partials/mobile-menu.html')
+            .then((resp) => resp.text())
+            .then((html) => {
+                menuPlaceholder.innerHTML = html;
+                initMobileMenu();
+            })
+            .catch(() => {
+                // If the partial fails to load, still try to init in case markup exists.
+                initMobileMenu();
+            });
+    } else {
+        initMobileMenu();
+    }
 
     // Delegación: un solo listener para cambio de idioma (desktop y móvil)
     document.body.addEventListener('change', function(e) {
