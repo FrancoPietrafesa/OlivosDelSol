@@ -82,6 +82,10 @@ body.index-page .navbar {
     border-bottom: 1px solid var(--cream-border);
 }
 
+body.index-page {
+    --section-cream: var(--cream);
+}
+
 body.index-page .navbar::before {
     background: transparent;
 }
@@ -398,7 +402,7 @@ body.index-page .lang-select select {
 
 /* Why Us section (index) */
 .why-us-section {
-    background: var(--cream);
+    background: var(--section-cream);
     color: var(--ink);
     padding: 6rem 0;
 }
@@ -486,7 +490,7 @@ body.index-page .lang-select select {
 
 /* Around Us section (index) */
 .around-section {
-    background: var(--cream);
+    background: var(--section-cream);
     color: var(--ink);
     padding: 6rem 0;
 }
@@ -556,7 +560,7 @@ body.index-page .lang-select select {
 
 /* Testimonials section (index) */
 .testimonials-section {
-    background: var(--cream);
+    background: var(--section-cream);
     color: var(--ink);
     padding: 6rem 0;
 }
