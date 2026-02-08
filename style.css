@@ -619,7 +619,7 @@ body.index-page .lang-select select {
 }
 
 .testimonial-card {
-    background: linear-gradient(135deg, rgba(244, 235, 217, 0.98), rgba(235, 224, 203, 0.98));
+    background: linear-gradient(135deg, rgba(235, 223, 200, 0.98), rgba(224, 210, 185, 0.98));
     border: 1px solid var(--cream-border);
     border-radius: 18px;
     padding: 2rem;
