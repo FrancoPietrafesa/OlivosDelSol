@@ -24,58 +24,28 @@
     </div>
     <header>
         <nav class="navbar">
-            <div class="logo">
-                <img src="images/logo.png" alt="Logo Olivos del Sol">
-                <span data-i18n="header.logo">Hotel Olivos del Sol</span>
-            </div>
-            <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="nav-links">
-                <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
-                <!-- Current page: link to this page's section -->
-                <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
-                <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-                
-                <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
-                <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
-                <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
-                <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
-            </ul>
-            <div class="lang-select">
-                <select id="language-select">
-                    <option value="es">🇦🇷 ES</option>
-                    <option value="en">🇬🇧 EN</option>
-                </select>
-            </div>
-
-            <div class="ios-menu-backdrop" hidden></div>
-            <div id="mobileMenu" class="ios-menu" role="dialog" aria-modal="true" hidden>
-                <div class="ios-menu-sheet" role="menu">
-                    <ul class="nav-links">
-                        <li><a href="index.html#home" data-i18n="nav.home">Inicio</a></li>
-                        <!-- Current page: link to this page's section -->
-                        <li><a href="#services" data-i18n="nav.services">Servicios</a></li>
-                        <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-                        
-                        <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
-                        <li><a href="index.html#recommendations" data-i18n="nav.recommendations">Recomendaciones</a>
-                        </li>
-                        <li><a href="index.html#reservations" data-i18n="nav.reservations">Reservas</a></li>
-                        <li><a href="index.html#contact" data-i18n="nav.contact">Contacto</a></li>
-                    </ul>
-                    <div class="lang-select">
-                        <select id="language-select">
-                            <option value="es">🇦🇷 ES</option>
-                            <option value="en">🇬🇧 EN</option>
-                        </select>
-                    </div>
-                    <button class="ios-menu-close" aria-label="Cerrar menú">Cerrar</button>
-                </div>
-            </div>
-        </nav>
+    <div class="nav-left">
+        <ul class="nav-links nav-links-left">
+            <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+            <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+            <li class="nav-more"><a href="recommendations.html" data-i18n="nav.recommendations">M�s <span class="caret">?</span></a></li>
+        </ul>
+    </div>
+    <div class="logo">
+        <a class="logo-link" href="index.html">
+            <img src="images/logo.png" alt="Logo Olivos del Sol">
+            <span data-i18n="header.logo">Hotel Olivos del Sol</span>
+        </a>
+    </div>
+    <div class="nav-right">
+        <a class="nav-cta" href="reservations.html">Reservar</a>
+        <button class="nav-toggle" aria-label="Abrir men�" aria-controls="mobileMenu" aria-expanded="false">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+    </div>
+</nav>
     </header>
 
     <section id="services" class="services-section">
@@ -152,5 +122,6 @@
 </body>
 
 </html>
+
 
 
