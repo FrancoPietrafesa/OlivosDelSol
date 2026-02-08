@@ -990,9 +990,9 @@ section h2::after {
 }
 
 .service-item {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: linear-gradient(135deg, rgba(230, 216, 192, 0.98), rgba(221, 205, 178, 0.98));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
     border-radius: 16px;
     padding: 2rem;
     text-align: center;
@@ -1026,7 +1026,7 @@ section h2::after {
 }
 
 .service-item h3 {
-    color: #fff;
+    color: var(--ink);
     margin-bottom: 1rem;
     font-size: 1.3rem;
     font-weight: 500;
@@ -1034,7 +1034,7 @@ section h2::after {
 }
 
 .service-item p {
-    color: #b0b0b0;
+    color: #2c2c2c;
     line-height: 1.8;
     margin: 0;
 }
@@ -2288,20 +2288,20 @@ body.services-page {
 }
 
 body.services-page .services-section {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 50%, #2a2a2a 100%);
+    background: var(--cream);
     padding: 6rem 0;
 }
 
 body.services-page .service-item {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(135deg, rgba(230, 216, 192, 0.98), rgba(221, 205, 178, 0.98));
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    border: 1px solid var(--cream-border);
 }
 
 body.services-page .service-item:hover {
-    border-color: rgba(255, 255, 255, 0.4);
-    background: rgba(255, 255, 255, 0.15);
+    border-color: var(--cream-border);
+    background: linear-gradient(135deg, rgba(238, 226, 205, 0.98), rgba(228, 214, 190, 0.98));
 }
 
 body.services-page footer {
