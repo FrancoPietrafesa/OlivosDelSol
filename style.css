@@ -2237,7 +2237,7 @@ body.index-page section:nth-child(5) {
 }
 
 body.index-page section:nth-child(6) {
-    background: linear-gradient(to bottom, rgba(32, 32, 32, 1), rgba(26, 26, 26, 1));
+    background: var(--cream);
 }
 
 body.index-page section:nth-child(7) {
