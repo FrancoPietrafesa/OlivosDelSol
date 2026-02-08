@@ -169,6 +169,7 @@ body.index-page .nav-cta:hover {
     gap: 1.5rem;
     margin: 0;
     padding: 0;
+    align-items: center;
 }
 
 .nav-links-left {
@@ -194,7 +195,7 @@ body.index-page .nav-cta:hover {
 .nav-more-toggle {
     background: none !important;
     border: 0 !important;
-    color: inherit;
+    color: #000000;
     font: inherit;
     cursor: pointer;
     padding: 0.5rem 0;
@@ -204,6 +205,7 @@ body.index-page .nav-cta:hover {
     font-weight: 500;
     font-size: 1rem;
     letter-spacing: 0.02em;
+    line-height: 1;
     position: relative;
     box-shadow: none !important;
     border-radius: 0 !important;
@@ -219,7 +221,7 @@ body.index-page .nav-cta:hover {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #556B2F, #708238);
+    background: #000000;
     transition: width 0.3s ease;
 }
 
