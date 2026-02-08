@@ -407,6 +407,10 @@ body.index-page .lang-select select {
     padding: 6rem 0;
 }
 
+.why-us-section p {
+    color: #2c2c2c;
+}
+
 .why-us-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -495,6 +499,10 @@ body.index-page .lang-select select {
     padding: 6rem 0;
 }
 
+.around-section p {
+    color: #2c2c2c;
+}
+
 .around-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -565,6 +573,10 @@ body.index-page .lang-select select {
     padding: 6rem 0;
 }
 
+.testimonials-section p {
+    color: #2c2c2c;
+}
+
 .testimonials-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -628,6 +640,10 @@ body.index-page .lang-select select {
     background: var(--section-cream);
     color: var(--ink);
     padding: 6rem 0;
+}
+
+.visit-section p {
+    color: #2c2c2c;
 }
 
 .visit-container {
