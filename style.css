@@ -470,6 +470,17 @@ body.index-page .lang-select select {
     text-shadow: none;
 }
 
+.visit-cta .text-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
+    border-radius: 999px;
+    background: var(--cream-strong);
+    border: 1px solid var(--cream-border);
+    line-height: 1;
+}
+
 .text-link:hover {
     text-decoration: underline;
 }
