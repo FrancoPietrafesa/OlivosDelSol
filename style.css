@@ -569,6 +569,7 @@ body.index-page .lang-select select {
     display: flex;
     align-items: center;
     gap: 1rem;
+    margin-top: 1.5rem;
 }
 
 .around-media img {
