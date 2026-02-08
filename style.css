@@ -210,6 +210,11 @@ body.index-page .nav-cta:hover {
     color: inherit;
     font-size: 1rem;
     position: relative;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    padding: 0.5rem 0 !important;
 }
 
 .nav-more-toggle::after {
