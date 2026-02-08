@@ -582,8 +582,10 @@ body.index-page .lang-select select {
 
 /* Testimonials section (index) */
 .testimonials-section {
-    background: var(--section-cream);
-    color: var(--ink);
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background-size: cover;
+    background-attachment: fixed;
+    color: #fff;
     padding: 6rem 0;
 }
 
@@ -603,12 +605,12 @@ body.index-page .lang-select select {
 }
 
 .testimonials-header h2 {
-    color: var(--ink);
+    color: #ffffff;
     margin-bottom: 0.5rem;
 }
 
 .testimonials-header p {
-    color: #2c2c2c;
+    color: #f2f2f2;
     margin: 0;
 }
 
@@ -619,17 +621,19 @@ body.index-page .lang-select select {
 }
 
 .testimonial-card {
-    background: var(--cream-strong);
-    border: 1px solid var(--cream-border);
+    background: linear-gradient(135deg, rgba(30, 30, 30, 0.75), rgba(10, 10, 10, 0.75));
+    border: 1px solid rgba(255, 255, 255, 0.18);
     border-radius: 18px;
     padding: 2rem;
     text-align: center;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.12);
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
 }
 
 .testimonial-quote {
     font-size: 1.05rem;
-    color: var(--ink);
+    color: #f2f2f2;
     margin: 0 0 1.5rem 0;
 }
 
@@ -641,11 +645,11 @@ body.index-page .lang-select select {
 
 .testimonial-name {
     font-weight: 700;
-    color: var(--ink);
+    color: #ffffff;
 }
 
 .testimonial-role {
-    color: #2c2c2c;
+    color: #d9d9d9;
     font-size: 0.95rem;
 }
 
