@@ -2247,7 +2247,7 @@ body.index-page section:nth-child(7) {
 }
 
 body.index-page section:nth-child(8) {
-    background: linear-gradient(to bottom, rgba(32, 32, 32, 1), rgba(26, 26, 26, 1));
+    background: var(--cream);
 }
 
 /* Ensure around-us keeps the hero-style background on index */
