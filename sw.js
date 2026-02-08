@@ -10,7 +10,6 @@ const urlsToCache = [
   '/partials/mobile-menu.html',
   '/services.html',
   '/gallery.html',
-  '/experiences.html',
   '/recommendations.html',
   '/reservations.html',
   '/contact.html',
