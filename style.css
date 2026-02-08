@@ -192,44 +192,41 @@ body.index-page .nav-cta:hover {
 }
 
 .nav-more-toggle {
-    background: transparent;
-    border: 0;
-    color: inherit;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(238, 225, 205, 0.95)) !important;
+    border: 1px solid rgba(0, 0, 0, 0.12) !important;
+    color: #1a1a1a;
     font: inherit;
     cursor: pointer;
-    padding: 0.5rem 0;
+    padding: 0.4rem 0.9rem !important;
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    font-weight: 500;
-}
-
-/* Match "Más" button to link style */
-.nav-more-toggle {
-    text-decoration: none;
-    color: #000;
-    font-size: 1rem;
-    position: relative;
-    background: transparent !important;
-    border: 0 !important;
-    box-shadow: none !important;
-    border-radius: 0 !important;
-    padding: 0.5rem 0 !important;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 999px !important;
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12) !important;
+    letter-spacing: 0.02em;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
 .nav-more-toggle::after {
     content: '';
     position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 0;
-    height: 2px;
-    background: linear-gradient(90deg, #556B2F, #708238);
-    transition: width 0.3s ease;
+    inset: 0;
+    border-radius: 999px;
+    border: 1px solid rgba(85, 107, 47, 0.35);
+    opacity: 0;
+    transition: opacity 0.2s ease;
+}
+
+.nav-more-toggle:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.16) !important;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(232, 216, 194, 0.98)) !important;
 }
 
 .nav-more-toggle:hover::after {
-    width: 100%;
+    opacity: 1;
 }
 
 .nav-more-menu {
