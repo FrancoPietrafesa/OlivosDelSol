@@ -207,7 +207,7 @@ body.index-page .nav-cta:hover {
 /* Match "Más" button to link style */
 .nav-more-toggle {
     text-decoration: none;
-    color: inherit;
+    color: #000;
     font-size: 1rem;
     position: relative;
     background: transparent !important;
