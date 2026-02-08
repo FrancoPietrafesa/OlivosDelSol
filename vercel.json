@@ -32,7 +32,7 @@
       ]
     },
     {
-      "source": "/(.*\\.(js|css|woff2|woff|ttf|eot))",
+      "source": "/:path*\\.(js|css|woff2|woff|ttf|eot)",
       "headers": [
         {
           "key": "Cache-Control",
