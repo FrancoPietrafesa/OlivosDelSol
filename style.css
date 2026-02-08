@@ -2255,6 +2255,15 @@ body.index-page #around-us {
     background-attachment: fixed;
 }
 
+body.index-page #around-us h2 {
+    color: #ffffff !important;
+    -webkit-text-fill-color: #ffffff !important;
+}
+
+body.index-page #why-us {
+    background: var(--cream);
+}
+
 /* Smooth scrolling */
 html {
     scroll-behavior: smooth;
