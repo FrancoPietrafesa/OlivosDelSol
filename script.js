@@ -605,6 +605,25 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Navbar "Más" dropdown (desktop)
+    const more = document.querySelector('.nav-more');
+    if (more) {
+        const toggle = more.querySelector('.nav-more-toggle');
+        toggle?.addEventListener('click', (e) => {
+            e.preventDefault();
+            const isOpen = more.classList.contains('open');
+            more.classList.toggle('open', !isOpen);
+            toggle.setAttribute('aria-expanded', (!isOpen).toString());
+        });
+
+        document.addEventListener('click', (e) => {
+            if (!more.contains(e.target)) {
+                more.classList.remove('open');
+                toggle?.setAttribute('aria-expanded', 'false');
+            }
+        });
+    }
+
     // Configurar la funcionalidad de lightbox para las imágenes de la galería
     document.querySelectorAll('.gallery-grid img').forEach(img => {
         img.addEventListener('click', function() {
