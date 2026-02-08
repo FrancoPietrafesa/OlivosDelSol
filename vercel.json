@@ -1,25 +1,5 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "api/reservations.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "**/*",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/reservations",
-      "dest": "api/reservations.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "headers": [
     {
       "source": "/(.*)",
@@ -61,10 +41,5 @@
       ]
     }
   ],
-  "rewrites": [
-    {
-      "source": "/sw.js",
-      "destination": "/sw.js"
-    }
-  ]
+  "rewrites": []
 }
