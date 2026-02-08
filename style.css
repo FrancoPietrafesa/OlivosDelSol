@@ -204,6 +204,29 @@ body.index-page .nav-cta:hover {
     font-weight: 500;
 }
 
+/* Match "Más" button to link style */
+.nav-more-toggle {
+    text-decoration: none;
+    color: inherit;
+    font-size: 1rem;
+    position: relative;
+}
+
+.nav-more-toggle::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #556B2F, #708238);
+    transition: width 0.3s ease;
+}
+
+.nav-more-toggle:hover::after {
+    width: 100%;
+}
+
 .nav-more-menu {
     position: absolute;
     top: 100%;
