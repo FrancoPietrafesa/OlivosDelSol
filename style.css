@@ -494,15 +494,13 @@ body.index-page .lang-select select {
 
 /* Around Us section (index) */
 .around-section {
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    background-size: cover;
-    background-attachment: fixed;
-    color: #fff;
+    background: var(--section-cream);
+    color: var(--ink);
     padding: 6rem 0;
 }
 
 .around-section p {
-    color: #f2f2f2;
+    color: #2c2c2c;
 }
 
 .around-container {
@@ -527,13 +525,13 @@ body.index-page .lang-select select {
 .around-text h2 {
     font-size: clamp(2rem, 4vw, 3.2rem);
     margin: 0 0 1rem 0;
-    color: #ffffff;
+    color: var(--ink);
     text-shadow: none;
 }
 
 .around-text p {
     font-size: 1.05rem;
-    color: #f2f2f2;
+    color: #2c2c2c;
     margin: 0 0 1.5rem 0;
 }
 
@@ -546,12 +544,12 @@ body.index-page .lang-select select {
 
 .around-item h3 {
     margin: 0 0 0.4rem 0;
-    color: #ffffff;
+    color: var(--ink);
 }
 
 .around-item p {
     margin: 0;
-    color: #f2f2f2;
+    color: #2c2c2c;
 }
 
 /* Card for around-us content */
@@ -2251,17 +2249,6 @@ body.index-page section:nth-child(8) {
 }
 
 /* Ensure around-us keeps the hero-style background on index */
-body.index-page #around-us {
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
-    background-size: cover;
-    background-attachment: fixed;
-}
-
-body.index-page #around-us h2 {
-    color: #ffffff !important;
-    -webkit-text-fill-color: #ffffff !important;
-}
-
 body.index-page #why-us {
     background: var(--cream);
 }
