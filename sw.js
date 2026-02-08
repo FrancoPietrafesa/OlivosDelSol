@@ -1,7 +1,7 @@
 // Service Worker para Hotel Olivos del Sol
 // Mejora la performance con cache offline
 
-const CACHE_NAME = 'olivos-del-sol-v3';
+const CACHE_NAME = 'olivos-del-sol-v4';
 const urlsToCache = [
   '/',
   '/index.html',
