@@ -494,7 +494,7 @@ body.index-page .lang-select select {
 
 /* Around Us section (index) */
 .around-section {
-    background: linear-gradient(rgba(18, 18, 18, 0.55), rgba(18, 18, 18, 0.55)), url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
     background-size: cover;
     background-attachment: fixed;
     color: #fff;
