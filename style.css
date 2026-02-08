@@ -464,10 +464,10 @@ body.index-page .lang-select select {
 }
 
 .text-link {
-    color: var(--cream);
+    color: #000;
     text-decoration: none;
     font-weight: 600;
-    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+    text-shadow: none;
 }
 
 .text-link:hover {
