@@ -380,6 +380,22 @@ body.index-page .lang-select select {
     border-color: rgba(255, 255, 255, 0.6);
 }
 
+.scroll-down--cream {
+    position: static;
+    margin: 1.25rem auto 0 auto;
+    transform: none;
+    background: var(--cream-strong);
+    border-color: var(--cream-border);
+    color: var(--ink);
+    display: flex;
+}
+
+.scroll-down--cream:hover {
+    transform: translateY(2px);
+    background: var(--cream);
+    border-color: var(--cream-border);
+}
+
 /* Why Us section (index) */
 .why-us-section {
     background: var(--cream);
@@ -461,6 +477,76 @@ body.index-page .lang-select select {
 }
 
 .why-us-media img {
+    width: 100%;
+    height: auto;
+    border-radius: 20px;
+    box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+    display: block;
+}
+
+/* Around Us section (index) */
+.around-section {
+    background: var(--cream);
+    color: var(--ink);
+    padding: 6rem 0;
+}
+
+.around-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 3rem;
+    align-items: center;
+}
+
+.around-text .eyebrow {
+    display: inline-block;
+    font-size: 0.85rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #5b5b5b;
+    margin-bottom: 0.75rem;
+}
+
+.around-text h2 {
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    margin: 0 0 1rem 0;
+    color: var(--ink);
+    text-shadow: none;
+}
+
+.around-text p {
+    font-size: 1.05rem;
+    color: #2c2c2c;
+    margin: 0 0 1.5rem 0;
+}
+
+.around-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin: 0 0 2rem 0;
+}
+
+.around-item h3 {
+    margin: 0 0 0.4rem 0;
+    color: var(--ink);
+}
+
+.around-item p {
+    margin: 0;
+    color: #2c2c2c;
+}
+
+.around-cta {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.around-media img {
     width: 100%;
     height: auto;
     border-radius: 20px;
@@ -2529,6 +2615,11 @@ body {
         grid-template-columns: 1fr 1fr;
         gap: 2rem;
     }
+
+    .around-container {
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+    }
 }
 
 @media (max-width: 900px) {
@@ -2538,6 +2629,18 @@ body {
 
     .why-us-media {
         order: -1;
+    }
+
+    .around-container {
+        grid-template-columns: 1fr;
+    }
+
+    .around-media {
+        order: -1;
+    }
+
+    .around-grid {
+        grid-template-columns: 1fr;
     }
 }
 
