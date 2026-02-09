@@ -56,29 +56,45 @@
 </nav>
     </header>
 
-    <section id="gallery" class="gallery-section">
-        <h2 data-i18n="gallery.title">Galería</h2>
-        <div class="gallery-grid">
-            <img src="images/468055293_18048612503483247_2721229852365988716_n.jpg" alt="Fachada del hotel y palmeras" loading="lazy" width="400" height="280">
-            <img src="images/468322890_18048613424483247_939284270881576216_n.jpg" alt="Hotel al atardecer" loading="lazy" width="400" height="280">
-            <img src="images/467974956_18048489227483247_727230495596107223_n.jpg" alt="Piscina y área de relax" loading="lazy" width="400" height="280">
-            <img src="images/448164664_18028615775483247_7811932803664603036_n.jpg" alt="Jardines del hotel" loading="lazy" width="400" height="280">
-            <img src="images/444485924_18028044413483247_1520712395456252353_n.jpg" alt="Restaurante con chimenea" loading="lazy" width="400" height="280">
-            <img src="images/Captura.PNG" alt="Habitación cómoda con aire acondicionado" loading="lazy" width="400" height="280">
-            <img src="images/3.PNG" alt="Habitación familiar con literas" loading="lazy" width="400" height="280">
-            <img src="images/6.PNG" alt="Habitación con vistas panorámicas" loading="lazy" width="400" height="280">
-            <img src="images/5.PNG" alt="Parque y senderos en la propiedad" loading="lazy" width="400" height="280">
+    <section id="gallery" class="gallery-section gallery-section--modern">
+        <div class="gallery-hero">
+            <h2 data-i18n="gallery.title">Galeria</h2>
+            <p>Explora cada espacio en detalle. Casas, monoambientes, piletas y eventos, en un solo lugar.</p>
         </div>
+
+        <div class="gallery-filters" role="tablist" aria-label="Filtros de galeria">
+            <button class="gallery-filter is-active" type="button" data-filter="all" role="tab" aria-selected="true">Todo</button>
+            <button class="gallery-filter" type="button" data-filter="casa" role="tab" aria-selected="false">Casas</button>
+            <button class="gallery-filter" type="button" data-filter="monoambiente" role="tab" aria-selected="false">Monoambientes</button>
+            <button class="gallery-filter" type="button" data-filter="pileta" role="tab" aria-selected="false">Piletas</button>
+            <button class="gallery-filter" type="button" data-filter="evento" role="tab" aria-selected="false">Eventos</button>
+        </div>
+
+        <div id="gallery-content" class="gallery-content" aria-live="polite"></div>
     </section>
 
-    <!-- Visor de imágenes -->
-    <div class="image-viewer">
-        <button class="close-btn" aria-label="Cerrar visor de imágenes"></button>
-        <button class="nav-btn prev-btn" aria-label="Imagen anterior">❮</button>
-        <img src="" alt="">
-        <button class="nav-btn next-btn" aria-label="Siguiente imagen">❯</button>
+    <!-- Modal Galeria -->
+    <div class="gallery-modal" id="galleryModal" aria-hidden="true">
+        <div class="gallery-modal__backdrop" data-close-modal></div>
+        <div class="gallery-modal__dialog" role="dialog" aria-modal="true" aria-labelledby="galleryModalTitle">
+            <div class="gallery-modal__header">
+                <h3 id="galleryModalTitle">Galeria</h3>
+                <button class="gallery-modal__close" type="button" aria-label="Cerrar galeria" data-close-modal>&times;</button>
+            </div>
+            <div class="gallery-modal__body">
+                <div class="gallery-modal__viewer">
+                    <button class="gallery-modal__nav gallery-modal__nav--prev" type="button" aria-label="Foto anterior">&larr;</button>
+                    <img class="gallery-modal__image" src="" alt="">
+                    <button class="gallery-modal__nav gallery-modal__nav--next" type="button" aria-label="Foto siguiente">&rarr;</button>
+                </div>
+                <div class="gallery-modal__thumbs-bar">
+                    <button class="gallery-modal__thumbs-nav gallery-modal__thumbs-nav--prev" type="button" aria-label="Desplazar miniaturas a la izquierda">&larr;</button>
+                    <div class="gallery-modal__thumbs" role="list"></div>
+                    <button class="gallery-modal__thumbs-nav gallery-modal__thumbs-nav--next" type="button" aria-label="Desplazar miniaturas a la derecha">&rarr;</button>
+                </div>
+            </div>
+        </div>
     </div>
-
      <footer>
         <div class="footer-content">
             <div class="footer-info">
@@ -120,6 +136,9 @@
             <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
         </div>
     </footer>
+
+    <!-- Mobile menu partial will be loaded dynamically -->
+    <div id="mobile-menu-placeholder"></div>
 </body>
 
 </html>

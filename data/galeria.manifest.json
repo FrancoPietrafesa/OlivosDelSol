@@ -1,0 +1,325 @@
+{
+  "generatedAt": "2026-02-09T02:54:24.141Z",
+  "items": [
+    {
+      "type": "casa",
+      "slug": "aromo-azl",
+      "rawName": "aromo azúl",
+      "displayName": "aromo azúl",
+      "description": "Texturas nobles y un clima suave para una estadia relajada.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": false,
+        "banos": 2,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/aromo%20az%C3%BAl/IMG_6199.JPG",
+        "images/habitaciones/aromo%20az%C3%BAl/IMG_6209.JPG",
+        "images/habitaciones/aromo%20az%C3%BAl/IMG_6216.JPG",
+        "images/habitaciones/aromo%20az%C3%BAl/OlivosdelSol-74.jpg",
+        "images/habitaciones/aromo%20az%C3%BAl/OlivosdelSol-127.jpg",
+        "images/habitaciones/aromo%20az%C3%BAl/OlivosdelSol-128.jpg"
+      ],
+      "cover": "images/habitaciones/aromo%20az%C3%BAl/IMG_6199.JPG",
+      "order": null
+    },
+    {
+      "type": "evento",
+      "slug": "eventos",
+      "rawName": "Eventos",
+      "displayName": "Eventos",
+      "description": "Espacios amplios, luz natural y detalles pensados para descansar.",
+      "amenities": null,
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.32%20PM%20(1).jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.32%20PM.jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.33%20PM%20(3).jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.33%20PM%20(5).jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.34%20PM%20(2).jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.34%20PM.jpeg",
+        "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.35%20PM.jpeg"
+      ],
+      "cover": "images/habitaciones/eventos/WhatsApp%20Image%202026-01-05%20at%207.11.32%20PM%20(1).jpeg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "frantoio",
+      "rawName": "frantoio",
+      "displayName": "frantoio",
+      "description": "Un refugio sereno con esencia local y comodidades esenciales.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": true,
+        "banos": 1,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/frantoio/OlivosdelSol-200.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-201.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-203.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-206.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-209.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-210.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-214.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-222%20(1).jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-223.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-225.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-226%20(1).jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-229.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-232.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-237.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-238.jpg",
+        "images/habitaciones/frantoio/OlivosdelSol-245.jpg"
+      ],
+      "cover": "images/habitaciones/frantoio/OlivosdelSol-200.jpg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "los-ciruelos",
+      "rawName": "los ciruelos",
+      "displayName": "los ciruelos",
+      "description": "Disenado para desconectar, con calma y privacidad.",
+      "amenities": {
+        "aireAcondicionado": false,
+        "wifi": true,
+        "cocina": true,
+        "banos": 1,
+        "piletaPrivada": true
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/los%20ciruelos/IMG_6172.JPG",
+        "images/habitaciones/los%20ciruelos/IMG_6174.JPG",
+        "images/habitaciones/los%20ciruelos/IMG_6175.JPG",
+        "images/habitaciones/los%20ciruelos/IMG_6185.JPG",
+        "images/habitaciones/los%20ciruelos/IMG_6186.JPG",
+        "images/habitaciones/los%20ciruelos/IMG_6192.JPG"
+      ],
+      "cover": "images/habitaciones/los%20ciruelos/IMG_6172.JPG",
+      "order": null
+    },
+    {
+      "type": "monoambiente",
+      "slug": "monoambientes",
+      "rawName": "Monoambientes",
+      "displayName": "Monoambientes",
+      "description": "Texturas nobles y un clima suave para una estadia relajada.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": false,
+        "banos": 2,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/monoambientes/OlivosdelSol-154.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-178.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-179.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-182.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-185.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-187.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-192.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-195.jpg",
+        "images/habitaciones/monoambientes/OlivosdelSol-199.jpg",
+        "images/habitaciones/monoambientes/WhatsApp%20Image%202026-01-05%20at%205.53.41%20PM.jpeg"
+      ],
+      "cover": "images/habitaciones/monoambientes/OlivosdelSol-154.jpg",
+      "order": null
+    },
+    {
+      "type": "pileta",
+      "slug": "pileta-principal",
+      "rawName": "Pileta principal",
+      "displayName": "Pileta principal",
+      "description": "Un refugio sereno con esencia local y comodidades esenciales.",
+      "amenities": null,
+      "characteristics": [
+        "piscina principal"
+      ],
+      "images": [
+        "images/habitaciones/piscina%20principal/OlivosdelSol-65.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-68.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-69.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-130.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-132.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-137.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-138.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-143.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-280.jpg"
+      ],
+      "cover": "images/habitaciones/piscina%20principal/OlivosdelSol-65.jpg",
+      "order": null
+    },
+    {
+      "type": "pileta",
+      "slug": "pileta-privada",
+      "rawName": "Pileta privada",
+      "displayName": "Pileta privada",
+      "description": "Espacios amplios, luz natural y detalles pensados para descansar.",
+      "amenities": null,
+      "characteristics": [
+        "piscina privada"
+      ],
+      "images": [
+        "images/habitaciones/piscina%20privada/OlivosdelSol-46.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-47.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-49.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-51.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-52%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-53%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-56.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-57%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-61.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-64.jpg"
+      ],
+      "cover": "images/habitaciones/piscina%20privada/OlivosdelSol-46.jpg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "piscina-principal",
+      "rawName": "piscina principal",
+      "displayName": "piscina principal",
+      "description": "Texturas nobles y un clima suave para una estadia relajada.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": false,
+        "banos": 2,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/piscina%20principal/OlivosdelSol-65.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-68.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-69.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-130.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-132.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-137.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-138.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-143.jpg",
+        "images/habitaciones/piscina%20principal/OlivosdelSol-280.jpg"
+      ],
+      "cover": "images/habitaciones/piscina%20principal/OlivosdelSol-65.jpg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "piscina-privada",
+      "rawName": "piscina privada",
+      "displayName": "piscina privada",
+      "description": "Un refugio sereno con esencia local y comodidades esenciales.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": true,
+        "banos": 1,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/piscina%20privada/OlivosdelSol-46.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-47.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-49.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-51.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-52%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-53%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-56.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-57%20(1).jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-61.jpg",
+        "images/habitaciones/piscina%20privada/OlivosdelSol-64.jpg"
+      ],
+      "cover": "images/habitaciones/piscina%20privada/OlivosdelSol-46.jpg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "pocitana",
+      "rawName": "pocitana",
+      "displayName": "pocitana",
+      "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": false,
+        "banos": 2,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/pocitana/OlivosdelSol-99.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-100.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-106.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-109.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-112.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-122.jpg",
+        "images/habitaciones/pocitana/OlivosdelSol-123.jpg"
+      ],
+      "cover": "images/habitaciones/pocitana/OlivosdelSol-99.jpg",
+      "order": null
+    },
+    {
+      "type": "casa",
+      "slug": "salon-principal",
+      "rawName": "salon principal",
+      "displayName": "salon principal",
+      "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
+      "amenities": {
+        "aireAcondicionado": true,
+        "wifi": true,
+        "cocina": false,
+        "banos": 2,
+        "piletaPrivada": false
+      },
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/salon%20principal/OlivosdelSol-144.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-145.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-147.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-148.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-153.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-158.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-276.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-277.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-288.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-289.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-306.jpg"
+      ],
+      "cover": "images/habitaciones/salon%20principal/OlivosdelSol-144.jpg",
+      "order": null
+    },
+    {
+      "type": "evento",
+      "slug": "salon-principal",
+      "rawName": "salon principal",
+      "displayName": "salon principal",
+      "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
+      "amenities": null,
+      "characteristics": null,
+      "images": [
+        "images/habitaciones/salon%20principal/OlivosdelSol-144.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-145.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-147.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-148.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-153.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-158.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-276.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-277.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-288.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-289.jpg",
+        "images/habitaciones/salon%20principal/OlivosdelSol-306.jpg"
+      ],
+      "cover": "images/habitaciones/salon%20principal/OlivosdelSol-144.jpg",
+      "order": null
+    }
+  ]
+}

@@ -67,6 +67,19 @@ El sitio incluye traducción español/inglés mediante selector de idioma.
 
 El selector de idiomas en la esquina superior derecha permite alternar entre español e inglés. Si deseas añadir más idiomas, edita el objeto `translations` en `script.js` agregando las traducciones correspondientes y actualiza las opciones en el selector.
 
+## Galería dinámica (images/habitaciones/)
+
+La sección **Galería** se genera automáticamente a partir de la carpeta `images/habitaciones/`.
+
+1. Coloca las carpetas e imágenes siguiendo la estructura indicada dentro de `images/habitaciones/`.
+2. Ejecuta el generador:
+```
+npm run build:gallery
+```
+3. Se crea/actualiza `data/galeria.manifest.json`, que es lo que consume el frontend.
+
+Si `images/habitaciones/` no existe, el manifest queda vacío y la sección mostrará un mensaje de “sin contenido”.
+
 
 ## Móvil y menú estilo iOS
 - Se añadió un menú móvil tipo *action sheet* (estilo iOS). El botón hamburguesa abre un panel con enlaces y selector de idioma.  
