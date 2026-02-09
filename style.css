@@ -2334,6 +2334,17 @@ body.gallery-page footer {
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     border-top: 1px solid rgba(255, 255, 255, 0.2);
+    color: #2c2c2c;
+}
+
+body.gallery-page footer .hotel-address,
+body.gallery-page footer .footer-contact,
+body.gallery-page footer .footer-contact p,
+body.gallery-page footer .footer-social,
+body.gallery-page footer .footer-social h4,
+body.gallery-page footer .hotel-phone,
+body.gallery-page footer .social-links {
+    color: #2c2c2c;
 }
 
 /* PÃ¡gina de Experiencias - Estilo Ãºnico */
@@ -3357,13 +3368,23 @@ body {
 }
 
 .gallery-modal__close {
-    background: var(--cream);
-    border: 1px solid var(--cream-border);
-    color: #111111;
+    background: transparent;
+    border: none;
+    color: #f2f2f2;
     border-radius: 12px;
-    padding: 0.45rem 0.9rem;
+    padding: 0.25rem 0.8rem;
     cursor: pointer;
     font-weight: 600;
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
+/* Force override global button styles for modal close */
+.gallery-modal__header button.gallery-modal__close {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0.25rem 0.8rem !important;
 }
 
 .gallery-modal__body {
@@ -3397,6 +3418,15 @@ body {
     line-height: 1;
 }
 
+.gallery-modal__thumbs-bar button.gallery-modal__thumbs-nav {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    min-width: 28px !important;
+    min-height: 28px !important;
+}
+
 .gallery-modal__viewer {
     position: relative;
     border-radius: 12px;
@@ -3414,14 +3444,16 @@ body {
     object-fit: contain;
 }
 
-.gallery-modal__nav {
+.gallery-modal__viewer .gallery-modal__nav {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
-    background: #111111;
-    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: transparent !important;
+    border: none !important;
     width: 44px;
     height: 44px;
+    min-width: 44px;
+    min-height: 44px;
     cursor: pointer;
     z-index: 2;
     display: grid;
@@ -3429,7 +3461,13 @@ body {
     color: transparent;
     font-size: 0;
     border-radius: 999px;
-    box-shadow: 0 10px 22px rgba(0, 0, 0, 0.25);
+    box-shadow: none !important;
+    opacity: 1;
+    pointer-events: auto;
+    padding: 0 !important;
+    overflow: visible !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
 }
 
 .gallery-modal__nav--prev {
@@ -3438,9 +3476,28 @@ body {
 
 .gallery-modal__nav--next {
     right: 16px;
+    z-index: 3;
+    left: auto;
+    visibility: visible;
+    opacity: 1;
 }
 
-.gallery-modal__nav::before {
+/* Force override of global button styles for modal nav */
+.gallery-modal__viewer button.gallery-modal__nav {
+    background: transparent !important;
+    border: none !important;
+    padding: 0 !important;
+    min-width: 44px !important;
+    min-height: 44px !important;
+    box-shadow: none !important;
+    overflow: visible !important;
+    font-size: 0 !important;
+    line-height: 0 !important;
+    letter-spacing: 0 !important;
+    text-transform: none !important;
+}
+
+.gallery-modal__viewer .gallery-modal__nav::before {
     content: '';
     width: 12px;
     height: 12px;
@@ -3449,22 +3506,33 @@ body {
     transform: rotate(45deg);
     transition: transform 0.2s ease, border-color 0.2s ease;
     filter: drop-shadow(0 8px 20px rgba(0, 0, 0, 0.35));
+    display: block;
 }
 
-.gallery-modal__nav--prev::before {
-    transform: rotate(-135deg);
+.gallery-modal__viewer .gallery-modal__nav {
+    --nav-rot: 45deg;
 }
 
-.gallery-modal__nav:hover::before,
-.gallery-modal__nav:focus-visible::before {
-    border-color: #111111;
-    transform: scale(1.05) rotate(45deg);
+.gallery-modal__viewer .gallery-modal__nav--prev {
+    --nav-rot: -135deg;
+}
+
+.gallery-modal__viewer .gallery-modal__nav--next {
+    --nav-rot: 45deg;
+}
+
+.gallery-modal__viewer .gallery-modal__nav--next::before {
+    transform: rotate(45deg);
+}
+.gallery-modal__viewer .gallery-modal__nav::before {
+    transform: rotate(var(--nav-rot));
+}
+
+.gallery-modal__viewer .gallery-modal__nav:hover::before,
+.gallery-modal__viewer .gallery-modal__nav:focus-visible::before {
+    border-color: #f2f2f2;
+    transform: scale(1.05) rotate(var(--nav-rot));
     outline: none;
-}
-
-.gallery-modal__nav--prev:hover::before,
-.gallery-modal__nav--prev:focus-visible::before {
-    transform: scale(1.05) rotate(-135deg);
 }
 
 @media (max-width: 768px) {
@@ -3501,6 +3569,13 @@ body {
     background: transparent;
     cursor: pointer;
     flex: 0 0 auto;
+    box-shadow: none;
+}
+
+.gallery-thumb-button {
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
 }
 
 .gallery-modal__thumbs img {

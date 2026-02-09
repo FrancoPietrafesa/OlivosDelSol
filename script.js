@@ -263,6 +263,7 @@ function initGalleryPage() {
             modalState.images.forEach((src, idx) => {
                 const btn = document.createElement('button');
                 btn.type = 'button';
+                btn.className = 'gallery-thumb-button';
                 btn.setAttribute('aria-label', `Ver foto ${idx + 1}`);
                 const img = document.createElement('img');
                 img.src = src;
