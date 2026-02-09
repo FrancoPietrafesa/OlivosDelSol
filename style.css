@@ -1,4 +1,4 @@
-/*
+﻿/*
  * Estilos globales modernos con tema oscuro y espacios en blanco
  */
 * {
@@ -26,7 +26,7 @@ body {
     letter-spacing: 0.01em;
 }
 
-/* Variables globales para ajustes rápidos de espacios y separación del toggle */
+/* Variables globales para ajustes rÃ¡pidos de espacios y separaciÃ³n del toggle */
 :root {
     --nav-toggle-gap: 0.5rem;
     --nav-toggle-gap-small: 0.25rem;
@@ -362,7 +362,7 @@ body.index-page .nav-more-toggle:hover {
 }
 
 /* =========================
-   HERO SECTION - Index con fondo dinámico
+   HERO SECTION - Index con fondo dinÃ¡mico
    ========================= */
 .home-section .hero {
     color: #fff;
@@ -383,7 +383,7 @@ body.index-page .nav-more-toggle:hover {
     left: 0;
     width: 100%;
     height: 100%;
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+    background: url('images/san-juan-argentina-1.jpg') no-repeat center center, linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
     background-size: cover;
     background-attachment: fixed;
     z-index: 0;
@@ -941,7 +941,7 @@ section h2::after {
 }
 
 /* =========================
-    EXCURSIONES / GUIDES - Estilo único
+    EXCURSIONES / GUIDES - Estilo Ãºnico
     ========================= */
 .tours-section h2,
 #excursiones h2 {
@@ -954,10 +954,10 @@ section h2::after {
 }
 
 /* =========================
-    SERVICIOS - Estilo único
+    SERVICIOS - Estilo Ãºnico
     ========================= */
 #services {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/san-juan-argentina (1).jpg') no-repeat center center fixed;
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('images/san-juan-argentina-1.jpg') no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
 }
@@ -1040,7 +1040,7 @@ section h2::after {
 }
 
 /* =========================
-   GALERÍA - Estilo único
+   GALERÃA - Estilo Ãºnico
    ========================= */
 .gallery-section {
     background: var(--cream);
@@ -1131,7 +1131,7 @@ section h2::after {
 }
 
 /* =========================
-   EXPERIENCIAS - Estilo único
+   EXPERIENCIAS - Estilo Ãºnico
    ========================= */
 .experiences-section {
     background: var(--cream);
@@ -1358,7 +1358,7 @@ section h2::after {
     accent-color: #556B2F;
 }
 
-/* Métodos de pago */
+/* MÃ©todos de pago */
 .payment-methods {
     display: flex;
     flex-direction: column;
@@ -1402,7 +1402,7 @@ section h2::after {
     color: #fff;
 }
 
-/* Resaltar la opción seleccionada usando JavaScript (clase agregada dinámicamente) */
+/* Resaltar la opciÃ³n seleccionada usando JavaScript (clase agregada dinÃ¡micamente) */
 .payment-option.selected {
     border-color: #556B2F;
     background: rgba(85, 107, 47, 0.1);
@@ -1784,7 +1784,7 @@ footer::before {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('images/san-juan-argentina (1).jpg') no-repeat center center;
+    background: url('images/san-juan-argentina-1.jpg') no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
     opacity: 0.1;
@@ -1985,7 +1985,7 @@ footer::before {
     }
 }
 
-/* Asegurar que el botón sea visible en todos los dispositivos móviles */
+/* Asegurar que el botÃ³n sea visible en todos los dispositivos mÃ³viles */
 @media (max-width: 768px) {
     .nav-toggle {
         display: flex !important;
@@ -2109,7 +2109,7 @@ footer::before {
 }
 
 .ios-menu .nav-links a::after {
-    content: "›";
+    content: "â€º";
     font-size: 1.2rem;
     opacity: 0.8;
     color: #fff;
@@ -2181,7 +2181,7 @@ footer::before {
     display: none !important;
 }
 
-/* Responsive específico para el menú móvil */
+/* Responsive especÃ­fico para el menÃº mÃ³vil */
 @media (max-width: 480px) {
     :root {
         --nav-height: 64px;
@@ -2279,10 +2279,10 @@ footer::before {
 }
 
 /* =========================
-   ESTILOS ESPECÍFICOS POR PÁGINA
+   ESTILOS ESPECÃFICOS POR PÃGINA
    ========================= */
 
-/* Página de Servicios - Estilo único */
+/* PÃ¡gina de Servicios - Estilo Ãºnico */
 body.services-page {
     background: #1a1a1a;
 }
@@ -2312,7 +2312,7 @@ body.services-page footer {
     color: #aaa;
 }
 
-/* Página de Galería - Estilo único */
+/* PÃ¡gina de GalerÃ­a - Estilo Ãºnico */
 body.gallery-page {
     background: #0a0a0a;
 }
@@ -2344,7 +2344,7 @@ body.gallery-page footer {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Página de Experiencias - Estilo único */
+/* PÃ¡gina de Experiencias - Estilo Ãºnico */
 body.experiences-page {
     background: #1a1a1a;
 }
@@ -2372,9 +2372,9 @@ body.experiences-page footer {
     color: #aaa;
 }
 
-/* Página Index - Estilo único */
+/* PÃ¡gina Index - Estilo Ãºnico */
 body.index-page section:nth-child(2) {
-    background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%), url('images/san-juan-argentina(1).jpg');
+    background: linear-gradient(135deg, rgba(42, 42, 42, 0.9) 0%, rgba(26, 26, 26, 0.9) 100%), url('images/san-juan-argentina-1.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
@@ -2507,7 +2507,7 @@ html {
 }
 
 /* =========================
-   IMAGE VIEWER - GALERÍA
+   IMAGE VIEWER - GALERÃA
    ========================= */
 .image-viewer {
     position: fixed;
@@ -2609,10 +2609,10 @@ html {
 }
 
 /* =========================
-   PÁGINAS ESPECÍFICAS ADICIONALES
+   PÃGINAS ESPECÃFICAS ADICIONALES
    ========================= */
 
-/* Página de Contacto - Estilo único */
+/* PÃ¡gina de Contacto - Estilo Ãºnico */
 body.contact-page {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
@@ -2640,7 +2640,7 @@ body.contact-page footer {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Página de Recomendaciones - Estilo único */
+/* PÃ¡gina de Recomendaciones - Estilo Ãºnico */
 body.recommendations-page {
     background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
 }
@@ -2676,7 +2676,7 @@ body.recommendations-page footer {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
-/* Página de Reservas - Estilo único */
+/* PÃ¡gina de Reservas - Estilo Ãºnico */
 body.reservations-page {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
 }
@@ -2779,7 +2779,7 @@ input[type="button"]:active {
     transform: translateY(-2px);
 }
 
-/* Transiciones suaves entre páginas */
+/* Transiciones suaves entre pÃ¡ginas */
 section {
     transition: background 0.5s ease;
 }
@@ -2791,7 +2791,7 @@ section {
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Transiciones suaves entre páginas */
+/* Transiciones suaves entre pÃ¡ginas */
 body {
     transition: background 0.5s ease;
 }
@@ -2839,10 +2839,10 @@ body {
 }
 
 /* =========================
-   OPTIMIZACIONES PARA MÓVIL
+   OPTIMIZACIONES PARA MÃ“VIL
    ========================= */
 
-/* Ajustes para transiciones en móvil */
+/* Ajustes para transiciones en mÃ³vil */
 @media (max-width: 768px) {
     .modern-shadow-hover:hover {
         transform: translateY(-1px);
@@ -2853,7 +2853,7 @@ body {
     }
 }
 
-/* Ajustes específicos para pantallas muy pequeñas */
+/* Ajustes especÃ­ficos para pantallas muy pequeÃ±as */
 @media (max-width: 480px) {
     .modern-shadow-small,
     .modern-shadow-medium,
@@ -2995,7 +2995,7 @@ body {
 }
 
 @media (max-width: 768px) {
-    /* Navegación móvil mejorada */
+    /* NavegaciÃ³n mÃ³vil mejorada */
     .nav-links {
         display: none;
     }
@@ -3015,7 +3015,7 @@ body {
         gap: 1.5rem;
     }
     
-    /* Image viewer en móvil */
+    /* Image viewer en mÃ³vil */
     .close-btn,
     .nav-btn {
         width: 45px;
@@ -3048,7 +3048,7 @@ body {
         padding: 2rem;
     }
     
-    /* Botones más grandes en móvil */
+    /* Botones mÃ¡s grandes en mÃ³vil */
     .btn-primary,
     .btn-secondary,
     button:not(.nav-toggle):not(.ios-menu-close) {
@@ -3056,7 +3056,7 @@ body {
         font-size: 1.1rem;
     }
     
-    /* Optimizar elementos con transición en móvil */
+    /* Optimizar elementos con transiciÃ³n en mÃ³vil */
     .service-item,
     .experience-item,
     .recommendation-item,
@@ -3066,7 +3066,7 @@ body {
 }
 
 @media (max-width: 480px) {
-    /* Espaciado más compacto */
+    /* Espaciado mÃ¡s compacto */
     section {
         padding: 3rem 0;
     }
@@ -3077,13 +3077,13 @@ body {
         margin: 0 0.5rem;
     }
     
-    /* Image viewer en pantallas muy pequeñas */
+    /* Image viewer en pantallas muy pequeÃ±as */
     .image-viewer img {
         max-width: 95%;
         max-height: 85%;
     }
     
-    /* Elementos más compactos */
+    /* Elementos mÃ¡s compactos */
     .service-item,
     .experience-item,
     .recommendation-item,
