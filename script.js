@@ -220,6 +220,31 @@ function initGalleryPage() {
             const shouldShow = type === 'all' || item.dataset.type === type;
             item.style.display = shouldShow ? '' : 'none';
         });
+
+        const groups = Array.from(container.querySelectorAll('.gallery-group'));
+        groups.forEach((group) => {
+            const groupItems = Array.from(group.querySelectorAll('.gallery-item'));
+            const anyVisible = groupItems.some((item) => item.style.display !== 'none');
+            group.style.display = anyVisible ? '' : 'none';
+        });
+    }
+
+    function scrollToFiltered(type) {
+        const section = document.getElementById('gallery');
+        if (!section) return;
+
+        let target = null;
+        if (type === 'all') {
+            target = section;
+        } else {
+            const firstItem = container.querySelector(`.gallery-item[data-type="${type}"]`);
+            target = firstItem?.closest('.gallery-group') || firstItem || section;
+        }
+
+        const navbar = document.querySelector('.navbar');
+        const offset = (navbar?.offsetHeight || 0) + 12;
+        const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+        window.scrollTo({ top: Math.max(top, 0), behavior: 'smooth' });
     }
 
     function initFilters() {
@@ -231,7 +256,9 @@ function initGalleryPage() {
                 });
                 btn.classList.add('is-active');
                 btn.setAttribute('aria-selected', 'true');
-                applyFilters(btn.dataset.filter || 'all');
+                const filter = btn.dataset.filter || 'all';
+                applyFilters(filter);
+                scrollToFiltered(filter);
             });
         });
     }

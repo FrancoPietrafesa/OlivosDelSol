@@ -84,6 +84,14 @@ body.index-page .navbar {
 
 body.index-page {
     --section-cream: var(--cream);
+    background: var(--cream);
+    color: var(--ink);
+}
+
+/* Evitar banda oscura debajo del hero en index */
+body.index-page .home-section {
+    background: transparent;
+    padding: 0;
 }
 
 body.index-page .navbar::before {
@@ -3151,21 +3159,25 @@ body {
 }
 
 .gallery-filter {
-    background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.12);
-    color: var(--ink);
-    padding: 0.45rem 1.1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 1.2rem;
     border-radius: 999px;
+    background: var(--cream-strong) !important;
+    border: 1px solid var(--cream-border) !important;
+    color: var(--ink) !important;
+    text-decoration: none;
     font-weight: 600;
     cursor: pointer;
     transition: all 0.2s ease;
+    box-shadow: none !important;
 }
 
 .gallery-filter.is-active,
 .gallery-filter:focus-visible {
-    background: var(--cream-strong);
+    background: var(--cream);
     border-color: var(--cream-border);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
     outline: none;
 }
 

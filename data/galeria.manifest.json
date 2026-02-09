@@ -4,8 +4,8 @@
     {
       "type": "casa",
       "slug": "aromo-azl",
-      "rawName": "aromo azúl",
-      "displayName": "aromo azúl",
+      "rawName": "Aromo azul",
+      "displayName": "Aromo azul",
       "description": "Texturas nobles y un clima suave para una estadia relajada.",
       "amenities": {
         "aireAcondicionado": true,
@@ -49,8 +49,8 @@
     {
       "type": "casa",
       "slug": "frantoio",
-      "rawName": "frantoio",
-      "displayName": "frantoio",
+      "rawName": "Frantoio",
+      "displayName": "Frantoio",
       "description": "Un refugio sereno con esencia local y comodidades esenciales.",
       "amenities": {
         "aireAcondicionado": true,
@@ -84,8 +84,8 @@
     {
       "type": "casa",
       "slug": "los-ciruelos",
-      "rawName": "los ciruelos",
-      "displayName": "los ciruelos",
+      "rawName": "Los ciruelos",
+      "displayName": "Los ciruelos",
       "description": "Disenado para desconectar, con calma y privacidad.",
       "amenities": {
         "aireAcondicionado": false,
@@ -187,8 +187,8 @@
     {
       "type": "casa",
       "slug": "piscina-principal",
-      "rawName": "piscina principal",
-      "displayName": "piscina principal",
+      "rawName": "Piscina principal",
+      "displayName": "Piscina principal",
       "description": "Texturas nobles y un clima suave para una estadia relajada.",
       "amenities": {
         "aireAcondicionado": true,
@@ -215,8 +215,8 @@
     {
       "type": "casa",
       "slug": "piscina-privada",
-      "rawName": "piscina privada",
-      "displayName": "piscina privada",
+      "rawName": "Piscina privada",
+      "displayName": "Piscina privada",
       "description": "Un refugio sereno con esencia local y comodidades esenciales.",
       "amenities": {
         "aireAcondicionado": true,
@@ -244,8 +244,8 @@
     {
       "type": "casa",
       "slug": "pocitana",
-      "rawName": "pocitana",
-      "displayName": "pocitana",
+      "rawName": "Pocitana",
+      "displayName": "Pocitana",
       "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
       "amenities": {
         "aireAcondicionado": true,
@@ -270,8 +270,8 @@
     {
       "type": "casa",
       "slug": "salon-principal",
-      "rawName": "salon principal",
-      "displayName": "salon principal",
+      "rawName": "Salon principal",
+      "displayName": "Salon principal",
       "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
       "amenities": {
         "aireAcondicionado": true,
@@ -300,8 +300,8 @@
     {
       "type": "evento",
       "slug": "salon-principal",
-      "rawName": "salon principal",
-      "displayName": "salon principal",
+      "rawName": "Salon principal",
+      "displayName": "Salon principal",
       "description": "Ambientes calidos con vistas abiertas y mobiliario confortable.",
       "amenities": null,
       "characteristics": null,
