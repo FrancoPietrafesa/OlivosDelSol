@@ -18,7 +18,7 @@
 
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
 
-    <link href="https://fonts.googleapis.com/css2?family=Gloock&family=Merriweather+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="style.css">
 
@@ -69,7 +69,7 @@
 
             <li class="nav-more">
 
-                <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Mas</button>
+                <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Más</button>
 
                 <ul class="nav-more-menu" role="menu">
 
@@ -131,81 +131,110 @@
 
                 <h2 data-i18n="contact.title">Contacto</h2>
 
-                <p>Estamos aquí para ayudarte a planificar tu estadía perfecta en San Juan. Contáctanos para reservas, consultas o cualquier información que necesites.</p>
+                <p>Estamos aqué para ayudarte a planificar tu estadía perfecta en San Juan. Contáctanos para reservas, consultas o cualquier información que necesites.</p>
 
             </div>
 
             
 
-            <div class="contact-content">
-
-                <div class="contact-card">
-
-                    <div class="contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M6.62,10.79C8.06,13.62 10.38,15.94 13.21,17.38L15.41,15.18C15.69,14.9 16.08,14.82 16.43,14.93C17.55,15.3 18.75,15.5 20,15.5A1,1 0 0,1 21,16.5V20A1,1 0 0,1 20,21A17,17 0 0,1 3,4A1,1 0 0,1 4,3H7.5A1,1 0 0,1 8.5,4C8.5,5.25 8.7,6.45 9.07,7.57C9.18,7.92 9.1,8.31 8.82,8.59L6.62,10.79Z"/>
-
-                        </svg>
-
+            <div class="location-showcase">
+                <div class="location-map-panel">
+                    <div class="location-coordinates">
+                        <span>Coordenadas</span>
+                        <strong>31.6582° S, 68.5247° W</strong>
                     </div>
-
-                    <h3>Teléfono</h3>
-
-                    <p>Llamanos directamente para reservas y consultas</p>
-
-                    <a href="tel:+542644444000" class="contact-link">+54 264 444-4000</a>
-
+                    <iframe
+                        title="Mapa Hotel Olivos del Sol"
+                        src="https://maps.google.com/maps?hl=es&ll=-31.6582,-68.5247&z=13&output=embed"
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    <a class="location-map-cta"
+                       href="https://maps.google.com/?q=Ruta+40+Calle+8+Pocito+San+Juan+Argentina"
+                       target="_blank" rel="noopener noreferrer">Ver en Google Maps</a>
                 </div>
 
-                
+                <div class="location-info-panel">
+                    <p class="location-kicker">Nuestra ubicación</p>
+                    <h3>Encontranos en el corazón de San Juan</h3>
+                    <p class="location-copy">
+                        Entre olivares y tranquilidad, estamos en Pocito - Villa Aberastain, con acceso rápido a la ciudad
+                        y a los principales puntos turísticos.
+                    </p>
 
-                <div class="contact-card">
-
-                    <div class="contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M12,11.5A2.5,2.5 0 0,1 9.5,9A2.5,2.5 0 0,1 12,6.5A2.5,2.5 0 0,1 14.5,9A2.5,2.5 0 0,1 12,11.5M12,2A7,7 0 0,0 5,9C5,14.25 12,22 12,22C12,22 19,14.25 19,9A7,7 0 0,0 12,2Z"/>
-
-                        </svg>
-
+                    <div class="location-info-cards">
+                        <article class="location-info-card location-info-card--full">
+                            <h4>Dirección</h4>
+                            <p>Ruta 40 y Calle 8, Pocito - Villa Aberastain, San Juan, Argentina.</p>
+                        </article>
+                        <article class="location-info-card">
+                            <h4>Teléfono</h4>
+                            <a href="tel:+542644444000">+54 264 444-4000</a>
+                        </article>
+                        <article class="location-info-card">
+                            <h4>Email</h4>
+                            <a href="mailto:info@olivosdelsol.com">info@olivosdelsol.com</a>
+                        </article>
                     </div>
 
-                    <h3>Ubicación</h3>
-
-                    <p>Visítanos en nuestro ubicación privilegiada</p>
-
-                    <a href="https://maps.google.com/?q=Ruta+40+Calle+8+Pocito+San+Juan+Argentina" target="_blank" rel="noopener noreferrer" class="contact-link">Ver en Google Maps</a>
-
-                </div>
-
-                
-
-                <div class="contact-card">
-
-                    <div class="contact-icon">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M20,8L12,13L4,8V6L12,11L20,6M20,4H4C2.89,4 2,4.89 2,6V18A2,2 0 0,0 4,20H20A2,2 0 0,0 22,18V6C22,4.89 21.1,4 20,4Z"/>
-
-                        </svg>
-
+                    <div class="getting-here">
+                        <h4>C&oacute;mo llegar</h4>
+                        <div class="getting-here-item">
+                            <div class="getting-here-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5 11L6.5 6.5C6.8 5.6 7.6 5 8.5 5h7c.9 0 1.7.6 2 1.5L19 11h1c.6 0 1 .4 1 1v3c0 .6-.4 1-1 1h-1v1.2c0 .4-.4.8-.8.8h-1.4c-.4 0-.8-.4-.8-.8V16H8v1.2c0 .4-.4.8-.8.8H5.8c-.4 0-.8-.4-.8-.8V16H4c-.6 0-1-.4-1-1v-3c0-.6.4-1 1-1h1zm2.6 0h8.8l-1.1-3.3c-.1-.4-.5-.7-.9-.7H9.6c-.4 0-.8.3-.9.7L7.6 11zM7 14.5a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4zm10 0a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z"/>
+                                </svg>
+                            </div>
+                            <div class="getting-here-body">
+                                <h5>Desde San Juan Capital (15 min)</h5>
+                                <ul>
+                                    <li>Tom&aacute; RN40 (Ruta 40) hacia el sur.</li>
+                                    <li>Gir&aacute; en Calle 8 y continu&aacute; hasta el acceso al hotel.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="getting-here-item">
+                            <div class="getting-here-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M5 11L6.5 6.5C6.8 5.6 7.6 5 8.5 5h7c.9 0 1.7.6 2 1.5L19 11h1c.6 0 1 .4 1 1v3c0 .6-.4 1-1 1h-1v1.2c0 .4-.4.8-.8.8h-1.4c-.4 0-.8-.4-.8-.8V16H8v1.2c0 .4-.4.8-.8.8H5.8c-.4 0-.8-.4-.8-.8V16H4c-.6 0-1-.4-1-1v-3c0-.6.4-1 1-1h1zm2.6 0h8.8l-1.1-3.3c-.1-.4-.5-.7-.9-.7H9.6c-.4 0-.8.3-.9.7L7.6 11zM7 14.5a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4zm10 0a1.2 1.2 0 100-2.4 1.2 1.2 0 000 2.4z"/>
+                                </svg>
+                            </div>
+                            <div class="getting-here-body">
+                                <h5>Desde Mendoza (aprox. 2 h 30 min)</h5>
+                                <ul>
+                                    <li>Tom&aacute; RN40 rumbo norte hacia San Juan.</li>
+                                    <li>Al llegar a Pocito, ingres&aacute; por Calle 8 hacia Ruta 40.</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="getting-here-item">
+                            <div class="getting-here-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 00-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5l8 2.5z"/>
+                                </svg>
+                            </div>
+                            <div class="getting-here-body">
+                                <h5>Desde Aeropuerto Domingo F. Sarmiento - UAQ (25 min)</h5>
+                                <ul>
+                                    <li>Sal&iacute; por el acceso del aeropuerto hacia Circunvalaci&oacute;n.</li>
+                                    <li>Tom&aacute; RN40 rumbo sur en direcci&oacute;n a Pocito.</li>
+                                    <li>Ofrecemos traslado privado a pedido para tu llegada.</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
 
-                    <h3>Email</h3>
-
-                    <p>Envíanos un mensaje y te responderemos pronto</p>
-
-                    <a href="mailto:info@olivosdelsol.com" class="contact-link">info@olivosdelsol.com</a>
-
+                    <div class="location-actions">
+                        <a href="https://maps.google.com/?q=Ruta+40+Calle+8+Pocito+San+Juan+Argentina"
+                           target="_blank" rel="noopener noreferrer" class="location-action location-action--primary">
+                            Abrir en Google Maps
+                        </a>
+                        <a href="https://wa.me/?text=Hotel%20Olivos%20del%20Sol%20-%20Ubicaci%C3%B3n%3A%20https%3A%2F%2Fmaps.google.com%2F%3Fq%3DRuta%2B40%2BCalle%2B8%2BPocito%2BSan%2BJuan%2BArgentina"
+                           target="_blank" rel="noopener noreferrer" class="location-action location-action--ghost">
+                            Compartir ubicaci&oacute;n
+                        </a>
+                    </div>
                 </div>
-
             </div>
-
-            
 
             <div class="social-section">
 
@@ -392,11 +421,6 @@
 
 
 </html>
-
-
-
-
-
 
 
 

@@ -36,7 +36,7 @@ const translations = {
         services: {title: 'Servicios', room: 'Habitaciones confortables', roomDesc: 'Amplias y luminosas habitaciones con todas las comodidades.', restaurant: 'Restaurante', restaurantDesc: 'Gastronomía regional e internacional de alta calidad.', pool: 'Piscina', poolDesc: 'Piscina al aire libre para relajarse y disfrutar del sol.', wifi: 'Wi‑Fi gratuito', wifiDesc: 'Acceso a internet de alta velocidad en todo el hotel.', parking: 'Estacionamiento', parkingDesc: 'Estacionamiento seguro para su vehículo.', spa: 'Spa & bienestar', spaDesc: 'Sesiones de masajes y tratamientos relajantes.'},
         gallery: {title: 'Galería'},
         experiences: {title: 'Experiencias', jose: '“Una estadía maravillosa. El personal nos hizo sentir como en casa y la piscina es espectacular.”', ana: '“Las habitaciones son amplias y cómodas. La comida en el restaurante fue deliciosa.”', luis: '“El hotel está cerca de muchas bodegas interesantes. ¡Sin duda volveré!”'},
-        recommendations: {title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMas: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.'},
+        recommendations: {title: 'Recomendaciones Turísticas', lasMarianas: 'Ubicada en calle Nueva s/n entre Av. Aberastain y Vidart, La Rinconada, Pocito, San Juan. Es una bodega familiar tranquila donde puedes conocer su antigua cava subterránea y degustar vinos premiados.', segisa: 'Situada en Aberastain y calle 15, Pocito. Esta bodega con cavas subterráneas permite descubrir la historia y el proceso del vino, y ofrece almuerzos acompañados de platos típicos en un ambiente acogedor.', fabril: 'En Ruta Nacional 40 entre calles 13 y 14, Pocito. Esta bodega pionera en vinos orgánicos ofrece visitas guiadas, degustaciones y venta de sus vinos y espumantes certificados.', miguelMás: 'Ubicada en la RP 215, Villa Aberastain. Es una moderna champañera familiar donde se degustan espumantes orgánicos y se disfruta de un almuerzo participativo con pizzas al horno.'},
         reservations: {title: 'Reservas', searchTitle: 'Búsqueda inicial', checkin: 'Fecha de entrada:', checkout: 'Fecha de salida:', guests: 'Huéspedes:', rooms: 'Habitaciones:', next: 'Siguiente', back: 'Atrás', selectTitle: 'Selecciona tu habitación', standard: 'Habitación estándar', suite: 'Suite', premium: 'Premium', summaryTitle: 'Resumen de la reserva', guestTitle: 'Datos del huésped', name: 'Nombre completo:', email: 'Correo electrónico:', phone: 'Teléfono:', paymentTitle: 'Forma de pago', paymentInstructions: 'Selecciona tu método de pago preferido:', paymentCard: 'Tarjeta de Débito/Crédito', paymentCardDesc: 'Pago seguro con tarjeta', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Pago rápido y seguro con MercadoPago', paymentCash: 'Efectivo en el local', paymentCashDesc: 'Pagarás al llegar al hotel', confirmationTitle: 'Confirmación', confirmationMessage: '¡Gracias por reservar con nosotros! Tu reserva ha sido recibida.', whatsappMessage: 'Puedes enviar un mensaje por WhatsApp para confirmar tu estadía:', finish: 'Enviar', sending: 'Enviando...', sent: 'Enviado'},
         contact: {title: 'Contacto', addressLabel: 'Dirección:', phoneLabel: 'Teléfono:'}
     },
@@ -45,10 +45,10 @@ const translations = {
         nav: {home: 'Home', services: 'Services', gallery: 'Gallery', experiences: 'Experiences', recommendations: 'Attractions', reservations: 'Bookings', guides: 'Tours', contact: 'Contact'},
         header: {logo: 'Hotel Olivos del Sol'},
         home: {title: 'Welcome to Hotel Olivos del Sol', subtitle: 'An oasis of tranquility and comfort in Pocito, San Juan.', description: 'Our hotel offers modern rooms, first-class services and exceptional attention to make your stay unforgettable.'},
-        services: {title: 'Services', room: 'Comfortable Rooms', roomDesc: 'Spacious and bright rooms with every comfort.', restaurant: 'Restaurant', restaurantDesc: 'High-quality regional and international gastronomy.', pool: 'Pool', poolDesc: 'Outdoor pool to relax and enjoy the sun.', wifi: 'Free Wi‑Fi', wifiDesc: 'High-speed internet access throughout the hotel.', parking: 'Parking', parkingDesc: 'Secure parking for your vehicle.', spa: 'Spa & Wellness', spaDesc: 'Massage sessions and relaxing treatments.'},
+        services: {title: 'Services', room: 'Comfortable Rooms', roomDesc: 'Spacious and bright rooms with every comfort.', restaurant: 'Restaurant', restaurantDesc: 'High-quality regional and international gastronomy.', pool: 'Pool', poolDesc: 'Outdoor pool to relax and enjoy the sun.', wifi: 'Free Wi‑Fi', wifiDesc: 'High-speed internet access throughout the hotel.', parking: 'Parking', parkingDesc: 'Secure parking for your vehicle.', spa: 'Spa & Wellness', spaDesc: 'Mássage sessions and relaxing treatments.'},
         gallery: {title: 'Gallery'},
         experiences: {title: 'Experiences', jose: '“A wonderful stay. The staff made us feel at home and the pool is spectacular.”', ana: '“The rooms are spacious and comfortable. The food in the restaurant was delicious.”', luis: '“The hotel is close to many interesting wineries. I will definitely return!”'},
-        recommendations: {title: 'Tourist Recommendations', lasMarianas: 'Located on Calle Nueva between Av. Aberastain and Vidart, La Rinconada, Pocito. This family winery features an old underground cellar and award-winning wines.', segisa: 'Located at Aberastain and Calle 15, Pocito. This boutique winery lets visitors discover the history and winemaking process and offers lunches with local dishes in a cozy atmosphere.', fabril: 'On National Route 40 between streets 13 and 14, Pocito. This pioneer organic winery offers guided tours, tastings and sales of its certified wines and sparkling wines.', miguelMas: 'Located on RP 215, Villa Aberastain. This modern family sparkling wine house offers organic sparkling wine tastings and a participatory lunch with pizza baked in a wood oven.'},
+        recommendations: {title: 'Tourist Recommendations', lasMarianas: 'Located on Calle Nueva between Av. Aberastain and Vidart, La Rinconada, Pocito. This family winery features an old underground cellar and award-winning wines.', segisa: 'Located at Aberastain and Calle 15, Pocito. This boutique winery lets visitors discover the history and winemaking process and offers lunches with local dishes in a cozy atmosphere.', fabril: 'On National Route 40 between streets 13 and 14, Pocito. This pioneer organic winery offers guided tours, tastings and sales of its certified wines and sparkling wines.', miguelMás: 'Located on RP 215, Villa Aberastain. This modern family sparkling wine house offers organic sparkling wine tastings and a participatory lunch with pizza baked in a wood oven.'},
         reservations: {title: 'Bookings', searchTitle: 'Initial search', checkin: 'Check‑in date:', checkout: 'Check‑out date:', guests: 'Guests:', rooms: 'Rooms:', next: 'Next', back: 'Back', selectTitle: 'Choose your room', standard: 'Standard room', suite: 'Suite', premium: 'Premium', summaryTitle: 'Booking summary', guestTitle: 'Guest details', name: 'Full name:', email: 'Email:', phone: 'Phone:', paymentTitle: 'Payment method', paymentInstructions: 'Select your preferred payment method:', paymentCard: 'Debit/Credit Card', paymentCardDesc: 'Secure card payment', paymentMercadopago: 'MercadoPago', paymentMercadopagoDesc: 'Quick and secure payment with MercadoPago', paymentCash: 'Cash at the hotel', paymentCashDesc: 'You will pay when you arrive at the hotel', confirmationTitle: 'Confirmation', confirmationMessage: 'Thank you for booking with us! Your booking has been received.', whatsappMessage: 'You can send a message via WhatsApp to confirm your stay:', finish: 'Finish'},
         contact: {title: 'Contact', addressLabel: 'Address:', phoneLabel: 'Phone:'}
     }
@@ -153,7 +153,7 @@ function initGalleryPage() {
         media.className = 'gallery-item__media';
         const img = document.createElement('img');
         img.src = item.cover || (item.images[0] || '');
-        img.alt = item.displayName || item.rawName || 'Galeria';
+        img.alt = item.displayName || item.rawName || 'Galería';
         img.loading = 'lazy';
         media.appendChild(img);
 
@@ -282,7 +282,7 @@ function initGalleryPage() {
     function openModal(item) {
         if (!modal) return;
         modalState.images = item.images || [];
-        modalState.title = item.displayName || 'Galeria';
+        modalState.title = item.displayName || 'Galería';
         modalState.index = 0;
         if (modalTitle) modalTitle.textContent = modalState.title;
         if (modalThumbs) {
@@ -1058,6 +1058,7 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 
     // Notificación server-side: el envío se realiza automáticamente por el servidor al pulsar Finalizar
+    initSectionFixedArrows();
     initGalleryPage();
 });
 
@@ -1172,3 +1173,94 @@ function initMobileMenu() {
 
 
 // Menú móvil: se inicializa en DOMContentLoaded vía initMobileMenu().
+
+function initSectionFixedArrows() {
+    if (!document.body.classList.contains('index-page')) return;
+
+    const sectionIds = ['home', 'why-us', 'around-us', 'testimonios', 'visit-us', 'faq'];
+    const sections = sectionIds
+        .map((id) => document.getElementById(id))
+        .filter(Boolean);
+
+    if (sections.length < 2) return;
+
+    const arrowEntries = [];
+
+    sections.forEach((section, index) => {
+        if (index === sections.length - 1) return;
+        const nextSection = sections[index + 1];
+        if (!nextSection) return;
+
+        let arrow = section.querySelector('.scroll-down--section-fixed');
+        if (!arrow) {
+            arrow = document.createElement('a');
+            arrow.className = 'scroll-down scroll-down--section-fixed scroll-down--gradient';
+            arrow.innerHTML = '<span class="scroll-down__icon">↓</span>';
+            section.appendChild(arrow);
+        }
+
+        const title = nextSection.querySelector('h2, h1')?.textContent?.trim() || 'la siguiente seccion';
+        arrow.setAttribute('href', `#${nextSection.id}`);
+        arrow.setAttribute('aria-label', `Bajar a ${title}`);
+
+        arrowEntries.push({ section, arrow });
+    });
+
+    arrowEntries.forEach(({ arrow }) => {
+        arrow.addEventListener('click', (event) => {
+            event.preventDefault();
+            const href = arrow.getAttribute('href');
+            if (!href || !href.startsWith('#')) return;
+
+            const target = document.querySelector(href);
+            if (!target) return;
+
+            const navbar = document.querySelector('.navbar');
+            const navbarOffset = navbar ? navbar.offsetHeight : 0;
+            const top = target.getBoundingClientRect().top + window.pageYOffset - navbarOffset - 8;
+
+            window.scrollTo({
+                top: Math.max(top, 0),
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    function getCurrentSectionIndex() {
+        const referencePoint = window.innerHeight * 0.35;
+        let closestIndex = 0;
+        let closestDistance = Number.POSITIVE_INFINITY;
+
+        sections.forEach((section, index) => {
+            const rect = section.getBoundingClientRect();
+            const distance = Math.abs(rect.top - referencePoint);
+            if (distance < closestDistance) {
+                closestDistance = distance;
+                closestIndex = index;
+            }
+        });
+
+        return closestIndex;
+    }
+
+    function updateActiveArrow() {
+        const activeIndex = getCurrentSectionIndex();
+        arrowEntries.forEach(({ section, arrow }) => {
+            const isActive = section === sections[activeIndex] && activeIndex < sections.length - 1;
+            arrow.classList.toggle('is-active', isActive);
+        });
+    }
+
+    let ticking = false;
+    window.addEventListener('scroll', () => {
+        if (ticking) return;
+        ticking = true;
+        window.requestAnimationFrame(() => {
+            updateActiveArrow();
+            ticking = false;
+        });
+    }, { passive: true });
+
+    window.addEventListener('resize', updateActiveArrow, { passive: true });
+    updateActiveArrow();
+}
