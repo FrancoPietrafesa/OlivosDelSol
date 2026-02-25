@@ -166,9 +166,9 @@ body.index-page .nav-cta:hover {
     font-family: var(--font-heading);
     font-weight: 500;
     font-size: 1.35rem;
-    color: #fff;
+    color: #000000;
     letter-spacing: 0.02em;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
 }
 
 .nav-links {
@@ -186,13 +186,13 @@ body.index-page .nav-cta:hover {
 
 .nav-links a {
     text-decoration: none;
-    color: #fff;
+    color: #000000;
     font-weight: 500;
     font-size: 1rem;
     transition: all 0.3s ease;
     position: relative;
     padding: 0.5rem 0;
-    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+    text-shadow: none;
     letter-spacing: 0.02em;
 }
 
@@ -240,8 +240,8 @@ body.index-page .nav-more-toggle:hover {
 }
 
 .nav-more-toggle:hover {
-    color: inherit;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    color: #000000;
+    text-shadow: none;
 }
 
 .nav-more-toggle:hover::after {
@@ -293,8 +293,8 @@ body.index-page .nav-more-toggle:hover {
 }
 
 .nav-links a:hover {
-    color: #fff;
-    text-shadow: 0 1px 3px rgba(255, 255, 255, 0.5);
+    color: #000000;
+    text-shadow: none;
 }
 
 .nav-links a:hover::after {
@@ -2653,7 +2653,7 @@ body.contact-page footer {
 
 /* PÃ¡gina de Recomendaciones - Estilo Ãºnico */
 body.recommendations-page {
-    background: linear-gradient(135deg, #2a2a2a 0%, #1a1a1a 100%);
+    background: var(--cream);
 }
 
 body.recommendations-page .recommendations-section {
@@ -2687,6 +2687,222 @@ body.recommendations-page footer {
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+/* Footer oscuro unificado para inicio, galeria y recomendaciones */
+body.index-page footer,
+body.gallery-page footer,
+body.recommendations-page footer {
+    background: linear-gradient(135deg, #111111 0%, #1a1a1a 45%, #222222 100%);
+    color: #f2f2f2;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+body.index-page footer::before,
+body.gallery-page footer::before,
+body.recommendations-page footer::before {
+    display: none;
+}
+
+body.index-page footer .hotel-address,
+body.index-page footer .footer-contact,
+body.index-page footer .footer-contact h4,
+body.index-page footer .footer-contact p,
+body.index-page footer .footer-social,
+body.index-page footer .footer-social h4,
+body.index-page footer .hotel-phone,
+body.index-page footer a,
+body.index-page footer .social-link,
+body.gallery-page footer .hotel-address,
+body.gallery-page footer .footer-contact,
+body.gallery-page footer .footer-contact h4,
+body.gallery-page footer .footer-contact p,
+body.gallery-page footer .footer-social,
+body.gallery-page footer .footer-social h4,
+body.gallery-page footer .hotel-phone,
+body.gallery-page footer a,
+body.gallery-page footer .social-link,
+body.recommendations-page footer .hotel-address,
+body.recommendations-page footer .footer-contact,
+body.recommendations-page footer .footer-contact h4,
+body.recommendations-page footer .footer-contact p,
+body.recommendations-page footer .footer-social,
+body.recommendations-page footer .footer-social h4,
+body.recommendations-page footer .hotel-phone,
+body.recommendations-page footer a,
+body.recommendations-page footer .social-link {
+    color: #f2f2f2;
+}
+
+/* Recomendaciones estilo storytelling */
+.wine-story {
+    max-width: none;
+    margin: 0;
+    width: 100%;
+}
+
+.wine-story__header {
+    margin-bottom: 2.25rem;
+    max-width: 1380px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wine-story__eyebrow {
+    display: block;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #d26d35;
+    margin-bottom: 0.85rem;
+    text-align: center;
+}
+
+.wine-story__title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    gap: 1.5rem;
+}
+
+.wine-story__title-row > div {
+    max-width: 760px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.wine-story h2 {
+    color: #1f1f1f;
+    margin: 0 0 0.75rem 0;
+    text-shadow: none;
+    text-align: center;
+}
+
+#recommendations.wine-story h2 {
+    color: #1f1f1f;
+    text-shadow: none;
+}
+
+.wine-story__lead {
+    margin: 0;
+    max-width: 760px;
+    color: #4a4a4a;
+    line-height: 1.7;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.wine-story__map-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    border: 1px solid #d2c3a8;
+    border-radius: 999px;
+    padding: 0.7rem 1rem;
+    text-decoration: none;
+    color: #333333;
+    background: #f3ebdc;
+    white-space: nowrap;
+    font-weight: 600;
+}
+
+.wine-story__map-btn:hover {
+    border-color: #beab89;
+    background: #ece1cd;
+}
+
+.wine-story__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem;
+    max-width: 1380px;
+    margin: 0 auto;
+}
+
+.wine-stop {
+    background: #f6efe1;
+    border: 1px solid #e2d5bd;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.wine-stop__media {
+    margin: 0;
+    position: relative;
+    aspect-ratio: 16 / 10;
+}
+
+.wine-stop__media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.wine-stop__media figcaption {
+    position: absolute;
+    left: 0.8rem;
+    bottom: 0.8rem;
+    margin: 0;
+    padding: 0.25rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(20, 20, 20, 0.75);
+    color: #f8f4ea;
+    font-size: 0.65rem;
+    letter-spacing: 0.13em;
+    text-transform: uppercase;
+}
+
+.wine-stop__body {
+    padding: 1rem 1.1rem 1.1rem;
+}
+
+.wine-stop__body h3 {
+    margin: 0 0 0.5rem 0;
+    color: #1b1b1b;
+}
+
+.wine-stop__body p {
+    margin: 0;
+    color: #545454;
+    line-height: 1.65;
+}
+
+.wine-stop__meta {
+    margin-top: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.wine-stop__meta a {
+    text-decoration: none;
+    color: #cf6534;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 0.75rem;
+}
+
+.wine-stop__meta span {
+    color: #cf6534;
+    font-weight: 700;
+    font-size: 0.78rem;
+}
+
+@media (max-width: 900px) {
+    .wine-story__title-row {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .wine-story__grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* PÃ¡gina de Reservas - Estilo Ãºnico */
 body.reservations-page {
     background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
@@ -2717,7 +2933,7 @@ body.reservations-page footer {
    ========================= */
 .btn-primary,
 .btn-secondary,
-button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button),
+button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle):not(.reservation-step button),
 input[type="submit"],
 input[type="button"] {
     padding: 0.875rem 2rem;
@@ -2736,7 +2952,7 @@ input[type="button"] {
 }
 
 .btn-primary:hover,
-button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button):hover,
+button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle):not(.reservation-step button):hover,
 input[type="submit"]:hover,
 input[type="button"]:hover {
     background: linear-gradient(135deg, #6b813f, #7d9248);
@@ -2745,7 +2961,7 @@ input[type="button"]:hover {
 }
 
 .btn-primary:active,
-button:not(.nav-toggle):not(.ios-menu-close):not(.reservation-step button):active,
+button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle):not(.reservation-step button):active,
 input[type="submit"]:active,
 input[type="button"]:active {
     transform: translateY(0);
@@ -3062,7 +3278,7 @@ body {
     /* Botones mÃ¡s grandes en mÃ³vil */
     .btn-primary,
     .btn-secondary,
-    button:not(.nav-toggle):not(.ios-menu-close) {
+    button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle) {
         padding: 1rem 1.5rem;
         font-size: 1.1rem;
     }
