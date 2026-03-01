@@ -51,6 +51,31 @@ Seguridad
 --------
 Nunca compartas tus credenciales SMTP públicamente. Guarda `.env` fuera del control de versiones o usa secretos en tu hosting.
 
+Despliegue 24/7 (reservas siempre disponibles)
+---------------------------------------------
+Para que el proceso quede funcionando 24/7 y la web pueda enviar reservas en cualquier momento:
+
+1. **Railway** (recomendado, gratis para bajo tráfico):
+   - Conectá el repo o subí la carpeta `server`.
+   - Variables de entorno: `SMTP_*`, `OWNER_EMAIL`, `GOOGLE_SERVICE_ACCOUNT_EMAIL`, `GOOGLE_PRIVATE_KEY`, opcionalmente `GOOGLE_SHEET_ID` y `GOOGLE_SHEET_RANGE`.
+   - Railway asigna una URL pública (ej. `https://tu-app.up.railway.app`). En el frontend, configurá esa URL como base para las llamadas a `/api/reservations` y `/api/availability` (o usá un proxy en tu hosting del sitio).
+
+2. **Render** (plan free con “spin down” tras inactividad):
+   - Creá un Web Service, repo = tu proyecto, comando `node server.js` (o `npm start`) en la carpeta `server`.
+   - Mismas variables de entorno que arriba. La URL será tipo `https://tu-servicio.onrender.com`.
+
+3. **VPS** (DigitalOcean, Vultr, etc.):
+   - Instalá Node.js, cloná el repo, `cd server && npm install`, configurá `.env`.
+   - Ejecutá con `pm2 start server.js` (o systemd) para que se reinicie solo y quede corriendo 24/7.
+
+En todos los casos: asegurate de que la **web pública** apunte al backend desplegado. Si el sitio está en Vercel/Netlify y el backend en Railway, en la página de reservas (o en `index.html` si es global) agregá antes de cargar `script.js`:
+
+```html
+<script>window.OLIVOS_API_BASE_URL = 'https://tu-backend.up.railway.app';</script>
+```
+
+Así las llamadas a `/api/availability` y `/api/reservations` irán a ese servidor 24/7.
+
 Siguientes pasos opcionales
 --------------------------
 - Persistir reservas en una base de datos

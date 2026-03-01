@@ -1,475 +1,515 @@
 <!DOCTYPE html>
-
-<html lang="es">
-
-
-
+<html lang="es" class="booking-page">
 <head>
-
-    <meta charset="UTF-8">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Reservas - Hotel Olivos del Sol</title>
-
-    <!-- Favicon -->
-
-    <link rel="icon" type="image/png" href="images/logo_cropped.png">
-
-    <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
-
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-    <link rel="stylesheet" href="style.css">
-
-    <!-- MercadoPago SDK -->
-
-    <script src="https://sdk.mercadopago.com/js/v2"></script>
-
-    <script src="config/mercadopago-config.js"></script>
-
-    <script defer src="script.js"></script>
-
-<script>
-
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
-
-</script>
-
-<script defer src="/_vercel/insights/script.js"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTM55SE79"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservas - Hotel Olivos del Sol</title>
+  <link rel="icon" type="image/png" href="images/logo_cropped.png">
+  <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GRTM55SE79');
+    window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
   </script>
+  <script defer src="/_vercel/insights/script.js"></script>
+  <style>
+    /* Sin franja oscura: html y body crema (también en style.css body.reservations-page.booking-page). */
+    html.booking-page,
+    body.reservations-page.booking-page {
+      background: var(--cream) !important;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+    body.reservations-page.booking-page {
+      color: var(--ink);
+      overflow-x: hidden;
+    }
+
+    /* Preloader crema en esta página (en style.css también) por si se ve al cargar. */
+    body.reservations-page.booking-page #preloader {
+      background: var(--cream) !important;
+    }
+
+    /* Navbar pegado al tope: no queda hueco oscuro arriba. */
+    body.reservations-page.booking-page .navbar {
+      top: 0;
+    }
+
+    /* Header sin altura en el flujo: main queda pegado al inicio del body. */
+    body.reservations-page.booking-page header {
+      height: 0;
+      min-height: 0;
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      border: none;
+    }
+
+    .booking-main {
+      padding-top: 0 !important;
+      margin: 0 !important;
+      min-height: 100vh;
+      background: var(--cream);
+    }
+
+    .booking-layout {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    .booking-hero {
+      position: relative;
+      min-height: 100vh;
+      background-color: var(--cream);
+      background-image: linear-gradient(115deg, rgba(40, 48, 42, 0.22), rgba(30, 38, 34, 0.18)), url('images/inicio/OlivosdelSol-288 (1).jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .booking-hero__copy {
+      position: absolute;
+      left: clamp(1.5rem, 5vw, 4.5rem);
+      bottom: clamp(1.5rem, 8vh, 5rem);
+      margin: 0;
+      color: #f6f1e7;
+      font-family: var(--font-heading);
+      line-height: 0.9;
+      font-size: clamp(2.2rem, 5.5vw, 4.8rem);
+      text-shadow: 0 8px 24px rgba(0,0,0,.35);
+    }
+
+    .booking-panel {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(1.5rem, 4vw, 3.5rem);
+      padding-top: calc(var(--nav-height) + 1rem);
+      background: #f8f5ee;
+      border-left: none;
+      box-shadow: -6px 0 20px rgba(0,0,0,0.06);
+    }
+
+    .booking-card {
+      width: min(590px, 100%);
+      background: #ddd3bc;
+      border: 1px solid #ece3d2;
+      border-radius: 16px;
+      padding: clamp(1.3rem, 3vw, 2.2rem);
+      box-shadow: 0 20px 36px rgba(0,0,0,.12);
+    }
+
+    .reservation-step { display: none; }
+    .reservation-step#step1 { display: block; }
+
+    .booking-title {
+      margin: 0 0 1.4rem;
+      font-size: clamp(2.2rem, 4vw, 3.4rem);
+      line-height: 0.95;
+      color: #101010;
+      text-align: left;
+    }
+
+    .booking-step-title {
+      margin: 0 0 .8rem;
+      color: #111;
+      font-size: clamp(1.5rem, 3.2vw, 2.2rem);
+      line-height: 1;
+    }
+
+    .booking-form-grid {
+      display: grid;
+      gap: .65rem;
+    }
+
+    .booking-label {
+      margin: .3rem 0 .2rem;
+      font-size: 1rem;
+      color: #1f1f1f;
+      font-family: var(--font-body);
+    }
+
+    .booking-input,
+    .booking-select,
+    #guestName,
+    #guestEmail,
+    #guestPhone {
+      width: 100%;
+      border: 1px solid #d8cebb;
+      border-radius: 10px;
+      background: #f3eee4;
+      color: #1d1d1d;
+      padding: .84rem .9rem;
+      font-size: 1rem;
+      font-family: var(--font-body);
+      outline: none;
+    }
+
+    .booking-input:focus,
+    .booking-select:focus,
+    #guestName:focus,
+    #guestEmail:focus,
+    #guestPhone:focus {
+      border-color: #708238;
+      box-shadow: 0 0 0 3px rgba(112,130,56,.17);
+    }
+
+    .error-message {
+      display: none;
+      color: #b12828;
+      font-size: .82rem;
+      margin: -.15rem 0 .05rem;
+      font-family: var(--font-body);
+    }
+
+    .availability-feedback {
+      display: none;
+      font-size: .9rem;
+      font-family: var(--font-body);
+      margin-top: .35rem;
+    }
+
+    .booking-primary,
+    .booking-secondary,
+    .reservation-step button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle) {
+      border: 0;
+      border-radius: 12px;
+      padding: .9rem 1.1rem;
+      font-family: var(--font-body);
+      font-size: .98rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .booking-primary,
+    .reservation-step button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle) {
+      background: linear-gradient(90deg, #4e6232, #708238);
+      color: #f7f3ea;
+      box-shadow: 0 10px 20px rgba(79,101,48,.28);
+    }
+
+    .booking-primary:hover,
+    .reservation-step button:not(.nav-toggle):not(.ios-menu-close):not(.nav-more-toggle):hover {
+      filter: brightness(1.05);
+      transform: translateY(-1px);
+    }
+
+    .booking-secondary {
+      background: transparent;
+      border: 1px solid #5c6e35;
+      color: #223016;
+      box-shadow: none;
+    }
+
+    .booking-actions {
+      margin-top: 1rem;
+      display: flex;
+      gap: .6rem;
+      justify-content: space-between;
+    }
+
+    .booking-choice {
+      display: grid;
+      gap: .55rem;
+    }
+
+    .room-note { font-size: 0.85rem; color: #555; font-style: normal; display: block; margin-top: 0.15rem; }
+    .booking-choice label,
+    .payment-option {
+      display: flex;
+      align-items: center;
+      gap: .55rem;
+      border: 1px solid #d5c9b3;
+      border-radius: 10px;
+      padding: .72rem .82rem;
+      background: #f3eee4;
+      font-family: var(--font-body);
+      color: #1c1c1c;
+    }
+
+    .payment-option.selected {
+      border-color: #506430;
+      box-shadow: 0 0 0 2px rgba(79,101,48,.15);
+    }
+
+    .payment-option-content {
+      display: grid;
+      gap: .1rem;
+    }
+
+    .payment-option-content strong { font-size: .95rem; }
+    .payment-option-content span { font-size: .82rem; color: #555; }
+
+    .booking-box {
+      border: 1px solid #d5c9b3;
+      border-radius: 10px;
+      background: #f3eee4;
+      padding: .82rem;
+      font-family: var(--font-body);
+      color: #1c1c1c;
+      margin-top: .7rem;
+    }
+
+    .booking-summary p { margin: 0 0 .3rem; }
+
+    .booking-trust {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: .6rem;
+      text-align: center;
+      font-family: var(--font-body);
+      font-size: .9rem;
+    }
+
+    .flatpickr-calendar {
+      border-radius: 14px;
+      border: 1px solid #e3dac9;
+      box-shadow: 0 14px 28px rgba(0,0,0,.18);
+    }
+
+    .flatpickr-day.selected,
+    .flatpickr-day.startRange,
+    .flatpickr-day.endRange {
+      background: #4f6530;
+      border-color: #4f6530;
+    }
+
+    .mobile-suites { display: none; }
+
+    .booking-footer-lite {
+      margin: 0;
+      border-top: 1px solid #ddd5c6;
+      background: #f8f5ee;
+      color: #222;
+      text-align: center;
+      padding: 1.1rem;
+      font-size: .88rem;
+    }
+
+    .booking-footer-lite::before { content: none !important; display: none !important; }
+
+    @media (max-width: 980px) {
+      .booking-layout { grid-template-columns: 1fr; min-height: auto; }
+      .booking-hero { min-height: 42vh; }
+      .booking-panel {
+        border-left: 0;
+        margin-top: -34px;
+        background: rgba(248, 245, 238, 0.96);
+        padding: 0 .75rem 1.2rem;
+        padding-top: 1rem;
+      }
+      .booking-card {
+        width: 100%;
+        background: rgba(248,245,238,.86);
+        border-color: rgba(255,255,255,.65);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        padding: 1.05rem;
+      }
+      .booking-title { font-size: clamp(1.95rem, 9vw, 2.45rem); margin-bottom: .9rem; }
+      .booking-trust { font-size: .74rem; gap: .35rem; }
+    }
+
+    @media (max-width: 640px) {
+      .booking-hero { min-height: 36vh; }
+      .booking-hero__copy { font-size: clamp(1.9rem, 10vw, 2.6rem); left: 1rem; bottom: .9rem; }
+      .booking-actions { flex-direction: column; }
+      .booking-actions .booking-secondary,
+      .booking-actions .booking-primary { width: 100%; }
+    }
+  </style>
 </head>
+<body class="reservations-page booking-page">
+  <div id="preloader"><div class="spinner"></div></div>
 
-
-
-<body class="reservations-page">
-
-    <!-- Preloader overlay -->
-
-    <div id="preloader">
-
-        <div class="spinner"></div>
-
-    </div>
-
-    <header>
-
-        <nav class="navbar">
-
-    <div class="nav-left">
-
+  <header>
+    <nav class="navbar">
+      <div class="nav-left">
         <ul class="nav-links nav-links-left">
-
-            <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
-
-            <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
-
-            <li class="nav-more">
-
-                <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Más</button>
-
-                <ul class="nav-more-menu" role="menu">
-
-                    <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
-
-                    <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
-
-                    <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-
-                    <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
-
-                    <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
-
-                </ul>
-
-            </li>
-
+          <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+          <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+          <li class="nav-more">
+            <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Más</button>
+            <ul class="nav-more-menu" role="menu">
+              <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+              <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+              <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
+              <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+              <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
+            </ul>
+          </li>
         </ul>
-
-    </div>
-
-    <div class="logo">
-
+      </div>
+      <div class="logo">
         <a class="logo-link" href="index.html">
-
-            <img src="images/logo.png" alt="Logo Olivos del Sol">
-
-            <span data-i18n="header.logo">Hotel Olivos del Sol</span>
-
+          <img src="images/logo.png" alt="Logo Olivos del Sol">
+          <span data-i18n="header.logo">Hotel Olivos del Sol</span>
         </a>
-
-    </div>
-
-    <div class="nav-right">
-
+      </div>
+      <div class="nav-right">
         <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
-
-            <span class="bar"></span>
-
-            <span class="bar"></span>
-
-            <span class="bar"></span>
-
+          <span class="bar"></span><span class="bar"></span><span class="bar"></span>
         </button>
+      </div>
+    </nav>
+  </header>
 
-    </div>
-
-</nav>
-
-    </header>
-
-
-
-    <section id="reservations" class="reservations-section">
-
-        <h2 data-i18n="reservations.title">Reservas</h2>
-
-        
-
-        <div id="reservation-form">
-
-            <!-- Step 1: Búsqueda inicial -->
-
-            <div class="reservation-step" id="step1">
-
-                <h3 data-i18n="reservations.searchTitle">Búsqueda inicial</h3>
-
-                <label data-i18n="reservations.checkin">Fecha de entrada:</label>
-
-                <input type="date" id="checkin" required>
-
-                <span class="error-message">Seleccione una fecha de entrada</span>
-
-
-
-                <label data-i18n="reservations.checkout">Fecha de salida:</label>
-
-                <input type="date" id="checkout" required>
-
-                <span class="error-message">Seleccione una fecha de salida</span>
-
-
-
-                <label data-i18n="reservations.guests">Huéspedes:</label>
-
-                <input type="number" id="guests" min="1" max="10" required>
-
-                <span class="error-message">Ingrese el número de huéspedes (1-10)</span>
-
-
-
-                <label data-i18n="reservations.rooms">Habitaciones:</label>
-
-                <input type="number" id="rooms" min="1" max="5" required>
-
-                <span class="error-message">Ingrese el número de habitaciones (1-5)</span>
-
-
-
-                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
-
+  <main class="booking-main">
+    <section class="booking-layout" id="reservations">
+      <div class="booking-hero">
+        <h1 class="booking-hero__copy">Tu refugio<br>en San Juan</h1>
+      </div>
+      <div class="booking-panel">
+        <div class="booking-card" id="reservation-form">
+          <div class="reservation-step" id="step1">
+            <h2 class="booking-title">Búsqueda inicial</h2>
+            <div class="booking-form-grid">
+              <input id="checkin" class="booking-input" placeholder="Fecha de entrada">
+              <span class="error-message">Seleccione una fecha de entrada</span>
+              <input id="checkout" class="booking-input" placeholder="Fecha de salida">
+              <span class="error-message">Seleccione una fecha de salida</span>
+              <select id="guests" class="booking-select">
+                <option value="" selected disabled>Huéspedes</option>
+                <option value="1">1 huésped</option><option value="2">2 huéspedes</option>
+                <option value="3">3 huéspedes</option><option value="4">4 huéspedes</option>
+                <option value="5">5 huéspedes</option><option value="6">6 huéspedes</option>
+              </select>
+              <span class="error-message">Seleccione huéspedes</span>
+              <label class="booking-label" for="rooms">Habitaciones</label>
+              <select id="rooms" class="booking-select">
+                <option value="1" selected>1</option><option value="2">2</option>
+                <option value="3">3</option><option value="4">4</option><option value="5">5</option>
+              </select>
+              <span class="error-message">Seleccione habitaciones</span>
+              <button type="button" class="booking-primary" onclick="nextStep()">Consultar disponibilidad</button>
+              <span id="availability-feedback" class="availability-feedback"></span>
             </div>
-
-
-
-            <!-- Step 2: Selección de habitación o plan -->
-
-            <div class="reservation-step" id="step2" style="display:none;">
-
-                <h3 data-i18n="reservations.selectTitle">Selecciona tu habitación</h3>
-
-                <label><input type="radio" name="roomType" value="standard" checked> <span
-
-                        data-i18n="reservations.standard">Habitación estándar</span> (US$80/noche)</label><br>
-
-                <label><input type="radio" name="roomType" value="suite"> <span
-
-                        data-i18n="reservations.suite">Suite</span> (US$120/noche)</label><br>
-
-                <label><input type="radio" name="roomType" value="premium"> <span
-
-                        data-i18n="reservations.premium">Premium</span> (US$200/noche)</label><br>
-
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-
-                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
-
+            <div class="booking-trust">
+              <span>Pago<br>Seguro</span>
+              <span>Mejor Precio<br>Garantizado</span>
+              <span>Cancelación<br>Gratuita</span>
             </div>
+          </div>
 
-
-
-            <!-- Step 3: Resumen y detalles -->
-
-            <div class="reservation-step" id="step3" style="display:none;">
-
-                <h3 data-i18n="reservations.summaryTitle">Resumen de la reserva</h3>
-
-                <div id="summary-details"></div>
-
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-
-                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
-
+          <div class="reservation-step" id="step2">
+            <h3 class="booking-step-title">Selecciona tu habitación</h3>
+            <p class="booking-label" style="margin-bottom: 0.5rem;">Elegí el tipo de alojamiento:</p>
+            <div class="booking-choice">
+              <label class="room-option"><input type="radio" name="roomType" value="frantoio" checked> <span>Frantoio</span></label>
+              <label class="room-option"><input type="radio" name="roomType" value="pocitana"> <span>Pocitana</span></label>
+              <label class="room-option"><input type="radio" name="roomType" value="aromo_azul"> <span>Aromo Azul</span></label>
+              <label class="room-option"><input type="radio" name="roomType" value="lo_ciruelos"> <span>Lo Ciruelos</span></label>
+              <label class="room-option room-option-mono" data-max-guests="3"><input type="radio" name="roomType" value="monoambiente"> <span>Monoambientes</span> <em class="room-note">(hasta 3 personas)</em></label>
             </div>
-
-
-
-            <!-- Step 4: Datos del huésped -->
-
-            <div class="reservation-step" id="step4" style="display:none;">
-
-                <h3 data-i18n="reservations.guestTitle">Datos del huésped</h3>
-
-                <label for="guestName" data-i18n="reservations.name">Nombre completo:</label>
-
-                <input type="text" id="guestName" required placeholder="Ingrese su nombre completo">
-
-                <span class="error-message">Por favor ingrese su nombre completo</span>
-
-
-
-                <label for="guestEmail" data-i18n="reservations.email">Correo electrónico:</label>
-
-                <input type="email" id="guestEmail" required placeholder="ejemplo@correo.com">
-
-                <span class="error-message">Ingrese un correo electrónico válido</span>
-
-
-
-                <label for="guestPhone" data-i18n="reservations.phone">Teléfono:</label>
-
-                <input type="tel" id="guestPhone" required placeholder="+54 123 456 7890">
-
-                <span class="error-message">Ingrese un número de teléfono válido</span>
-
-
-
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-
-                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
-
+            <span class="error-message room-type-error">Seleccione una opción de alojamiento</span>
+            <span class="error-message mono-guests-error" style="display:none;">Los monoambientes son solo hasta 3 personas. Volvé al paso anterior y elegí menos huéspedes u otra habitación.</span>
+            <div class="booking-actions">
+              <button type="button" class="booking-secondary" onclick="prevStep()">Atrás</button>
+              <button type="button" class="booking-primary" onclick="nextStep()">Siguiente</button>
             </div>
+          </div>
 
-
-
-            <!-- Step 5: Formas de pago -->
-
-            <div class="reservation-step" id="step5" style="display:none;">
-
-                <h3 data-i18n="reservations.paymentTitle">Forma de pago</h3>
-
-                <p data-i18n="reservations.paymentInstructions">Selecciona tu método de pago preferido:</p>
-
-
-
-                <div class="payment-methods">
-
-                    <label class="payment-option">
-
-                        <input type="radio" name="paymentMethod" value="card" checked>
-
-                        <div class="payment-option-content">
-
-                            <strong data-i18n="reservations.paymentCard">Tarjeta de Débito/Crédito</strong>
-
-                            <span data-i18n="reservations.paymentCardDesc">Pago seguro con tarjeta</span>
-
-                        </div>
-
-                    </label>
-
-
-
-                    <label class="payment-option">
-
-                        <input type="radio" name="paymentMethod" value="mercadopago">
-
-                        <div class="payment-option-content">
-
-                            <strong data-i18n="reservations.paymentMercadopago">MercadoPago</strong>
-
-                            <span data-i18n="reservations.paymentMercadopagoDesc">Pago rápido y seguro con
-
-                                MercadoPago</span>
-
-                        </div>
-
-                    </label>
-
-
-
-                    <label class="payment-option">
-
-                        <input type="radio" name="paymentMethod" value="cash">
-
-                        <div class="payment-option-content">
-
-                            <strong data-i18n="reservations.paymentCash">Efectivo en el local</strong>
-
-                            <span data-i18n="reservations.paymentCashDesc">Pagarás al llegar al hotel</span>
-
-                        </div>
-
-                    </label>
-
-                </div>
-
-
-
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-
-                <button onclick="nextStep()" data-i18n="reservations.next">Siguiente</button>
-
+          <div class="reservation-step" id="step3">
+            <h3 class="booking-step-title">Resumen de reserva</h3>
+            <div id="summary-details" class="booking-box booking-summary"></div>
+            <div class="booking-actions">
+              <button type="button" class="booking-secondary" onclick="prevStep()">Atrás</button>
+              <button type="button" class="booking-primary" onclick="nextStep()">Siguiente</button>
             </div>
+          </div>
 
-
-
-            <!-- Step 6: Confirmación -->
-
-            <div class="reservation-step" id="step6" style="display:none;">
-
-                <h3 data-i18n="reservations.confirmationTitle">Confirmación</h3>
-
-                <div id="confirmation-message" data-i18n="reservations.confirmationMessage">Haz click en el boton de
-
-                    enviar para finalizar la reserva. Enviaremos un email de
-
-                    confirmación al propietario y nos pondremos en contacto contigo pronto.</div>
-
-                <button onclick="prevStep()" data-i18n="reservations.back">Atrás</button>
-
-                <button onclick="finalizeReservation()" data-i18n="reservations.finish">Finalizar Reserva</button>
-
+          <div class="reservation-step" id="step4">
+            <h3 class="booking-step-title">Datos del huésped</h3>
+            <p class="booking-label" style="margin-bottom: 0.5rem;">Completá tus datos para la reserva:</p>
+            <div class="booking-form-grid">
+              <input id="guestName" class="booking-input" placeholder="Nombre completo">
+              <span class="error-message">Ingrese su nombre completo</span>
+              <input id="guestLastName" class="booking-input" placeholder="Apellido">
+              <span class="error-message">Ingrese su apellido</span>
+              <input id="guestEmail" class="booking-input" type="email" placeholder="Correo electrónico">
+              <span class="error-message">Ingrese un correo válido</span>
+              <input id="guestPhone" class="booking-input" type="tel" placeholder="Teléfono (ej: +54 264 000 0000)">
+              <span class="error-message">Ingrese un teléfono válido</span>
             </div>
+            <div class="booking-actions">
+              <button type="button" class="booking-secondary" onclick="prevStep()">Atrás</button>
+              <button type="button" class="booking-primary" onclick="nextStep()">Siguiente</button>
+            </div>
+          </div>
 
+          <div class="reservation-step" id="step5">
+            <h3 class="booking-step-title">Método de pago</h3>
+            <p class="booking-label" style="margin-bottom: 0.5rem;">Elegí cómo deseas pagar:</p>
+            <div class="payment-methods">
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="card" checked>
+                <div class="payment-option-content"><strong>Tarjeta de débito o crédito</strong><span>Pago seguro con tarjeta</span></div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="mercadopago">
+                <div class="payment-option-content"><strong>MercadoPago</strong><span>Pago rápido y seguro</span></div>
+              </label>
+              <label class="payment-option">
+                <input type="radio" name="paymentMethod" value="efectivo_hotel">
+                <div class="payment-option-content"><strong>Efectivo en el hotel</strong><span>Pagás al llegar a recepción</span></div>
+              </label>
+            </div>
+            <div id="card-payment-form" class="booking-box">Pago con tarjeta: se coordina al confirmar la reserva.</div>
+            <div id="mercadopago-payment-form" class="booking-box" style="display:none;"><div id="mercadopago-container"></div></div>
+            <div id="local-payment-info" class="booking-box" style="display:none;">Abonás en efectivo al llegar al hotel.</div>
+            <div class="booking-actions">
+              <button type="button" class="booking-secondary" onclick="prevStep()">Atrás</button>
+              <button type="button" id="payment-button" class="booking-primary" onclick="nextStep()">Confirmar y continuar</button>
+            </div>
+          </div>
+
+          <div class="reservation-step" id="step6">
+            <h3 class="booking-step-title">Confirmar reserva</h3>
+            <div id="confirmation-summary" class="booking-box booking-summary"></div>
+            <p class="booking-label" style="margin-top: 0.75rem;">Al enviar, la reserva se enviará al hotel con todos tus datos.</p>
+            <div id="confirmation-message" class="booking-box" style="margin-top: 0.5rem;"></div>
+            <div class="booking-actions">
+              <button type="button" class="booking-secondary" onclick="prevStep()">Atrás</button>
+              <button type="button" class="booking-primary" onclick="finalizeReservation()">Confirmar y enviar reserva</button>
+            </div>
+          </div>
         </div>
-
+      </div>
     </section>
+  </main>
 
+  <footer class="booking-footer-lite">&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</footer>
+  <div id="mobile-menu-placeholder"></div>
 
-
-     <footer>
-
-        <div class="footer-content">
-
-            <div class="footer-info">
-
-                <div class="hotel-address">
-
-                    Ruta 40 Calle 8<br>
-
-                    Pocito - Villa Aberastain<br>
-
-                    San Juan, Argentina
-
-                </div>
-
-            </div>
-
-            <div class="footer-contact">
-
-                                 <h4>Contacto Directo</h4> <div class="hotel-phone">+54 264 444-4000</div>
-
-                <p>Reservas y consultas</p>
-
-            </div>
-
-            <div class="footer-social">
-
-                <div class="social-links">
-
-                                    <h4>Síguenos</h4>
-
-    <a href="https://www.tripadvisor.es/Hotel_Review-g312785-d5006150-Reviews-Apart_Cabanas_Olivos_del_Sol-San_Juan_Province_of_San_Juan_Cuyo.html" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="TripAdvisor">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-
-                        </svg>
-
-                    </a>
-
-                    <a href="https://www.airbnb.com.ar/rooms/1157214581954301757?viralityEntryPoint=1&unique_share_id=7A6C4082-50EC-4EB7-9459-7F331E4487D2&slcid=329b20582b124625b5b6ebf7917886bf&s=76&feature=share&set_everest_cookie_on_new_domain=1764616711.EAZTllZmIyNWRjMGU0NG.hgG4VC4fsc7dJCT62lTJmysYzTFf9ekBRHmJ426RO7w&adults=1&channel=native&slug=wWfrHKmk&source_impression_id=p3_1764616712_P36QrYA7PQIqskS9" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Airbnb">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M15.5 1h-7A2.5 2.5 0 0 0 6 3.5v7A2.5 2.5 0 0 0 8.5 13h7a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 15.5 1zM14 20H10v-1h4v1zm2.25-3H7.75V5h8.5v12z"/>
-
-                        </svg>
-
-                    </a>
-
-                    <a href="https://www.instagram.com/hotel_olivosdelsol?igsh=MWFldjByZjhxMnV4Yg%3D%3D" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-
-                        </svg>
-
-                    </a>
-
-                </div>
-
-            </div>
-
-        </div>
-
-        
-
-            <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
-
-        </div>
-
-    </footer>
-
-
-
-    <!-- Mobile menu partial will be loaded dynamically -->
-
-    <div id="mobile-menu-placeholder"></div>
-
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/es.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var checkin = document.getElementById('checkin');
+      var checkout = document.getElementById('checkout');
+      if (!checkin || !checkout || typeof flatpickr === 'undefined') return;
+      flatpickr.localize(flatpickr.l10ns.es);
+      var checkoutPicker;
+      var baseConfig = { dateFormat: 'Y-m-d', altInput: true, altFormat: 'd M Y', allowInput: false, disableMobile: true, monthSelectorType: 'static' };
+      flatpickr(checkin, Object.assign({}, baseConfig, {
+        minDate: 'today',
+        onChange: function (selectedDates) {
+          if (!checkoutPicker) return;
+          if (selectedDates.length > 0) {
+            checkoutPicker.set('minDate', selectedDates[0]);
+            if (checkoutPicker.selectedDates[0] && checkoutPicker.selectedDates[0] < selectedDates[0]) checkoutPicker.clear();
+          }
+        }
+      }));
+      checkoutPicker = flatpickr(checkout, Object.assign({}, baseConfig, { minDate: 'today' }));
+    });
+  </script>
 </body>
-
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

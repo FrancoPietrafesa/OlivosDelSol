@@ -1,4 +1,4 @@
-﻿let currentStep = 1;
+let currentStep = 1;
 let reservationData = {};
 let currentLanguage = 'es';
 
@@ -561,7 +561,6 @@ function showStep(step) {
     // Actualizar progress indicator
     updateStepIndicator(step);
     
-    // Inicializar resaltado de opciones de pago cuando se muestra el paso 5
     if (step === 5) {
         const selectedPayment = document.querySelector('input[name="paymentMethod"]:checked');
         document.querySelectorAll('.payment-option').forEach(option => {
@@ -570,6 +569,9 @@ function showStep(step) {
         if (selectedPayment && selectedPayment.closest('.payment-option')) {
             selectedPayment.closest('.payment-option').classList.add('selected');
         }
+    }
+    if (step === 6) {
+        fillConfirmationSummary();
     }
 }
 
@@ -611,6 +613,16 @@ function validateField(input, regex) {
     return isValid;
 }
 
+function getRoomTypeLabel(value) {
+    const labels = { frantoio: 'Frantoio', pocitana: 'Pocitana', aromo_azul: 'Aromo Azul', lo_ciruelos: 'Lo Ciruelos', monoambiente: 'Monoambientes (hasta 3 personas)' };
+    return labels[value] || value || '';
+}
+
+function getPaymentMethodLabel(value) {
+    const labels = { card: 'Tarjeta de débito o crédito', mercadopago: 'MercadoPago', efectivo_hotel: 'Efectivo en el hotel', local: 'Efectivo en el hotel' };
+    return labels[value] || value || '';
+}
+
 function validateStep(step) {
     let isValid = true;
     switch(step) {
@@ -627,21 +639,34 @@ function validateStep(step) {
         case 2: {
             const roomType = document.querySelector('input[name="roomType"]:checked');
             const errorSpan = document.querySelector('.room-type-error');
+            const monoError = document.querySelector('.mono-guests-error');
+            if (monoError) monoError.style.display = 'none';
             if (!roomType && errorSpan) {
                 errorSpan.style.display = 'block';
-                isValid = false;
+                return false;
             }
-            return isValid;
+            if (roomType && roomType.value === 'monoambiente') {
+                const guests = parseInt(reservationData.guests, 10);
+                if (!isNaN(guests) && guests > 3) {
+                    if (monoError) { monoError.style.display = 'block'; }
+                    if (errorSpan) errorSpan.style.display = 'none';
+                    return false;
+                }
+            }
+            if (errorSpan) errorSpan.style.display = 'none';
+            return true;
         }
         case 4: {
             const guestName = document.getElementById('guestName');
+            const guestLastName = document.getElementById('guestLastName');
             const guestEmail = document.getElementById('guestEmail');
             const guestPhone = document.getElementById('guestPhone');
             
             const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            const phoneRegex = /^\+[\d\s-]+$/;
+            const phoneRegex = /^[\d\s+\-()]{8,}$/;
             
             isValid = validateField(guestName) &&
+                     validateField(guestLastName) &&
                      validateField(guestEmail, emailRegex) &&
                      validateField(guestPhone, phoneRegex);
             return isValid;
@@ -653,7 +678,48 @@ function validateStep(step) {
 
 // No se usa bot cliente; las notificaciones se envÃ­an por email server-side
 
-function nextStep() {
+function setAvailabilityFeedback(message, isError) {
+    const el = document.getElementById('availability-feedback');
+    if (!el) return;
+    el.textContent = message || '';
+    el.style.display = message ? 'block' : 'none';
+    el.style.color = isError ? '#b12828' : '#2f6b2e';
+}
+
+function getApiBaseUrl() {
+    if (typeof window !== 'undefined' && window.OLIVOS_API_BASE_URL) return window.OLIVOS_API_BASE_URL.replace(/\/$/, '');
+    const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname);
+    return isLocal ? 'http://localhost:3000' : '';
+}
+
+async function checkAvailability(checkin, checkout) {
+    const baseUrl = getApiBaseUrl();
+    const apiUrl = `${baseUrl}/api/availability`;
+
+    const resp = await fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json'
+        },
+        body: JSON.stringify({ checkin, checkout })
+    });
+
+    let data = null;
+    try {
+        data = await resp.json();
+    } catch (_) {
+        data = null;
+    }
+
+    if (!resp.ok) {
+        throw new Error((data && data.error) || 'No se pudo verificar disponibilidad en este momento.');
+    }
+
+    return data;
+}
+
+async function nextStep() {
     if (!validateStep(currentStep)) {
         return;
     }
@@ -664,6 +730,29 @@ function nextStep() {
         reservationData.checkout = document.getElementById('checkout').value;
         reservationData.guests = document.getElementById('guests').value;
         reservationData.rooms = document.getElementById('rooms').value;
+
+        try {
+            setAvailabilityFeedback('Verificando disponibilidad...', false);
+            const result = await checkAvailability(reservationData.checkin, reservationData.checkout);
+            if (!result.available) {
+                const firstConflict = Array.isArray(result.conflicts) && result.conflicts.length > 0
+                    ? result.conflicts[0]
+                    : null;
+                const detail = firstConflict
+                    ? ` Rango ocupado: ${firstConflict.checkin} a ${firstConflict.checkout}.`
+                    : '';
+                setAvailabilityFeedback(`No hay disponibilidad para esas fechas.${detail}`, true);
+                return;
+            }
+            setAvailabilityFeedback('Hay disponibilidad para esas fechas. Puedes continuar con la reserva.', false);
+        } catch (err) {
+            const isConnectionError = /Failed to fetch|NetworkError|ECONNREFUSED|Network request failed|fetch/i.test(String(err && err.message));
+            const msg = isConnectionError
+                ? 'No se pudo conectar con el servicio de disponibilidad. Intenta nuevamente en unos segundos.'
+                : (err.message || 'No se pudo verificar disponibilidad.');
+            setAvailabilityFeedback(msg, true);
+            return;
+        }
     }
     if (currentStep === 2) {
         // get selected room type
@@ -671,40 +760,56 @@ function nextStep() {
         reservationData.roomType = roomType;
     }
     if (currentStep === 3) {
-        // On summary step show details
         const summaryDiv = document.getElementById('summary-details');
         if (summaryDiv) {
             const lang = translations[currentLanguage];
-            let roomLabel = '';
-            if (reservationData.roomType === 'standard') roomLabel = lang.reservations.standard;
-            if (reservationData.roomType === 'suite') roomLabel = lang.reservations.suite;
-            if (reservationData.roomType === 'premium') roomLabel = lang.reservations.premium;
-            summaryDiv.innerHTML = `<p>${lang.reservations.checkin} ${reservationData.checkin}</p>` +
-                                   `<p>${lang.reservations.checkout} ${reservationData.checkout}</p>` +
-                                   `<p>${lang.reservations.guests} ${reservationData.guests}</p>` +
-                                   `<p>${lang.reservations.rooms} ${reservationData.rooms}</p>` +
-                                   `<p>Tipo de habitación: ${roomLabel}</p>`;
+            const roomLabel = getRoomTypeLabel(reservationData.roomType);
+            summaryDiv.innerHTML = `<p><strong>${lang.reservations.checkin}</strong> ${reservationData.checkin}</p>` +
+                                   `<p><strong>${lang.reservations.checkout}</strong> ${reservationData.checkout}</p>` +
+                                   `<p><strong>${lang.reservations.guests}</strong> ${reservationData.guests}</p>` +
+                                   `<p><strong>${lang.reservations.rooms}</strong> ${reservationData.rooms}</p>` +
+                                   `<p><strong>Habitación:</strong> ${roomLabel}</p>`;
         }
     }
     if (currentStep === 4) {
         reservationData.guestName = document.getElementById('guestName').value;
+        reservationData.guestLastName = document.getElementById('guestLastName').value;
         reservationData.guestEmail = document.getElementById('guestEmail').value;
         reservationData.guestPhone = document.getElementById('guestPhone').value;
     }
     if (currentStep === 5) {
-        // Get selected payment method
         const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
         if (paymentMethod) {
             reservationData.paymentMethod = paymentMethod.value;
         }
-    }
-    if (currentStep === 6) {
-        // Confirmation step - don't proceed further
+        showStep(6);
+        fillConfirmationSummary();
         return;
     }
-    if (currentStep < 6) {
-        showStep(currentStep + 1);
+    if (currentStep === 6) {
+        return;
     }
+    showStep(currentStep + 1);
+}
+
+function fillConfirmationSummary() {
+    const el = document.getElementById('confirmation-summary');
+    if (!el) return;
+    const lang = translations[currentLanguage];
+    const roomLabel = getRoomTypeLabel(reservationData.roomType);
+    const paymentLabel = getPaymentMethodLabel(reservationData.paymentMethod);
+    const fullName = [reservationData.guestName, reservationData.guestLastName].filter(Boolean).join(' ');
+    el.innerHTML = '<p><strong>Resumen de tu reserva</strong></p>' +
+        `<p><strong>${lang.reservations.checkin}</strong> ${reservationData.checkin}</p>` +
+        `<p><strong>${lang.reservations.checkout}</strong> ${reservationData.checkout}</p>` +
+        `<p><strong>${lang.reservations.guests}</strong> ${reservationData.guests} · <strong>Habitaciones:</strong> ${reservationData.rooms}</p>` +
+        `<p><strong>Habitación:</strong> ${roomLabel}</p>` +
+        `<p><strong>Nombre completo:</strong> ${fullName || '-'}</p>` +
+        `<p><strong>Correo electrónico:</strong> ${reservationData.guestEmail || '-'}</p>` +
+        `<p><strong>Teléfono:</strong> ${reservationData.guestPhone || '-'}</p>` +
+        `<p><strong>Método de pago:</strong> ${paymentLabel}</p>`;
+    const msg = document.getElementById('confirmation-message');
+    if (msg && !msg.textContent) msg.textContent = 'Revisá que todo sea correcto y hacé clic en "Confirmar y enviar reserva" para enviar la reserva al hotel.';
 }
 
 function prevStep() {
@@ -718,7 +823,7 @@ function resetForm() {
     // Limpiar todos los campos manualmente
     const fields = [
         'checkin', 'checkout', 'guests', 'rooms',
-        'guestName', 'guestEmail', 'guestPhone',
+        'guestName', 'guestLastName', 'guestEmail', 'guestPhone',
         'cardName', 'cardNumber', 'cardExpiry', 'cardCVC'
     ];
     fields.forEach(id => {
@@ -739,16 +844,14 @@ function resetForm() {
         roomTypeRadios[0].checked = true; // Marcar el primero por defecto
     }
     
-    // Reiniciar el mÃ©todo de pago a tarjeta
     const paymentMethodRadios = document.querySelectorAll('input[name="paymentMethod"]');
     if (paymentMethodRadios.length > 0) {
         const cardRadio = Array.from(paymentMethodRadios).find(r => r.value === 'card');
-        if (cardRadio) {
-            cardRadio.checked = true;
-        } else {
-            paymentMethodRadios[0].checked = true;
-        }
+        if (cardRadio) cardRadio.checked = true;
+        else paymentMethodRadios[0].checked = true;
     }
+    const confSummary = document.getElementById('confirmation-summary');
+    if (confSummary) confSummary.innerHTML = '';
     
     // Limpiar mensajes de error
     document.querySelectorAll('.error-message').forEach(msg => {
@@ -802,17 +905,16 @@ function handlePaymentMethodChange() {
     mercadopagoForm.style.display = 'none';
     localInfo.style.display = 'none';
     
-    // Mostrar el formulario correspondiente
     if (paymentMethod === 'card') {
         cardForm.style.display = 'block';
-        paymentButton.textContent = 'Pagar con Tarjeta';
+        paymentButton.textContent = 'Confirmar y continuar';
     } else if (paymentMethod === 'mercadopago') {
         mercadopagoForm.style.display = 'block';
-        paymentButton.textContent = 'Pagar con MercadoPago';
+        paymentButton.textContent = 'Confirmar y continuar';
         initMercadoPagoCheckout();
-    } else if (paymentMethod === 'local') {
+    } else if (paymentMethod === 'efectivo_hotel' || paymentMethod === 'local') {
         localInfo.style.display = 'block';
-        paymentButton.textContent = 'Confirmar Reserva';
+        paymentButton.textContent = 'Confirmar y continuar';
     }
 }
 
@@ -879,7 +981,9 @@ async function finalizeReservation() {
                 resetForm();
             }, 3000);
         } else {
-            confMsg.textContent = `Hubo un problema al enviar la reserva: ${serverResult.error || 'Error desconocido'}. Por favor, inténtalo de nuevo o contáctanos directamente por teléfono.`;
+            const rawError = (serverResult.error || 'Error desconocido').toString().trim();
+            const normalizedError = rawError.replace(/[.]+$/g, '');
+            confMsg.textContent = `No se pudo enviar la reserva: ${normalizedError}. Inténtalo nuevamente o contáctanos por teléfono.`;
             confMsg.style.color = '#f44336';
             // Rehabilitar el botÃ³n para que puedan intentar de nuevo
             if (finishButton) {
@@ -905,10 +1009,8 @@ async function finalizeReservation() {
 
 // Envia la reserva al servidor (si estÃ¡ disponible). Retorna {ok:true,data} o {ok:false,error}
 async function sendReservationToServer(reservation) {
-    // Determinar baseUrl: en desarrollo usamos localhost:3000, en producciÃ³n (Vercel) usamos ruta relativa
     const isLocal = /(^localhost$|^127\.0\.0\.1$|^0\.0\.0\.0$)/.test(globalThis.location.hostname);
-    // En producciÃ³n, usar ruta relativa para que funcione con Vercel serverless functions
-    const baseUrl = isLocal ? 'http://localhost:3000' : '';
+    const baseUrl = getApiBaseUrl();
     const apiUrl = `${baseUrl}/api/reservations`;
 
     console.log('Enviando reserva al servidor:', reservation, '->', apiUrl);
@@ -1289,4 +1391,3 @@ function initSectionFixedArrows() {
     window.addEventListener('resize', updateActiveArrow, { passive: true });
     updateActiveArrow();
 }
-
