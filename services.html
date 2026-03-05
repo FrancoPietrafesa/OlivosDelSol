@@ -1,301 +1,437 @@
 <!DOCTYPE html>
-
 <html lang="es">
-
-
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Servicios - Hotel Olivos del Sol</title>
-
-    <!-- Favicon -->
-
     <link rel="icon" type="image/png" href="images/logo_cropped.png">
-
     <link rel="shortcut icon" type="image/png" href="images/logo_cropped.png">
-
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
     <link rel="stylesheet" href="style.css">
-
     <script defer src="script.js"></script>
+    <script>
+      window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+    </script>
+    <script defer src="/_vercel/insights/script.js"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTM55SE79"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} 
+      gtag('js', new Date());
+      gtag('config', 'G-GRTM55SE79');
+    </script>
+    <style>
+        body.services-page {
+            background-image: url('images/inicio/OlivosdelSol-70.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            color: #f5f5f5;
+        }
 
-<script>
+        .services-showcase {
+            min-height: calc(100svh - 140px);
+            padding: calc(var(--nav-height) + 2.6rem) 1.5rem 2rem;
+            background: transparent;
+        }
 
-  window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };
+        .services-section {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0;
+            background: transparent;
+        }
 
-</script>
+        #services.services-section {
+            background: transparent !important;
+            min-height: auto !important;
+        }
 
-<script defer src="/_vercel/insights/script.js"></script>
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 1.1rem;
+        }
 
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRTM55SE79"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+        .service-card {
+            position: relative;
+            min-height: 250px;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.64);
+            box-shadow: 0 18px 34px rgba(10, 19, 29, 0.30);
+            background-size: cover;
+            background-position: center;
+            isolation: isolate;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
 
-    gtag('config', 'G-GRTM55SE79');
-  </script>
+        .service-card::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(8, 15, 23, 0.08) 0%, rgba(8, 15, 23, 0.84) 100%);
+            z-index: -1;
+        }
+
+        .service-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 24px 40px rgba(8, 16, 24, 0.38);
+        }
+
+        .service-card--featured {
+            grid-column: span 2;
+            min-height: 280px;
+        }
+
+        .service-card__content {
+            position: absolute;
+            left: 1.2rem;
+            right: 1.2rem;
+            bottom: 1rem;
+            display: grid;
+            gap: 0.45rem;
+            align-items: end;
+        }
+
+        .service-card__meta {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.9rem;
+        }
+
+        .service-card h3 {
+            margin: 0;
+            font-family: var(--font-heading);
+            font-weight: 600;
+            font-size: clamp(1.9rem, 2vw, 2.35rem);
+            line-height: 1;
+            color: #f5f0e6;
+            text-shadow: 0 4px 18px rgba(0, 0, 0, 0.42);
+        }
+
+        .service-card:not(.service-card--featured) h3 {
+            font-size: clamp(1.28rem, 1.8vw, 1.65rem);
+        }
+
+        .service-card p {
+            margin: 0;
+            color: rgba(246, 242, 236, 0.92);
+            font-size: 1.06rem;
+            line-height: 1.28;
+            max-width: 54ch;
+            text-shadow: 0 3px 16px rgba(0, 0, 0, 0.48);
+        }
+
+        .service-card:not(.service-card--featured) p {
+            font-size: 0.94rem;
+            max-width: 34ch;
+        }
+
+        .service-card__icon {
+            width: 30px;
+            height: 30px;
+            flex: 0 0 auto;
+            color: #f5f0e6;
+            opacity: 0.95;
+        }
+
+        .service-card__cta {
+            justify-self: end;
+            margin-top: 0.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.58);
+            border-radius: 11px;
+            background: rgba(245, 239, 230, 0.16);
+            color: #f9f5ee;
+            text-decoration: none;
+            font-size: 0.94rem;
+            font-weight: 500;
+            padding: 0.5rem 1rem;
+            transition: background 0.2s ease, border-color 0.2s ease;
+        }
+
+        .service-card__cta:hover {
+            background: rgba(245, 239, 230, 0.24);
+            border-color: rgba(255, 255, 255, 0.74);
+        }
+
+        body.services-page footer {
+            margin: 0;
+            padding: 0 0.9rem 1.3rem;
+            background: transparent;
+            border: 0;
+        }
+
+        body.services-page .footer-content {
+            max-width: 1160px;
+            margin: 0 auto;
+            padding: 0.7rem 1rem;
+            display: grid;
+            grid-template-columns: 1fr 1fr auto;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(23, 52, 67, 0.58);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 18px;
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            box-shadow: 0 10px 28px rgba(7, 17, 27, 0.35);
+        }
+
+        body.services-page .footer-info,
+        body.services-page .footer-contact {
+            color: rgba(246, 246, 246, 0.95);
+            font-size: 1.04rem;
+            font-weight: 400;
+            line-height: 1.2;
+        }
+
+        body.services-page .hotel-address,
+        body.services-page .hotel-phone {
+            color: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+        }
+
+        body.services-page .footer-contact {
+            text-align: center;
+        }
+
+        body.services-page .footer-social .social-links {
+            display: inline-flex;
+            align-items: center;
+            justify-content: flex-end;
+            gap: 0.6rem;
+        }
+
+        body.services-page .footer-social h4,
+        body.services-page .footer-contact h4,
+        body.services-page .footer-contact p,
+        body.services-page footer > p {
+            display: none;
+        }
+
+        body.services-page .social-link {
+            width: 34px;
+            height: 34px;
+            border-radius: 999px;
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            background: rgba(255, 255, 255, 0.1);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s ease, background-color 0.2s ease;
+        }
+
+        body.services-page .social-link:hover {
+            transform: translateY(-1px);
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        body.services-page .social-link svg {
+            width: 18px;
+            height: 18px;
+            fill: #ffffff;
+        }
+
+        @media (max-width: 1200px) {
+            .services-grid {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+
+            .service-card--featured {
+                grid-column: span 3;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .services-showcase {
+                padding-top: calc(var(--nav-height) + 2rem);
+                background-position: 62% center;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+
+            .service-card--featured {
+                grid-column: span 2;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-showcase {
+                padding: calc(var(--nav-height) + 1.4rem) 0.9rem 1rem;
+                background-attachment: scroll;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .service-card,
+            .service-card--featured {
+                min-height: 225px;
+                grid-column: span 1;
+            }
+
+            .service-card h3,
+            .service-card:not(.service-card--featured) h3 {
+                font-size: 1.9rem;
+            }
+
+            .service-card p,
+            .service-card:not(.service-card--featured) p {
+                font-size: 0.94rem;
+                max-width: 100%;
+            }
+
+            body.services-page .footer-content {
+                grid-template-columns: 1fr;
+                justify-items: center;
+                text-align: center;
+                gap: 0.8rem;
+                border-radius: 14px;
+            }
+
+            body.services-page .footer-contact {
+                text-align: center;
+            }
+        }
+    </style>
 </head>
-
-
-
 <body class="services-page">
-
-    <!-- Preloader overlay -->
-
     <div id="preloader">
-
         <div class="spinner"></div>
-
     </div>
 
     <header>
-
         <nav class="navbar">
+            <div class="logo">
+                <a class="logo-link" href="index.html">
+                    <img src="images/logo.png" alt="Logo Olivos del Sol">
+                    <span data-i18n="header.logo">Hotel Olivos del Sol</span>
+                </a>
+            </div>
 
-    <div class="nav-left">
-
-        <ul class="nav-links nav-links-left">
-
-            <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
-
-            <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
-
-            <li class="nav-more">
-
-                <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Más</button>
-
-                <ul class="nav-more-menu" role="menu">
-
-                    <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
-
-                    <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
-
-                    <li><a href="gallery.html" data-i18n="nav.gallery">Galería</a></li>
-
-                    <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
-
-                    <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
-
+            <div class="nav-left">
+                <ul class="nav-links nav-links-left">
+                    <li><a href="guides.html" data-i18n="nav.guides">Excursiones</a></li>
+                    <li><a href="reservations.html" data-i18n="nav.reservations">Reservas</a></li>
+                    <li class="nav-more">
+                        <button class="nav-more-toggle" type="button" aria-haspopup="true" aria-expanded="false">Mas</button>
+                        <ul class="nav-more-menu" role="menu">
+                            <li><a href="index.html" data-i18n="nav.home">Inicio</a></li>
+                            <li><a href="services.html" data-i18n="nav.services">Servicios</a></li>
+                            <li><a href="gallery.html" data-i18n="nav.gallery">Galeria</a></li>
+                            <li><a href="recommendations.html" data-i18n="nav.recommendations">Recomendaciones</a></li>
+                            <li><a href="contact.html" data-i18n="nav.contact">Contacto</a></li>
+                        </ul>
+                    </li>
                 </ul>
+            </div>
 
-            </li>
-
-        </ul>
-
-    </div>
-
-    <div class="logo">
-
-        <a class="logo-link" href="index.html">
-
-            <img src="images/logo.png" alt="Logo Olivos del Sol">
-
-            <span data-i18n="header.logo">Hotel Olivos del Sol</span>
-
-        </a>
-
-    </div>
-
-    <div class="nav-right">
-
-        <button class="nav-toggle" aria-label="Abrir menú" aria-controls="mobileMenu" aria-expanded="false">
-
-            <span class="bar"></span>
-
-            <span class="bar"></span>
-
-            <span class="bar"></span>
-
-        </button>
-
-    </div>
-
-</nav>
-
+            <div class="nav-right">
+                <button class="nav-toggle" aria-label="Abrir menu" aria-controls="mobileMenu" aria-expanded="false">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </button>
+            </div>
+        </nav>
     </header>
 
+    <main class="services-showcase">
+        <section id="services" class="services-section" aria-label="Servicios del hotel">
+            <div class="services-grid">
+                <article class="service-card service-card--featured" style="background-image: url('images/habitaciones/frantoio/OlivosdelSol-245.jpg');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.room">Habitaciones Confortables</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M3 13V7.8C3 6.81 3.81 6 4.8 6H19.2C20.19 6 21 6.81 21 7.8V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M5 13V11.8C5 11.36 5.36 11 5.8 11H10.2C10.64 11 11 11.36 11 11.8V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M13 13V11.8C13 11.36 13.36 11 13.8 11H18.2C18.64 11 19 11.36 19 11.8V13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 18V13H22V18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 18V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M20 18V20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                        </div>
+                        <p data-i18n="services.roomDesc">Amplias y luminosas habitaciones con todas las comodidades, disenadas para su maximo descanso.</p>
+                        <a class="service-card__cta" href="gallery.html">Ver mas</a>
+                    </div>
+                </article>
 
+                <article class="service-card" style="background-image: url('images/habitaciones/salon principal/OlivosdelSol-145.jpg');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.restaurant">Restaurante</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M6 3V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M9 3V12" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M6 8H9" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7.5 12V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M15 3V9.5C15 10.88 16.12 12 17.5 12C18.88 12 20 10.88 20 9.5V3" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M17.5 12V21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                        </div>
+                        <p data-i18n="services.restaurantDesc">Gastronomia regional e internacional de alta calidad con ingredientes locales frescos.</p>
+                    </div>
+                </article>
 
-    <section id="services" class="services-section">
+                <article class="service-card" style="background-image: url('images/habitaciones/piscina principal/OlivosdelSol-68.jpg');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.pool">Piscina</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M2 15C3.1 15 3.6 14 4.7 14C5.8 14 6.3 15 7.4 15C8.5 15 9 14 10.1 14C11.2 14 11.7 15 12.8 15C13.9 15 14.4 14 15.5 14C16.6 14 17.1 15 18.2 15C19.3 15 19.8 14 20.9 14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M2 19C3.1 19 3.6 18 4.7 18C5.8 18 6.3 19 7.4 19C8.5 19 9 18 10.1 18C11.2 18 11.7 19 12.8 19C13.9 19 14.4 18 15.5 18C16.6 18 17.1 19 18.2 19C19.3 19 19.8 18 20.9 18" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 11V5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 5L10 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M8 5L6 7" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                        </div>
+                        <p data-i18n="services.poolDesc">Piscina al aire libre para relajarse y disfrutar del sol con servicio exclusivo.</p>
+                    </div>
+                </article>
 
-        <h2 data-i18n="services.title">Servicios</h2>
+                <article class="service-card" style="background-image: url('images/actividades/IMG_6215 (1).JPG');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.spa">Spa &amp; Bienestar</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M12 20C10.2 17.7 7 15.8 7 12.5C7 10.57 8.57 9 10.5 9C11.36 9 12.16 9.31 12.78 9.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 20C13.8 17.7 17 15.8 17 12.5C17 10.57 15.43 9 13.5 9C12.64 9 11.84 9.31 11.22 9.83" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M12 8C12 6.34 13.34 5 15 5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                        </div>
+                        <p data-i18n="services.spaDesc">Sesiones de masajes y tratamientos relajantes para revitalizar cuerpo y mente.</p>
+                    </div>
+                </article>
 
-        <div class="services-list">
+                <article class="service-card" style="background-image: url('images/actividades/OlivosdelSol-269.jpg');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.parking">Estacionamiento</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M5 13L7 8.5C7.32 7.79 8.02 7.33 8.8 7.33H15.2C15.98 7.33 16.68 7.79 17 8.5L19 13" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M4 16.5C4 15.67 4.67 15 5.5 15H18.5C19.33 15 20 15.67 20 16.5V19H4V16.5Z" stroke="currentColor" stroke-width="1.6"/><path d="M6.5 17H7.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M16.5 17H17.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M18 8H21" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M19.5 6.5V9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+                        </div>
+                        <p data-i18n="services.parkingDesc">Estacionamiento seguro y privado para su vehiculo durante toda la estadia.</p>
+                    </div>
+                </article>
 
-            <div class="service-item">
-
-                <h3 data-i18n="services.room">Habitaciones confortables</h3>
-
-                <p data-i18n="services.roomDesc">Amplias y luminosas habitaciones con todas las comodidades.</p>
-
+                <article class="service-card" style="background-image: url('images/468322890_18048613424483247_939284270881576216_n.jpg');">
+                    <div class="service-card__content">
+                        <div class="service-card__meta">
+                            <h3 data-i18n="services.wifi">Wi-Fi Gratuito</h3>
+                            <svg class="service-card__icon" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><path d="M4 9.5C8.42 5.5 15.58 5.5 20 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M7 12.5C10.05 9.95 13.95 9.95 17 12.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 15.5C11.2 14.68 12.8 14.68 14 15.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="18.4" r="1.1" fill="currentColor"/></svg>
+                        </div>
+                        <p data-i18n="services.wifiDesc">Acceso a internet de alta velocidad en todas las areas del hotel para mantenerse conectado.</p>
+                    </div>
+                </article>
             </div>
+        </section>
+    </main>
 
-            <div class="service-item">
-
-                <h3 data-i18n="services.restaurant">Restaurante</h3>
-
-                <p data-i18n="services.restaurantDesc">Gastronomía regional e internacional de alta calidad.</p>
-
-            </div>
-
-            <div class="service-item">
-
-                <h3 data-i18n="services.pool">Piscina</h3>
-
-                <p data-i18n="services.poolDesc">Piscina al aire libre para relajarse y disfrutar del sol.</p>
-
-            </div>
-
-            <div class="service-item">
-
-                <h3 data-i18n="services.wifi">Wi‑Fi gratuito</h3>
-
-                <p data-i18n="services.wifiDesc">Acceso a internet de alta velocidad en todo el hotel.</p>
-
-            </div>
-
-            <div class="service-item">
-
-                <h3 data-i18n="services.parking">Estacionamiento</h3>
-
-                <p data-i18n="services.parkingDesc">Estacionamiento seguro para su vehículo.</p>
-
-            </div>
-
-            <div class="service-item">
-
-                <h3 data-i18n="services.spa">Spa &amp; bienestar</h3>
-
-                <p data-i18n="services.spaDesc">Sesiones de masajes y tratamientos relajantes.</p>
-
-            </div>
-
-        </div>
-
-    </section>
-
-
-
-     <footer>
-
+    <footer>
         <div class="footer-content">
-
             <div class="footer-info">
-
-                <div class="hotel-address">
-
-                    Ruta 40 Calle 8<br>
-
-                    Pocito - Villa Aberastain<br>
-
-                    San Juan, Argentina
-
-                </div>
-
+                <div class="hotel-address">Ruta 40 Calle 8, Pocito - Villa Aberastain</div>
             </div>
-
             <div class="footer-contact">
-
-                                 <h4>Contacto Directo</h4> <div class="hotel-phone">+54 264 444-4000</div>
-
-                <p>Reservas y consultas</p>
-
+                <div class="hotel-phone">Contacto Directo: +54 264 444 4000</div>
             </div>
-
             <div class="footer-social">
-
                 <div class="social-links">
-
-                                    <h4>Síguenos</h4>
-
-    <a href="https://www.tripadvisor.es/Hotel_Review-g312785-d5006150-Reviews-Apart_Cabanas_Olivos_del_Sol-San_Juan_Province_of_San_Juan_Cuyo.html" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="TripAdvisor">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-
-                        </svg>
-
+                    <a href="https://www.instagram.com/hotel_olivosdelsol?igsh=MWFldjByZjhxMnV4Yg%3D%3D" target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
+                        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
                     </a>
-
-                    <a href="https://www.airbnb.com.ar/rooms/1157214581954301757?viralityEntryPoint=1&unique_share_id=7A6C4082-50EC-4EB7-9459-7F331E4487D2&slcid=329b20582b124625b5b6ebf7917886bf&s=76&feature=share&set_everest_cookie_on_new_domain=1764616711.EAZTllZmIyNWRjMGU0NG.hgG4VC4fsc7dJCT62lTJmysYzTFf9ekBRHmJ426RO7w&adults=1&channel=native&slug=wWfrHKmk&source_impression_id=p3_1764616712_P36QrYA7PQIqskS9" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Airbnb">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M15.5 1h-7A2.5 2.5 0 0 0 6 3.5v7A2.5 2.5 0 0 0 8.5 13h7a2.5 2.5 0 0 0 2.5-2.5v-7A2.5 2.5 0 0 0 15.5 1zM14 20H10v-1h4v1zm2.25-3H7.75V5h8.5v12z"/>
-
-                        </svg>
-
+                    <a href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer" class="social-link" title="Facebook">
+                        <svg viewBox="0 0 24 24"><path d="M13.5 8H16V5h-2.5C10.46 5 9 6.79 9 9.54V12H7v3h2v4h3v-4h2.54l.46-3H12V9.76C12 8.8 12.29 8 13.5 8z"/></svg>
                     </a>
-
-                    <a href="https://www.instagram.com/hotel_olivosdelsol?igsh=MWFldjByZjhxMnV4Yg%3D%3D" 
-
-                       target="_blank" rel="noopener noreferrer" class="social-link" title="Instagram">
-
-                        <svg viewBox="0 0 24 24">
-
-                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
-
-                        </svg>
-
-                    </a>
-
                 </div>
-
             </div>
-
         </div>
-
-        
-
-            <p>&copy; 2025 Hotel Olivos del Sol. Todos los derechos reservados.</p>
-
-        </div>
-
     </footer>
 
-
-
-    <!-- Mobile menu partial will be loaded dynamically -->
-
     <div id="mobile-menu-placeholder"></div>
-
 </body>
-
-
-
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

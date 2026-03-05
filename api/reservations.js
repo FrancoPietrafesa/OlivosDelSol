@@ -13,11 +13,31 @@ const GOOGLE_SHEET_RANGE = process.env.GOOGLE_SHEET_RANGE || 'A:P';
 const GOOGLE_SERVICE_ACCOUNT_EMAIL = process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL || '';
 const GOOGLE_PRIVATE_KEY = (process.env.GOOGLE_PRIVATE_KEY || '').replace(/\\n/g, '\n');
 
+const PAYMENT_LABELS = {
+  card: 'Tarjeta de debito o credito',
+  mercadopago: 'MercadoPago',
+  efectivo_hotel: 'Efectivo en el hotel',
+  local: 'Efectivo en el hotel'
+};
+
+function normalizeHeader(value) {
+  return String(value || '')
+    .toLowerCase()
+    .trim()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ');
+}
+
 function calculateNights(checkin, checkout) {
   const a = new Date(checkin || '');
   const b = new Date(checkout || '');
   const diff = Math.round((b - a) / (1000 * 60 * 60 * 24));
   return Number.isNaN(diff) ? 0 : diff;
+}
+
+function getPaymentLabel(paymentMethod) {
+  return PAYMENT_LABELS[paymentMethod] || paymentMethod || '';
 }
 
 function normalizeReservation(reservation) {
@@ -34,19 +54,13 @@ function normalizeReservation(reservation) {
     telefono: reservation.guestPhone || '',
     mensaje_original: 'Reservado por la web',
     id_reserva: `web-${Date.now()}`,
-    email: reservation.guestEmail || ''
+    email: reservation.guestEmail || '',
+    metodo_pago: getPaymentLabel(reservation.paymentMethod)
   };
 }
 
-const PAYMENT_LABELS = {
-  card: 'Tarjeta de débito o crédito',
-  mercadopago: 'MercadoPago',
-  efectivo_hotel: 'Efectivo en el hotel',
-  local: 'Efectivo en el hotel'
-};
-
 function buildEmailText(row, reservation) {
-  const paymentLabel = PAYMENT_LABELS[reservation.paymentMethod] || reservation.paymentMethod || '-';
+  const paymentLabel = getPaymentLabel(reservation.paymentMethod) || '-';
   const roomLabel = (row.tipo || '-').replace(/_/g, ' ');
   return `Nueva reserva en Olivos del Sol\n\n` +
     `Nombre: ${row.nombre || '-'}\n` +
@@ -58,11 +72,72 @@ function buildEmailText(row, reservation) {
     `Noches: ${row.noches || '-'}\n` +
     `Personas: ${row.personas || '-'}\n` +
     `Habitaciones: ${reservation.rooms || '-'}\n` +
-    `Tipo habitación: ${roomLabel}\n` +
-    `Método de pago: ${paymentLabel}\n` +
+    `Tipo habitacion: ${roomLabel}\n` +
+    `Metodo de pago: ${paymentLabel}\n` +
     `Mensaje original: ${row.mensaje_original}\n` +
     `ID reserva: ${row.id_reserva}\n\n` +
     `Enviado: ${new Date().toLocaleString()}`;
+}
+
+function findHeaderIndex(headers, candidates) {
+  for (let i = 0; i < headers.length; i += 1) {
+    const h = headers[i];
+    if (candidates.some((candidate) => h.includes(candidate))) return i;
+  }
+  return -1;
+}
+
+function pickHeaderIndexes(rawHeaders) {
+  const headers = rawHeaders.map(normalizeHeader);
+
+  return {
+    created_at: findHeaderIndex(headers, ['created at', 'fecha', 'timestamp']),
+    estado: findHeaderIndex(headers, ['estado', 'status']),
+    tipo: findHeaderIndex(headers, ['tipo', 'suite', 'habitacion']),
+    check_in: findHeaderIndex(headers, ['check in', 'checkin', 'entrada']),
+    check_out: findHeaderIndex(headers, ['check out', 'checkout', 'salida']),
+    noches: findHeaderIndex(headers, ['noches', 'nights']),
+    personas: findHeaderIndex(headers, ['personas', 'huespedes', 'guests']),
+    nombre: findHeaderIndex(headers, ['nombre', 'name']),
+    apellido: findHeaderIndex(headers, ['apellido', 'last name']),
+    telefono: findHeaderIndex(headers, ['telefono', 'phone']),
+    mensaje_original: findHeaderIndex(headers, ['mensaje original', 'mensaje']),
+    id_reserva: findHeaderIndex(headers, ['id reserva', 'reservation id']),
+    email: findHeaderIndex(headers, ['email', 'correo']),
+    metodo_pago: findHeaderIndex(headers, ['metodo de pago', 'forma de pago', 'payment method'])
+  };
+}
+
+function buildValuesFromHeaders(rawHeaders, row) {
+  const values = new Array(Math.max(rawHeaders.length, 16)).fill('');
+  const indexMap = pickHeaderIndexes(rawHeaders);
+
+  Object.entries(indexMap).forEach(([key, index]) => {
+    if (index >= 0) values[index] = row[key] || '';
+  });
+
+  return [values];
+}
+
+function buildFallbackValues(row) {
+  return [[
+    row.created_at,
+    row.estado,
+    row.tipo,
+    row.check_in,
+    row.check_out,
+    row.noches,
+    row.personas,
+    row.nombre,
+    row.apellido,
+    row.telefono,
+    row.mensaje_original,
+    row.id_reserva,
+    row.email,
+    row.metodo_pago,
+    '',
+    ''
+  ]];
 }
 
 async function appendReservationToSheet(row) {
@@ -77,24 +152,23 @@ async function appendReservationToSheet(row) {
   });
   const sheets = google.sheets({ version: 'v4', auth });
 
-  const values = [[
-    row.created_at,
-    row.estado,
-    row.tipo,
-    row.check_in,
-    row.check_out,
-    row.noches,
-    row.personas,
-    row.nombre,
-    row.apellido,
-    row.telefono,
-    row.mensaje_original,
-    row.id_reserva,
-    row.email,
-    '',
-    '',
-    ''
-  ]];
+  const tabName = GOOGLE_SHEET_RANGE.includes('!') ? GOOGLE_SHEET_RANGE.split('!')[0] : null;
+  const headerRange = tabName ? `${tabName}!1:1` : '1:1';
+
+  let values = buildFallbackValues(row);
+
+  try {
+    const headerResp = await sheets.spreadsheets.values.get({
+      spreadsheetId: GOOGLE_SHEET_ID,
+      range: headerRange
+    });
+    const headerRow = (headerResp.data && headerResp.data.values && headerResp.data.values[0]) || [];
+    if (headerRow.length > 0) {
+      values = buildValuesFromHeaders(headerRow, row);
+    }
+  } catch (err) {
+    // Si falla lectura de headers, usamos fallback por posicion y continuamos.
+  }
 
   await sheets.spreadsheets.values.append({
     spreadsheetId: GOOGLE_SHEET_ID,
