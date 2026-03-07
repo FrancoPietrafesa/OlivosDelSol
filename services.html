@@ -247,9 +247,13 @@
         }
 
         @media (max-width: 900px) {
+            body.services-page {
+                background-attachment: scroll;
+                background-position: center top;
+            }
+
             .services-showcase {
                 padding-top: calc(var(--nav-height) + 2rem);
-                background-position: 62% center;
             }
 
             .services-grid {
@@ -262,9 +266,13 @@
         }
 
         @media (max-width: 640px) {
+            body.services-page {
+                background-size: cover;
+                background-position: center top;
+            }
+
             .services-showcase {
                 padding: calc(var(--nav-height) + 1.4rem) 0.9rem 1rem;
-                background-attachment: scroll;
             }
 
             .services-grid {
@@ -301,6 +309,7 @@
                 text-align: center;
             }
         }
+
     </style>
 </head>
 <body class="services-page">
