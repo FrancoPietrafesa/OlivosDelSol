@@ -209,6 +209,9 @@ function initGalleryPage() {
 
     function matchesFilter(itemType, filter) {
         if (filter === 'all') return true;
+        if (filter === 'casa' || filter === 'monoambiente' || filter === 'pileta' || filter === 'evento') {
+            return itemType === filter;
+        }
         if (filter === 'habitaciones') return itemType === 'casa' || itemType === 'monoambiente';
         if (filter === 'naturaleza') return itemType === 'pileta';
         if (filter === 'instalaciones') return itemType === 'evento';
